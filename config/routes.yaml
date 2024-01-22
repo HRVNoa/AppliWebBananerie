@@ -3,3 +3,11 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+accueilIndex:
+    path : /
+    controller: App\Controller\IndexController::index
+
+membreLister:
+    path : /annuaire
+    controller: App\Controller\MembreController::index
