@@ -95,6 +95,6 @@ class SecteurActiviteController extends AbstractController
         }
         $entityManager->remove($secteurActivite);
         $entityManager->flush();
-        return $this->redirectToRoute('secteurLister');
+        return $this->redirectToRoute('secteuractiviteLister');
     }
 }
