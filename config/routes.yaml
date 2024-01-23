@@ -60,20 +60,20 @@ statutSupprimer:
 
 metierConsulter:
     path: /metier/consulter/{id}
-    controller: App\Controller\MetierController::consulterStatut
+    controller: App\Controller\MetierController::consulterMetier
 
 metierLister:
     path: /metier/lister
-    controller: App\Controller\MetierController::listerStatut
+    controller: App\Controller\MetierController::listerMetier
 
 metierAjouter:
     path: /metier/ajouter
-    controller: App\Controller\MetierController::ajouterStatut
+    controller: App\Controller\MetierController::ajouterMetier
 
 metierModifier:
     path: /metier/modifier/{id}
-    controller: App\Controller\MetierController::modifierStatut
+    controller: App\Controller\MetierController::modifierMetier
 
 metierSupprimer:
     path: /metier/supprimer/{id}
-    controller: App\Controller\MetierController::supprimerStatut
+    controller: App\Controller\MetierController::supprimerMetier

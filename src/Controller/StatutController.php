@@ -47,6 +47,7 @@ class StatutController extends AbstractController
     {
         $statut = new statut();
         $form = $this->createForm(MetierType::class, $statut);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
             $statut = $form->getData();

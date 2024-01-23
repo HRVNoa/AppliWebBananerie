@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Consulter Statut {% endblock %}
+
+{% block body %}
+    <table class="table table-borderless">
+        <tr><td>ID : </td><td>{{statut.id}}</td>
+        <tr><td>Libelle : </td><td>{{statut.libelle}}</td>
+    </table>
+{% endblock %}
