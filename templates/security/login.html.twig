@@ -1,31 +1,83 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Page de connexion</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{{ asset("/design/assets/vendors/mdi/css/materialdesignicons.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("/design/assets/vendors/css/vendor.bundle.base.css")}}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{{ asset("/design/assets/css/style.css")}}">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="{{ asset("/design/assets/images/favicon.png")}}" />
+</head>
 
-{% block title %}Log in!{% endblock %}
+<body>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+                <div class="card col-lg-4 mx-auto">
+                    <div class="card-body px-5 py-5">
+                        <h3 class="card-title text-left mb-3">Login</h3>
+                        <form method="post">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
 
-{% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+                            {% if app.user %}
+                                <div class="mb-3">
+                                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                                </div>
+                            {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                            <h1 class="h3 mb-3 font-weight-normal">Connectez-vous </h1>
+                            <div class="form-group">
+                            <label for="inputEmail">Email *</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control p_input" autocomplete="email" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword">Mot de passe *</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between">
+                                <a href="#" class="forgot-pass">Mot de passe oublié?</a>
+                            </div>
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+                            <div class="text-center">
+                             <button class="btn btn-primary btn-block enter-btn" type="submit">
+                                 Connexion
+                              </button>
+                            </div>
+                        </form>
+                        <p class="sign-up">Pas encore de compte?<a href="#"> S'inscrire</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% endif %}
+    </div>
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script src="{{ asset("/design/assets/vendors/js/vendor.bundle.base.js")}}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="{{ asset("/design/assets/js/off-canvas.js")}}"></script>
+<script src="{{ asset("/assets/js/hoverable-collapse.js")}}"></script>
+<script src="{{ asset("/assets/js/misc.js")}}"></script>
+<script src="{{ asset("/assets/js/settings.js")}}"></script>
+<script src="{{ asset("/assets/js/todolist.js")}}"></script>
+</body>
+</html>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
-{% endblock %}
