@@ -32,14 +32,12 @@ class IndependantModifierType extends AbstractType
                 'choice_label' => function ($statut) {
                     return $statut->getLibelle();
                 },
-                'attr' => ['class' => "text-white"],
             ])
             ->add('metier', EntityType::class, [
                 'class' => Metier::class,
                 'choice_label' => function ($metier) {
                     return $metier->getLibelle();
                 },
-                'attr' => ['class' => "text-white"],
             ])
         ;
         $builder->add('enregistrer',SubmitType::class, array('label' => 'Modifier Independant', "attr" => ["class" => "btn btn-primary"]));
