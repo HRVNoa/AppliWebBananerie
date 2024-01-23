@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="ajout template">
-      <change afterPath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/IndependantType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/MetierModifierType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/MetierType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/StatutModifierType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/StatutType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/independant/ajouter.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/metier/ajouter.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/statut/ajouter.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/IndependantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndependantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MetierController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MetierController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/StatutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/StatutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +27,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "PaulCuquemelle"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;PaulCuquemelle&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -205,7 +194,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Gestion-méthode-controller-metier-statut-independant",
+    "git-widget-placeholder": "route-pour-la-gestion-des-controllers-metier-statut-independant",
     "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/independant",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
