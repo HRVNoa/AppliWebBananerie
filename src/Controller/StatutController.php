@@ -7,6 +7,7 @@ use App\Entity\Statut;
 use App\Form\MetierModifierType;
 use App\Form\MetierType;
 use App\Form\StatutModifierType;
+use App\Form\StatutType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +47,7 @@ class StatutController extends AbstractController
     public function ajouterStatut(ManagerRegistry $doctrine,Request $request)
     {
         $statut = new statut();
-        $form = $this->createForm(MetierType::class, $statut);
+        $form = $this->createForm(StatutType::class, $statut);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 

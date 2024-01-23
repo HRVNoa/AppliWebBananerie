@@ -18,28 +18,27 @@ class IndependantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class , ["attr" => ["class" => "text-white"]])
-            ->add('prenom', TextType::class, ["attr" => ["class" => "text-white"]])
-            ->add('entreprise', TextType::class, ["attr" => ["class" => "text-white"]])
-            ->add('tel', TextType::class, ["attr" => ["class" => "text-white"]])
-            ->add('dateNaiss', DateType::class, ["attr" => ["class" => "text-white"]])
-            ->add('copos', TextType::class, ["attr" => ["class" => "text-white"]])
-            ->add('email', TextType::class, ["attr" => ["class" => "text-white"]])
-            ->add('adresse', TextType::class, ["attr" => ["class" => "text-white"]])
-            ->add('ville', TextType::class, ["attr" => ["class" => "text-white"]])
+            ->add('nom', TextType::class )
+            ->add('prenom', TextType::class)
+            ->add('entreprise', TextType::class)
+            ->add('tel', TextType::class)
+            ->add('dateNaiss', DateType::class)
+            ->add('copos', TextType::class)
+            ->add('email', TextType::class)
+            ->add('adresse', TextType::class)
+            ->add('ville', TextType::class)
             ->add('statut', EntityType::class,  [
                 'class' => Statut::class,
                 'choice_label' => function ($statut) {
                     return $statut->getLibelle();
                 },
-                'attr' => ['class' => "text-white"],
+
             ])
             ->add('metier', EntityType::class, [
                 'class' => Metier::class,
                 'choice_label' => function ($metier) {
                     return $metier->getLibelle();
                 },
-                'attr' => ['class' => "text-white"],
             ])
 
         ;

@@ -5,8 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Création vu pour lister">
+      <change afterPath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/SecteurActiviteController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Entreprise.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/SecteurActivite.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/EntrepriseModifierType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/EntrepriseType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/SecteurActiviteModifierType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/SecteurActiviteType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/EntrepriseRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/SecteurActiviteRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/SecteurActivitéRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/entreprise/ajouter.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/entreprise/consulter.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/entreprise/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/entreprise/lister.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/secteur/ajouter.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/secteur/consulter.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/secteur/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/secteur/lister.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/membre/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/membre/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/StatutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/StatutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/IndependantType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/MetierModifierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MetierModifierType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/MetierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MetierType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/StatutModifierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/StatutModifierType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/StatutType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/StatutType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,8 +221,8 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Vue-lister-consulter-pour-independant-metier-et-statut",
-    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/independant",
+    "git-widget-placeholder": "Entreprise",
+    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/secteur",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -207,6 +234,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/secteur" />
+      <recent name="$PROJECT_DIR$/templates/entreprise" />
       <recent name="$PROJECT_DIR$/templates/independant" />
       <recent name="$PROJECT_DIR$/templates/metier" />
       <recent name="$PROJECT_DIR$/templates/statut" />
@@ -513,6 +542,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

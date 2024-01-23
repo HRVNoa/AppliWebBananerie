@@ -77,3 +77,49 @@ metierModifier:
 metierSupprimer:
     path: /metier/supprimer/{id}
     controller: App\Controller\MetierController::supprimerMetier
+
+
+
+entrepriseConsulter:
+    path: /entreprise/consulter/{id}
+    controller: App\Controller\EntrepriseController::consulterEntreprise
+
+entrepriseLister:
+    path: /entreprise/lister
+    controller: App\Controller\EntrepriseController::listerEntreprise
+
+entrepriseAjouter:
+    path: /entreprise/ajouter
+    controller: App\Controller\EntrepriseController::ajouterEntreprise
+
+entrepriseModifier:
+    path: /entreprise/modifier/{id}
+    controller: App\Controller\EntrepriseController::modifierEntreprise
+
+entrepriseSupprimer:
+    path: /entreprise/supprimer/{id}
+    controller: App\Controller\EntrepriseController::supprimerEntreprise
+
+
+
+secteuractiviteConsulter:
+    path: /secteuractivite/consulter/{id}
+    controller: App\Controller\SecteurActiviteController::consulterSecteurActivite
+
+secteuractiviteLister:
+    path: /secteuractivite/lister
+    controller: App\Controller\SecteurActiviteController::listerSecteurActivite
+
+secteuractiviteAjouter:
+    path: /secteuractivite/ajouter
+    controller: App\Controller\SecteurActiviteController::ajouterSecteurActivite
+
+secteuractiviteModifier:
+    path: /secteuractivite/modifier/{id}
+    controller: App\Controller\SecteurActiviteController::modifierSecteurActivite
+
+secteuractiviteSupprimer:
+    path: /secteuractivite/supprimer/{id}
+    controller: App\Controller\SecteurActiviteController::supprimerSecteurActivite
+
+

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block title %}Annuaire{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Liste entreprise</h4>
+                    <form action="{{ path('entrepriseAjouter') }}" method="get">
+                        <button type="submit" class="btn btn-primary">Ajouter une nouvelle entreprise</button>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th> Nom </th>
+                                <th> Prénom </th>
+                                <th> Nom Structure </th>
+                                <th> Secteur d'activite </th>
+                                <th> Fonction exercée </th>
+                                <th> Adresse </th>
+                                <th> Email </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for e in entreprises %}
+                            <tr>
+                                <td style="text-align: center;"  class="text-white">{{ e.nom }}</td>
+                                <td style="text-align: center;" class="text-white">{{ e.prenom }}</td>
+                                <td style="text-align: center;" class="text-white">{{ e.nomstructure }}</td>
+                                <td style="text-align: center;" class="text-white">{{ e.secteuractivite.libelle }}</td>
+                                <td style="text-align: center;" class="text-white">{{ e.fonctionstructure}}</td>
+                                <td style="text-align: center;" class="text-white">{{ e.adresseStructure }}</td>
+                                <td style="text-align: center;" class="text-white">{{ e.email }}</td>
+
+                                <td>
+                                    <form action="{{ path('entrepriseConsulter', {'id': e.id}) }}" method="get">
+                                        <button type="submit" class="btn btn-outline-primary">Consulter</button>
+                                    </form>
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
