@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Consulter Independant {% endblock %}
+
+
+{% block body %}
+
+<table class="table table-borderless">
+    <tr><td>Nom : </td><td>{{entreprise.nom}}</td>
+
+    <tr><td>Prenom : </td><td>{{entreprise.prenom}}</td>
+
+    <tr><td>Nom Structure: </td><td>{{entreprise.nomstructure}}</td></tr>
+
+    <tr><td>Secteur d'activite : </td><td>{{entreprise.secteuractivite.libelle}}</td></tr>
+
+    <tr><td>Fonction exercée:  </td><td> {{ entreprise.fonctionstructure}}</td></tr>
+
+    <tr><td>Adresse : </td><td>{{ entreprise.adresseStructure }}</td></tr>
+
+    <tr><td>Email : </td><td>{{ entreprise.email }}</td></tr>
+
+</table>
+{% endblock %}
