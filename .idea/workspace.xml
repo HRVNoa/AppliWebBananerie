@@ -5,14 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="ajout template">
+      <change afterPath="$PROJECT_DIR$/src/Controller/IndependantController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/MetierController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/StatutController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Independant.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Metier.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Statut.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/IndependantRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/MetierRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/StatutRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/independant/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/metier/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/statut/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +191,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "page-register",
+    "git-widget-placeholder": "création-entités-inde/statut/metier",
     "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
