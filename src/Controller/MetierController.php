@@ -45,6 +45,7 @@ class MetierController extends AbstractController
     {
         $metier = new metier();
         $form = $this->createForm(MetierType::class, $metier);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
             $metier = $form->getData();
