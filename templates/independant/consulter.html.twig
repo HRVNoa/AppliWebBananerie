@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}Consulter Independant {% endblock %}
+
+
+{% block body %}
+
+<table class="table table-borderless">
+    <tr><td>Nom : </td><td>{{independant.nom}}</td>
+
+    <tr><td>Prenom : </td><td>{{independant.prenom}}</td>
+
+    <tr><td>E-mail: </td><td>{{independant.email}}</td></tr>
+
+    <tr><td>Telephone : </td><td>{{independant.tel}}</td></tr>
+
+    <tr><td>Date Naissance:  </td><td> {{ independant.dateNaiss  |date('d/m/Y')}}</td></tr>
+
+    <tr><td>Adresse : </td><td>{{ independant.adresse }}</td></tr>
+
+    <tr><td>Metier : </td><td>{{ independant.metier.libelle }}</td></tr>
+
+    <tr><td>Statut : </td><td>{{ independant.statut.libelle }}</td></tr>
+
+</table>
+{% endblock %}
