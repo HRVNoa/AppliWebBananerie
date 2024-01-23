@@ -11,3 +11,69 @@ accueilIndex:
 membreLister:
     path : /annuaire
     controller: App\Controller\MembreController::index
+
+
+
+independantConsulter:
+    path: /independant/consulter/{id}
+    controller: App\Controller\IndependantController::consulterIndependant
+
+independantLister:
+    path: /independant/lister
+    controller: App\Controller\IndependantController::listerIndependant
+
+independantAjouter:
+    path: /independant/ajouter
+    controller: App\Controller\IndependantController::ajouterIndependant
+
+independantModifier:
+    path: /independant/modifier/{id}
+    controller: App\Controller\IndependantController::modifierIndependant
+
+independantSupprimer:
+    path: /independant/supprimer/{id}
+    controller: App\Controller\IndependantController::supprimerIndependant
+
+
+
+statutConsulter:
+    path: /statut/consulter/{id}
+    controller: App\Controller\StatutController::consulterStatut
+
+statutLister:
+    path: /statut/lister
+    controller: App\Controller\StatutController::listerStatut
+
+statutAjouter:
+    path: /statut/ajouter
+    controller: App\Controller\StatutController::ajouterStatut
+
+statutModifier:
+    path: /statut/modifier/{id}
+    controller: App\Controller\StatutController::modifierStatut
+
+statutSupprimer:
+    path: /statut/supprimer/{id}
+    controller: App\Controller\StatutController::supprimerStatut
+
+
+
+metierConsulter:
+    path: /metier/consulter/{id}
+    controller: App\Controller\MetierController::consulterStatut
+
+metierLister:
+    path: /metier/lister
+    controller: App\Controller\MetierController::listerStatut
+
+metierAjouter:
+    path: /metier/ajouter
+    controller: App\Controller\MetierController::ajouterStatut
+
+metierModifier:
+    path: /metier/modifier/{id}
+    controller: App\Controller\MetierController::modifierStatut
+
+metierSupprimer:
+    path: /metier/supprimer/{id}
+    controller: App\Controller\MetierController::supprimerStatut
