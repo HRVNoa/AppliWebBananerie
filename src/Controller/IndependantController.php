@@ -45,6 +45,8 @@ class IndependantController extends AbstractController
     {
         $independant = new independant();
         $form = $this->createForm(IndependantType::class, $independant);
+        $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $independant = $form->getData();
