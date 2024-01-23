@@ -28,7 +28,18 @@
                                             <button type="submit" class="btn btn-outline-primary">Consulter</button>
                                         </form>
                                     </td>
-
+                                    <td>
+                                        <form action="{{ path('secteuractiviteModifier', {'id': s.id}) }}" method="post">
+                                            <input type="hidden" name="_method" value="UPDATE">
+                                            <button type="submit" class="btn btn-outline-primary">Modifier</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{ path('secteuractiviteSupprimer', {'id': s.id}) }}" method="post">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-outline-primary">Supprimer</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
