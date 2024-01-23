@@ -5,19 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="ajout template">
-      <change afterPath="$PROJECT_DIR$/src/Controller/IndependantController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/MetierController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/StatutController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Independant.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Metier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Statut.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/IndependantRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/MetierRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/StatutRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/independant/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/metier/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/statut/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/IndependantType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/MetierModifierType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/MetierType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/StatutModifierType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/StatutType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/independant/ajouter.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/metier/ajouter.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/statut/ajouter.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/IndependantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndependantController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MetierController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MetierController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/StatutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/StatutController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +37,20 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "PaulCuquemelle"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="62cf7ecd-6e75-49ac-9d11-bf53e0667fa0" />
+        <option name="url" value="https://github.com/HRVNoa/AppliWebBananerie.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -191,8 +205,8 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "création-entités-inde/statut/metier",
-    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie",
+    "git-widget-placeholder": "Gestion-méthode-controller-metier-statut-independant",
+    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/independant",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -202,6 +216,12 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/independant" />
+      <recent name="$PROJECT_DIR$/templates/metier" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
@@ -242,7 +262,87 @@
       <option name="project" value="LOCAL" />
       <updated>1705998500747</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Création entité independant">
+      <option name="closed" value="true" />
+      <created>1706005087837</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706005087837</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Création entité Metier">
+      <option name="closed" value="true" />
+      <created>1706005093576</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706005093576</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Création entité Statut">
+      <option name="closed" value="true" />
+      <created>1706005099266</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1706005099266</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Création controller Statut">
+      <option name="closed" value="true" />
+      <created>1706005104076</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706005104076</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Création controller Independant">
+      <option name="closed" value="true" />
+      <created>1706005111241</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706005111241</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Création repository statut">
+      <option name="closed" value="true" />
+      <created>1706005140268</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706005140268</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Création repository metier">
+      <option name="closed" value="true" />
+      <created>1706005149017</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706005149017</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Création controller metier">
+      <option name="closed" value="true" />
+      <created>1706005153884</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1706005153884</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Création repository independant">
+      <option name="closed" value="true" />
+      <created>1706005164181</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706005164181</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Création des index de base de metier statut et independant">
+      <option name="closed" value="true" />
+      <created>1706005180722</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706005180722</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,6 +352,16 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="ajout template" />
     <MESSAGE value="Création vue de la page login" />
-    <option name="LAST_COMMIT_MESSAGE" value="Création vue de la page login" />
+    <MESSAGE value="Création entité independant" />
+    <MESSAGE value="Création entité Metier" />
+    <MESSAGE value="Création entité Statut" />
+    <MESSAGE value="Création controller Statut" />
+    <MESSAGE value="Création controller Independant" />
+    <MESSAGE value="Création repository statut" />
+    <MESSAGE value="Création repository metier" />
+    <MESSAGE value="Création controller metier" />
+    <MESSAGE value="Création repository independant" />
+    <MESSAGE value="Création des index de base de metier statut et independant" />
+    <option name="LAST_COMMIT_MESSAGE" value="Création des index de base de metier statut et independant" />
   </component>
 </project>
