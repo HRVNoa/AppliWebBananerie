@@ -5,35 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Création vu pour lister">
-      <change afterPath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/SecteurActiviteController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Entreprise.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/SecteurActivite.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/EntrepriseModifierType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/EntrepriseType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/SecteurActiviteModifierType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/SecteurActiviteType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/EntrepriseRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/SecteurActiviteRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/SecteurActivitéRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/entreprise/ajouter.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/entreprise/consulter.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/entreprise/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/entreprise/lister.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/secteur/ajouter.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/secteur/consulter.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/secteur/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/secteur/lister.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/StatutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/StatutController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/IndependantType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/MetierModifierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MetierModifierType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/MetierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MetierType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/StatutModifierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/StatutModifierType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/StatutType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/StatutType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecteurActiviteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecteurActiviteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/entreprise/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entreprise/lister.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/independant/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/lister.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/metier/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/metier/lister.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/secteur/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/secteur/lister.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/statut/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/statut/lister.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +25,19 @@
     </execution>
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -221,7 +212,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Entreprise",
+    "git-widget-placeholder": "Ajout-bouton-suppression-et-modification",
     "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/secteur",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -264,102 +255,6 @@
       <updated>1705916400888</updated>
       <workItem from="1705916401932" duration="230000" />
       <workItem from="1705917514620" duration="984000" />
-    </task>
-    <task id="LOCAL-00001" summary="ajout template">
-      <option name="closed" value="true" />
-      <created>1705917753590</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1705917753590</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Création vue de la page login">
-      <option name="closed" value="true" />
-      <created>1705998500747</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1705998500747</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Création entité independant">
-      <option name="closed" value="true" />
-      <created>1706005087837</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1706005087837</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Création entité Metier">
-      <option name="closed" value="true" />
-      <created>1706005093576</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1706005093576</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Création entité Statut">
-      <option name="closed" value="true" />
-      <created>1706005099266</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1706005099266</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Création controller Statut">
-      <option name="closed" value="true" />
-      <created>1706005104076</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1706005104076</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Création controller Independant">
-      <option name="closed" value="true" />
-      <created>1706005111241</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1706005111241</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Création repository statut">
-      <option name="closed" value="true" />
-      <created>1706005140268</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1706005140268</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Création repository metier">
-      <option name="closed" value="true" />
-      <created>1706005149017</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1706005149017</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Création controller metier">
-      <option name="closed" value="true" />
-      <created>1706005153884</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1706005153884</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Création repository independant">
-      <option name="closed" value="true" />
-      <created>1706005164181</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1706005164181</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Création des index de base de metier statut et independant">
-      <option name="closed" value="true" />
-      <created>1706005180722</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1706005180722</updated>
     </task>
     <task id="LOCAL-00013" summary="Ajout des routes pour controler Consulter Lister Supprimer Modifier Ajouter pour les entites suivantes : Metier Statut et Independant">
       <option name="closed" value="true" />
@@ -537,7 +432,223 @@
       <option name="project" value="LOCAL" />
       <updated>1706015767103</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Création de la vue lister">
+      <option name="closed" value="true" />
+      <created>1706018526629</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018526629</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Création de la vue ajouter">
+      <option name="closed" value="true" />
+      <created>1706018531804</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018531804</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Modification sidebar">
+      <option name="closed" value="true" />
+      <created>1706018538094</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018538094</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Création consulter">
+      <option name="closed" value="true" />
+      <created>1706018554017</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018554017</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Création consulter">
+      <option name="closed" value="true" />
+      <created>1706018555938</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018555938</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Création entite">
+      <option name="closed" value="true" />
+      <created>1706018560318</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018560318</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Création entite">
+      <option name="closed" value="true" />
+      <created>1706018568172</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018568172</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Modification style et ajout bouton enregistrer">
+      <option name="closed" value="true" />
+      <created>1706018582106</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018582106</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Modification style et ajout bouton enregistrer">
+      <option name="closed" value="true" />
+      <created>1706018584305</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018584305</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Modification style et ajout bouton enregistrer">
+      <option name="closed" value="true" />
+      <created>1706018589304</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018589304</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Modification style et ajout bouton enregistrer">
+      <option name="closed" value="true" />
+      <created>1706018591614</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018591614</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Modification style et ajout bouton enregistrer">
+      <option name="closed" value="true" />
+      <created>1706018594317</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018594317</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Modification style et ajout bouton enregistrer">
+      <option name="closed" value="true" />
+      <created>1706018596795</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018596795</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Ajout route pour secteur et entreprise">
+      <option name="closed" value="true" />
+      <created>1706018610464</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018610464</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Correction bug ajout">
+      <option name="closed" value="true" />
+      <created>1706018625869</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018625869</updated>
+    </task>
+    <task id="LOCAL-00050" summary="création repository">
+      <option name="closed" value="true" />
+      <created>1706018634574</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018634575</updated>
+    </task>
+    <task id="LOCAL-00051" summary="création repository">
+      <option name="closed" value="true" />
+      <created>1706018637311</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018637311</updated>
+    </task>
+    <task id="LOCAL-00052" summary="création repository">
+      <option name="closed" value="true" />
+      <created>1706018641120</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018641120</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Création form pour modifier">
+      <option name="closed" value="true" />
+      <created>1706018651498</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018651499</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Création form pour modifier">
+      <option name="closed" value="true" />
+      <created>1706018655086</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018655086</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Création form">
+      <option name="closed" value="true" />
+      <created>1706018661034</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018661034</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Création form">
+      <option name="closed" value="true" />
+      <created>1706018663542</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018663542</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Création index de test">
+      <option name="closed" value="true" />
+      <created>1706018671751</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018671751</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Création page de lister">
+      <option name="closed" value="true" />
+      <created>1706018680368</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018680368</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Création page de lister">
+      <option name="closed" value="true" />
+      <created>1706018682402</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018682402</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Création CRUD">
+      <option name="closed" value="true" />
+      <created>1706018688698</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018688698</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Création CRUD">
+      <option name="closed" value="true" />
+      <created>1706018690583</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1706018690584</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -556,16 +667,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="ajout template" />
-    <MESSAGE value="Création vue de la page login" />
-    <MESSAGE value="Création entité independant" />
-    <MESSAGE value="Création entité Metier" />
-    <MESSAGE value="Création entité Statut" />
-    <MESSAGE value="Création controller Statut" />
-    <MESSAGE value="Création controller Independant" />
-    <MESSAGE value="Création repository statut" />
-    <MESSAGE value="Création repository metier" />
-    <MESSAGE value="Création controller metier" />
     <MESSAGE value="Création repository independant" />
     <MESSAGE value="Création des index de base de metier statut et independant" />
     <MESSAGE value="Ajout des routes pour controler Consulter Lister Supprimer Modifier Ajouter pour les entites suivantes : Metier Statut et Independant" />
@@ -577,6 +678,20 @@
     <MESSAGE value="Correction bug dans l'ajout" />
     <MESSAGE value="Correction bug pour les routes de statut" />
     <MESSAGE value="Création vu pour lister" />
-    <option name="LAST_COMMIT_MESSAGE" value="Création vu pour lister" />
+    <MESSAGE value="Création de la vue lister" />
+    <MESSAGE value="Création de la vue ajouter" />
+    <MESSAGE value="Modification sidebar" />
+    <MESSAGE value="Création consulter" />
+    <MESSAGE value="Création entite" />
+    <MESSAGE value="Modification style et ajout bouton enregistrer" />
+    <MESSAGE value="Ajout route pour secteur et entreprise" />
+    <MESSAGE value="Correction bug ajout" />
+    <MESSAGE value="création repository" />
+    <MESSAGE value="Création form pour modifier" />
+    <MESSAGE value="Création form" />
+    <MESSAGE value="Création index de test" />
+    <MESSAGE value="Création page de lister" />
+    <MESSAGE value="Création CRUD" />
+    <option name="LAST_COMMIT_MESSAGE" value="Création CRUD" />
   </component>
 </project>
