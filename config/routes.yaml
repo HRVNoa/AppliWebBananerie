@@ -4,6 +4,11 @@ controllers:
         namespace: App\Controller
     type: attribute
 
+choixInscription:
+    path : /choixinscription
+    controller : App\Controller\IndexController::choix
+
+
 accueilIndex:
     path : /
     controller: App\Controller\IndexController::index
