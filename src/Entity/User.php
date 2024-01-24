@@ -29,6 +29,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Entreprise $entreprise = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Independant $independant = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,5 +103,49 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getEntreprise(): ?Entreprise
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?Entreprise $entreprise): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($entreprise === null && $this->entreprise !== null) {
+            $this->entreprise->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($entreprise !== null && $entreprise->getUser() !== $this) {
+            $entreprise->setUser($this);
+        }
+
+        $this->entreprise = $entreprise;
+
+        return $this;
+    }
+
+    public function getIndependant(): ?Independant
+    {
+        return $this->independant;
+    }
+
+    public function setIndependant(?Independant $independant): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($independant === null && $this->independant !== null) {
+            $this->independant->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($independant !== null && $independant->getUser() !== $this) {
+            $independant->setUser($this);
+        }
+
+        $this->independant = $independant;
+
+        return $this;
     }
 }
