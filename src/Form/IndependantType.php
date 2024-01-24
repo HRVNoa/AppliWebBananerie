@@ -40,15 +40,8 @@ class IndependantType extends AbstractType
                 'choice_label' => function ($metier) {
                     return $metier->getLibelle();
                 },
-            ])
-            ->add('tags', EntityType::class, [
-                'class' => Tag::class,
-                'choice_label' => function ($tag) {
-                    return $tag->getLibelle();
-                },
-                'multiple' => true,
             ]);
-        $builder->add('enregistrer',SubmitType::class, array('label' => 'Nouveau Independant', "attr" => ["class" => "btn btn-primary"]));
+        $builder->add('enregistrer',SubmitType::class, array('label' => 'Confirmer inscription', "attr" => ["class" => "btn btn-primary"]));
     }
 
     public function configureOptions(OptionsResolver $resolver): void
