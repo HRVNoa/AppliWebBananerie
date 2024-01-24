@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des tags{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Liste Tags</h4>
+                    <form action="{{ path('tagAjouter') }}" method="get">
+                        <button type="submit" class="btn btn-primary">Ajouter un nouveau tag</button>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;"> ID </th>
+                                <th style="text-align: center;"> Libelle </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for t in tags %}
+                                <tr>
+                                    <td style="text-align: center;"  class="text-white">{{ t.id }}</td>
+                                    <td style="text-align: center;" class="text-white">{{ t.libelle }}</td>
+
+
+                                    <td>
+                                        <form action="{{ path('tagConsulter', {'id': t.id}) }}" method="get">
+                                            <button type="submit" class="btn btn-outline-primary">Consulter</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{ path('tagModifier', {'id': t.id}) }}" method="post">
+                                            <input type="hidden" name="_method" value="UPDATE">
+                                            <button type="submit" class="btn btn-outline-primary">Modifier</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{ path('tagSupprimer', {'id': t.id}) }}" method="post">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-outline-primary">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
