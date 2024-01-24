@@ -5,23 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Création vu pour lister">
-      <change afterPath="$PROJECT_DIR$/src/Controller/TagController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Tag.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/TagModifierType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/TagType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/TagRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/tag/ajouter.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/tag/consulter.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/tag/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/tag/lister.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/index/choix.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/IndependantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndependantController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Entreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Entreprise.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Independant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Independant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/EntrepriseType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/EntrepriseType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/IndependantType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/independant/consulter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/consulter.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/independant/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/lister.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/entreprise/ajouter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entreprise/ajouter.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/independant/ajouter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/ajouter.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +220,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Gestion-tag",
+    "git-widget-placeholder": "Relier-compte-a-profil",
     "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/tag",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

@@ -4,14 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Entreprise;
 use App\Entity\Independant;
+use App\Entity\User;
 use App\Form\EntrepriseModifierType;
 use App\Form\EntrepriseType;
 use App\Form\IndependantModifierType;
 use App\Form\IndependantType;
+use App\Form\RegistrationFormType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EntrepriseController extends AbstractController
@@ -44,21 +47,28 @@ class EntrepriseController extends AbstractController
             'entreprises' => $entreprises,
         ]);
     }
-    public function ajouterEntreprise(ManagerRegistry $doctrine,Request $request)
+    public function ajouterEntreprise(ManagerRegistry $doctrine,Request $request ,SessionInterface $session)
     {
-        $entreprise = new entreprise();
+        $entreprise = new Entreprise();
         $form = $this->createForm(EntrepriseType::class, $entreprise);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $user = new User();
+        $form2 = $this->createForm(RegistrationFormType::class, $user);
+        $form2->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
             $entreprise = $form->getData();
 
             $entityManager = $doctrine->getManager();
             $entityManager->persist($entreprise);
             $entityManager->flush();
 
-            return $this->render('entreprise/consulter.html.twig', ['entreprise' => $entreprise,]);
+            // Stockez l'ID de l'entreprise dans la session
+            $session->set('entreprise_id', $entreprise->getId());
+
+            // Redirigez vers le formulaire d'inscription de l'utilisateur
+            return $this->redirectToRoute('app_register');
         } else {
             return $this->render('entreprise/ajouter.html.twig', array('form' => $form->createView(),));
         }
