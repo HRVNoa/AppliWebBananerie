@@ -123,3 +123,26 @@ secteuractiviteSupprimer:
     controller: App\Controller\SecteurActiviteController::supprimerSecteurActivite
 
 
+
+tagConsulter:
+    path: /tag/consulter/{id}
+    controller: App\Controller\TagController::consulterTag
+
+tagLister:
+    path: /tag/lister
+    controller: App\Controller\TagController::listerTag
+
+tagAjouter:
+    path: /tag/ajouter
+    controller: App\Controller\TagController::ajouterTag
+
+tagModifier:
+    path: /tag/modifier/{id}
+    controller: App\Controller\TagController::modifierTag
+
+tagSupprimer:
+    path: /tag/supprimer/{id}
+    controller: App\Controller\TagController::supprimerTag
+
+
+
