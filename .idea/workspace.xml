@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Création vu pour lister">
-      <change afterPath="$PROJECT_DIR$/templates/index/choix.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/IndependantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndependantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Entreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Entreprise.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Independant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Independant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/EntrepriseType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/EntrepriseType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/IndependantType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entreprise/ajouter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entreprise/ajouter.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/independant/ajouter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/ajouter.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +207,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Relier-compte-a-profil",
+    "git-widget-placeholder": "Modification-navbar",
     "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/tag",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -263,118 +250,6 @@
       <updated>1705916400888</updated>
       <workItem from="1705916401932" duration="230000" />
       <workItem from="1705917514620" duration="984000" />
-    </task>
-    <task id="LOCAL-00013" summary="Ajout des routes pour controler Consulter Lister Supprimer Modifier Ajouter pour les entites suivantes : Metier Statut et Independant">
-      <option name="closed" value="true" />
-      <created>1706007517379</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1706007517379</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Ajout bouton confirmer">
-      <option name="closed" value="true" />
-      <created>1706015647048</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015647048</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Ajout bouton confirmer">
-      <option name="closed" value="true" />
-      <created>1706015651084</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015651084</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Ajout bouton confirmer">
-      <option name="closed" value="true" />
-      <created>1706015653364</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015653364</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Ajout bouton confirmer">
-      <option name="closed" value="true" />
-      <created>1706015655621</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015655621</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Ajout bouton confirmer">
-      <option name="closed" value="true" />
-      <created>1706015658524</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015658524</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Ajout bouton confirmer">
-      <option name="closed" value="true" />
-      <created>1706015660832</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015660832</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Création vu pour l'ajout">
-      <option name="closed" value="true" />
-      <created>1706015674036</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015674036</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Création vu pour l'ajout">
-      <option name="closed" value="true" />
-      <created>1706015677203</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015677203</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Création vu pour l'ajout">
-      <option name="closed" value="true" />
-      <created>1706015680022</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015680022</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Ajout lien dans la navbar">
-      <option name="closed" value="true" />
-      <created>1706015689712</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015689712</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Création vu pour consulter">
-      <option name="closed" value="true" />
-      <created>1706015705738</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015705738</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Création vu pour consulter">
-      <option name="closed" value="true" />
-      <created>1706015708058</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015708058</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Création vu pour consulter">
-      <option name="closed" value="true" />
-      <created>1706015710410</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015710410</updated>
     </task>
     <task id="LOCAL-00027" summary="Ajout nouveaux champs">
       <option name="closed" value="true" />
@@ -656,7 +531,119 @@
       <option name="project" value="LOCAL" />
       <updated>1706018690584</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Ajout choix inscription">
+      <option name="closed" value="true" />
+      <created>1706103944065</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1706103944065</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Ajout one to one">
+      <option name="closed" value="true" />
+      <created>1706103951530</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1706103951530</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Ajout systeme pour lier le formulaire 1 avec le form 2">
+      <option name="closed" value="true" />
+      <created>1706103967387</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1706103967387</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Modif visuel">
+      <option name="closed" value="true" />
+      <created>1706103976130</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1706103976130</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Ajotu controller choix inscription">
+      <option name="closed" value="true" />
+      <created>1706103993842</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1706103993842</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Suppresion choix de tag">
+      <option name="closed" value="true" />
+      <created>1706104004005</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1706104004005</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Ajout nouveau systeme pour passer la variable en session">
+      <option name="closed" value="true" />
+      <created>1706104022423</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1706104022423</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Modification dans l'entite pour le one to one">
+      <option name="closed" value="true" />
+      <created>1706104039893</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1706104039893</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Modification dans l'entite pour le one to one">
+      <option name="closed" value="true" />
+      <created>1706104047448</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1706104047448</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Ajout vue pour choix inscription">
+      <option name="closed" value="true" />
+      <created>1706104073406</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1706104073406</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Modification aspect">
+      <option name="closed" value="true" />
+      <created>1706104083820</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1706104083820</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Modification aspect">
+      <option name="closed" value="true" />
+      <created>1706104086399</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1706104086399</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Changement nom botuon">
+      <option name="closed" value="true" />
+      <created>1706104097069</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1706104097069</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Ajout systeme pour passer la variable dans la session">
+      <option name="closed" value="true" />
+      <created>1706104118112</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1706104118112</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,18 +662,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Création repository independant" />
-    <MESSAGE value="Création des index de base de metier statut et independant" />
-    <MESSAGE value="Ajout des routes pour controler Consulter Lister Supprimer Modifier Ajouter pour les entites suivantes : Metier Statut et Independant" />
-    <MESSAGE value="Ajout bouton confirmer" />
-    <MESSAGE value="Création vu pour l'ajout" />
-    <MESSAGE value="Ajout lien dans la navbar" />
-    <MESSAGE value="Création vu pour consulter" />
-    <MESSAGE value="Ajout nouveaux champs" />
-    <MESSAGE value="Correction bug dans l'ajout" />
-    <MESSAGE value="Correction bug pour les routes de statut" />
-    <MESSAGE value="Création vu pour lister" />
-    <MESSAGE value="Création de la vue lister" />
     <MESSAGE value="Création de la vue ajouter" />
     <MESSAGE value="Modification sidebar" />
     <MESSAGE value="Création consulter" />
@@ -700,6 +675,18 @@
     <MESSAGE value="Création index de test" />
     <MESSAGE value="Création page de lister" />
     <MESSAGE value="Création CRUD" />
-    <option name="LAST_COMMIT_MESSAGE" value="Création CRUD" />
+    <MESSAGE value="Ajout choix inscription" />
+    <MESSAGE value="Ajout one to one" />
+    <MESSAGE value="Ajout systeme pour lier le formulaire 1 avec le form 2" />
+    <MESSAGE value="Modif visuel" />
+    <MESSAGE value="Ajotu controller choix inscription" />
+    <MESSAGE value="Suppresion choix de tag" />
+    <MESSAGE value="Ajout nouveau systeme pour passer la variable en session" />
+    <MESSAGE value="Modification dans l'entite pour le one to one" />
+    <MESSAGE value="Ajout vue pour choix inscription" />
+    <MESSAGE value="Modification aspect" />
+    <MESSAGE value="Changement nom botuon" />
+    <MESSAGE value="Ajout systeme pour passer la variable dans la session" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout systeme pour passer la variable dans la session" />
   </component>
 </project>
