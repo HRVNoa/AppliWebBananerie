@@ -9,6 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndependantController extends AbstractController
@@ -41,21 +42,24 @@ class IndependantController extends AbstractController
             'independants' => $independants,
         ]);
     }
-    public function ajouterIndependant(ManagerRegistry $doctrine,Request $request)
+    public function ajouterIndependant(ManagerRegistry $doctrine,Request $request ,SessionInterface $session)
     {
         $independant = new independant();
         $form = $this->createForm(IndependantType::class, $independant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $independant = $form->getData();
 
             $entityManager = $doctrine->getManager();
             $entityManager->persist($independant);
             $entityManager->flush();
 
-            return $this->render('independant/consulter.html.twig', ['independant' => $independant,]);
+            // Stockez l'ID de l'entreprise dans la session
+            $session->set('independant_id', $independant->getId());
+
+            // Redirigez vers le formulaire d'inscription de l'utilisateur
+            return $this->redirectToRoute('app_register');
         } else {
             return $this->render('independant/ajouter.html.twig', array('form' => $form->createView(),));
         }
