@@ -35,6 +35,9 @@ class Entreprise
     #[ORM\JoinColumn(nullable: false)]
     private ?SecteurActivite $secteuractivite = null;
 
+    #[ORM\OneToOne(inversedBy: 'entreprise', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Entreprise
     public function setSecteuractivite(?SecteurActivite $secteuractivite): static
     {
         $this->secteuractivite = $secteuractivite;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
