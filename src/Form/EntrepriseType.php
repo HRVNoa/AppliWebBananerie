@@ -30,7 +30,7 @@ class EntrepriseType extends AbstractType
                 },
             ])
         ;
-        $builder->add('enregistrer',SubmitType::class, array('label' => 'Nouvelle entreprise', "attr" => ["class" => "btn btn-primary"]));
+        $builder->add('enregistrer',SubmitType::class, array('label' => 'Confirmer inscription', "attr" => ["class" => "btn btn-primary"]));
 
     }
 
