@@ -5,13 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Création vu pour lister">
+      <change afterPath="$PROJECT_DIR$/src/Controller/TagController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Tag.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/TagModifierType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/TagType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/TagRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tag/ajouter.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tag/consulter.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tag/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tag/lister.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecteurActiviteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecteurActiviteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entreprise/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entreprise/lister.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Independant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Independant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/IndependantType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/independant/consulter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/consulter.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/independant/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/lister.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/metier/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/metier/lister.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/secteur/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/secteur/lister.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/statut/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/statut/lister.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,8 +222,8 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Ajout-bouton-suppression-et-modification",
-    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/secteur",
+    "git-widget-placeholder": "Gestion-tag",
+    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/tag",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -225,11 +235,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/tag" />
       <recent name="$PROJECT_DIR$/templates/secteur" />
       <recent name="$PROJECT_DIR$/templates/entreprise" />
       <recent name="$PROJECT_DIR$/templates/independant" />
       <recent name="$PROJECT_DIR$/templates/metier" />
-      <recent name="$PROJECT_DIR$/templates/statut" />
     </key>
   </component>
   <component name="RunManager">
