@@ -26,6 +26,10 @@
                                 <th> Code Postal </th>
                                 <th> Statut </th>
                                 <th> Metier </th>
+                                <th> Tags </th>
+                                <th> Consulter </th>
+                                <th> Modifier </th>
+                                <th> Supprimer </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,6 +46,13 @@
                                 <td style="text-align: center;" class="text-white">{{ i.copos }}</td>
                                 <td style="text-align: center;" class="text-white">{{ i.statut.libelle }}</td>
                                 <td style="text-align: center;" class="text-white">{{ i.metier.libelle }}</td>
+                                <td style="text-align: center;" class="text-white">
+                                    {% for tag in i.tags %}
+                                        {{~ "/" ~ tag.libelle }}
+                                    {% else %}
+                                        Pas de tag
+                                    {% endfor %}
+                                </td>
 
                                 <td>
                                     <form action="{{ path('independantConsulter', {'id': i.id}) }}" method="get">

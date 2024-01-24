@@ -21,5 +21,14 @@
 
     <tr><td>Statut : </td><td>{{ independant.statut.libelle }}</td></tr>
 
+    <tr><td>Tags : </td>
+        <td>
+            {% for tag in independant.tags %}
+                {{~ "/" ~ tag.libelle }}
+            {% else %}
+                Pas de tag
+            {% endfor %}
+        </td></tr>
+
 </table>
 {% endblock %}

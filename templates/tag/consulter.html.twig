@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}Consulter Tag {% endblock %}
+
+{% block body %}
+    <table class="table table-borderless">
+        <tr><td>ID : </td><td>{{tag.id}}</td>
+
+        <tr><td>Libelle : </td><td>{{tag.libelle}}</td>
+
+    </table>
+{% endblock %}
