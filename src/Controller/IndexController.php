@@ -14,4 +14,10 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
+    public function choix(): Response
+    {
+        return $this->render('index/choix.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
 }
