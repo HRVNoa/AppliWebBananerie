@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Independant;
 use App\Entity\Metier;
 use App\Entity\Statut;
+use App\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -39,6 +40,13 @@ class IndependantModifierType extends AbstractType
                     return $metier->getLibelle();
                 },
             ])
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
+                'choice_label' => function ($tag) {
+                    return $tag->getLibelle();
+                },
+                'multiple' => true,
+            ]);
         ;
         $builder->add('enregistrer',SubmitType::class, array('label' => 'Modifier Independant', "attr" => ["class" => "btn btn-primary"]));
 
