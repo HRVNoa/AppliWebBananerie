@@ -53,6 +53,9 @@ class Independant
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'independants')]
     private Collection $tags;
 
+    #[ORM\OneToOne(inversedBy: 'independant', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -215,6 +218,18 @@ class Independant
     public function removeTag(Tag $tag): static
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
