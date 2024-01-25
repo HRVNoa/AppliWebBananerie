@@ -27,6 +27,7 @@
                                 <th> Statut </th>
                                 <th> Metier </th>
                                 <th> Tags </th>
+                                <th> Super Tags </th>
                                 <th> Consulter </th>
                                 <th> Modifier </th>
                                 <th> Supprimer </th>
@@ -49,6 +50,15 @@
                                 <td style="text-align: center;" class="text-white">
                                     {% for independantTag in i.independantTags %}
                                         {{ "/" ~ independantTag.tag.libelle }}
+                                    {% else %}
+                                        Pas de tag
+                                    {% endfor %}
+                                </td>
+                                <td style="text-align: center;" class="text-white">
+                                    {% for independantTag in i.independantTags %}
+                                        {% if independantTag.super == 1 %}
+                                            {{ "/" ~ independantTag.tag.libelle }}
+                                        {% endif %}
                                     {% else %}
                                         Pas de tag
                                     {% endfor %}

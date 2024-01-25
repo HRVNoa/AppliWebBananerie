@@ -3,21 +3,21 @@
 namespace App\Form;
 
 use App\Entity\Independant;
-use App\Entity\IndependantTag;
-use App\Entity\Metier;
-use App\Entity\Statut;
 use App\Entity\Tag;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Statut;
+use App\Entity\Metier;
+use App\Entity\IndependantTag;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class IndependantModifierType extends AbstractType
 {
@@ -28,41 +28,49 @@ class IndependantModifierType extends AbstractType
             ->add('prenom', TextType::class)
             ->add('entreprise', TextType::class)
             ->add('tel', TextType::class)
-            ->add('dateNaiss', DateType::class )
+            ->add('dateNaiss', DateType::class)
             ->add('copos', TextType::class)
             ->add('email', TextType::class)
             ->add('adresse', TextType::class)
             ->add('ville', TextType::class)
-            ->add('statut', EntityType::class,  [
+            ->add('statut', EntityType::class, [
                 'class' => Statut::class,
-                'choice_label' => function ($statut) {
-                    return $statut->getLibelle();
-                },
+                'choice_label' => 'libelle',
             ])
             ->add('metier', EntityType::class, [
                 'class' => Metier::class,
-                'choice_label' => function ($metier) {
-                    return $metier->getLibelle();
-                },
+                'choice_label' => 'libelle',
             ])
             ->add('selectedTags', EntityType::class, [
                 'class' => Tag::class,
                 'choice_label' => 'libelle',
                 'multiple' => true,
-                'mapped' => false, // Ce champ ne sera pas directement mappé à une propriété de l'entité
                 'expanded' => true,
-                'attr' => [
-                    'class' => 'form-check', // Ajoute une classe CSS personnalisée
-                    'max-tags' => 10, // Définir une limite de 10 tags maximum
-                ],
-            ])
-        ;
-        $builder->add('enregistrer',SubmitType::class, array('label' => 'Modifier Independant', "attr" => ["class" => "btn btn-primary"]));
+                'mapped' => false,
+                'attr' => ['class' => 'form-check', 'max-tags' => 10],
+            ]);
 
+        // Ajouter le champ pour sélectionner les super tags
+        $builder->add('superTags', ChoiceType::class, [
+            'choices' => $options['tags'],
+            'choice_label' => function (Tag $tag) {
+                return $tag->getLibelle();
+            },
+            'choice_value' => 'id',
+            'expanded' => true,
+            'multiple' => true,
+            'mapped' => false,
+        ]);
+
+        $builder->add('enregistrer', SubmitType::class, ['label' => 'Modifier Independant', 'attr' => ['class' => 'btn btn-primary']]);
+
+
+        // Gérer la soumission du formulaire
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             $independant = $event->getData();
             $form = $event->getForm();
             $selectedTags = $form->get('selectedTags')->getData();
+            $selectedSuperTags = $form->get('superTags')->getData();
 
             // Synchroniser les IndependantTag
             $currentTags = new ArrayCollection();
@@ -75,7 +83,7 @@ class IndependantModifierType extends AbstractType
                     $independantTag = new IndependantTag();
                     $independantTag->setIndependant($independant);
                     $independantTag->setTag($tag);
-                    $independantTag->setSuper(false); // Définir la valeur par défaut pour 'super'
+                    $independantTag->setSuper(false);
                     $independant->addIndependantTag($independantTag);
                 }
             }
@@ -83,6 +91,9 @@ class IndependantModifierType extends AbstractType
             foreach ($independant->getIndependantTags() as $independantTag) {
                 if (!$selectedTags->contains($independantTag->getTag())) {
                     $independant->removeIndependantTag($independantTag);
+                } else {
+                    // Mettre à jour le statut super en fonction de la sélection de l'utilisateur
+                    $independantTag->setSuper(in_array($independantTag->getTag(), $selectedSuperTags, false));
                 }
             }
         });
@@ -92,6 +103,7 @@ class IndependantModifierType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Independant::class,
+            'tags' => [],
         ]);
     }
 }

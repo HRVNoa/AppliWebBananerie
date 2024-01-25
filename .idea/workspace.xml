@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Modification pour afficher le nom de la personne connectée cela a aussi permis de controller que mon systeme de connexion fonctionne belle et bien">
-      <change afterPath="$PROJECT_DIR$/src/Entity/IndependantTag.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/IndependantTagType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/TagSelectionType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/IndependantTagRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Independant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Independant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Tag.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Tag.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/IndependantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndependantController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/independant/consulter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/consulter.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/independant/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/lister.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,19 +22,6 @@
     </execution>
   </component>
   <component name="Git.Settings">
-    <excluded-from-favorite>
-      <branch-storage>
-        <map>
-          <entry type="LOCAL">
-            <value>
-              <list>
-                <branch-info repo="$PROJECT_DIR$" source="master" />
-              </list>
-            </value>
-          </entry>
-        </map>
-      </branch-storage>
-    </excluded-from-favorite>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -210,22 +191,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Modification-entité&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Applications/MAMP/htdocs/AppliWebBananerie/templates/tag&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "super-tag",
+    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/tag",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates/tag" />
@@ -671,14 +652,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Création de la vue ajouter" />
-    <MESSAGE value="Modification sidebar" />
-    <MESSAGE value="Création consulter" />
-    <MESSAGE value="Création entite" />
-    <MESSAGE value="Modification style et ajout bouton enregistrer" />
-    <MESSAGE value="Ajout route pour secteur et entreprise" />
-    <MESSAGE value="Correction bug ajout" />
-    <MESSAGE value="création repository" />
     <MESSAGE value="Création form pour modifier" />
     <MESSAGE value="Création form" />
     <MESSAGE value="Création index de test" />
@@ -696,6 +669,14 @@
     <MESSAGE value="Modification aspect" />
     <MESSAGE value="Changement nom botuon" />
     <MESSAGE value="Ajout systeme pour passer la variable dans la session" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout systeme pour passer la variable dans la session" />
+    <MESSAGE value="Ajout et suppresion d'une relation pour independantTag" />
+    <MESSAGE value="Ajout systeme de selection" />
+    <MESSAGE value="Ajout et suppresion relation avec independanttag" />
+    <MESSAGE value="Modification affichage pour adpater a novuelle relation" />
+    <MESSAGE value="Form pour independantType" />
+    <MESSAGE value="Création nouvelle entité pour gerer la relation" />
+    <MESSAGE value="Modification systeme de choix tags" />
+    <MESSAGE value="Modification vue pour affichage de tags" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modification vue pour affichage de tags" />
   </component>
 </project>
