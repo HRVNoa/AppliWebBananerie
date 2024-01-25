@@ -64,31 +64,37 @@ class IndependantController extends AbstractController
             return $this->render('independant/ajouter.html.twig', array('form' => $form->createView(),));
         }
     }
-    public function modifierIndependant(ManagerRegistry $doctrine, $id, Request $request){
-
+    public function modifierIndependant(ManagerRegistry $doctrine, $id, Request $request)
+    {
         $independant = $doctrine->getRepository(Independant::class)->find($id);
 
         if (!$independant) {
             throw $this->createNotFoundException('Aucun independant trouvé avec le numéro '.$id);
-        }
-        else
-        {
-            $form = $this->createForm(IndependantModifierType::class, $independant);
+        } else {
+            // Récupérer les tags actuellement sélectionnés par l'indépendant
+            $selectedTags = [];
+            foreach ($independant->getIndependantTags() as $independantTag) {
+                $selectedTags[] = $independantTag->getTag();
+            }
+
+            // Créer le formulaire avec les tags sélectionnés
+            $form = $this->createForm(IndependantModifierType::class, $independant, [
+                'tags' => $selectedTags,
+            ]);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-
                 $independant = $form->getData();
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($independant);
                 $entityManager->flush();
-                return $this->render('independant/consulter.html.twig', ['independant' => $independant,]);
-            }
-            else{
-                return $this->render('independant/ajouter.html.twig', array('form' => $form->createView(),));
+                return $this->render('independant/consulter.html.twig', ['independant' => $independant]);
+            } else {
+                return $this->render('independant/ajouter.html.twig', ['form' => $form->createView()]);
             }
         }
     }
+
     public function supprimerIndependant(ManagerRegistry $doctrine, int $id): Response
     {
         $entityManager = $doctrine->getManager();
