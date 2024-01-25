@@ -47,11 +47,12 @@
                                 <td style="text-align: center;" class="text-white">{{ i.statut.libelle }}</td>
                                 <td style="text-align: center;" class="text-white">{{ i.metier.libelle }}</td>
                                 <td style="text-align: center;" class="text-white">
-                                    {% for tag in i.tags %}
-                                        {{~ "/" ~ tag.libelle }}
+                                    {% for independantTag in i.independantTags %}
+                                        {{ "/" ~ independantTag.tag.libelle }}
                                     {% else %}
                                         Pas de tag
                                     {% endfor %}
+
                                 </td>
 
                                 <td>

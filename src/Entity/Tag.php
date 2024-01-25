@@ -18,12 +18,12 @@ class Tag
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
-    #[ORM\ManyToMany(targetEntity: Independant::class, mappedBy: 'tags')]
-    private Collection $independants;
+    #[ORM\OneToMany(mappedBy: 'tag', targetEntity: IndependantTag::class)]
+    private Collection $independantTags;
 
     public function __construct()
     {
-        $this->independants = new ArrayCollection();
+        $this->independantTags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -44,27 +44,30 @@ class Tag
     }
 
     /**
-     * @return Collection<int, Independant>
+     * @return Collection<int, IndependantTag>
      */
-    public function getIndependants(): Collection
+    public function getIndependantTags(): Collection
     {
-        return $this->independants;
+        return $this->independantTags;
     }
 
-    public function addIndependant(Independant $independant): static
+    public function addIndependantTag(IndependantTag $independantTag): static
     {
-        if (!$this->independants->contains($independant)) {
-            $this->independants->add($independant);
-            $independant->addTag($this);
+        if (!$this->independantTags->contains($independantTag)) {
+            $this->independantTags->add($independantTag);
+            $independantTag->setTag($this);
         }
 
         return $this;
     }
 
-    public function removeIndependant(Independant $independant): static
+    public function removeIndependantTag(IndependantTag $independantTag): static
     {
-        if ($this->independants->removeElement($independant)) {
-            $independant->removeTag($this);
+        if ($this->independantTags->removeElement($independantTag)) {
+            // set the owning side to null (unless already changed)
+            if ($independantTag->getTag() === $this) {
+                $independantTag->setTag(null);
+            }
         }
 
         return $this;

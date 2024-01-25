@@ -23,8 +23,8 @@
 
     <tr><td>Tags : </td>
         <td>
-            {% for tag in independant.tags %}
-                {{~ "/" ~ tag.libelle }}
+            {% for independantTag in independant.independantTags %}
+                {{ "/" ~ independantTag.tag.libelle }}
             {% else %}
                 Pas de tag
             {% endfor %}
