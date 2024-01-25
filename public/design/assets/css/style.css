@@ -16470,8 +16470,8 @@ code {
   .btn.btn-icon-text .btn-icon-append, .fc button.btn-icon-text .btn-icon-append, .ajax-upload-dragdrop .btn-icon-text.ajax-file-upload .btn-icon-append, .swal2-modal .swal2-buttonswrapper .btn-icon-text.swal2-styled .btn-icon-append {
     margin-left: .5rem; }
   .btn.btn-social-icon, .fc button.btn-social-icon, .ajax-upload-dragdrop .btn-social-icon.ajax-file-upload, .swal2-modal .swal2-buttonswrapper .btn-social-icon.swal2-styled {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     padding: 0; }
   .btn.get-started-btn, .fc button.get-started-btn, .ajax-upload-dragdrop .get-started-btn.ajax-file-upload, .swal2-modal .swal2-buttonswrapper .get-started-btn.swal2-styled {
     font-size: 0.75rem;
@@ -16487,6 +16487,28 @@ code {
   border-left: 0; }
 
 /*social buttons*/
+.btn-insta {
+  background: #C13584;
+  color: #ffffff; }
+.btn-insta:hover, .btn-insta:focus {
+  background: #C13584;
+  color: #ffffff; }
+.btn-insta.btn-social-icon-text {
+  padding: 0 1.5rem 0 0;
+  background: #C13584; }
+.btn-insta.btn-social-icon-text i {
+  background: #C13584;
+  padding: .75rem;
+  display: inline-block;
+  margin-right: 1.5rem; }
+
+.btn-outline-insta {
+  border: 1px solid #C13584;
+  color: #C13584; }
+.btn-outline-insta:hover {
+  background: #C13584;
+  color: #ffffff; }
+
 .btn-twitter {
   background: #2caae1;
   color: #ffffff; }
