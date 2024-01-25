@@ -1,34 +1,191 @@
 {% extends 'base.html.twig' %}
 {% block title %}Consulter Independant {% endblock %}
 
+{% block stylesheets %}
+    <style>
+
+    .emp-profile{
+    padding: 3%;
+
+    }
+    .profile-img{
+    text-align: center;
+    }
+    .profile-img img{
+    width: 70%;
+    height: 100%;
+    }
+    .profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+    }
+    .profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+    }
+    .profile-head h4{
+        color: #FFFFFF;
+        font-size: 15px;
+    }
+    .profile-head h5{
+    color: #FFFFFF;
+        font-size: 35px;
+    }
+    .profile-head h6{
+    color: #0062cc;
+        font-size: 25px;
+    }
+    .profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+    }
+    .proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+    }
+    .proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+    }
+    .profile-head .nav-tabs{
+    margin-bottom:5%;
+    }
+    .profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+    }
+    .profile-head .nav-tabs .nav-link.active{
+    border: none;
+
+    }
+    .profile-work{
+    padding: 14%;
+    margin-top: -15%;
+    }
+    .profile-work p{
+    font-size: 18px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+    }
+    .profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 12px;
+    }
+    .profile-work ul{
+    list-style: none;
+    }
+    .profile-tab label{
+    font-weight: 600;
+    }
+    .profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+
+    }
+    .imgportfolio{
+        object-fit: cover;
+        aspect-ratio: 16/9;
+    }
+ .card{border: 0px;}
+    </style>
+{% endblock %}
 
 {% block body %}
 
-<table class="table table-borderless">
-    <tr><td>Nom : </td><td>{{independant.nom}}</td>
 
-    <tr><td>Prenom : </td><td>{{independant.prenom}}</td>
+<div class="card">
+    <div class=" emp-profile">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="profile-head mb-3">
+                        <h5>
+                            {{independant.nom}} {{independant.prenom}}
+                        </h5>
+                        <h4>
+                            {{ independant.email }}
+                        </h4>
+                        <h6>
+                            {{ independant.metier.libelle }}
+                        </h6>
 
-    <tr><td>E-mail: </td><td>{{independant.email}}</td></tr>
+                        <button type="button" class="btn btn-social-icon btn-facebook"><i style="font-size: 25px" class="mdi mdi-facebook"></i></button>
+                        <button type="button" class="btn btn-social-icon btn-youtube"><i style="font-size: 25px" class="mdi mdi-youtube"></i></button>
+                        <button type="button" class="btn btn-social-icon btn-insta"><i style="font-size: 25px" class="mdi mdi-instagram"></i></button>
+                        <button type="button" class="btn btn-social-icon btn-linkedin"><i style="font-size: 25px" class="mdi mdi-linkedin "></i></button>
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+                        fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+                        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu
+                    </p>
+                </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>Super Tags</p>
+                        {% for independantTag in independant.independantTags %}
+                            {% if independantTag.super == 1 %}
+                                {{  independantTag.tag.libelle }}
+                                <br>
+                            {% endif %}
+                        {% else %}
+                            Pas de tag
+                        {% endfor %}
+                        <p>Tag</p>
+                        {% for independantTag in independant.independantTags %}
+                            {{  independantTag.tag.libelle  }}
+                            <br>
+                        {% else %}
+                            Pas de tag
+                        {% endfor %}
+                    </div>
+                </div>
 
-    <tr><td>Telephone : </td><td>{{independant.tel}}</td></tr>
-
-    <tr><td>Date Naissance:  </td><td> {{ independant.dateNaiss  |date('d/m/Y')}}</td></tr>
-
-    <tr><td>Adresse : </td><td>{{ independant.adresse }}</td></tr>
-
-    <tr><td>Metier : </td><td>{{ independant.metier.libelle }}</td></tr>
-
-    <tr><td>Statut : </td><td>{{ independant.statut.libelle }}</td></tr>
-
-    <tr><td>Tags : </td>
-        <td>
-            {% for independantTag in independant.independantTags %}
-                {{ "/" ~ independantTag.tag.libelle }}
-            {% else %}
-                Pas de tag
-            {% endfor %}
-        </td></tr>
-
-</table>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Portfolio Slide</h4>
+                            <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
+                                <div class="item">
+                                    <img src="/design/assets/images/dashboard/Rectangle.jpg" alt="" class="imgportfolio">
+                                </div>
+                                <div class="item">
+                                    <img src="/design/assets/images/dashboard/Img_5.jpg" alt="" class="imgportfolio">
+                                </div>
+                                <div class="item">
+                                    <img src="/design/assets/images/dashboard/img_6.jpg" alt="" class="imgportfolio">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
+</div>
 {% endblock %}
