@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Independant;
+use App\Form\ContactType;
 use App\Form\IndependantModifierType;
 use App\Form\IndependantType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -10,6 +11,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndependantController extends AbstractController
@@ -106,5 +112,41 @@ class IndependantController extends AbstractController
         $entityManager->remove($independant);
         $entityManager->flush();
         return $this->redirectToRoute('independantLister');
+    }
+
+    public function sendmailIndependant(Request $request): Response
+    {
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            $transport = Transport::fromDsn('smtp://bananeriebot@gmail.com:ramchihfwonbusnl@smtp.gmail.com:587?encryption=tls&auth_mode=login');
+            $mailer = new Mailer($transport);
+            $email = (new Email())
+                ->from(new Address('bananeriebot@gmail.com', 'Contact La Bananerie'))
+                ->to("icilabananerie@gmail.com")
+                ->subject("Nouveau message de " . $formData['nom']) // Sujet
+//                ->text('ici le texte');
+                ->text(
+                    "Nom: " . $formData['nom'] . "\n" .
+                    "Email: " . $formData['email'] . "\n" .
+                    "Téléphone: " . $formData['phone'] . "\n\n" .
+                    "Objet: " . $formData['objet'] . "\n\n" .
+                    "Message:\n\n" . $formData['message']
+                );
+            try {
+                $mailer->send($email);
+                $this->addFlash('error', 'Merci! Votre message a été envoyé.');
+            } catch (TransportExceptionInterface $e) {
+                $this->addFlash('error', "Oops! Quelque chose s'est mal passé et nous n'avons pas pu envoyer votre message.");
+            }
+
+        }
+
+        return $this->render('contact/contact.html.twig', [
+            'page_name' => 'Contact',
+            'form' => $form->createView(),
+        ]);
     }
 }
