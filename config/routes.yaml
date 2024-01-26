@@ -39,6 +39,9 @@ independantSupprimer:
     path: /independant/supprimer/{id}
     controller: App\Controller\IndependantController::supprimerIndependant
 
+independant_sendmail:
+    path: /independant/consulter/{id}/send
+    controller: App\Controller\IndependantController::sendmailIndependant
 
 
 statutConsulter:
