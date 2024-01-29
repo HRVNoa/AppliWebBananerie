@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Modification affichage profil">
-      <change afterPath="$PROJECT_DIR$/src/Form/ContactType.php" afterDir="false" />
+    <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Ajout route sendmail">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/IndependantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndependantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/independant/consulter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/consulter.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,9 +192,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "PHPUnit.Main.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "ajout-contact-dans-profil",
+    "git-widget-placeholder": "navbar-update",
     "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/tag",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -242,6 +240,8 @@
       <workItem from="1705917514620" duration="984000" />
       <workItem from="1706169852772" duration="1409000" />
       <workItem from="1706256267126" duration="4871000" />
+      <workItem from="1706515381470" duration="348000" />
+      <workItem from="1706515825276" duration="4777000" />
     </task>
     <task id="LOCAL-00029" summary="Correction bug dans l'ajout">
       <option name="closed" value="true" />
@@ -654,10 +654,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Création form" />
-    <MESSAGE value="Création index de test" />
-    <MESSAGE value="Création page de lister" />
-    <MESSAGE value="Création CRUD" />
     <MESSAGE value="Ajout choix inscription" />
     <MESSAGE value="Ajout one to one" />
     <MESSAGE value="Ajout systeme pour lier le formulaire 1 avec le form 2" />
@@ -679,6 +675,10 @@
     <MESSAGE value="Modification systeme de choix tags" />
     <MESSAGE value="Modification vue pour affichage de tags" />
     <MESSAGE value="Ajout bouton instagram" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout bouton instagram" />
+    <MESSAGE value="Ajout contact dans le profil" />
+    <MESSAGE value="Création ContactType" />
+    <MESSAGE value="IndependantController ajout send mail" />
+    <MESSAGE value="Ajout route sendmail" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout route sendmail" />
   </component>
 </project>
