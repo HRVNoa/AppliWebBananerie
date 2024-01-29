@@ -36,75 +36,75 @@
             <li class="nav-item menu-items">
                 <a class="nav-link" href="/">
               <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
+                <i class="mdi mdi-table" style="font-size: 20px"></i>
               </span>
-                    <span class="menu-title">Accueil</span>
+                    <span class="menu-title">Tableau de bord</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
-                <i class="mdi mdi-calendar"></i>
+                <i class="mdi mdi-account-outline" style="font-size: 20px"></i>
               </span>
-                    <span class="menu-title">Calendrier</span>
+                    <span class="menu-title">Mon Compte</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ asset("design/pages/ui-features/buttons.html")}}">Grand Studio</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ asset("design/pages/ui-features/dropdowns.html")}}">Petit Studio</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ asset("design/pages/ui-features/typography.html")}}">Salle de Montage</a></li>
+                        <li class="nav-item">
+                            {% if app.user.entreprise %}
+                                <a class="nav-link" href="/entreprise/consulter/{{ app.user.entreprise.id }}">Mon Profil</a>
+                            {% elseif app.user.independant %}
+                                <a class="nav-link" href="/independant/consulter/{{ app.user.independant.id }}">Mon Profil</a>
+                            {% else %}
+                                <a class="nav-link" href="/">Mon Profil</a>
+                            {% endif %}
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ asset("design/pages/ui-features/buttons.html")}}">Mes événements</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ asset("design/pages/ui-features/dropdowns.html")}}">Mes réservations</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ asset("design/pages/ui-features/typography.html")}}">Relevé de compte</a></li>
                     </ul>
                 </div>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="/independant/lister">
+                <a class="nav-link" href="/">
               <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
+                <i class="mdi mdi-table-large" style="font-size: 20px"></i>
               </span>
-                    <span class="menu-title">Independant</span>
+                    <span class="menu-title">Annuaire</span>
                 </a>
             </li>
+
             <li class="nav-item menu-items">
-                <a class="nav-link" href="/entreprise/lister">
+                <a class="nav-link" href="/">
               <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
+                <i class="mdi mdi-calendar-clock" style="font-size: 20px"></i>
               </span>
-                    <span class="menu-title">Entreprise</span>
+                    <span class="menu-title">Événements</span>
                 </a>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
+
             <li class="nav-item menu-items">
-                <a class="nav-link" href="/statut/lister">
+                <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
+                <i class="mdi mdi-worker" style="font-size: 20px"></i>
               </span>
-                    <span class="menu-title">Statut</span>
+                    <span class="menu-title">Admin</span>
+                    <i class="menu-arrow"></i>
                 </a>
+                <div class="collapse" id="auth">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="/independant/lister"> Independant </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/entreprise/lister"> Entreprise </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/statut/lister"> Statut </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/metier/lister"> Metier </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/secteuractivite/lister"> Secteur </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/tag/lister"> Tag </a></li>
+                    </ul>
+                </div>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="/metier/lister">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
-                    <span class="menu-title">Metier</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="/secteuractivite/lister">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
-                    <span class="menu-title">Secteur</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="/tag/lister">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
-                    <span class="menu-title">Tag</span>
-                </a>
-            </li>
+            {% endif %}
         </ul>
     </nav>
     <!-- partial -->
@@ -119,47 +119,6 @@
                     <span class="mdi mdi-menu"></span>
                 </button>
                 <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item dropdown border-left">
-                        <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="mdi mdi-email"></i>
-                            <span class="count bg-success"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                            <h6 class="p-3 mb-0">Messages</h6>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="{{ asset("design/assets/images/faces/face4.jpg")}}" alt="image" class="rounded-circle profile-pic">
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1">Mark send you a message</p>
-                                    <p class="text-muted mb-0"> 1 Minutes ago </p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="{{ asset("design/assets/images/faces/face2.jpg")}}" alt="image" class="rounded-circle profile-pic">
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1">Cregh send you a message</p>
-                                    <p class="text-muted mb-0"> 15 Minutes ago </p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="{{ asset("design/assets/images/faces/face3.jpg")}}" alt="image" class="rounded-circle profile-pic">
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1">Profile picture updated</p>
-                                    <p class="text-muted mb-0"> 18 Minutes ago </p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <p class="p-3 mb-0 text-center">4 new messages</p>
-                        </div>
-                    </li>
                     <li class="nav-item dropdown border-left">
                         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                             <i class="mdi mdi-bell"></i>
