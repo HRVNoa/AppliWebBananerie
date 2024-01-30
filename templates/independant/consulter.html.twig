@@ -148,21 +148,30 @@
                 <div class="col-md-4">
                     <div class="profile-work">
                         <p>Super Tags</p>
+                        {% set displayedTags = [] %}
+
+                        {# Parcours des super tags #}
                         {% for independantTag in independant.independantTags %}
                             {% if independantTag.super == 1 %}
-                                {{  independantTag.tag.libelle }}
+                                {{ independantTag.tag.libelle }}
                                 <br>
+                                {% set displayedTags = displayedTags|merge([independantTag.tag.libelle]) %}
+                            {% endif %}
+                        {% else %}
+                            Pas de super tag
+                        {% endfor %}
+                        <p>Tags</p>
+                        {# Parcours des tags classiques #}
+                        {% for independantTag in independant.independantTags %}
+                            {% if independantTag.tag.libelle not in displayedTags %}
+                                {{ independantTag.tag.libelle }}
+                                <br>
+                                {% set displayedTags = displayedTags|merge([independantTag.tag.libelle]) %}
                             {% endif %}
                         {% else %}
                             Pas de tag
                         {% endfor %}
-                        <p>Tag</p>
-                        {% for independantTag in independant.independantTags %}
-                            {{  independantTag.tag.libelle  }}
-                            <br>
-                        {% else %}
-                            Pas de tag
-                        {% endfor %}
+
                     </div>
                 </div>
 
@@ -191,6 +200,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Contact</h4>
+                    <p>Envoyez moi un message pour toute demande d'information, de tarifs, de projets...</p>
                     <form class="forms-sample">
                         <div class="row">
                             <div class="form-group col-4">
