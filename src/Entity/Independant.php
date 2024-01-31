@@ -56,6 +56,27 @@ class Independant
     #[ORM\OneToMany(mappedBy: 'independant', targetEntity: IndependantTag::class, cascade: ['persist'])]
     private Collection $independantTags;
 
+    #[ORM\Column]
+    private ?bool $annuaire = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $photodeprofil = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $instagram = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $facebook = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $linkedin = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $youtube = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Carrousel $carrousel = null;
+
     public function __construct()
     {
         $this->independantTags = new ArrayCollection();
@@ -236,6 +257,90 @@ class Independant
                 $independantTag->setIndependant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isAnnuaire(): ?bool
+    {
+        return $this->annuaire;
+    }
+
+    public function setAnnuaire(bool $annuaire): static
+    {
+        $this->annuaire = $annuaire;
+
+        return $this;
+    }
+
+    public function getPhotodeprofil(): ?string
+    {
+        return $this->photodeprofil;
+    }
+
+    public function setPhotodeprofil(?string $photodeprofil): static
+    {
+        $this->photodeprofil = $photodeprofil;
+
+        return $this;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): static
+    {
+        $this->instagram = $instagram;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): static
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    public function getLinkedin(): ?string
+    {
+        return $this->linkedin;
+    }
+
+    public function setLinkedin(?string $linkedin): static
+    {
+        $this->linkedin = $linkedin;
+
+        return $this;
+    }
+
+    public function getYoutube(): ?string
+    {
+        return $this->youtube;
+    }
+
+    public function setYoutube(?string $youtube): static
+    {
+        $this->youtube = $youtube;
+
+        return $this;
+    }
+
+    public function getCarrousel(): ?Carrousel
+    {
+        return $this->carrousel;
+    }
+
+    public function setCarrousel(?Carrousel $carrousel): static
+    {
+        $this->carrousel = $carrousel;
 
         return $this;
     }
