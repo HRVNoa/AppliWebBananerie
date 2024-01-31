@@ -77,6 +77,9 @@ class Independant
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Carrousel $carrousel = null;
 
+    #[ORM\ManyToOne(inversedBy: 'independants2nd')]
+    private ?Metier $metierSecondaire = null;
+
     public function __construct()
     {
         $this->independantTags = new ArrayCollection();
@@ -341,6 +344,18 @@ class Independant
     public function setCarrousel(?Carrousel $carrousel): static
     {
         $this->carrousel = $carrousel;
+
+        return $this;
+    }
+
+    public function getMetierSecondaire(): ?Metier
+    {
+        return $this->metierSecondaire;
+    }
+
+    public function setMetierSecondaire(?Metier $metierSecondaire): static
+    {
+        $this->metierSecondaire = $metierSecondaire;
 
         return $this;
     }
