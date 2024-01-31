@@ -4,10 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="modif sidebar/navbar">
+    <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="FIn de branche (modif sur le consulter indep)">
+      <change afterPath="$PROJECT_DIR$/src/Entity/Bourse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Carrousel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Equipement.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/EquipementEspace.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Espace.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Evenement.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Inscription.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Media.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Paiement.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Reservation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Tarif.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/TypeEspace.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/TypeEvenement.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/BourseRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/CarrouselRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/EquipementEspaceRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/EquipementRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/EspaceRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/EvenementRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/InscriptionRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/MediaRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/PaiementRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/ReservationRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/TarifRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/TypeEspaceRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/TypeEvenementRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/independant/consulter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/consulter.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Independant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Independant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,23 +229,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;PHPUnit.Main.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;planning&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Applications/MAMP/htdocs/AppliWebBananerie/templates/tag&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "PHPUnit.Main.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "création-modf-entité-mcd",
+    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/tag",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates/tag" />
@@ -257,6 +283,7 @@
       <workItem from="1706515381470" duration="348000" />
       <workItem from="1706515825276" duration="4777000" />
       <workItem from="1706602071760" duration="7210000" />
+      <workItem from="1706688126800" duration="3958000" />
     </task>
     <task id="LOCAL-00029" summary="Correction bug dans l'ajout">
       <option name="closed" value="true" />
