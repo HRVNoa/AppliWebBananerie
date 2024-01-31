@@ -17,6 +17,10 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\UsersAuthenticator
+            entry_point: 'App\Security\UsersAuthenticator'
+            form_login:
+                login_path: app_login
+                check_path: app_login
             logout:
                 path: app_logout
                 # where to redirect after logout
@@ -33,11 +37,13 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_USER }
-        - { path: ^/gestionnaire, roles: ROLE_GEST }
+        - { path: ^/entreprise, roles: ROLE_ENTREPRISE }
+        - { path: ^/independant, roles: ROLE_INDEPENDANT }
 
     role_hierarchy:
-        ROLE_GEST: [ROLE_USER]
-        ROLE_ADMIN: [ROLE_GEST]
+        ROLE_ENTREPRISE: [ROLE_USER]
+        ROLE_INDEPENDANT: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_INDEPENDANT, ROLE_ENTREPRISE]
 
 when@test:
     security:
