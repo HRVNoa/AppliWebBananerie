@@ -28,8 +28,8 @@
                     <div class="card-body px-5 py-5 ">
                         <p class="lead"> Merci de choisir si vous êtes indépendant ou si vous êtes salarié d'une entreprise. </p>
                         <div>
-                            <button type="button" class="btn btn-outline-secondary btn-lg btn-block m-1" style="font-size: larger" onclick="window.location.href='/independant/ajouter'">Indépendant</button>
-                            <button type="button" class="btn btn-outline-secondary btn-lg btn-block m-1" style="font-size: larger" onclick="window.location.href='/entreprise/ajouter'">Entreprise</button>
+                            <button type="button" class="btn btn-outline-secondary btn-lg btn-block m-1" style="font-size: larger" onclick="window.location.href=' {{ path("independantAjouter") }}'">Indépendant</button>
+                            <button type="button" class="btn btn-outline-secondary btn-lg btn-block m-1" style="font-size: larger" onclick="window.location.href='{{ path("entrepriseAjouter") }}'">Entreprise</button>
                         </div>
                     </div>
                 </div>

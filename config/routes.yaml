@@ -28,7 +28,7 @@ independantLister:
     controller: App\Controller\IndependantController::listerIndependant
 
 independantAjouter:
-    path: /independant/ajouter
+    path: /public/ajouter
     controller: App\Controller\IndependantController::ajouterIndependant
 
 independantModifier:
@@ -97,7 +97,7 @@ entrepriseLister:
     controller: App\Controller\EntrepriseController::listerEntreprise
 
 entrepriseAjouter:
-    path: /entreprise/ajouter
+    path: /public/ajouter
     controller: App\Controller\EntrepriseController::ajouterEntreprise
 
 entrepriseModifier:
