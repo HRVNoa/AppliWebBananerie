@@ -21,9 +21,13 @@ class Metier
     #[ORM\OneToMany(mappedBy: 'metier', targetEntity: Independant::class)]
     private Collection $independants;
 
+    #[ORM\OneToMany(mappedBy: 'metierSecondaire', targetEntity: Independant::class)]
+    private Collection $independants2nd;
+
     public function __construct()
     {
         $this->independants = new ArrayCollection();
+        $this->independants2nd = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +71,36 @@ class Metier
             // set the owning side to null (unless already changed)
             if ($independant->getMetier() === $this) {
                 $independant->setMetier(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Independant>
+     */
+    public function getIndependants2nd(): Collection
+    {
+        return $this->independants2nd;
+    }
+
+    public function addIndependants2nd(Independant $independants2nd): static
+    {
+        if (!$this->independants2nd->contains($independants2nd)) {
+            $this->independants2nd->add($independants2nd);
+            $independants2nd->setMetierSecondaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIndependants2nd(Independant $independants2nd): static
+    {
+        if ($this->independants2nd->removeElement($independants2nd)) {
+            // set the owning side to null (unless already changed)
+            if ($independants2nd->getMetierSecondaire() === $this) {
+                $independants2nd->setMetierSecondaire(null);
             }
         }
 
