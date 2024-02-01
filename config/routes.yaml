@@ -151,8 +151,8 @@ tagModifier:
 tagSupprimer:
     path: /tag/supprimer/{id}
     controller: App\Controller\TagController::supprimerTag
-
-
+    
+    
 
 annuaireControl:
     path: /admin/annuaire
@@ -162,5 +162,15 @@ delIndependantAnnuaire:
     path: /admin/annuaire/{id}
     controller: App\Controller\AdminController::delIndependantAnnuaire
 
+newmemberLister:
+    path: /admin/newmember
+    controller: App\Controller\AdminController::listerNewMember
 
+newmemberConfirmed:
+    path: /admin/confirmed/{id}
+    controller: App\Controller\AdminController::confirmerNewMember
+
+newmemberRefuser:
+    path: /admin/supprimer/{id}
+    controller: App\Controller\AdminController::refuserNewMember
 
