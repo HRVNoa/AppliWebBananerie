@@ -49,7 +49,12 @@ class RegistrationController extends AbstractController
                     $independant->setUser($user);
                 }
                 $session->remove('independant_id');
+            } else {
+                $this->addFlash("error","“Vous devez choisir entre la pilule bleu ou la pilule rouge“");
+                return $this->redirectToRoute("choixInscription");
+
             }
+            $user->setConfirmed(0);
 
             $entityManager->persist($user);
             $entityManager->flush();
