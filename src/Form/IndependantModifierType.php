@@ -8,6 +8,7 @@ use App\Entity\Statut;
 use App\Entity\Metier;
 use App\Entity\IndependantTag;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -48,6 +49,9 @@ class IndependantModifierType extends AbstractType
                 'expanded' => true,
                 'mapped' => false,
                 'attr' => ['class' => 'form-check', 'max-tags' => 10],
+            ])
+            ->add('annuaire', CheckboxType::class,[
+                'required' => false
             ]);
 
         // Ajouter le champ pour sélectionner les super tags
