@@ -153,4 +153,14 @@ tagSupprimer:
     controller: App\Controller\TagController::supprimerTag
 
 
+newmemberLister:
+    path: /admin/newmember
+    controller: App\Controller\AdminController::listerNewMember
 
+newmemberConfirmed:
+    path: /admin/confirmed/{id}
+    controller: App\Controller\AdminController::confirmerNewMember
+
+newmemberRefuser:
+    path: /admin/supprimer/{id}
+    controller: App\Controller\AdminController::refuserNewMember
