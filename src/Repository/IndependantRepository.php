@@ -21,6 +21,16 @@ class IndependantRepository extends ServiceEntityRepository
         parent::__construct($registry, Independant::class);
     }
 
+    public function findAllSorted($sort)
+    {
+        return $this->createQueryBuilder('i')
+            ->orderBy('i.nom', $sort)
+            ->addOrderBy('i.prenom', $sort)
+            ->where('i.annuaire = true')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Independant[] Returns an array of Independant objects
 //     */

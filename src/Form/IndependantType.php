@@ -6,8 +6,11 @@ use App\Entity\Independant;
 use App\Entity\Metier;
 use App\Entity\Statut;
 use App\Entity\Tag;
+use Doctrine\DBAL\Types\BooleanType;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -40,6 +43,9 @@ class IndependantType extends AbstractType
                 'choice_label' => function ($metier) {
                     return $metier->getLibelle();
                 },
+            ])
+            ->add('annuaire', CheckboxType::class, [
+                'required' => false
             ]);
         $builder->add('enregistrer',SubmitType::class, array('label' => 'Confirmer inscription', "attr" => ["class" => "btn btn-primary"]));
     }

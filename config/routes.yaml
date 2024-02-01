@@ -13,9 +13,9 @@ accueilIndex:
     path : /
     controller: App\Controller\IndexController::index
 
-membreLister:
-    path : /annuaire
-    controller: App\Controller\MembreController::index
+annuaireLister:
+    path : /user/annuaire
+    controller: App\Controller\AnnuaireController::lister
 
 
 
@@ -151,7 +151,16 @@ tagModifier:
 tagSupprimer:
     path: /tag/supprimer/{id}
     controller: App\Controller\TagController::supprimerTag
+    
+    
 
+annuaireControl:
+    path: /admin/annuaire
+    controller: App\Controller\AdminController::annuaireControl
+
+delIndependantAnnuaire:
+    path: /admin/annuaire/{id}
+    controller: App\Controller\AdminController::delIndependantAnnuaire
 
 newmemberLister:
     path: /admin/newmember
@@ -164,3 +173,4 @@ newmemberConfirmed:
 newmemberRefuser:
     path: /admin/supprimer/{id}
     controller: App\Controller\AdminController::refuserNewMember
+

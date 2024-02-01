@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\Entreprise;
 use App\Entity\Independant;
 use App\Entity\IndependantTag;
+use App\Entity\Metier;
 use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -81,4 +83,40 @@ class AdminController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('newmemberLister');
     }
+
+    public function annuaireControl(ManagerRegistry $doctrine, Request $request)
+    {
+        $sort = $request->query->get('sort', 'asc');
+
+        $independants = $doctrine
+            ->getRepository(Independant::class)
+            ->findAllSorted($sort);
+
+        return $this->render('admin/annuaire.html.twig', [
+            'independants' => $independants,
+        ]);
+    }
+
+    public function delIndependantAnnuaire(ManagerRegistry $doctrine, $id)
+    {
+        //récupération de l'annuaire avec son id
+        $independant = $doctrine->getRepository(Independant::class)->find($id);
+
+        if (!$independant) { // test si il y a une categorie lier avec l'id
+            $this->addFlash('error', 'L\'independant que vous voulais supprimé n\'existe pas.');
+            return $this->redirectToRoute('annuaireControl');
+        }
+        $independant->setAnnuaire(false);
+        try {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($independant);
+            $entityManager->flush();
+            $this->addFlash('success', 'L\'independant n\'est plus afficher dans l\'annuaire avec succès.');
+
+        } catch (\Exception $e){
+            $this->addFlash('error', 'L\'independant n\'a pas pu être retirer. Cause : ' . $e);
+        }
+        return $this->redirectToRoute('annuaireControl');
+    }
+
 }
