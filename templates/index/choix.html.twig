@@ -26,11 +26,23 @@
             <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg text-center">
                 <div class="card col-lg-4 mx-auto">
                     <div class="card-body px-5 py-5 ">
+                        {% set error = false %}
+                        {% for message in app.flashes('error') %}
+                            {% set error = true %}
+                            <p>{{ message }}</p>
+                            <p class="lead"> Merci de choisir si vous êtes indépendant ou si vous êtes salarié d'une entreprise. </p>
+                            <div>
+                                <button type="button" class="btn btn-outline-primary btn-lg btn-block m-1" style="font-size: larger" onclick="window.location.href=' {{ path("independantAjouter") }}'">Indépendant</button>
+                                <button type="button" class="btn btn-outline-danger btn-lg btn-block m-1" style="font-size: larger" onclick="window.location.href='{{ path("entrepriseAjouter") }}'">Entreprise</button>
+                            </div>
+                        {% endfor %}
+                        {% if error == false %}
                         <p class="lead"> Merci de choisir si vous êtes indépendant ou si vous êtes salarié d'une entreprise. </p>
                         <div>
                             <button type="button" class="btn btn-outline-secondary btn-lg btn-block m-1" style="font-size: larger" onclick="window.location.href=' {{ path("independantAjouter") }}'">Indépendant</button>
                             <button type="button" class="btn btn-outline-secondary btn-lg btn-block m-1" style="font-size: larger" onclick="window.location.href='{{ path("entrepriseAjouter") }}'">Entreprise</button>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
