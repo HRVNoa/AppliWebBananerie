@@ -49,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Inscription::class)]
     private Collection $inscriptions;
 
+    #[ORM\Column]
+    private ?bool $confirmed = null;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -278,6 +281,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $inscription->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isConfirmed(): ?bool
+    {
+        return $this->confirmed;
+    }
+
+    public function setConfirmed(bool $confirmed): static
+    {
+        $this->confirmed = $confirmed;
 
         return $this;
     }

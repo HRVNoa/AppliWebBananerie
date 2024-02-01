@@ -80,6 +80,9 @@ class Independant
     #[ORM\ManyToOne(inversedBy: 'independants2nd')]
     private ?Metier $metierSecondaire = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $video = null;
+
     public function __construct()
     {
         $this->independantTags = new ArrayCollection();
@@ -356,6 +359,18 @@ class Independant
     public function setMetierSecondaire(?Metier $metierSecondaire): static
     {
         $this->metierSecondaire = $metierSecondaire;
+
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): static
+    {
+        $this->video = $video;
 
         return $this;
     }
