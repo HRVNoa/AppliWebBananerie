@@ -90,10 +90,8 @@ class IndexController extends AbstractController
                                 $destName = 'Admin';
                             }
 
-                            $data = $form->getData();
-
                             $entityManager = $doctrine->getManager();
-                            $entityManager->persist($data);
+                            $entityManager->remove($reservation);
                             $entityManager->flush();
 
                             $this->addFlash('success', 'La réservation à bien été annulée');
@@ -133,6 +131,7 @@ class IndexController extends AbstractController
                                         <ul>
                                             <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
                                             <li>Heure : '. $reservation->getHeureDebut()->format("H") .'h à '. $reservation->getHeureFin()->format("H") .'h</li>
+                                            <li>Détail de la réservation : '. $reservation->getLibelle() .'</li>
                                         </ul>
                                         <p>Pour plus d\'informations ou pour toute question, n\'hésitez pas à nous contacter La Bananerie ou via l\'espace membre.</p>
                                         <p>Nous espérons avoir l\'opportunité de vous accueillir prochainement.</p>
