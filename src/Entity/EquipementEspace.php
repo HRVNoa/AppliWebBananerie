@@ -14,7 +14,7 @@ class EquipementEspace
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $quantitÃe = null;
+    private ?int $quantite = null;
 
     #[ORM\ManyToOne(inversedBy: 'equipementEspaces')]
     private ?Espace $espace = null;
@@ -27,14 +27,14 @@ class EquipementEspace
         return $this->id;
     }
 
-    public function getQuantitÃe(): ?int
+    public function getQuantite(): ?int
     {
-        return $this->quantitÃe;
+        return $this->quantite;
     }
 
-    public function setQuantitÃe(int $quantitÃe): static
+    public function setQuantite(int $quantite): static
     {
-        $this->quantitÃe = $quantitÃe;
+        $this->quantite = $quantite;
 
         return $this;
     }

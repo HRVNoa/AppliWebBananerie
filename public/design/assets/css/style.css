@@ -16786,7 +16786,7 @@ code {
   .btn-inverse-secondary:not(.btn-inverse-light) {
     color: #e4eaec; }
   .btn-inverse-secondary:hover {
-    color: #ffffff;
+    color: #000;
     background-color: #e4eaec;
     border-color: #e4eaec; }
   .btn-inverse-secondary.focus, .btn-inverse-secondary:focus {

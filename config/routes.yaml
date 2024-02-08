@@ -13,6 +13,18 @@ accueilIndex:
     path : /
     controller: App\Controller\IndexController::index
 
+formReservation:
+    path : /reservation
+    controller : App\Controller\IndexController::formReservation
+
+showFormReservation:
+    path : /reservationShow
+    controller : App\Controller\IndexController::showFormReservation
+
+detailReservation:
+    path : /reservationDetail
+    controller : App\Controller\IndexController::modalDetail
+
 annuaireLister:
     path : /user/annuaire
     controller: App\Controller\AnnuaireController::lister
