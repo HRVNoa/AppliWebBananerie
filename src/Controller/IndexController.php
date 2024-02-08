@@ -52,7 +52,7 @@ class IndexController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
 
-    public function modalDetail(Request $request, ManagerRegistry $doctrine)
+    public function modalDetail(Request $request, ManagerRegistry $doctrine, Security $security)
     {
         if ($request->query->get('id', null) != null){
             $id = $request->query->get('id', null);
@@ -78,10 +78,88 @@ class IndexController extends AbstractController
                     try {
                         if ($annulable){
                             //Annulation de la reservation
+
+                            $connectedUser = $security->getUser();
+                            if ($reservation->getUser()->getIndependant() != null){
+                                $inde = $doctrine->getRepository(Independant::class)->findOneBy(['user' => $reservation->getUser()]);
+                                $destName = $inde->getNom().' '.$inde->getPrenom();
+                            }else if ($reservation->getUser()->getEntreprise() != null){
+                                $entr = $doctrine->getRepository(Entreprise::class)->findOneBy(['user' => $reservation->getUser()]);
+                                $destName = $entr->getNom().' '.$entr->getPrenom();
+                            }else{
+                                $destName = 'Admin';
+                            }
+
+                            $data = $form->getData();
+
                             $entityManager = $doctrine->getManager();
-                            $entityManager->remove($reservation);
+                            $entityManager->persist($data);
                             $entityManager->flush();
+
                             $this->addFlash('success', 'La réservation à bien été annulée');
+
+                            // Envoi du mail pour confirmation
+                            $transport = Transport::fromDsn('smtp://bananeriebot@gmail.com:ramchihfwonbusnl@smtp.gmail.com:587?encryption=tls&auth_mode=login');
+                            $mailer = new Mailer($transport);
+                            $email = (new Email())
+                                ->from(new Address('bananeriebot@gmail.com', 'La Bananerie'))
+                                ->to($security->getUser()->getUserIdentifier())
+                                ->subject("Annulation d'une réservation : ". $reservation->getEspace()->getLibelle() ) // Sujet
+                                ->html('
+                                    <style>
+                                        body {
+                                            font-family: Arial, sans-serif;
+                                            margin: 0;
+                                            padding: 0;
+                                            background-color: #f4f4f4;
+                                        }
+                                    </style>
+                                    
+                                    <div style="background-color: #ffffff;
+                                            width: 600px;
+                                            margin: 0 auto;
+                                            padding: 20px;
+                                            color: #000;">
+                                    <div style="background-color: #FACC5F;
+                                                color: #ffffff;
+                                                padding: 10px;
+                                                text-align: center;">
+                                        <h2>Annulation de votre réservation</h2>
+                                    </div>
+                                    <div style="padding: 20px;
+                                                text-align: left;">
+                                        <p>Bonjour '. $destName .',</p>
+                                        <p>Nous sommes désolés de vous informer que votre réservation a été annulée. Voici les détails de la réservation annulée :</p>
+                                        <ul>
+                                            <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
+                                            <li>Heure : '. $reservation->getHeureDebut()->format("H") .'h à '. $reservation->getHeureFin()->format("H") .'h</li>
+                                        </ul>
+                                        <p>Pour plus d\'informations ou pour toute question, n\'hésitez pas à nous contacter La Bananerie ou via l\'espace membre.</p>
+                                        <p>Nous espérons avoir l\'opportunité de vous accueillir prochainement.</p>
+                                        <p>Cordialement,</p>
+                                        <p>La Bananerie.</p>
+                                    </div>
+                                    <div style="background-color: #333333;
+                                                color: #ffffff;
+                                                padding: 10px;
+                                                text-align: center;
+                                                font-size: 12px;">
+                                        Merci de votre compréhension | <a href="https://google.fr" style="color: #ffffff;">Visitez notre site</a>
+                                    </div>
+                                </div>
+                                ');
+                            try {
+                                $mailer->send($email);
+                                $this->addFlash('success', 'Un accusé vous a été envoyé par mail.');
+                            } catch (TransportExceptionInterface $e) {
+                                $this->addFlash('error', "Oops! Quelque chose s'est mal passé et nous n'avons pas pu envoyer un accusé de la réservation par email.");
+                            }
+
+                            return $this->render('index/reservation.html.twig', [
+                                'form' => $form,
+                                'reservation' => $reservation,
+                                'succes' => false
+                            ]);
                         }else{
                             $this->addFlash('error', 'La réservation ne peut être annulée seulement 48h à l\'avance.');
                         }
