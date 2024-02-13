@@ -3,6 +3,11 @@
 
 {% block stylesheets %}
     <style>
+        .pdp{
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
 
     .emp-profile{
     padding: 3%;
@@ -77,6 +82,14 @@
     padding: 14%;
     margin-top: -15%;
     }
+        .metiersecondaire{
+            padding: 14%;
+            margin-top: -5%;
+        }
+        .metiersecondaire h6{
+            color: #818182;
+            font-size: 20px;
+        }
     .profile-work p{
     font-size: 18px;
     color: #818182;
@@ -105,131 +118,397 @@
         aspect-ratio: 16/9;
     }
  .card{border: 0px;}
+         .responsive-iframe-container {
+             position: relative;
+             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+             height: 0;
+             overflow: hidden;
+         }
+
+        .responsive-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
     </style>
 {% endblock %}
 
 {% block body %}
-
-
-<div class="card">
-    <div class=" emp-profile">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="profile-head mb-3">
-                        <h5>
-                            {{independant.nom}} {{independant.prenom}}
-                        </h5>
-                        <h4>
-                            {{ independant.email }}
-                        </h4>
-                        <h6>
-                            {{ independant.metier.libelle }}
-                        </h6>
-
-                        <button type="button" class="btn btn-social-icon btn-facebook"><i style="font-size: 25px" class="mdi mdi-facebook"></i></button>
-                        <button type="button" class="btn btn-social-icon btn-youtube"><i style="font-size: 25px" class="mdi mdi-youtube"></i></button>
-                        <button type="button" class="btn btn-social-icon btn-insta"><i style="font-size: 25px" class="mdi mdi-instagram"></i></button>
-                        <button type="button" class="btn btn-social-icon btn-linkedin"><i style="font-size: 25px" class="mdi mdi-linkedin "></i></button>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
-                        fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-                        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu
-                    </p>
-                </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-work">
-                        <p>Super Tags</p>
-                        {% set displayedTags = [] %}
-
-                        {# Parcours des super tags #}
-                        {% for independantTag in independant.independantTags %}
-                            {% if independantTag.super == 1 %}
-                                {{ independantTag.tag.libelle }}
-                                <br>
-                                {% set displayedTags = displayedTags|merge([independantTag.tag.libelle]) %}
+    {% if app.user.independant is not null and app.user.independant.id == independant.id %}
+        <div class="card">
+            <div class=" emp-profile">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="profile-img">
+                                <img src="{{ asset('membre/photodeprofil/') }}{{ independant.photodeprofil }}" alt="" class="pdp"/>
+                                <a href="{{ path('independantModifierPhotoDeProfil', {'id': app.user.independant.id}) }}" class="file btn btn-lg btn-primary">
+                                    Changer de photo
+                                </a>
+                            </div>
+                            {% if independant.metiersecondaire != null %}
+                            <div class="metiersecondaire">
+                                <h6>
+                            {{ independant.metiersecondaire.libelle}}
+                                </h6>
+                            </div>
                             {% endif %}
-                        {% else %}
-                            Pas de super tag
-                        {% endfor %}
-                        <p>Tags</p>
-                        {# Parcours des tags classiques #}
-                        {% for independantTag in independant.independantTags %}
-                            {% if independantTag.tag.libelle not in displayedTags %}
-                                {{ independantTag.tag.libelle }}
-                                <br>
-                                {% set displayedTags = displayedTags|merge([independantTag.tag.libelle]) %}
-                            {% endif %}
-                        {% else %}
-                            Pas de tag
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="profile-head mb-3">
+                                <h5>
+                                    {{independant.nom}} {{independant.prenom}}
+                                </h5>
+                                <h4>
+                                    {{ independant.email }}
+                                </h4>
+                                <h6>
+                                    {{ independant.metier.libelle }}
+                                </h6>
+
+                                <button type="button" class="btn btn-social-icon btn-facebook" onclick='window.location.href="{{ independant.facebook }}"'><i style="font-size: 25px" class="mdi mdi-facebook"></i></button>
+                                <button type="button" class="btn btn-social-icon btn-youtube" onclick='window.location.href="{{ independant.youtube }}"'><i style="font-size: 25px" class="mdi mdi-youtube"></i></button>
+                                <button type="button" class="btn btn-social-icon btn-insta" onclick='window.location.href="{{ independant.instagram }}"'><i style="font-size: 25px" class="mdi mdi-instagram"></i></button>
+                                <button type="button" class="btn btn-social-icon btn-linkedin" onclick='window.location.href="{{ independant.linkedin }}"'><i style="font-size: 25px" class="mdi mdi-linkedin "></i></button>
+                            </div>
+                                <h4> {{ independant.statut.libelle }}</h4>
+                            <p>
+                                {{ independant.description }}
+                            </p>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{{ path('independantModifierInfo', { 'id': app.user.independant.id }) }}"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Votre Profil"/> </a>
+                        </div>
+                        {% for message in app.flashes('errorInfo') %}
+                        <h5 class="text-danger">{{ message }}</h5>
                         {% endfor %}
 
-                    </div>
-                </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="profile-work">
+                                <p>Super Tags</p>
+                                {% set displayedTags = [] %}
 
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Portfolio Slide</h4>
-                            <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
-                                <div class="item">
-                                    <img src="/design/assets/images/dashboard/Rectangle.jpg" alt="" class="imgportfolio">
+                                {# Parcours des super tags #}
+                                {% for independantTag in independant.independantTags %}
+                                    {% if independantTag.super == 1 %}
+                                        {{ independantTag.tag.libelle }}
+                                        <br>
+                                        {% set displayedTags = displayedTags|merge([independantTag.tag.libelle]) %}
+                                    {% endif %}
+                                {% else %}
+                                    Pas de super tag
+                                {% endfor %}
+                                <p>Tags</p>
+                                {# Parcours des tags classiques #}
+                                {% for independantTag in independant.independantTags %}
+                                    {% if independantTag.tag.libelle not in displayedTags %}
+                                        {{ independantTag.tag.libelle }}
+                                        <br>
+                                        {% set displayedTags = displayedTags|merge([independantTag.tag.libelle]) %}
+                                    {% endif %}
+                                {% else %}
+                                    Pas de tag
+                                {% endfor %}
+                                <div style="margin-top: 10px">
+                                    <a href="{{ path('independantModifierTag', { 'id': app.user.independant.id }) }}"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Modifier Tag"/> </a>
                                 </div>
-                                <div class="item">
-                                    <img src="/design/assets/images/dashboard/Img_5.jpg" alt="" class="imgportfolio">
-                                </div>
-                                <div class="item">
-                                    <img src="/design/assets/images/dashboard/img_6.jpg" alt="" class="imgportfolio">
+                            </div>
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% if carrousel.media != null %}
+                                    <h4 class="card-title">Portfolio</h4>
+
+                                    <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
+                                            {% for media in carrousel.media %}
+                                            <div class="item">
+                                                <img src="{{ asset('membre/portfolio/' ~ media.lien) }}" alt="" class="imgportfolio">
+                                            </div>
+                                            {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                    <div class ="col-md-4 " style="margin-top: 10px">
+                                        <a href="{{ path('independantCréerPortfolio', { 'id': app.user.independant.id }) }}"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Mon Portfolio"/> </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                        {% if independant.videos|length > 0 %}
+                            <div class="row align-content-center align-items-center justify-content-center">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Video :</h4>
+                                            {% set displaySuperVideos = false %}
+                                            {% for video in independant.videos %}
+                                                {% if video.super == 1 %}
+                                                    {% set displaySuperVideos = true %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {% if independant.videos|length > 0 and displaySuperVideos %}
+                                                <div class="col-md-12 col-sm-12 mb-12">
+                                                    <div class="responsive-iframe-container">
+                                                        {% for video in independant.videos %}
+                                                            {% if video.super == 1 %}
+                                                                <iframe src="https://www.youtube.com/embed/{{ video.lien|split('=')[1]|split('&')[0] }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-content-center align-items-center justify-content-center">
+                                {% set video_count = independant.videos|filter(video => video.super == 0)|length %}
+                                {% set col_class = 'col-md-2 col-sm-6' %}
+                                {% if video_count == 1 %}
+                                    {% set col_class = 'col-md-12 col-sm-12' %}
+                                {% elseif video_count == 2 %}
+                                    {% set col_class = 'col-md-6 col-sm-6' %}
+                                {% elseif video_count == 3 %}
+                                    {% set col_class = 'col-md-4 col-sm-6' %}
+                                {% elseif video_count == 4 %}
+                                    {% set col_class = 'col-md-3 col-sm-6' %}
+                                {% endif %}
+
+                                {% for video in independant.videos %}
+                                    {% if video.super == 0 %}
+                                        <div class="{{ col_class }} mb-2">
+                                            <div class="responsive-iframe-container">
+                                                <iframe src="https://www.youtube.com/embed/{{ video.lien|split('=')[1]|split('&')[0] }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                            {% endif %}
+                            <div class="row">
+                                <div class ="col-md-4 " style="margin-top: 10px">
+                                    <a href="{{ path('independantListerVideo', { 'id': app.user.independant.id }) }}"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Vos videos"/> </a>
+                                </div>
+                            </div>
+                    </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="card">
+            <div class=" emp-profile">
+                <div class="row">
+                    <div class="col-md-4">
+                        {% if independant.photodeprofil|length > 0 %}
+                        <div class="profile-img">
+                            <img src="{{ asset('membre/photodeprofil/') }}{{ independant.photodeprofil }}" alt="" class="pdp"/>
+                        </div>
+                        {% endif %}
+                        {% if independant.metiersecondaire != null %}
+                        <div class="metiersecondaire">
+                            <h6>
+                                 {{ independant.metiersecondaire.libelle}}
+                            </h6>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head mb-3">
+                            <h5>
+                                {{independant.nom}} {{independant.prenom}}
+                            </h5>
+                            <h4>
+                                {{ independant.email }}
+                            </h4>
+                            <h6>
+                                {{ independant.metier.libelle }}
+                            </h6>
+                            {% if independant.facebook|length > 0 %}
+                                <button type="button" class="btn btn-social-icon btn-facebook" onclick='window.location.href="{{ independant.facebook }}"'><i style="font-size: 25px" class="mdi mdi-facebook"></i></button>
+                            {% endif %}
+                            {% if independant.youtube|length > 0 %}
+                                <button type="button" class="btn btn-social-icon btn-youtube" onclick='window.location.href="{{ independant.youtube }}"'><i style="font-size: 25px" class="mdi mdi-youtube"></i></button>
+                            {% endif %}
+                            {% if independant.instagram|length > 0 %}
+                                <button type="button" class="btn btn-social-icon btn-insta" onclick='window.location.href="{{ independant.instagram }}"'><i style="font-size: 25px" class="mdi mdi-instagram"></i></button>
+                            {% endif %}
+                            {% if independant.linkedin|length > 0 %}
+                                <button type="button" class="btn btn-social-icon btn-linkedin" onclick='window.location.href="{{ independant.linkedin }}"'><i style="font-size: 25px" class="mdi mdi-linkedin "></i></button>
+                            {% endif %}
+                        </div>
+                        <h4> {{ independant.statut.libelle }}</h4>
+                         {% if independant.description|length > 0 %}
+                            <p>
+                                {{ independant.description }}
+                            </p>
+                         {% endif %}
+                    </div>
+                    <div class="row">
+                    {% if independant.independantTags|length > 0 %}
+                        <div class="col-md-4">
+                            <div class="profile-work">
+                                <p>Super Tags</p>
+                                {% set displayedTags = [] %}
+
+                                {# Parcours des super tags #}
+                                {% for independantTag in independant.independantTags %}
+                                    {% if independantTag.super == 1 %}
+                                        {{ independantTag.tag.libelle }}
+                                        <br>
+                                        {% set displayedTags = displayedTags|merge([independantTag.tag.libelle]) %}
+                                    {% endif %}
+                                {% else %}
+                                    Pas de super tag
+                                {% endfor %}
+
+                                <p>Tags</p>
+                                {# Parcours des tags classiques #}
+                                {% for independantTag in independant.independantTags %}
+                                    {% if independantTag.tag.libelle not in displayedTags %}
+                                        {{ independantTag.tag.libelle }}
+                                        <br>
+                                        {% set displayedTags = displayedTags|merge([independantTag.tag.libelle]) %}
+                                    {% endif %}
+                                {% else %}
+                                    Pas de tag
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if carrousel.media|length > 0 %}
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Portfolio :</h4>
+                                    <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
+                                        {% for media in carrousel.media %}
+                                            <div class="item">
+                                                <img src="{{ asset('membre/portfolio/' ~ media.lien) }}" alt="" class="imgportfolio">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            </div>
-        <div class="row">
-        <div class="col-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Contact</h4>
-                    <p>Envoyez moi un message pour toute demande d'information, de tarifs, de projets...</p>
-                    <form class="forms-sample">
-                        <div class="row">
-                            <div class="form-group col-4">
-                                <label for="exampleInputName">Nom</label>
-                                <input type="text" class="form-control" id="exampleInputName" placeholder="Nom">
-                            </div>
-                            <div class="form-group col-4">
-                                <label for="exampleInputEmail">Adresse Email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
-                            </div>
-                            <div class="form-group col-4">
-                                <label for="exampleInputTel">Téléphone</label>
-                                <input type="tel" class="form-control" id="exampleInputTel" placeholder="Téléphone">
+                {% if independant.videos|length > 0 %}
+                    <div class="row align-content-center align-items-center justify-content-center">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Video :</h4>
+                                    {% set displaySuperVideos = false %}
+                                    {% for video in independant.videos %}
+                                        {% if video.super == 1 %}
+                                            {% set displaySuperVideos = true %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if independant.videos|length > 0 and displaySuperVideos %}
+                                        <div class="col-md-12 col-sm-12 mb-12">
+                                            <div class="responsive-iframe-container">
+                                                {% for video in independant.videos %}
+                                                    {% if video.super == 1 %}
+                                                        <iframe src="https://www.youtube.com/embed/{{ video.lien|split('=')[1]|split('&')[0] }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputObjet">Objet</label>
-                            <input type="text" class="form-control" id="exampleInputObjet" placeholder="Objet">
+                    </div>
+                    <div class="row align-content-center align-items-center justify-content-center">
+                        <div class="row align-content-center align-items-center justify-content-center">
+                            {% set video_count = independant.videos|filter(video => video.super == 0)|length %}
+                            {% set col_class = 'col-md-2 col-sm-6' %}
+                            {% if video_count == 1 %}
+                                {% set col_class = 'col-md-12 col-sm-12' %}
+                            {% elseif video_count == 2 %}
+                                {% set col_class = 'col-md-6 col-sm-6' %}
+                            {% elseif video_count == 3 %}
+                                {% set col_class = 'col-md-4 col-sm-6' %}
+                            {% elseif video_count == 4 %}
+                                {% set col_class = 'col-md-3 col-sm-6' %}
+                            {% endif %}
+
+                            {% for video in independant.videos %}
+                                {% if video.super == 0 %}
+                                    <div class="{{ col_class }} mb-2">
+                                        <div class="responsive-iframe-container">
+                                            <iframe src="https://www.youtube.com/embed/{{ video.lien|split('=')[1]|split('&')[0] }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
-                        <div class="form-group">
-                            <label for="exampleTextarea">Message</label>
-                            <textarea class="form-control" id="exampleTextarea" rows="4"></textarea>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Contact</h4>
+                                <p>Envoyez moi un message pour toute demande d'information, de tarifs, de projets...</p>
+                                {{ form_start(form, {'action': path('independant_sendmail',{'id':  independant.id })},{'attr':{'class':'form-sample'}})}}
+                                <div class="row">
+                                    <div class="form-group col-4">
+                                        <div id="exampleInputName">
+                                            {{ form_errors(form.nom) }}
+                                            {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <div id="exampleInputEmail">
+                                            {{ form_errors(form.email) }}
+                                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <div id="exampleInputTel">
+                                            {{ form_errors(form.phone) }}
+                                            {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div id="exampleInputObjet">
+                                        {{ form_errors(form.objet) }}
+                                        {{ form_widget(form.objet, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div id="TextArea">
+                                        {{ form_errors(form.message) }}
+                                        {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                {% for message in app.flashes('error') %}
+                                    <div style="color: #fff">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                                <button type="submit" class="btn btn-primary me-2">Envoyez</button>
+                                {{ form_end(form) }}
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary me-2">Envoyez</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
-    </div>
-</div>
+    {% endif %}
+
+
 {% endblock %}

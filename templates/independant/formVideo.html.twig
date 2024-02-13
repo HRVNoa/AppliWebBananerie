@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modification Tags{% endblock %}
+{% block stylesheets %}
+
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Changement de votre vidéo</h4>
+                <div class="row">
+                    {{ form_start(form, {'attr': {'class': 'form-sample'}}) }}
+                    {{ form_widget(form._token) }}
+                    <div class="col-md-9">
+                        <div class="form-group row">
+                            <label for="selectedTags" class="col-sm-3 col-form-label">Video :</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.video, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-description"> *Vous ne pouvez mettre que une video youtube.
+                </div>
+                <div class="row flex-c-c">
+                    <div class="col-md-2 flex-c-c">
+                        <button type="button" class="btn btn-outline-danger btn-icon-text" onclick="window.location.href='{{ path('independantConsulter', {'id': independant.id}) }}'">Annuler</button>
+                    </div>
+                    <div class="col-md-2 flex-c-c">
+                        {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-primary btn-icon-text text-center'}}) }}
+
+                    </div>
+                </div>
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

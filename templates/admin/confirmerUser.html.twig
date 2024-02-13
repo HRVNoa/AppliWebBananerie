@@ -8,6 +8,13 @@
                 <div class="card-body">
                     <h4 class="card-title">Confirmer nouveau utilisateurs independants</h4>
 
+                    {% for message in app.flashes('succesmail') %}
+                        <h5 class="text-success">{{ message }}</h5>
+                    {% endfor %}
+                    {% for message in app.flashes('errormail') %}
+                        <h5 class="text-danger">{{ message }}</h5>
+                    {% endfor %}
+
                     {# Tableau pour les indépendants #}
                     <div class="table-responsive">
                         <table class="table table-striped">

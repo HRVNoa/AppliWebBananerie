@@ -22,7 +22,7 @@ class IndependantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class )
+            ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
             ->add('entreprise', TextType::class)
             ->add('tel', TextType::class)
@@ -43,9 +43,6 @@ class IndependantType extends AbstractType
                 'choice_label' => function ($metier) {
                     return $metier->getLibelle();
                 },
-            ])
-            ->add('annuaire', CheckboxType::class, [
-                'required' => false
             ]);
         $builder->add('enregistrer',SubmitType::class, array('label' => 'Confirmer inscription', "attr" => ["class" => "btn btn-primary"]));
     }
