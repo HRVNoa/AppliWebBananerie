@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block title %}Ajouter Video {% endblock %}
+{% block stylesheets %}
+    <style>
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+            margin-left: 15px;
+            cursor: pointer;
+            margin-top: 6px;
+            /* Styles supplémentaires */
+        }
+        .form-check-input:checked {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+        .form-check-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
+        }
+    </style>
+{% endblock %}
+{% block body %}
+
+    <div class="card">
+    <div class="card-body">
+
+    {{ form_start(form) }}
+    {{ form_widget(form._token) }}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Saisir une nouvelle/modifier video</h6>
+        </div>
+        <div class="card-body">
+            <div class="">
+            <label class="txt37">Lien de votre video :</label>
+            {{ form_errors(form.lien) }}
+            {{ form_widget(form.lien) }}
+            </div>
+            <p class="card-description"> La vidéo doit être un lien youtube. </p>
+            <div class="row">
+            <label style="margin-top: 20px;">Mise en avant :</label>
+            {{ form_errors(form.super) }}
+            {{ form_widget(form.super, {'attr': {'class': 'form-check-input'}}) }}
+            </div>
+            <p class="card-description"> Mise en avant signifie que la vidéo sera agrandi. Il ne peut y avoir que une seule video mise en avant. </p>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+        <span class="text">Ajouter/Mettre à jour</span>
+    </button>
+    {{ form_end(form) }}
+    </div>
+    </div>
+
+{% endblock %}

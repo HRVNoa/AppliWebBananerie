@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modification Information{% endblock %}
+{% block stylesheets %}
+<style>
+    .form-check-input {
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+        cursor: pointer;
+        margin-top: 6px;
+        /* Styles supplémentaires */
+    }
+    .form-check-input:checked {
+        background-color: #4CAF50;
+        border-color: #4CAF50;
+    }
+    .form-check-input:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Modification Information</h4>
+
+                    {{ form_start(form, {'attr': {'class': 'form-sample'}}) }}
+                     {{ form_widget(form._token) }}
+                    <p class="card-description"> Information Personnel </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nom</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Prénom</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <p class="card-description"> Changer d'email ici ne fait pas changer votre email de connexion. </p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Date de Naissance</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.dateNaiss, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Metier Principal</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.metier, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Metier Secondaire</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.metierSecondaire, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Adresse</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row ç">
+                                <label class="col-sm-3 col-form-label">Code Postal</label>
+                                <div class="col-sm-9">
+                                    {{ form_errors(form.copos) }}
+                                    {{ form_widget(form.copos, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row ">
+                                <label class="col-sm-3 col-form-label">Statut</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.statut, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row ">
+                                <label class="col-sm-3 col-form-label">Ville</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Description</label>
+                                <div class="col-sm-9">
+                                    {{ form_errors(form.description) }}
+                                    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-description"> Description de maximum 500 caractères. </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Facebook</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.facebook, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Youtube</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.youtube, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Instagram</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.instagram, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Linkedin</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.linkedin, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-description"> Pour les réseaux sociaux merci de renseigné le lien direct vers la page. Exemple : https://youtube.com/laBananerie </p>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Entreprise</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.entreprise, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Telephone</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">Annuaire</label>
+                        {{ form_widget(form.annuaire, {'attr': {'class': 'form-check-input'}}) }}
+                    </div>
+                    <p class="card-description"> En cochant l'annuaire vous acceptez d'être visible sur l'application pour être contacté.<br> Acceptez-vous apporte aussi l'accès à l'annuaire pour pouvoir le consulter. </p>
+                </div>
+                <div class="row flex-c-c">
+                    <div class="col-md-2 flex-c-c">
+                        <button type="button" class="btn btn-outline-danger btn-icon-text" onclick="window.location.href='{{ path('independantConsulter', {'id': independant.id}) }}'">Annuler</button>
+                    </div>
+                    <div class="col-md-2 flex-c-c">
+                        {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-primary btn-icon-text text-center'}}) }}
+
+                    </div>
+                </div>
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
