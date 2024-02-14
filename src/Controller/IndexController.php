@@ -5,10 +5,13 @@ namespace App\Controller;
 use App\Entity\Entreprise;
 use App\Entity\Espace;
 use App\Entity\Independant;
+use App\Entity\Media;
 use App\Entity\Reservation;
+use App\Entity\TarifEspaceTarif;
 use App\Entity\TypeEspace;
 use App\Entity\User;
 use App\Form\ReservationType;
+use App\Form\TarifEspaceType;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
@@ -374,6 +377,17 @@ class IndexController extends AbstractController
                 'succes' => false
             ]);
         }
+    }
+
+    public function modalEspace(ManagerRegistry $doctrine, $idCarrousel, $idEspace)
+    {
+        $medias = $doctrine->getRepository(Media::class)->findBy(['carrousel' => $idCarrousel]);
+        $espace = $doctrine->getRepository(Espace::class)->find($idEspace);
+
+        return $this->render('index/modalEspace.html.twig', [
+            'medias' => $medias,
+            'espace' => $espace,
+        ]);
     }
 
     public function choix(): Response
