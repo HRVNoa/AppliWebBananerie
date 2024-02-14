@@ -25,6 +25,7 @@ class MediaType extends AbstractType
                 'class' => Carrousel::class,
                 'choice_label' => 'id',
                 'disabled' => true,
+            ])
             ->add('alt', TextType::class, [
                 'attr' => [
                     'class'=> 'form-control form-control-user',

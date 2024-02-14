@@ -57,7 +57,7 @@ class TagController extends AbstractController
             $entityManager->persist($tag);
             $entityManager->flush();
 
-            return $this->render('tag/consulter.html.twig', ['tag' => $tag,]);
+            return $this->redirectToRoute('tagLister');
         } else {
             return $this->render('tag/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -80,7 +80,7 @@ class TagController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($tag);
                 $entityManager->flush();
-                return $this->render('tag/consulter.html.twig', ['tag' => $tag,]);
+                return $this->redirectToRoute('tagLister');
             }
             else{
                 return $this->render('tag/ajouter.html.twig', array('form' => $form->createView(),));

@@ -54,7 +54,7 @@ class MetierController extends AbstractController
             $entityManager->persist($metier);
             $entityManager->flush();
 
-            return $this->render('metier/consulter.html.twig', ['metier' => $metier,]);
+            return $this->redirectToRoute('metierLister');
         } else {
             return $this->render('metier/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -77,7 +77,7 @@ class MetierController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($metier);
                 $entityManager->flush();
-                return $this->render('metier/consulter.html.twig', ['metier' => $metier,]);
+                return $this->redirectToRoute('metierLister');
             }
             else{
                 return $this->render('metier/ajouter.html.twig', array('form' => $form->createView(),));
