@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    {% for message in app.flashes('success') %}
+                        <div class="card bg-success text-white shadow" style="margin-bottom: 20px">
+                            <div class="card-body">
+                                Success
+                                <div class="text-white">{{ message }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {% for message in app.flashes('error') %}
+                        <div class="card bg-danger text-white shadow" style="margin-bottom: 20px">
+                            <div class="card-body">
+                                Erreur
+                                <div class="text-white">{{ message }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="form-group">
+                        <div class="row flex-c-b">
+                            <div class="col-lg-4">
+                                <h3 class="card-title">Réservation des espaces</h3>
+                            </div>
+                            <div class="col-lg-4 flex-c-c" style="justify-content: flex-end">
+                                <a type="button" class="btn btn-outline-success btn-fw" href="{{ path('adminAjoutReservation') }}">Ajouter une réservation</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>Espace</th>
+                                <th>Prénom Nom</th>
+                                <th>Jour</th>
+                                <th>Horraire</th>
+                                <th>Détail de la réservation</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reservation in reservations %}
+                                <tr style="cursor: pointer">
+                                    <td>
+                                        {{ reservation.espace.libelle }}
+                                    </td>
+                                    {% if reservation.user.entreprise != null %}
+                                        <td>{{ reservation.user.entreprise.prenom|capitalize }} {{ reservation.user.entreprise.nom|upper }} (Entreprise)</td>
+                                    {% elseif reservation.user.independant != null %}
+                                        <td>{{ reservation.user.independant.prenom|capitalize }} {{ reservation.user.independant.nom|upper }} (Indépendant)</td>
+                                    {% else %}
+                                        <td>{{ reservation.user.email }} (admin)</td>
+                                    {% endif %}
+                                    <td>{{ reservation.date|date('d/m/Y') }}</td>
+                                    <td>{{ reservation.heureDebut|date('H') }}h à {{ reservation.heureFin|date('H') }}h</td>
+                                    <td>{{ reservation.libelle }}</td>
+                                    <td><a type="button" class="btn btn-outline-danger btn-fw" href="{{ path('adminAnnuleReservation', {'id':reservation.id}) }}">Annuler</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="card bg-success text-white shadow" style="margin-bottom: 20px">
+            <div class="card-body">
+                Success
+                <div class="text-white">{{ message }}</div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="card bg-danger text-white shadow" style="margin-bottom: 20px">
+            <div class="card-body">
+                Erreur
+                <div class="text-white">{{ message }}</div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="card text-white shadow" style="margin-bottom: 20px">
+        <div class="card-body">
+            <h4>Photo de l'espace : {{ espace }}</h4>
+            <div class="text-white">
+                <a type="button" class="btn btn-outline-success btn-fw" href="{{ path("adminEspaceCarrouselAdd", {'id': carrousel.id}) }}" style="margin-top: 10px">Ajouter une photo</a>
+            </div>
+        </div>
+    </div>
+
+
+    {% set mediaCount = 0 %}
+    {% for media in medias %}
+        {% if mediaCount == 0 %}
+            <div class="row" style="padding-top: 5px; padding-bottom: 5px">
+
+        {% endif %}
+        <div class="col-lg-4" style="height: inherit; padding-bottom: 5px; padding-top: 5px;">
+            <div class="card" style="height: 100%;">
+                <div class="card-body">
+                    <img src="{{ asset('media/espace/') }}{{ media.carrousel.id }}/{{ media.lien }}" class="d-block w-100" alt="{{ media.alt }}">
+                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row rounded mt-3">
+                        <div class="text-md-left text-xl-left">
+                            <h6 class="mb-1">Description de la photo</h6>
+                            <p class="text-muted mb-0">{{ media.alt }}</p>
+                        </div>
+                    </div>
+                    <a type="button" class="btn btn-outline-danger btn-fw" href="{{ path("adminEspaceCarrouselDel", {'id': media.id}) }}" style="margin-top: 10px">Supprimer</a>
+                </div>
+            </div>
+        </div>
+
+        {% if mediaCount == 2 %}
+            </div>
+            {% set mediaCount = 0 %}
+        {% else %}
+            {% set mediaCount = mediaCount + 1 %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}

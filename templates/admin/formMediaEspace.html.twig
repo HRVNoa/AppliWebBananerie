@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="card-body" style="margin-bottom: 20px">
+        <blockquote class="blockquote blockquote-primary">
+            <p class="text-success">SUCCESS :</p>
+            <footer class="blockquote-footer text-success">{{ message }}</footer>
+        </blockquote>
+    </div>
+{% endfor %}
+{% for message in app.flashes('error') %}
+    <div class="card-body" style="margin-bottom: 20px">
+        <blockquote class="blockquote blockquote-primary">
+            <p class="text-danger">ERREUR :</p>
+            <footer class="blockquote-footer text-danger">{{ message }}</footer>
+        </blockquote>
+    </div>
+{% endfor %}
+
+{{ form_start(form) }}
+{{ form_widget(form._token) }}
+<div class="container">
+    <div class="row" style="padding-top: 20px">
+        <div class="col-cm-12">
+            <h2>Ajout du média:</h2>
+
+            <div class="row" style="padding-top: 20px">
+                <div class="col-md-12">
+                    <label class="text-secondary">Photo :</label>
+                    {{ form_widget(form.lien) }}
+                </div>
+            </div>
+
+            <div class="row" style="padding-top: 20px">
+                <div class="col-md-12">
+                    <label  for="admin_reservation_heureDebut" class="text-secondary">Description:</label>
+                    {{ form_widget(form.alt) }}
+                </div>
+            </div>
+
+            <div class="row" style="padding-top: 20px">
+                <div class="col-md-4">
+                    <button id="btnConfirm" type="submit" class="btn btn-success btn-fw">Valider</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{{ form_end(form,{'render_rest':false}) }}
+{% endblock %}

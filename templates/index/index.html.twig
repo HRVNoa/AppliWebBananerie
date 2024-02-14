@@ -90,6 +90,131 @@
             font-size: 26px;
         }
 
+    /*    Bouton switch PS C'est PAS MOI QUI LA FAIT*/
+
+        .checkbox-wrapper-8 .tgl {
+            display: none;
+        }
+
+        .checkbox-wrapper-8 .tgl,
+        .checkbox-wrapper-8 .tgl:after,
+        .checkbox-wrapper-8 .tgl:before,
+        .checkbox-wrapper-8 .tgl *,
+        .checkbox-wrapper-8 .tgl *:after,
+        .checkbox-wrapper-8 .tgl *:before,
+        .checkbox-wrapper-8 .tgl + .tgl-btn {
+            box-sizing: border-box;
+        }
+
+        .checkbox-wrapper-8 .tgl::-moz-selection,
+        .checkbox-wrapper-8 .tgl:after::-moz-selection,
+        .checkbox-wrapper-8 .tgl:before::-moz-selection,
+        .checkbox-wrapper-8 .tgl *::-moz-selection,
+        .checkbox-wrapper-8 .tgl *:after::-moz-selection,
+        .checkbox-wrapper-8 .tgl *:before::-moz-selection,
+        .checkbox-wrapper-8 .tgl + .tgl-btn::-moz-selection,
+        .checkbox-wrapper-8 .tgl::selection,
+        .checkbox-wrapper-8 .tgl:after::selection,
+        .checkbox-wrapper-8 .tgl:before::selection,
+        .checkbox-wrapper-8 .tgl *::selection,
+        .checkbox-wrapper-8 .tgl *:after::selection,
+        .checkbox-wrapper-8 .tgl *:before::selection,
+        .checkbox-wrapper-8 .tgl + .tgl-btn::selection {
+            background: none;
+        }
+
+        .checkbox-wrapper-8 .tgl + .tgl-btn {
+            outline: 0;
+            display: block;
+            width: 4em;
+            height: 2em;
+            position: relative;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .checkbox-wrapper-8 .tgl + .tgl-btn:after,
+        .checkbox-wrapper-8 .tgl + .tgl-btn:before {
+            position: relative;
+            display: block;
+            content: "";
+            width: 50%;
+            height: 100%;
+        }
+
+        .checkbox-wrapper-8 .tgl + .tgl-btn:after {
+            left: 0;
+        }
+
+        .checkbox-wrapper-8 .tgl + .tgl-btn:before {
+            display: none;
+        }
+
+        .checkbox-wrapper-8 .tgl:checked + .tgl-btn:after {
+            left: 50%;
+        }
+
+        .checkbox-wrapper-8 .tgl-skewed + .tgl-btn {
+            overflow: hidden;
+            transform: skew(-10deg);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transition: all 0.2s ease;
+            font-family: sans-serif;
+            background: #888;
+        }
+
+        .checkbox-wrapper-8 .tgl-skewed + .tgl-btn:after,
+        .checkbox-wrapper-8 .tgl-skewed + .tgl-btn:before {
+            transform: skew(10deg);
+            display: inline-block;
+            transition: all 0.2s ease;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            line-height: 2em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .checkbox-wrapper-8 .tgl-skewed + .tgl-btn:after {
+            left: 100%;
+            content: attr(data-tg-on);
+        }
+
+        .checkbox-wrapper-8 .tgl-skewed + .tgl-btn:before {
+            left: 0;
+            content: attr(data-tg-off);
+        }
+
+        .checkbox-wrapper-8 .tgl-skewed + .tgl-btn:active {
+            background: #888;
+        }
+
+        .checkbox-wrapper-8 .tgl-skewed + .tgl-btn:active:before {
+            left: -10%;
+        }
+
+        .checkbox-wrapper-8 .tgl-skewed:checked + .tgl-btn {
+            background: #86d993;
+        }
+
+        .checkbox-wrapper-8 .tgl-skewed:checked + .tgl-btn:before {
+            left: -100%;
+        }
+
+        .checkbox-wrapper-8 .tgl-skewed:checked + .tgl-btn:after {
+            left: 0;
+        }
+
+        .checkbox-wrapper-8 .tgl-skewed:checked + .tgl-btn:active:after {
+            left: 10%;
+        }
+
     </style>
 
 {% endblock %}
@@ -118,10 +243,10 @@
                     </blockquote>
                 </div>
             {% endfor %}
-            <div class="card-body">
+            <div class="card-body" style="padding: 1rem 1rem">
                 <div class="table-responsive">
-
-                        <div id="calendarIcon" style="cursor: pointer; width: fit-content;">
+                    <div class="flex-c-b">
+                        <div id="calendarIcon" style="cursor: pointer; width: inherit">
                             <div class="flex-c-c" style="flex-direction: column">
                                 <i class="mdi mdi-calendar setDate">
                                 </i>
@@ -129,11 +254,17 @@
                             </div>
                         </div>
 
+                        <div class="checkbox-wrapper-8 flex-c-c col-lg-2">
+                            <input type="checkbox" id="cb3-8" class="tgl tgl-skewed">
+                            <label for="cb3-8" data-tg-on="Poste" data-tg-off="Espace" class="tgl-btn"></label>
+                        </div>
+                    </div>
+
                     <div id="calendarContainer" style="display: none; position: absolute; z-index: 1000;">
 
                         <div class="row">
                             <button id="prevMonth" class="col-lg-4"><i class="mdi mdi-chevron-left"></i></button>
-                            <h4 class="col-lg-4 setDate">Février 2024</h4>
+                            <h4 class="col-lg-4 setDate"></h4>
                             <button id="nextMonth" class="col-lg-4"><i class="mdi mdi-chevron-right"></i></button>
                         </div>
                         <div id="calendar"></div>
@@ -143,18 +274,18 @@
                         <thead>
                         <tr>
                             <th style="color: #fff; width: 400px">Salles</th>
-                            <th style="color: #fff; width: 400px">Matin 9h - 13h</th>
-                            <th style="color: #fff; width: 400px">Après-midi 14h - 18h</th>
+                            <th style="color: #fff; width: 200px">Matin 9h - 13h</th>
+                            <th style="color: #fff; width: 200px">Après-midi 14h - 18h</th>
                         </tr>
                         </thead>
                         <tbody style="color: #fff;">
                         {% for espace in espaces %}
 
-                            {% if espace.typeEspace.categorie.id != 4 %}
-                                <tr style="height: 60px">
+{#                            {% if espace.typeEspace.categorie.id != 4 %}#}
+                                <tr class="{% if espace.typeEspace.categorie.id == 4 %}posteFlex{% else %}espace{% endif %}" style="{% if espace.typeEspace.categorie.id == 4 %}display: none;{% else %}display: table-row;{% endif %} height: 60px">
                                     <td>
                                         <div class="flex-c-b" style="width: 100%;">
-                                            {{ espace.libelle }}
+                                            <h6 class="clickableEsapce leads" style="margin: 0; padding: 0; cursor: pointer" data-src="{{ path('modalEspace', {'idCarrousel': espace.carrousel.id, 'idEspace': espace.id }) }}"><i class="mdi mdi-eye text-primary"></i> {{ espace.libelle }}</h6>
                                             {% set HaveRes = false %}
                                             {% for reservation in reservations %}
                                                 {% if reservation.espace.id == espace.id %}
@@ -162,13 +293,15 @@
                                                 {% endif %}
                                             {% endfor %}
                                             {% if HaveRes == false %}
-                                                <button data-src="{{ path('formReservation', {'id': espace.id, 'date':jour|format('Y/m/d'), 'heures': 'j' }) }}" class="btn btn-outline-secondary btn-fw btn-rounded clickable">Réserver pour la journée</button>
+                                                {% if espace.typeEspace.categorie.id != 5 %}
+                                                    <button data-src="{{ path('formReservation', {'id': espace.id, 'date':jour|format('Y/m/d'), 'heures': 'j' }) }}" class="btn btn-outline-secondary btn-fw btn-rounded clickable">Réserver pour la journée</button>
+                                                {% endif %}
                                             {% endif %}
                                         </div>
                                     </td>
                                     {% if espace.typeEspace.categorie.id == 5%}
 
-                                        <td colspan="2">SUR DEVIS UNIQUEMENT - à partir de 850€ TTC à la journée - prestation à la carte</td>
+                                        <td colspan="2">DEVIS UNIQUEMENT à partir de 850€ TTC à la journée</td>
                                     {% else %}
                                         {% set haveReservation = false %}
                                         {% set res = 0 %}
@@ -201,7 +334,7 @@
                                         {% endif %}
                                     {% endif %}
                                 </tr>
-                            {% endif %}
+{#                            {% endif %}#}
                         {% endfor %}
                         </tbody>
                     </table>
@@ -214,11 +347,12 @@
             <div class="card-body">
                 <h2>Mes réservations</h2>
                 {% for userReservation in userReservations %}
+                    {% set duree = userReservation.heureFin|date('H') - userReservation.heureDebut|date('H') %}
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-lg-12 my-auto flex-c-c" style="flex-direction: column">
                         <div class="flex-c-c">
                             <h5 class="mb-0">{{ userReservation.espace.libelle }}</h5>
-                            <p class="text-warning ms-2 mb-0 font-weight-medium">00 BananaCoins</p>
+                            <p class="text-warning ms-2 mb-0 font-weight-medium">{% for i in userReservation.espace.tarifEspaceTarifs %}{% if i.heure == duree %}{{ i.prix }}{% endif %}{% endfor%} BananaCoins</p>
                         </div>
                         <h6 class="text-muted font-weight-normal">Le {{ userReservation.date|date('d/m/Y') }} de {{ userReservation.heureDebut|date('H') }}h à {{ userReservation.heureFin|date('H') }}h </h6>
                         <h6 class="text-info font-weight-normal clickableDetail" style="cursor: pointer" data-src="{{ path('detailReservation', {'id': userReservation.id}) }}">Plus de détails</h6>
@@ -231,7 +365,7 @@
 </div>
 
     <!-- Modal réservation -->
-    <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+    <div class="modal modalclose fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <h2 id="timeReservation">Chargement en cours...</h2>
@@ -240,12 +374,22 @@
         </div>
     </div>
 
-    <!-- Modal réservation -->
-    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+    <!-- Modal detail -->
+    <div class="modal modalclose fade" id="detailModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <h2 id="timeDetail">Chargement en cours...</h2>
                 <iframe id="modalDetail" style="width: inherit" height="500" title="Detail" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal espace -->
+    <div class="modal fade" id="espaceModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 750px;">
+            <div class="modal-content" style="padding: 20px; background-color: #191c24">
+                <h2 id="timeEspace">Chargement en cours...</h2>
+                <iframe id="modalEspace" style="width: inherit" height="500" title="Detail" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
             </div>
         </div>
     </div>
@@ -256,8 +400,45 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
 
-            $('.modal').click(function() {
+            var postFlex = $('.posteFlex');
+            var espace = $('.espace');
+
+            $('#cb3-8').click(function () {
+                console.log($(this));
+                if ($(this)[0].checked){
+                    for (let i = 0; i < postFlex.length; i++) {
+                        postFlex[i].style.display = 'table-row';
+                    }
+                    for (let i = 0; i < espace.length; i++) {
+                        espace[i].style.display = 'none';
+                    }
+                }else{
+                    for (let i = 0; i < postFlex.length; i++) {
+                        postFlex[i].style.display = 'none';
+                    }
+                    for (let i = 0; i < espace.length; i++) {
+                        espace[i].style.display = 'table-row';
+                    }
+                }
+            });
+
+            $('.modalclose').click(function() {
                 location.reload();
+            });
+
+            $('.clickableEsapce').click(function() {
+                // Ouvrir la modal ici
+                $('#espaceModal').modal('show');
+
+                document.getElementById('modalEspace').style.display = 'none';
+                document.getElementById('timeEspace').style.display = 'block';
+
+                var iframe = document.querySelector('#modalEspace');
+                iframe.src = $(this).data('src');
+                setTimeout(() => {
+                    document.getElementById('modalEspace').style.display = 'block';
+                    document.getElementById('timeEspace').style.display = 'none';
+                },'2500');
             });
 
             $('.clickableDetail').click(function() {

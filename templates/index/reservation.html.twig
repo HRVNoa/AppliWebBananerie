@@ -63,7 +63,13 @@
                 </div>
                 {{ form_widget(form.espace) }}
                 {{ form_widget(form.user) }}
-                <div style="padding-top: 20px" id="btnform">
+
+                {% set duree = reservation.heureFin|date('H') - reservation.heureDebut|date('H') %}
+                <h6 style="padding-top: 10px;">Coût : {% for i in reservation.espace.tarifEspaceTarifs %}{% if i.heure == duree %}{{ i.prix }}{% endif %}{% endfor%} B.Coins</h6>
+                <h6 style="padding-top: 2px;">Votre solde : 25 B.Coins</h6>
+                <h6 style="padding-top: 2px;">Nouveau solde après achat : 6 B.Coins</h6>
+
+                <div style="padding-top: 15px" id="btnform">
                     <button id="btnConfirm" type="submit" class="btn btn-success btn-fw">CONFIRMER</button>
                     <h4 id="temoins" style="display: none" class="">Réservation en cours...</h4>
                 </div>
