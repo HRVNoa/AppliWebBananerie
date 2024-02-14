@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TarifEspaceTarifRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 #[ORM\Entity(repositoryClass: TarifEspaceTarifRepository::class)]
 class TarifEspaceTarif
@@ -14,26 +15,26 @@ class TarifEspaceTarif
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $heure = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $heure = null;
 
     #[ORM\ManyToOne(inversedBy: 'tarifEspaceTarifs')]
     private ?Espace $espace = null;
 
-    #[ORM\ManyToOne(inversedBy: 'tarifEspaceTarifs')]
-    private ?TarifEspace $tarifEspace = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $prix = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getHeure(): ?\DateTimeInterface
+    public function getHeure(): ?int
     {
         return $this->heure;
     }
 
-    public function setHeure(\DateTimeInterface $heure): static
+    public function setHeure(int $heure): static
     {
         $this->heure = $heure;
 
@@ -52,14 +53,14 @@ class TarifEspaceTarif
         return $this;
     }
 
-    public function getTarifEspace(): ?TarifEspace
+    public function getPrix(): ?int
     {
-        return $this->tarifEspace;
+        return $this->prix;
     }
 
-    public function setTarifEspace(?TarifEspace $tarifEspace): static
+    public function setPrix(?int $prix): static
     {
-        $this->tarifEspace = $tarifEspace;
+        $this->prix = $prix;
 
         return $this;
     }
