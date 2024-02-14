@@ -25,6 +25,10 @@ detailReservation:
     path : /reservationDetail
     controller : App\Controller\IndexController::modalDetail
 
+modalEspace:
+    path : /modalEspace/{idCarrousel}/{idEspace}
+    controller : App\Controller\IndexController::modalEspace
+
 annuaireLister:
     path : /user/annuaire
     controller: App\Controller\AnnuaireController::lister
@@ -169,6 +173,42 @@ tagSupprimer:
 annuaireControl:
     path: /admin/annuaire
     controller: App\Controller\AdminController::annuaireControl
+
+adminAjoutReservation:
+    path: /admin/reservationAjout
+    controller: App\Controller\AdminController::adminAjoutReservation
+
+adminReservation:
+    path: /admin/reservation
+    controller: App\Controller\AdminController::adminReservation
+
+adminAnnuleReservation:
+    path: /admin/reservation/cancel
+    controller: App\Controller\AdminController::adminAnnuleReservation
+
+adminEspace:
+    path: /admin/espace
+    controller: App\Controller\AdminController::adminEspace
+
+adminEspacePrix:
+    path: /admin/espacePrix/{id}
+    controller: App\Controller\AdminController::adminEspacePrix
+
+adminEspaceModif:
+    path: /admin/espace/{id}
+    controller: App\Controller\AdminController::adminEspaceModif
+
+adminEspaceCarrousel:
+    path: /admin/espaceCarrousel/liste/{id}
+    controller: App\Controller\AdminController::adminEspaceCarrousel
+
+adminEspaceCarrouselDel:
+    path: /admin/espaceCarrousel/del/{id}
+    controller: App\Controller\AdminController::adminEspaceCarrouselDel
+
+adminEspaceCarrouselAdd:
+    path: /admin/espaceCarrousel/add/{id}
+    controller: App\Controller\AdminController::adminEspaceCarrouselAdd
 
 delIndependantAnnuaire:
     path: /admin/annuaire/{id}
