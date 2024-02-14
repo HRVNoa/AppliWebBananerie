@@ -40,6 +40,7 @@ security:
         - { path: ^/user, roles: ROLE_USER }
         - { path: ^/entreprise, roles: ROLE_ENTREPRISE }
         - { path: ^/independant, roles: ROLE_INDEPENDANT }
+        - { path: ^/independant/consulter/.*, roles: [ ROLE_INDEPENDANT, ROLE_ENTREPRISE ] }
 
     role_hierarchy:
         ROLE_ENTREPRISE: [ROLE_USER]

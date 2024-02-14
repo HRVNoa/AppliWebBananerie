@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Reservation;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,6 +20,34 @@ class ReservationRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Reservation::class);
+    }
+
+    public function getReservationByEspace($date, $hd, $hf, $espace_id): array
+    {
+//        $date = explode("/",$date);
+//        $date = $date[2].'/'.$date[1].'/'.$date[0];
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.date = :date and r.heureDebut = :hd and r.heureFin = :hf and r.espace = :espace_id ')
+            ->setParameter('date', $date)
+            ->setParameter('hd', $hd)
+            ->setParameter('hf', $hf)
+            ->setParameter('espace_id', $espace_id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getReservationFutureByUser($user): array
+    {
+        $date= new DateTime();
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.user = :user and r.date >= :date')
+            ->setParameter('user', $user)
+            ->setParameter('date', $date->format('Y/m/d'))
+            ->orderBy('r.date', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 //    /**

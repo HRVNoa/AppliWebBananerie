@@ -21,8 +21,8 @@ class Carrousel
     #[ORM\OneToMany(mappedBy: 'carrousel', targetEntity: Media::class)]
     private Collection $media;
 
-    #[ORM\OneToOne(mappedBy: 'carrousel', cascade: ['persist', 'remove'])]
-    private ?Espace $espace = null;
+    #[ORM\OneToMany(mappedBy: 'carrousel', targetEntity: Espace::class)]
+    private Collection $espace;
 
     #[ORM\OneToOne(mappedBy: 'portfolio', cascade: ['persist', 'remove'])]
     private ?Independant $independant = null;

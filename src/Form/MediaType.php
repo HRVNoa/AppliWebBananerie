@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Carrousel;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Entity\Independant;
 use App\Entity\Media;
 use Doctrine\ORM\EntityRepository;
@@ -20,6 +21,10 @@ class MediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('carrousel', EntityType::class, [
+                'class' => Carrousel::class,
+                'choice_label' => 'id',
+                'disabled' => true,
             ->add('alt', TextType::class, [
                 'attr' => [
                     'class'=> 'form-control form-control-user',
@@ -45,8 +50,7 @@ class MediaType extends AbstractType
                         'maxSize' => '12M',
                     ])
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
