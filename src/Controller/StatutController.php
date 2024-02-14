@@ -57,7 +57,7 @@ class StatutController extends AbstractController
             $entityManager->persist($statut);
             $entityManager->flush();
 
-            return $this->render('statut/consulter.html.twig', ['statut' => $statut,]);
+            return $this->redirectToRoute('statutLister');
         } else {
             return $this->render('statut/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -80,7 +80,7 @@ class StatutController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($statut);
                 $entityManager->flush();
-                return $this->render('statut/consulter.html.twig', ['statut' => $statut,]);
+                return $this->redirectToRoute('statutLister');
             }
             else{
                 return $this->render('statut/ajouter.html.twig', array('form' => $form->createView(),));

@@ -55,7 +55,7 @@ class SecteurActiviteController extends AbstractController
             $entityManager->persist($secteurActivite);
             $entityManager->flush();
 
-            return $this->render('secteur/consulter.html.twig', ['secteur' => $secteurActivite,]);
+            return $this->redirectToRoute('secteuractiviteLister');
         } else {
             return $this->render('secteur/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -78,7 +78,7 @@ class SecteurActiviteController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($secteurActivite);
                 $entityManager->flush();
-                return $this->render('secteur/consulter.html.twig', ['secteur' => $secteurActivite,]);
+                return $this->redirectToRoute('secteuractiviteLister');
             }
             else{
                 return $this->render('secteur/ajouter.html.twig', array('form' => $form->createView(),));

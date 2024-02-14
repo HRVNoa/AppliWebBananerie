@@ -14,7 +14,9 @@ class StatutType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('libelle',TextType::class)
+            ->add('libelle',TextType::class,[
+                'attr' => ['class' => 'form-control text-light']
+            ])
         ;
         $builder->add('enregistrer',SubmitType::class, array('label' => 'Nouveau Statut', "attr" => ["class" => "btn btn-primary"]));
 

@@ -14,28 +14,23 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th style="text-align: center;"> ID </th>
-                                <th style="text-align: center;"> Libelle </th>
+                                <th style="text-align: left;"> Libelle </th>
+                                <th style="text-align: center;"> Modifier </th>
+                                <th style="text-align: center;"> Supprimer </th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for s in secteurs %}
                                 <tr>
-                                    <td style="text-align: center;"  class="text-white">{{ s.id }}</td>
-                                    <td style="text-align: center;" class="text-white">{{ s.libelle }}</td>
+                                    <td style="text-align: left;" class="text-white">{{ s.libelle }}</td>
                                     <td>
-                                        <form action="{{ path('secteuractiviteConsulter', {'id': s.id}) }}" method="get">
-                                            <button type="submit" class="btn btn-outline-primary">Consulter</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="{{ path('secteuractiviteModifier', {'id': s.id}) }}" method="post">
+                                        <form action="{{ path('secteuractiviteModifier', {'id': s.id}) }}" method="post" class="flex-c-c">
                                             <input type="hidden" name="_method" value="UPDATE">
                                             <button type="submit" class="btn btn-outline-primary">Modifier</button>
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="{{ path('secteuractiviteSupprimer', {'id': s.id}) }}" method="post">
+                                        <form action="{{ path('secteuractiviteSupprimer', {'id': s.id}) }}" method="post" class="flex-c-c">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="submit" class="btn btn-outline-primary">Supprimer</button>
                                         </form>
