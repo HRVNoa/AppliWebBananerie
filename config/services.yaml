@@ -5,7 +5,9 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     MediaEspace: '%kernel.project_dir%/public/media/espace'
+    photoprofil: '%kernel.project_dir%/public/membre/photodeprofil/'
 
+    portfolio: '%kernel.project_dir%/public/membre/portfolio/'
 services:
 
     App\Security\UserConfirmedChecker: ~

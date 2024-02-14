@@ -23,16 +23,56 @@
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="row w-100 m-0">
             <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
-                <div class="card col-lg-4 mx-auto">
-                    <div class="card-body px-5 py-5">
-                        <h3 class="card-title text-left mb-3">Inscription salarié d'une entreprise</h3>
-                        {{ form_start(form) }}
-                        {{ form_widget(form) }}
-                        {{ form_end(form) }}
-                        <p class="terms">By creating an account you are accepting our<a href="#"> Terms & Conditions</a></p>
+                <div class=" mx-auto">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Inscription Entreprise</h4>
+                            {{  form_start(form, {'attr': {'class': 'form-sample'}}) }}
+                            {{ form_widget(form._token) }}
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Nom :</label>
+                                    {{ form_errors(form.nom) }}
+                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Prenom :</label>
+                                    {{ form_errors(form.prenom) }}
+                                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Nom Structure :</label>
+                                    {{ form_errors(form.nomStructure) }}
+                                    {{ form_widget(form.nomStructure, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Adresse Structure :</label>
+                                    {{ form_errors(form.adresseStructure) }}
+                                    {{ form_widget(form.adresseStructure, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                   <label for="exampleInputPassword4">Email :</label>
+                                    {{ form_errors(form.email) }}
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputPassword4">Fonction Structure :</label>
+                                    {{ form_errors(form.fonctionStructure) }}
+                                    {{ form_widget(form.fonctionStructure, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                               <div class="form-group">
+                                 <label for="exampleInputPassword4">Secteur D'activite :</label>
+                                   {{ form_errors(form.secteuractivite) }}
+                                   {{ form_widget(form.secteuractivite, {'attr': {'class': 'form-control'}}) }}
+                              </div>
+                            {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-primary btn-icon-text text-center'}}) }}
 
+                            {{ form_end(form, {'render_rest': false}) }}
+                        </div>
                     </div>
                 </div>
+                <p class="terms">Par créer un compte vous avez accepté nos<a href="#"> Termes & Conditions</a></p>
+            </div>
             </div>
         </div>
     </div>

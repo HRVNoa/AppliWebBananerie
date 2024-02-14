@@ -12,6 +12,7 @@ use App\Form\IndependantType;
 use App\Form\RegistrationFormType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -43,7 +44,7 @@ class EntrepriseController extends AbstractController
         $repository = $doctrine->getRepository(Entreprise::class);
         $entreprises = $repository->findAll();
 
-        return $this->render('entreprise/lister.html.twig', [
+        return $this->render('/entreprise/lister.html.twig', [
             'entreprises' => $entreprises,
         ]);
     }
@@ -73,9 +74,16 @@ class EntrepriseController extends AbstractController
             return $this->render('entreprise/ajouter.html.twig', array('form' => $form->createView(),));
         }
     }
-    public function modifierEntreprise(ManagerRegistry $doctrine, $id, Request $request){
+    public function modifierEntreprise(ManagerRegistry $doctrine, $id, Request $request, Security $security){
 
         $entreprise = $doctrine->getRepository(Entreprise::class)->find($id);
+        $user = $entreprise->getUser();
+        $currentUser= $security->getUser();
+        if ($currentUser !== $user && !$this->isGranted('ROLE_ADMIN')) {
+            // Si les ID ne correspondent pas, redirigez l'utilisateur vers sa propre page
+            $this->addFlash('error', 'Vous n\'êtes pas autorisé à modifier les informations d\'une autre entreprise.');
+            return $this->redirectToRoute('accueilIndex');
+        }
 
         if (!$entreprise) {
             throw $this->createNotFoundException('Aucun entreprise trouvé avec le numéro '.$id);
@@ -94,7 +102,7 @@ class EntrepriseController extends AbstractController
                 return $this->render('entreprise/consulter.html.twig', ['entreprise' => $entreprise,]);
             }
             else{
-                return $this->render('entreprise/ajouter.html.twig', array('form' => $form->createView(),));
+                return $this->render('entreprise/formModif.html.twig',['entreprise' => $entreprise, 'form' => $form->createView()]);
             }
         }
     }
@@ -102,10 +110,13 @@ class EntrepriseController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $entreprise = $entityManager->getRepository(Entreprise::class)->find($id);
-
+        $user = $entreprise->getUser();
+        //$bourse = $user->getBourse();
         if (!$entreprise) {
             throw $this->createNotFoundException('Aucun entreprise trouvé avec le numéro '.$id);
         }
+        //$entityManager->remove($bourse);
+        $entityManager->remove($user);
         $entityManager->remove($entreprise);
         $entityManager->flush();
         return $this->redirectToRoute('entrepriseLister');

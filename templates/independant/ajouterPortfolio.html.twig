@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+{% block title %}Ajouter Portfolio{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-body">
+
+            <h1>Portfolio</h1>
+
+            {% if app.user.independant.portfolio %}
+                <div class="col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3" style="display: flex; justify-content: space-between; align-items: center">
+                            <h6 class="m-0 font-weight-bold text-primary">Toutes vos photos dans le portfolio</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Lien</th>
+                                        <th>Modifier</th>
+                                        <th>Supprimer</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for media in medias %}
+                                        <tr>
+                                            <td>{{media.alt}}</td>
+                                            <td>{{media.lien}}</td>
+                                            <td>
+                                                <a href="{{ path('independantModifierPortfolio', {'id': media.id}) }}" class="btn btn-warning btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                                    <span class="text">Modifier</span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('independantSupprimerPortfolio' , {'id': media.id}) }}" class="btn btn-danger btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                                    <span class="text">Supprimer</span>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {{ form_start(form) }}
+            {{ form_widget(form._token) }}
+            <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Saisir une nouvelle photo</h6>
+            </div>
+            <div class="card-body">
+                {% for message in app.flashes('errorphotos') %}
+                    {% set errorphotos = true %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+                <label class="txt37">Description de la photo :</label>
+                {{ form_errors(form.alt) }}
+                {{ form_widget(form.alt) }}
+
+                <label style="margin-top: 20px;">Photo :</label>
+                {{ form_errors(form.lien) }}
+                {{ form_widget(form.lien) }}
+                <p class="card-description"> Taille maximale 12 Mo. </p>
+            </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                <span class="text">METTRE À JOUR</span>
+            </button>
+            {{ form_end(form) }}
+        </div>
+</div>
+{% endblock %}

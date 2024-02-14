@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modification Tags{% endblock %}
+{% block stylesheets %}
+
+<style>
+    .select-multiple-tags {
+        height: auto;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+    }
+
+    .select-multiple-tags:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    .select-super-tags {
+        height: auto;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+    }
+
+    .select-super-tags:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Changement de vos tags</h4>
+                {% for message in app.flashes('errortag') %}
+                {% set errortag = true %}
+                <p>{{ message }}</p>
+                <p class="lead"> Merci de choisir maximum 10 tags. </p>
+                {% endfor %}
+                {% for message in app.flashes('errorsupertag') %}
+                    {% set errortag = true %}
+                    <p>{{ message }}</p>
+                    <p class="lead"> Merci de choisir maximum 3 super tags. </p>
+                {% endfor %}
+                {{ form_start(form, {'attr': {'class': 'form-sample'}}) }}
+                {{ form_widget(form._token) }}
+                    <p class="card-description">  </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="selectedTags" class="col-sm-3 col-form-label">Tag :</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.selectedTags, {'attr': {'class': 'form-control select-multiple-tags', 'id': 'selectedTags'}})}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="superTags" class="col-sm-3 col-form-label">Super Tag :</label>
+                                <div class="col-sm-9">
+                                    {{ form_widget(form.superTags, {'attr': {'class': 'form-control select-super-tags', 'id': 'superTags'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="card-description"> *Vous ne pouvez avoir que 10 Tags maximum et que 3 Super tags. <br>*Les super tags sont affichés sur l'annuaire.</p>
+                    </div>
+                <div class="row flex-c-c">
+                    <div class="col-md-2 flex-c-c">
+                        <button type="button" class="btn btn-outline-danger btn-icon-text" onclick="window.location.href='{{ path('independantConsulter', {'id': independant.id}) }}'">Annuler</button>
+                    </div>
+                    <div class="col-md-2 flex-c-c">
+                        {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-primary btn-icon-text text-center'}}) }}
+
+                    </div>
+                </div>
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialise Select2 pour les champs sélectionnés
+            $('#independant_modifier_tag_selectedTags').select2({
+                placeholder: "Sélectionnez des tags",
+                allowClear: true
+            });
+            $('#independant_modifier_tag_superTags').select2({
+                placeholder: "Sélectionnez des super tags",
+                allowClear: true
+            });
+        });
+    </script>
+
+{% endblock %}

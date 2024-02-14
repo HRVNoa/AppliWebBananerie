@@ -26,7 +26,7 @@ class RegistrationFormType extends AbstractType
                                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepté nos termes.',
                     ]),
                 ],
                 'attr'=>['class'=>"form-check-input "],
@@ -38,11 +38,11 @@ class RegistrationFormType extends AbstractType
                         'first_options' => [
                             'constraints' => [
                                 new NotBlank([
-                                    'message' => 'Please enter a password',
+                                    'message' => 'Merci de rentrez votre mot de passe',
                                 ]),
                                 new Length([
                                     'min' => 6,
-                                    'minMessage' => 'Your password should be at least {{ limit }} characters',
+                                    'minMessage' => 'Votre mot de passe doit au moins contenir {{limit}}',
                                     'max' => 4096,
                                 ]),
                             ],

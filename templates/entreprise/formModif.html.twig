@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modification Information{% endblock %}
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Modification Information</h4>
+
+                {{ form_start(form, {'attr': {'class': 'form-sample'}}) }}
+                {{ form_widget(form._token) }}
+                <p class="card-description"> Information Personnel </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nom</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Prénom</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nom structure</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.nomStructure, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Adresse Structure</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.adresseStructure, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Fonction Structure</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.fonctionStructure, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Secteur d'activité</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.secteuractivite, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row flex-c-c">
+                    <div class="col-md-2 flex-c-c">
+                        <button type="button" class="btn btn-outline-danger btn-icon-text" onclick="window.location.href='{{ path('entrepriseConsulter', {'id': entreprise.id}) }}'">Annuler</button>
+                    </div>
+                    <div class="col-md-2 flex-c-c">
+                        {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-primary btn-icon-text text-center'}}) }}
+
+                    </div>
+                </div>
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
