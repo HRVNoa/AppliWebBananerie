@@ -4,60 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Correction bug inscription + easter egg">
-      <change afterPath="$PROJECT_DIR$/public/design/pdp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/membre/photodeprofil/img_0717.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/membre/photodeprofil/imglibrededroitpdp.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/membre/portfolio/11_hervieu_imgportfolio1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/membre/portfolio/11_hervieu_imgportfolio2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/membre/portfolio/1_test_imgportfolio1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/membre/portfolio/1_test_imgportfolio2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Video.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/IndependantContactType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/IndependantModifierPhotoDeProfilType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/IndependantModifierTagType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/IndependantModifierVideoType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/MediaType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/VideoType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/VideoRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Validator/Constraints/IsAgeNotTooHigh.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Validator/Constraints/IsAgeNotTooHighValidator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Validator/Constraints/IsOldEnough.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Validator/Constraints/IsOldEnoughValidator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/entreprise/formModif.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/independant/ajouterPortfolio.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/independant/ajouterVideo.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/independant/formModifInfo.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/independant/formModifPortfolio.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/independant/formModifTag.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/independant/formPhotodeProfil.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/independant/formVideo.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/independant/listerVideo.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Branche entiere gestion profil manque juste tag regle bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/IndependantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndependantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Carrousel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Carrousel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/EquipementEspace.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/EquipementEspace.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Independant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Independant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantModifierType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/IndependantTagType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantTagType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/IndependantType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/confirmerUser.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/confirmerUser.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/IndependantModifierTagType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantModifierTagType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/MediaType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MediaType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/annuaire/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/annuaire/lister.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entreprise/ajouter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entreprise/ajouter.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entreprise/consulter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entreprise/consulter.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/independant/ajouter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/ajouter.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/independant/consulter.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/consulter.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/independant/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/independant/lister.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,23 +207,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;PHPUnit.Main.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Modification-Profil&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Applications/MAMP/htdocs/AppliWebBananerie/templates/tag&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "PHPUnit.Main.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "fixbug",
+    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates/tag" />
@@ -322,6 +276,8 @@
       <workItem from="1707293058923" duration="20800000" />
       <workItem from="1707379447838" duration="44131000" />
       <workItem from="1707813548029" duration="2658000" />
+      <workItem from="1707818399327" duration="17000" />
+      <workItem from="1707898855816" duration="2763000" />
     </task>
     <task id="LOCAL-00040" summary="Création entite">
       <option name="closed" value="true" />

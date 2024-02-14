@@ -128,6 +128,7 @@ class IndependantController extends AbstractController
         $entityManager = $doctrine->getManager();
         $independant = $entityManager->getRepository(Independant::class)->find($id);
         $user = $independant->getUser();
+
         //$bourse = $user->getBourse();
         if (!$independant) {
             throw $this->createNotFoundException('Aucun independant trouvé avec le numéro '.$id);
