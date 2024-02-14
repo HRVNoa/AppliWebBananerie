@@ -65,7 +65,7 @@ class Independant
     #[ORM\OneToOne(inversedBy: 'independant', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'independant', targetEntity: IndependantTag::class, cascade: ['persist'])]
+    #[ORM\OneToMany(mappedBy: 'independant', targetEntity: IndependantTag::class, cascade: ['persist', 'remove'])]
     private Collection $independantTags;
 
     #[ORM\Column]
