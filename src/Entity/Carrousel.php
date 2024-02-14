@@ -18,10 +18,10 @@ class Carrousel
     #[ORM\Column(length: 50, nullable:true)]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'carrousel', targetEntity: Media::class)]
+    #[ORM\OneToMany(mappedBy: 'carrousel', targetEntity: Media::class , cascade: ['persist', 'remove'] )]
     private Collection $media;
 
-    #[ORM\OneToMany(mappedBy: 'carrousel', targetEntity: Espace::class)]
+    #[ORM\OneToMany(mappedBy: 'carrousel', targetEntity: Espace::class, cascade:  ['persist', 'remove'])]
     private Collection $espace;
 
     #[ORM\OneToOne(mappedBy: 'portfolio', cascade: ['persist', 'remove'])]

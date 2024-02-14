@@ -105,7 +105,6 @@ class IndependantModifierTagType extends AbstractType
                     $independant->addIndependantTag($independantTag);
                 }
             }
-            $tagsToRemove = [];
             // Suppression des tags qui ne sont plus sélectionnés comme selectedTags ni comme superTags
             foreach ($independant->getIndependantTags() as $independantTag) {
                 if (!in_array($independantTag->getTag(), $selectedTags) && !in_array($independantTag->getTag(), $selectedSuperTags)) {
