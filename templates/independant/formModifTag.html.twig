@@ -5,27 +5,212 @@
 <style>
     .select-multiple-tags {
         height: auto;
-        background-color: #f8f9fa;
-        border-radius: 4px;
-        border: 1px solid #ced4da;
     }
 
-    .select-multiple-tags:focus {
-        border-color: #80bdff;
-        outline: 0;
-        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-    }
-    .select-super-tags {
-        height: auto;
-        background-color: #f8f9fa;
-        border-radius: 4px;
-        border: 1px solid #ced4da;
+
+    #checklist div {
+        --background: #2A3038;
+        --text: #c3c8de;
+        --check: #facc5f;
+        --disabled: #9a9a9a;
+        --border-radius: 10px;
+        background: var(--background);
+        border-radius: var(--border-radius);
+        position: relative;
+        box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
+        padding: 30px 85px;
+        display: grid;
+        grid-template-columns: 30px auto;
+        align-items: center;
+        justify-content: flex-start;
     }
 
-    .select-super-tags:focus {
-        border-color: #80bdff;
-        outline: 0;
-        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    #checklist div label {
+        color: var(--text);
+        position: relative;
+        cursor: pointer;
+        display: grid;
+        align-items: center;
+        width: fit-content;
+        transition: color 0.3s ease;
+        margin-right: 20px;
+    }
+
+    #checklist div label::before, #checklist label::after {
+        content: "";
+        position: absolute;
+    }
+
+    #checklist div label::before {
+        height: 2px;
+        width: 8px;
+        left: -27px;
+        background: var(--check);
+        border-radius: 2px;
+        transition: background 0.3s ease;
+    }
+
+    #checklist div label:after {
+        height: 4px;
+        width: 4px;
+        top: 8px;
+        left: -25px;
+        border-radius: 50%;
+    }
+
+    #checklist div input[type="checkbox"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        position: relative;
+        height: 15px;
+        width: 15px;
+        outline: none;
+        border: 0;
+        margin: 0 15px 0 0;
+        cursor: pointer;
+        background: var(--background);
+        display: grid;
+        align-items: center;
+        margin-right: 20px;
+    }
+
+    #checklist div input[type="checkbox"]:checked::before, #checklist input[type="checkbox"]:checked::after {
+        content: "";
+        position: absolute;
+        height: 2px;
+        top: auto;
+        background: var(--check);
+        border-radius: 2px;
+    }
+
+    #checklist div input[type="checkbox"]::before {
+        width: 0px;
+        right: 60%;
+        transform-origin: right bottom;
+    }
+
+    #checklist div input[type="checkbox"]::after {
+        width: 0px;
+        left: 40%;
+        transform-origin: left bottom;
+    }
+
+    #checklist div input[type="checkbox"]::before {
+        animation: check-01 0.4s ease forwards;
+    }
+
+    #checklist div input[type="checkbox"]:checked::after {
+        animation: check-02 0.4s ease forwards;
+    }
+
+    #checklist div input[type="checkbox"] + label {
+        color: var(--disabled);
+        animation: move 0.3s ease 0.1s forwards;
+    }
+
+    #checklist div input[type="checkbox"]:checked + label {
+        color: #fff;
+        animation: move 0.3s ease 0.1s forwards;
+    }
+
+    #checklist div input[type="checkbox"]:checked + label::before {
+        background: none;
+    }
+
+    #checklist div input[type="checkbox"]:checked + label::after {
+        animation: firework 0.4s ease forwards;
+    }
+
+    @keyframes move {
+        50% {
+            padding-left: 8px;
+            padding-right: 0px;
+        }
+
+        100% {
+            padding-right: 4px;
+        }
+    }
+
+    @keyframes slice {
+        60% {
+            width: 100%;
+            left: 4px;
+        }
+
+        100% {
+            width: 100%;
+            left: -2px;
+            padding-left: 0;
+        }
+    }
+
+    @keyframes check-01 {
+        0% {
+            width: 4px;
+            top: auto;
+            transform: rotate(0);
+        }
+
+        50% {
+            width: 0px;
+            top: auto;
+            transform: rotate(0);
+        }
+
+        51% {
+            width: 0px;
+            top: 8px;
+            transform: rotate(45deg);
+        }
+
+        100% {
+            width: 5px;
+            top: 8px;
+            transform: rotate(45deg);
+        }
+    }
+
+    @keyframes check-02 {
+        0% {
+            width: 4px;
+            top: auto;
+            transform: rotate(0);
+        }
+
+        50% {
+            width: 0px;
+            top: auto;
+            transform: rotate(0);
+        }
+
+        51% {
+            width: 0px;
+            top: 8px;
+            transform: rotate(-45deg);
+        }
+
+        100% {
+            width: 10px;
+            top: 8px;
+            transform: rotate(-45deg);
+        }
+    }
+
+    @keyframes firework {
+        0% {
+            opacity: 1;
+            box-shadow: 0 0 0 -2px #facc5f, 0 0 0 -2px #FACC5F, 0 0 0 -2px #FACC5F, 0 0 0 -2px #FACC5F, 0 0 0 -2px #FACC5F, 0 0 0 -2px #FACC5F;
+        }
+
+        30% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            box-shadow: 0 -15px 0 0px #FACC5F, 14px -8px 0 0px #FACC5F, 14px 8px 0 0px #FACC5F, 0 15px 0 0px #FACC5F, -14px 8px 0 0px #FACC5F, -14px -8px 0 0px #FACC5F;
+        }
     }
 
 </style>
@@ -52,19 +237,17 @@
                     <p class="card-description">  </p>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group row">
-                                <label for="selectedTags" class="col-sm-3 col-form-label">Tag :</label>
-                                <div class="col-sm-9">
-                                    {{ form_widget(form.selectedTags, {'attr': {'class': 'form-control select-multiple-tags', 'id': 'selectedTags'}})}}
-                                </div>
+                            <label for="selectedTags" class="col-sm-3 col-form-label">Tag :</label>
+                            <div class="col-sm-9" id="checklist">
+                                {{ form_errors(form.selectedTags, {'attr': {'class': 'text-light'}})}}
+                                {{ form_widget(form.selectedTags, {'attr': {'class': 'form-control select-multiple-tags', 'id': 'selectedTags'}})}}
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group row">
-                                <label for="superTags" class="col-sm-3 col-form-label">Super Tag :</label>
-                                <div class="col-sm-9">
-                                    {{ form_widget(form.superTags, {'attr': {'class': 'form-control select-super-tags', 'id': 'superTags'}}) }}
-                                </div>
+                            <label for="superTags" class="col-sm-3 col-form-label">Super Tag :</label>
+                            <div class="col-sm-9" id="checklist">
+                                {{ form_errors(form.superTags, {'attr': {'class': 'text-light'}})}}
+                                {{ form_widget(form.superTags, {'attr': {'class': 'form-control select-multiple-tags', 'id': 'superTags'}}) }}
                             </div>
                         </div>
 
@@ -83,18 +266,30 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
-        $(document).ready(function() {
-            // Initialise Select2 pour les champs sélectionnés
-            $('#independant_modifier_tag_selectedTags').select2({
-                placeholder: "Sélectionnez des tags",
-                allowClear: true
+        // Pas plus de 10 tag
+        const checkboxes = document.querySelectorAll('#independant_modifier_tag_selectedTags input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('click', () => {
+                const selectedCount = document.querySelectorAll('#independant_modifier_tag_selectedTags input[type="checkbox"]:checked').length;
+                const maxSelected = 10;
+
+                if (selectedCount > maxSelected) {
+                    checkbox.checked = false;
+                }
             });
-            $('#independant_modifier_tag_superTags').select2({
-                placeholder: "Sélectionnez des super tags",
-                allowClear: true
+        });
+
+        // Pas plus de 3 super tag
+        const checkboxesSuper = document.querySelectorAll('#independant_modifier_tag_superTags input[type="checkbox"]');
+        checkboxesSuper.forEach(checkbox => {
+            checkbox.addEventListener('click', () => {
+                const selectedCount = document.querySelectorAll('#independant_modifier_tag_superTags input[type="checkbox"]:checked').length;
+                const maxSelected = 3;
+
+                if (selectedCount > maxSelected) {
+                    checkbox.checked = false;
+                }
             });
         });
     </script>

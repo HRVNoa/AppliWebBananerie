@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Count;
 
 class IndependantModifierTagType extends AbstractType
 {
@@ -46,6 +47,16 @@ class IndependantModifierTagType extends AbstractType
                 'data' => $selectedTagsInitialValue, // Set initial values
                 'multiple' => true,
                 'mapped' => false,
+                'required' => true,
+                'expanded' => true,
+                'constraints' => [
+                    new Count([
+                        'min' => 3,
+                        'max' => 10,
+                        'minMessage' => 'Veuillez sélectionner au moins 3 tags.',
+                        'maxMessage' => 'Vous ne pouvez pas sélectionner plus de 10 tags.',
+                    ]),
+                ],
             ])
             ->add('superTags', EntityType::class, [
                 'class' => Tag::class,
@@ -56,6 +67,16 @@ class IndependantModifierTagType extends AbstractType
                 'data' => $superTagsInitialValue,
                 'multiple' => true,
                 'mapped' => false,
+                'required' => true,
+                'expanded' => true,
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                        'max' => 3,
+                        'minMessage' => 'Veuillez sélectionner au moins un super-tag.',
+                        'maxMessage' => 'Vous ne pouvez pas sélectionner plus de 3 super-tags.',
+                    ]),
+                ],
             ])
             ->add('enregistrer', SubmitType::class, ['label' => 'Modifier', 'attr' => ['class' => 'btn btn-primary']]);
 
@@ -88,7 +109,6 @@ class IndependantModifierTagType extends AbstractType
                     foreach ($independant->getIndependantTags() as $independantTag) {
                         if ($independantTag->getTag() === $tag) {
                             $independantTag->setSuper($isSuperTag);
-                            break;
                         }
                     }
                 }
