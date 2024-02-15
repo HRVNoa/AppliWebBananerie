@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réservation{% endblock %}
+{% block title %}Espace{% endblock %}
 
 {% block body %}
     {% for message in app.flashes('success') %}
@@ -20,9 +20,10 @@
             </div>
         </div>
     {% endfor %}
-
+    <a type="button" class="btn btn-outline-primary" href="{{ path("adminEspaceAjouter") }}">Ajouter</a>
     {% set espaceCount = 0 %}
     {% for espace in espaces %}
+
 
         {% if espaceCount == 0 %}
             <div class="row" style="padding-top: 5px; padding-bottom: 5px">
@@ -118,6 +119,9 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                    <div class="row flex-c-c" style="width: 100%; padding-top: 10px;padding-bottom: 10px;">
+                        <a type="button" class="btn btn-outline-danger" href="{{ path("adminEspaceSupprimer", {'id':espace.id}) }}">Supprimer</a>
                     </div>
                 </div>
             </div>

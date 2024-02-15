@@ -31,8 +31,7 @@ class EspaceType extends AbstractType
             ])
             ->add('typeEspace', EntityType::class, [
                 'class' => TypeEspace::class,
-                'choice_label' => 'id',
-                'disabled' => true,
+                'choice_label' => 'libelle',
                 'attr'=>['class'=>'text-light form-control'],
             ])
         ;
