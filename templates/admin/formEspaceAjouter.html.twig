@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modification espace{% endblock %}
-<div class="card">
+{% block title %}Ajouter espace{% endblock %}
+
+{% block body %}
+    <div class="card">
         <div class="card-body">
-            {% block body %}
-                <link href="https://cdn.jsdelivr.net/npm/select2/dist/css/select2.min.css" rel="stylesheet" />
-                <script src="https://cdn.jsdelivr.net/npm/select2/dist/js/select2.min.js"></script>
+            <link href="https://cdn.jsdelivr.net/npm/select2/dist/css/select2.min.css" rel="stylesheet" />
+            <script src="https://cdn.jsdelivr.net/npm/select2/dist/js/select2.min.js"></script>
 
             {% for message in app.flashes('success') %}
                 <div class="card-body" style="margin-bottom: 20px">
@@ -15,6 +16,7 @@
                     </blockquote>
                 </div>
             {% endfor %}
+
             {% for message in app.flashes('error') %}
                 <div class="card-body" style="margin-bottom: 20px">
                     <blockquote class="blockquote blockquote-primary">
@@ -29,7 +31,7 @@
             <div class="container">
                 <div class="row" style="padding-top: 20px">
                     <div class="col-cm-12">
-                        <h2>Modification de l'espace:</h2>
+                        <h2>Ajout d'un espace:</h2>
 
                         <div class="row" style="padding-top: 20px">
                             <div class="col-md-12">
@@ -53,15 +55,28 @@
                         </div>
 
                         <div class="row" style="padding-top: 20px">
+                            <div class="col-md-12">
+                                <label class="text-secondary">Modalité de reservation :</label>
+                                <div class="form-group">
+                                    {% for choice in form.dureeTarif %}
+                                        <div>
+                                            {{ form_widget(choice) }}
+                                            {{ form_label(choice) }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 20px">
                             <div class="col-md-4">
                                 <button id="btnConfirm" type="submit" class="btn btn-success btn-fw">Valider</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
             {{ form_end(form,{'render_rest':false}) }}
         </div>
-</div>
+    </div>
 {% endblock %}

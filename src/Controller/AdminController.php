@@ -13,6 +13,7 @@ use App\Entity\Reservation;
 use App\Entity\TarifEspaceTarif;
 use App\Entity\User;
 use App\Form\AdminReservationType;
+use App\Form\EspaceAjouterType;
 use App\Form\EspaceType;
 use App\Form\MediaType;
 use App\Form\MetierType;
@@ -435,12 +436,43 @@ class AdminController extends AbstractController
     public function adminEspaceAjouter(ManagerRegistry $doctrine,Request $request)
     {
         $espace = new Espace();
-        $form = $this->createForm(EspaceType::class, $espace);
+        $form = $this->createForm(EspaceAjouterType::class, $espace);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+                $dureeTarif = $form->get('dureeTarif')->getData();
                 $carrousel = new Carrousel();
                 $espace->setCarrousel($carrousel);
+                switch ($dureeTarif) {
+                    case '1_4_9':
+                        $prix = new TarifEspaceTarif();
+                        $prix->setPrix(0);
+                        $prix->setHeure(1);
+                        $prix->setEspace($espace);
+                        $espace->addTarifEspaceTarif($prix);
+                        $prix2 = new TarifEspaceTarif();
+                        $prix2->setPrix(0);
+                        $prix2->setHeure(4);
+                        $prix2->setEspace($espace);
+                        $espace->addTarifEspaceTarif($prix2);
+                        $prix3 = new TarifEspaceTarif();
+                        $prix3->setPrix(0);
+                        $prix3->setHeure(9);
+                        $prix3->setEspace($espace);
+                        $espace->addTarifEspaceTarif($prix3);
+                    case '4_9':
+                        $prix = new TarifEspaceTarif();
+                        $prix->setPrix(0);
+                        $prix->setHeure(4);
+                        $prix->setEspace($espace);
+                        $espace->addTarifEspaceTarif($prix);
+                        $prix2 = new TarifEspaceTarif();
+                        $prix2->setPrix(0);
+                        $prix2->setHeure(9);
+                        $prix2->setEspace($espace);
+                        $espace->addTarifEspaceTarif($prix2);
+                    case 'none':
+                }
                 $espace = $form->getData();
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($carrousel);
@@ -455,7 +487,7 @@ class AdminController extends AbstractController
 
             return $this->redirectToRoute('adminEspace');
         } else {
-            return $this->render('admin/formEspace.html.twig', array('form' => $form->createView(),));
+            return $this->render('admin/formEspaceAjouter.html.twig', array('form' => $form->createView(),));
         }
     }
     public function adminEspace(ManagerRegistry $doctrine)
@@ -586,6 +618,32 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('adminEspaceCarrousel',['id' => $media->getCarrousel()->getEspace()->getId()]);
 
     }
+
+    public function adminEspacePrixAdd(ManagerRegistry $doctrine, Request $request, $id){
+        $tarif = $doctrine->getRepository(TarifEspaceTarif::class)->find($id);
+        $form = $this->createForm(TarifEspaceType::class, $tarif);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+            try {
+                $data = $form->getData();
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($data);
+                $entityManager->flush();
+                $this->addFlash('success', 'Le prix a bien été ajouter.');
+            }catch (\Exception $e){
+                $this->addFlash('error', 'Le prix n\'a pas été ajouter. Cause : '.$e);
+            }
+            return $this->redirectToRoute('adminEspace');
+        }else{
+            return $this->render('admin/formPrixEspace.html.twig', [
+                'form' => $form,
+                'tarif' => $tarif,
+            ]);
+        }
+    }
+
 
     public function adminEspacePrix(ManagerRegistry $doctrine, Request $request, $id)
     {
