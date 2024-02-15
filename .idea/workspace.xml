@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="Branche entiere gestion profil manque juste tag regle bug">
+    <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="fix bug">
+      <change afterPath="$PROJECT_DIR$/templates/admin/lister.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/register.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/IndependantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndependantController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Carrousel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Carrousel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Independant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Independant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/IndependantModifierTagType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/IndependantModifierTagType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/MediaType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MediaType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/annuaire/lister.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/annuaire/lister.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/EspaceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/EspaceType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/espace.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/espace.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/formEspace.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/formEspace.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,23 +210,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "PHPUnit.Main.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "fixbug",
-    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;PHPUnit.Main.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;System-admin-et-ajout-espace&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Applications/MAMP/htdocs/AppliWebBananerie&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates/tag" />
@@ -278,6 +281,7 @@
       <workItem from="1707813548029" duration="2658000" />
       <workItem from="1707818399327" duration="17000" />
       <workItem from="1707898855816" duration="2763000" />
+      <workItem from="1707984063906" duration="305000" />
     </task>
     <task id="LOCAL-00040" summary="Création entite">
       <option name="closed" value="true" />
@@ -690,7 +694,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Ajout systeme pour passer la variable dans la session" />
     <MESSAGE value="Ajout et suppresion d'une relation pour independantTag" />
     <MESSAGE value="Ajout systeme de selection" />
     <MESSAGE value="Ajout et suppresion relation avec independanttag" />
@@ -715,6 +718,7 @@
     <MESSAGE value="Modification" />
     <MESSAGE value="visuel pour confirmer" />
     <MESSAGE value="Correction bug inscription + easter egg" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction bug inscription + easter egg" />
+    <MESSAGE value="fix bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
   </component>
 </project>

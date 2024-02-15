@@ -9,6 +9,19 @@ choixInscription:
     controller : App\Controller\IndexController::choix
 
 
+adminAjouter:
+    path : /admin/Register
+    controller: App\Controller\AdminController::ajouterAdmin
+
+adminLister:
+    path : /admin/listerAdmin
+    controller: App\Controller\AdminController::listerAdmin
+
+adminSupprimer:
+    path : /admin/supprimer/{id}
+    controller: App\Controller\AdminController::supprimerAdmin
+
+
 accueilIndex:
     path : /
     controller: App\Controller\IndexController::index
@@ -253,6 +266,14 @@ adminEspaceCarrouselDel:
 adminEspaceCarrouselAdd:
     path: /admin/espaceCarrousel/add/{id}
     controller: App\Controller\AdminController::adminEspaceCarrouselAdd
+
+adminEspaceSupprimer:
+    path : /admin/espace/supprimer/{id}
+    controller: App\Controller\AdminController::adminEspaceSupprimer
+
+adminEspaceAjouter:
+    path : /admin/espaceajouter
+    controller: App\Controller\AdminController::adminEspaceAjouter
 
 delIndependantAnnuaire:
     path: /admin/annuaire/{id}

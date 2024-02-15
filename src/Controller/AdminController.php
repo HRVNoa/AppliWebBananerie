@@ -15,20 +15,26 @@ use App\Entity\User;
 use App\Form\AdminReservationType;
 use App\Form\EspaceType;
 use App\Form\MediaType;
+use App\Form\MetierType;
+use App\Form\RegistrationFormType;
 use App\Form\TarifEspaceType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
@@ -426,10 +432,57 @@ class AdminController extends AbstractController
         }
     }
 
+    public function adminEspaceAjouter(ManagerRegistry $doctrine,Request $request)
+    {
+        $espace = new Espace();
+        $form = $this->createForm(EspaceType::class, $espace);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $carrousel = new Carrousel();
+                $espace->setCarrousel($carrousel);
+                $espace = $form->getData();
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($carrousel);
+                $entityManager->persist($espace);
+                $entityManager->flush();
+                $this->addFlash('success', 'L\'espace a été créer avec succès.');
+
+            }catch (\Exception $e){
+                $this->addFlash('error', 'L\'espace n\'a pas pu être créer.'.$e);
+
+            }
+
+            return $this->redirectToRoute('adminEspace');
+        } else {
+            return $this->render('admin/formEspace.html.twig', array('form' => $form->createView(),));
+        }
+    }
     public function adminEspace(ManagerRegistry $doctrine)
     {
         $espaces = $doctrine->getRepository(Espace::class)->findAll();
         return $this->render('admin/espace.html.twig', ['espaces' => $espaces,]);
+    }
+
+    public function adminEspaceSupprimer(ManagerRegistry $doctrine, int $id)
+    {
+        $entityManager = $doctrine->getManager();
+        $espace = $entityManager->getRepository(Espace::class)->find($id);
+
+        if (!$espace) {
+            throw $this->createNotFoundException('Aucun espace trouvé avec le numéro '.$id);
+        }
+        try {
+            $entityManager->remove($espace);
+            $entityManager->flush();
+            $this->addFlash('success', 'L\'espace a été supprimer avec succès.');
+
+        }catch (\Exception $e){
+            $this->addFlash('error', 'L\'espace n\'a pas pu être supprimer.'.$e);
+
+        }
+        return $this->redirectToRoute('adminEspace');
+
     }
 
     public function adminEspaceModif(ManagerRegistry $doctrine, Request $request, $id)
@@ -559,6 +612,57 @@ class AdminController extends AbstractController
             ]);
         }
     }
+    public function ajouterAdmin(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ManagerRegistry $doctrine ,SessionInterface $session): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
 
+            $user->setConfirmed(1);
+            $user->setRoles(["ROLE_ADMIN"]);
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('adminLister');
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+    public function listerAdmin(ManagerRegistry $doctrine)
+    {
+        $repository = $doctrine->getRepository(User::class);
+        $users = $repository->findAll();
+        $admins =[];
+        foreach ($users as $user) {
+            if (in_array('ROLE_ADMIN', $user->getRoles())) {
+                $admins[] = $user;
+            }
+        }
+        return $this->render('admin/lister.html.twig', [
+            'admins' => $admins,
+        ]);
+    }
+    public function supprimerAdmin(ManagerRegistry $doctrine, int $id): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $admin = $entityManager->getRepository(User::class)->find($id);
+
+        if (!$admin) {
+            throw $this->createNotFoundException('Aucun admin trouvé avec le numéro '.$id);
+        }
+        $entityManager->remove($admin);
+        $entityManager->flush();
+        return $this->redirectToRoute('adminSupprimer');
+    }
 }

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réservation{% endblock %}
+{% block title %}Modification espace{% endblock %}
 
 {% block body %}
     <link href="https://cdn.jsdelivr.net/npm/select2/dist/css/select2.min.css" rel="stylesheet" />
@@ -39,8 +39,15 @@
 
             <div class="row" style="padding-top: 20px">
                 <div class="col-md-12">
-                    <label  for="admin_reservation_heureDebut" class="text-secondary">Description:</label>
+                    <label class="text-secondary">Description:</label>
                     {{ form_widget(form.description) }}
+                </div>
+            </div>
+
+            <div class="row" style="padding-top: 20px">
+                <div class="col-md-12">
+                    <label class="text-secondary">Type Espace:</label>
+                    {{ form_widget(form.typeEspace) }}
                 </div>
             </div>
 
