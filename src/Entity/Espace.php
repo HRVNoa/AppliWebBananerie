@@ -31,7 +31,7 @@ class Espace
     #[ORM\OneToMany(mappedBy: 'espace', targetEntity: Reservation::class)]
     private Collection $reservations;
 
-    #[ORM\OneToMany(mappedBy: 'espace', targetEntity: TarifEspaceTarif::class)]
+    #[ORM\OneToMany(mappedBy: 'espace', targetEntity: TarifEspaceTarif::class , cascade: ['persist', 'remove'] )]
     private Collection $tarifEspaceTarifs;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]

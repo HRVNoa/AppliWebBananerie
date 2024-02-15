@@ -251,6 +251,10 @@ adminEspacePrix:
     path: /admin/espacePrix/{id}
     controller: App\Controller\AdminController::adminEspacePrix
 
+adminEspacePrixAjouter:
+    path: /admin/espacePrixAjouter/{id}
+    controller: App\Controller\AdminController::adminEspacePrixAdd
+
 adminEspaceModif:
     path: /admin/espace/{id}
     controller: App\Controller\AdminController::adminEspaceModif
