@@ -88,50 +88,40 @@ class IndependantModifierTagType extends AbstractType
             $selectedTags = $form->get('selectedTags')->getData();
             $selectedSuperTags = $form->get('superTags')->getData();
 
-            // Créer une liste de tous les tags actuels
-            $currentTags = new ArrayCollection();
+            // Convertir les superTags en un tableau d'identifiants pour faciliter la vérification
+            $selectedSuperTagsIds = array_map(function (Tag $tag) {
+                return $tag->getId();
+            }, $selectedSuperTags);
+
+            // Supprimer les tags qui sont à la fois dans les tags classiques et les super tags
+            $selectedTags = array_filter($selectedTags, function (Tag $tag) use ($selectedSuperTagsIds) {
+                return !in_array($tag->getId(), $selectedSuperTagsIds);
+            });
+
+            // Réinitialiser les tags de l'indépendant pour les reconstruire à partir des sélections
             foreach ($independant->getIndependantTags() as $independantTag) {
-                $currentTags->add($independantTag->getTag());
+                $independant->removeIndependantTag($independantTag);
             }
 
-            // Mettre à jour ou ajouter les selectedTags
+            // Ajouter les tags sélectionnés comme tags normaux
             foreach ($selectedTags as $tag) {
-                $isSuperTag = in_array($tag, $selectedSuperTags);
-                if (!$currentTags->contains($tag)) {
-                    // Si le tag n'est pas dans les tags actuels, l'ajouter
-                    $independantTag = new IndependantTag();
-                    $independantTag->setIndependant($independant);
-                    $independantTag->setTag($tag);
-                    $independantTag->setSuper($isSuperTag);
-                    $independant->addIndependantTag($independantTag);
-                } else {
-                    // Si le tag est déjà présent, mettre à jour son statut super
-                    foreach ($independant->getIndependantTags() as $independantTag) {
-                        if ($independantTag->getTag() === $tag) {
-                            $independantTag->setSuper($isSuperTag);
-                        }
-                    }
-                }
+                $independantTag = new IndependantTag();
+                $independantTag->setIndependant($independant);
+                $independantTag->setTag($tag);
+                $independantTag->setSuper(false);
+                $independant->addIndependantTag($independantTag);
             }
 
-            // Assurez-vous que tous les superTags sont traités, même s'ils ne sont pas dans selectedTags
-            foreach ($selectedSuperTags as $superTag) {
-                if (!$currentTags->contains($superTag)) {
-                    // Ajoutez le superTag s'il n'est pas déjà inclus
-                    $independantTag = new IndependantTag();
-                    $independantTag->setIndependant($independant);
-                    $independantTag->setTag($superTag);
-                    $independantTag->setSuper(true);
-                    $independant->addIndependantTag($independantTag);
-                }
-            }
-            // Suppression des tags qui ne sont plus sélectionnés comme selectedTags ni comme superTags
-            foreach ($independant->getIndependantTags() as $independantTag) {
-                if (!in_array($independantTag->getTag(), $selectedTags) && !in_array($independantTag->getTag(), $selectedSuperTags)) {
-                    $independant->removeIndependantTag($independantTag);
-                }
+            // Ajouter les super tags sélectionnés
+            foreach ($selectedSuperTags as $tag) {
+                $independantTag = new IndependantTag();
+                $independantTag->setIndependant($independant);
+                $independantTag->setTag($tag);
+                $independantTag->setSuper(true);
+                $independant->addIndependantTag($independantTag);
             }
         });
+
 
     }
 
