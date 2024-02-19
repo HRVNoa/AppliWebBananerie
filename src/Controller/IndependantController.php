@@ -197,11 +197,11 @@ class IndependantController extends AbstractController
         $conditionsRemplies = $independant->getMetier() !== null &&
             $independant->getMetierSecondaire() !== null &&
             $independant->getPhotodeprofil() !== null;
-        if (!$conditionsRemplies) {
-            $this->addFlash('errorInfo', 'Vous devez avoir trois super tag et une photo de profil avant de pouvoir remplir vos informations complèmentaire.');
-            return $this->redirectToRoute('independantConsulter',['id' => $idinde]); // Redirigez vers une page appropriée
-
-        }
+//        if (!$conditionsRemplies) {
+//            $this->addFlash('errorInfo', 'Vous devez avoir trois super tag et une photo de profil avant de pouvoir remplir vos informations complèmentaire.');
+//            return $this->redirectToRoute('independantConsulter',['id' => $idinde]); // Redirigez vers une page appropriée
+//
+//        }
         if (!$independant) {
             throw $this->createNotFoundException('Aucun independant trouvé avec le numéro '.$id);
         }
