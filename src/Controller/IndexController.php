@@ -38,19 +38,18 @@ class IndexController extends AbstractController
             $userReservations = $doctrine->getRepository(Reservation::class)->getReservationFutureByUser($security->getUser());
 
             $jour = $request->query->get('jour', date("d/m/Y"));
-            if ($jour <= date("d/m/Y")){
-                $jour = date("d/m/Y");
+            $jour = DateTime::createFromFormat('d/m/Y', $jour);
+            if ($jour <= new DateTime()){
+                $jour = new DateTime();
             }
-            $jourFind = explode("/",$jour);
-            $jourFind = $jourFind[2].'/'.$jourFind[1].'/'.$jourFind[0];
             $espaces = $doctrine->getRepository(Espace::class)->findAll();
-            $reservations = $doctrine->getRepository(Reservation::class)->findBy(['date' => new DateTime($jourFind)]);
+            $reservations = $doctrine->getRepository(Reservation::class)->findBy(['date' => $jour]);
 
             return $this->render('index/index.html.twig', [
                 'espaces' => $espaces,
                 'reservations' => $reservations,
                 'userReservations' => $userReservations,
-                'jour' => $jour,
+                'jour' => $jour->format('d/m/Y'),
             ]);
         }
         return $this->redirectToRoute('app_login');
