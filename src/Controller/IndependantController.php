@@ -195,10 +195,10 @@ class IndependantController extends AbstractController
             return $this->redirectToRoute('accueilIndex');
         }
         $conditionsRemplies = $independant->getMetier() !== null &&
-            $independant->getMetierSecondaire() !== null &&
+            $independant->getIndependantTags()->count()  > 0 &&
             $independant->getPhotodeprofil() !== null;
         if (!$conditionsRemplies) {
-            $this->addFlash('errorInfo', 'Vous devez avoir trois super tag et une photo de profil avant de pouvoir remplir vos informations complèmentaire.');
+            $this->addFlash('errorInfo', 'Vous devez avoir au moins 1 super tag et une photo de profil avant de pouvoir remplir vos informations complèmentaire.');
             return $this->redirectToRoute('independantConsulter',['id' => $idinde]); // Redirigez vers une page appropriée
 
         }
@@ -419,7 +419,7 @@ class IndependantController extends AbstractController
 
         $carrouselid = $doctrine->getRepository(Media::class)->find($media);
 
-        $idinde = $carrouselid->getCarrousel()->getId();
+        $idinde = $carrouselid->getCarrousel()->getIndependant()->getId();
 
         $independant = $doctrine->getRepository(Independant::class)->find($idinde);
         $user = $independant->getUser();
@@ -471,20 +471,14 @@ class IndependantController extends AbstractController
 
         $carrouselid = $doctrine->getRepository(Media::class)->find($media);
 
-        $idinde = $carrouselid->getCarrousel()->getId();
+        $idinde = $carrouselid->getCarrousel()->getIndependant()->getId();
 
         $independant = $doctrine->getRepository(Independant::class)->find($idinde);
-        $user = $independant->getUser();
-        $currentUser= $security->getUser();
-        if ($currentUser !== $user && !$this->isGranted('ROLE_ADMIN')) {
-            // Si les ID ne correspondent pas, redirigez l'utilisateur vers sa propre page
-            $this->addFlash('error', 'Vous n\'êtes pas autorisé à modifier les informations d\'un autre indépendant.');
-            return $this->redirectToRoute('accueilIndex');
-        }
+
 
         if (!$media) {
             $this->addFlash('error', 'Le média que vous voulez supprimer n\'existe pas.');
-            return $this->redirectToRoute('independantCréerPortfolio', ['independant' => $independant, 'id' => $idinde]); // Remplacer 'some_route' par la route appropriée
+            return $this->redirectToRoute('independantCréerPortfolio', ['independant' => $independant, 'id' => $idinde]);
         }
 
         $filename = $media->getLien();
@@ -497,7 +491,7 @@ class IndependantController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('success', 'Le média a été supprimé avec succès.');
-        return $this->redirectToRoute('independantCréerPortfolio', ['independant' => $independant, 'id' => $idinde]); // Remplacer 'some_route' par la route appropriée
+        return $this->redirectToRoute('independantCréerPortfolio', ['independant' => $independant, 'id' => $idinde]);
     }
 
     private function uploadFile(UploadedFile $file, Media $media): string
