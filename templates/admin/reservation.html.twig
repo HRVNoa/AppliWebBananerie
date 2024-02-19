@@ -62,7 +62,7 @@
                                         <td>{{ reservation.user.email }} (admin)</td>
                                     {% endif %}
                                     <td>{{ reservation.date|date('d/m/Y') }}</td>
-                                    <td>{{ reservation.heureDebut|date('H') }}h à {{ reservation.heureFin|date('H') }}h</td>
+                                    <td>{{ reservation.heureDebut }}h à {{ reservation.heureFin }}h</td>
                                     <td>{{ reservation.libelle }}</td>
                                     <td><a type="button" class="btn btn-outline-danger btn-fw" href="{{ path('adminAnnuleReservation', {'id':reservation.id}) }}">Annuler</a></td>
                                 </tr>

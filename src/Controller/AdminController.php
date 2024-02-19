@@ -290,7 +290,7 @@ class AdminController extends AbstractController
                     <p>Nous sommes désolés de vous informer que votre réservation a été annulée par un administrateur. Voici les détails de la réservation annulée :</p>
                     <ul>
                         <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
-                        <li>Heure : '. $reservation->getHeureDebut()->format("H") .'h à '. $reservation->getHeureFin()->format("H") .'h</li>
+                        <li>Heure : '. $reservation->getHeureDebut() .'h à '. $reservation->getHeureFin() .'h</li>
                         <li>Détail de la réservation : '. $reservation->getLibelle() .'</li>
                     </ul>
                     <p>Pour plus d\'informations ou pour toute question, n\'hésitez pas à nous contacter La Bananerie ou via l\'espace membre.</p>
@@ -401,7 +401,7 @@ class AdminController extends AbstractController
                         <p>Nous avons bien réservé votre réservation. Voici les détails :</p>
                         <ul>
                             <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
-                            <li>Heure : '. $reservation->getHeureDebut()->format("H") .'h à '. $reservation->getHeureFin()->format("H") .'h</li>
+                            <li>Heure : '. $reservation->getHeureDebut() .'h à '. $reservation->getHeureFin() .'h</li>
                             <li>Detail de votre réservation : '.$reservation->getLibelle().'</li>
                         </ul>
                         <p>Pour toute modification ou annulation, veuillez nous contacter la bananerie ou via l\'espace membre.</p>

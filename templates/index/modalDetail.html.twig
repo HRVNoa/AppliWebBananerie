@@ -30,8 +30,6 @@
 
 
 {% if succes %}
-    {{ form_start(form) }}
-    {{ form_widget(form._token) }}
     <div class="container">
         <div class="row" style="padding-top: 20px">
             <div class="col-cm-12">
@@ -41,49 +39,47 @@
                 <div class="row" style="padding-top: 20px">
                     <div class="col-md-12">
                         <label class="text-secondary">JOUR :</label>
-                        {{ form_widget(form.date) }}
+                        {{ reservation.date|date('d/m/Y') }}
                     </div>
                 </div>
 
                 <div class="row" style="padding-top: 20px">
                     <div style="width: 50%;">
                         <label class="text-secondary">HEURE DE DÉBUT :</label>
-                        {{ form_widget(form.heureDebut) }}
+                        {{ reservation.heureDebut }}
                     </div>
 
                     <div style="width: 50%;">
                         <label class="text-secondary">HEURE DE FIN :</label>
-                        {{ form_widget(form.heureFin) }}
+                        {{ reservation.heureFin }}
                     </div>
                 </div>
                 <div class="row" style="padding-top: 20px">
                     <div class="col-md-12">
                         <label class="text-secondary">DÉTAILS DE LA RÉSERVATION :</label>
-                        {{ form_widget(form.libelle) }}
+                        {{ reservation.libelle }}
                     </div>
                 </div>
-                {{ form_widget(form.espace) }}
-                {{ form_widget(form.user) }}
                 <div style="padding-top: 20px" id="btnform">
                     {% if annulable %}
-                        <button id="btnConfirm" type="submit" class="btn btn-danger btn-fw">ANNULER MA RÉSERVATION</button>
+                        <a href="{{ path('detailReservation', {'id': reservation.id,'annuler': true}) }}" id="btnConfirm" type="submit" class="btn btn-danger btn-fw">ANNULER MA RÉSERVATION</a>
                         <h4 id="temoins" style="display: none" class="">Annulation en cours...</h4>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    {{ form_end(form,{"render_rest": false}) }}
 {% endif %}
 <script>
 
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("reservation_libelle").disabled = 'true';
+        document.getElementById("reservation_heureDebut").disabled = 'true';
+        document.getElementById("reservation_heureFin").disabled = 'true';
+        document.getElementById("reservation_date").disabled = 'true';
         document.getElementById("btnConfirm").addEventListener("click", function () {
-            if (document.getElementById("reservation_libelle").value !== '') {
-                document.getElementById("btnConfirm").style.display = "none";
-                document.getElementById("temoins").style.display = "block";
-            }
+            document.getElementById("btnConfirm").style.display = "none";
+            document.getElementById("temoins").style.display = "block";
         })
     });
 
