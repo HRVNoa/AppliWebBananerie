@@ -13,7 +13,7 @@
                         <div class="row flex-c-b">
                             <div class="col-lg-2">
                                 <select id="filterMetier" class="form-control" style="color: #6c7293;">
-                                    <option value="">Filtre métiers</option>
+                                    <option value="">Rechercher un métier</option>
                                     {% for metier in metiers %}
                                         <option value="{{ metier.id }}" style="color: #fff;">{{ metier.libelle }}</option>
                                     {% endfor %}
@@ -38,8 +38,8 @@
                                         <a href="{{ path('annuaireLister', {'sort': 'desc'}) }}"><i class="mdi mdi-arrow-down-drop-circle-outline"></i></a>
                                     {% endif %}
                                 </th>
-                                <th>Métier principal</th>
-                                <th>Métier secondaire</th>
+                                <th>Métier #1</th>
+                                <th>Métier #2</th>
                                 <th>Tags</th>
                                 <th style="display: none">TagNormal</th>
                                 <th></th>

@@ -2,19 +2,35 @@
 {% block title %}Liste des metiers{% endblock %}
 {% block stylesheets %}{% endblock %}
 {% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="card bg-success text-white shadow" style="margin-bottom: 20px">
+            <div class="card-body">
+                Success
+                <div class="text-white">{{ message }}</div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="card bg-danger text-white shadow" style="margin-bottom: 20px">
+            <div class="card-body">
+                Erreur
+                <div class="text-white">{{ message }}</div>
+            </div>
+        </div>
+    {% endfor %}
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Liste Metiers</h4>
                     <form action="{{ path('metierAjouter') }}" method="get">
-                        <button type="submit" class="btn btn-primary">Ajouter un nouveau metier</button>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
                     </form>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th style="text-align: left;"> Libelle </th>
+                                <th style="text-align: left;"> Libellé </th>
 {#                                <th style="text-align: center;"> Consulter </th>#}
                                 <th style="text-align: center;"> Modifier </th>
                                 <th style="text-align: center;"> Supprimer </th>

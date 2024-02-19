@@ -141,15 +141,14 @@
     {% if app.user.independant is not null and app.user.independant.id == independant.id %}
         {% for message in app.flashes('success') %}
             <div class="card-body" style="margin-bottom: 20px">
-                <blockquote class="blockquote blockquote-primary">
-                    <p class="text-success">SUCCÈS :</p>
+                <blockquote class="">
                     <footer class="blockquote-footer text-success">{{ message }}</footer>
                 </blockquote>
             </div>
         {% endfor %}
         {% for message in app.flashes('error') %}
             <div class="card-body" style="margin-bottom: 20px">
-                <blockquote class="blockquote blockquote-primary">
+                <blockquote class="">
                     <p class="text-danger">ERREUR :</p>
                     <footer class="blockquote-footer text-danger">{{ message }}</footer>
                 </blockquote>
