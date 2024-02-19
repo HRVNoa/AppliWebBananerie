@@ -82,57 +82,41 @@ class AdminController extends AbstractController
             padding: 0;
             background-color: #f4f4f4;
         }
-        .container {
-            max-width: 600px;
+    </style>
+</head>
+<body>
+    <div style=" max-width: 600px;
             margin: 20px auto;
             padding: 20px;
             background-color: #ffffff;
             border: 1px solid #dddddd;
-            border-radius: 8px;
-        }
-        .header {
-            background-color: #007bff;
+            border-radius: 8px;">
+        <div style="background-color: #007bff;
             color: #ffffff;
             padding: 10px;
             text-align: center;
-            border-radius: 8px 8px 0 0;
-        }
-        .content {
-            padding: 20px;
-            text-align: center;
-        }
-        .footer {
-            background-color: #f4f4f4;
+            border-radius: 8px 8px 0 0;">
+            Bienvenue sur l\'application de la bananarie!
+        </div>
+        <div style="padding: 20px;
+            text-align: center;">
+            <h1>Bonjour !</h1>
+            <p>Votre inscription à l\'espace membre de la Bananerie a bien été prise en compte.</p>
+            <p>Vous pouvez désormais vous connecter avec vos identifiants et réserver en ligne un espace, un studio ou encore consulter l’annuaire de nos membres.  .</p>
+            <p>En cas de besoin, n’hésitez pas à nous contacter à icilabananerie@gmail.com</p>
+            <p>A très bientôt à La Bananerie !</p>
+            <p>
+            LA BANANERIE<br>
+            134 Bd Leroy<br>
+            14 000 CAEN
+            </p>
+        </div>
+        <div style=" background-color: #f4f4f4;
             color: #777777;
             text-align: center;
             padding: 10px;
             font-size: 12px;
-            border-radius: 0 0 8px 8px;
-        }
-        a.button {
-            display: inline-block;
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            Bienvenue sur l\'application de la bananarie!
-        </div>
-        <div class="content">
-            <h1>Bonjour !</h1>
-            <p>Nous sommes ravis de vous compter parmi nous.</p>
-            <p>Vous faites maintenant partie de notre communauté grandissante. Préparez-vous à découvrir toutes les possibilités offertes par nos services.</p>
-            <p>Nous vous invitons à visiter notre site web:</p>
-            <a href="https://www.votreentreprise.com" class="button">Visitez notre application</a>
-        </div>
-        <div class="footer">
+            border-radius: 0 0 8px 8px;">
             Merci de nous avoir rejoint. Si vous avez des questions, n\'hésitez pas à contacter notre support.
             <br>Email: icilabananerie@gmail.com
     </div>
