@@ -19,15 +19,27 @@
 
     <link rel="shortcut icon" href="{{ asset("design/assets/images/favicon.png")}}" />
 
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+    <style>
+        .aspectlogo{
+            object-fit: cover;
+            aspect-ratio: 500/166;
+        }
+        .petitaspectlogo{
+            object-fit: cover;
+            aspect-ratio: 75/166;
+        }
+
+    </style>
+    {% endblock %}
 </head>
 <body>
 <div class="container-scroller">
     <!-- partial:partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <a class="sidebar-brand brand-logo" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/assets/images/logo.svg")}}" alt="logo" /></a>
-            <a class="sidebar-brand brand-logo-mini" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/assets/images/logo-mini.svg")}}" alt="logo" /></a>
+            <a class="sidebar-brand brand-logo" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/admin/logo/BlancSimple.png")}}" alt="logo" class="aspectlogo"/></a>
+            <a class="sidebar-brand brand-logo-mini" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/admin/logo/Blanccourt.png")}}" alt="logo" class="petitaspectlogo"/></a>
         </div>
         <ul class="nav">
             <li class="nav-item nav-category">
@@ -38,7 +50,7 @@
               <span class="menu-icon">
                 <i class="mdi mdi-table" style="font-size: 20px"></i>
               </span>
-                    <span class="menu-title">Tableau de bord</span>
+                    <span class="menu-title">Réservation</span>
                 </a>
             </li>
             {% if is_granted('ROLE_ADMIN') %}
@@ -97,8 +109,9 @@
                         <li class="nav-item"> <a class="nav-link" href="{{ path('metierLister') }}"> Metier </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('secteuractiviteLister') }}"> Secteur </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('tagLister') }}"> Tag </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ path('newmemberLister') }}"> NewMember </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('newmemberLister') }}"> Confimation </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('adminLister') }}"> Admin </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('contactMousquetaires') }}"> Mousquetaires </a></li>
 
                     </ul>
                 </div>
@@ -168,7 +181,7 @@
         <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
                 <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> <a href="/mentionlegale" target="_blank">Mention légale</a> </span>
             </div>
         </footer>
         <!-- partial -->

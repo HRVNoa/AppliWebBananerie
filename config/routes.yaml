@@ -21,10 +21,13 @@ adminSupprimer:
     path : /admin/supprimer/{id}
     controller: App\Controller\AdminController::supprimerAdmin
 
-
 accueilIndex:
     path : /
     controller: App\Controller\IndexController::index
+
+mentionlegale:
+    path : /mentionlegale
+    controller: App\Controller\IndexController::mentionlegale
 
 formReservation:
     path : /reservation
@@ -225,7 +228,11 @@ tagSupprimer:
     path: /admin/tag/supprimer/{id}
     controller: App\Controller\TagController::supprimerTag
     
-    
+
+
+contactMousquetaires:
+    path: /admin/mousquetaires
+    controller: App\Controller\AdminController::contactMousquetaires
 
 annuaireControl:
     path: /admin/annuaire

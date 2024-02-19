@@ -58,7 +58,7 @@
                             {% for independant in independants %}
                                 <tr onclick="window.location.href='{{ path('independantConsulter', {"id": independant.id}) }}'" style="cursor: pointer" data-metier-id="{{ independant.metier.id }}">
                                     <td class="py-1">
-                                        <img src="{{ asset('design/assets/images/faces/face15.jpg') }}" alt="image">
+                                        <img src="{{ asset('membre/photodeprofil/') }}{{ independant.photodeprofil }}" alt="">
                                     </td>
                                     <td>{{ independant.prenom|capitalize }} {{ independant.nom|upper }}</td>
                                     <td>{{ independant.metier.libelle }}</td>
