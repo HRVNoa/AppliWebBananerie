@@ -723,4 +723,9 @@ class AdminController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('adminSupprimer');
     }
+
+    public function contactMousquetaires(): Response
+    {
+        return $this->render('admin/contactMousquetaires.html.twig');
+    }
 }

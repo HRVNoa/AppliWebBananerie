@@ -356,4 +356,8 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
+    public function mentionlegale(): Response
+    {
+        return $this->render('index/mentionlegale.html.twig');
+    }
 }
