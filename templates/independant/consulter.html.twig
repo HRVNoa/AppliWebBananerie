@@ -155,9 +155,16 @@
                 </blockquote>
             </div>
         {% endfor %}
+
         <div class="card">
+            <div style="">
             <div class=" emp-profile">
-                    <div class="row">
+                <div class="row" style="padding-left: 5%">
+                    <div class="flex-c-b" style="width: fit-content; align-items: baseline">
+                        <h4 class="card-title">Mon Profil</h4><a href="{{ path('independantModifierInfo', { 'id': app.user.independant.id }) }}"><i class="mdi mdi-grease-pencil" style="margin-left: 5px"></i> </a>
+                    </div>
+                </div>
+                <div class="row">
                         <div class="col-md-4">
                             <div class="profile-img">
                                 <img src="{{ asset('membre/photodeprofil/') }}{{ independant.photodeprofil }}" alt="" class="pdp"/>
@@ -174,7 +181,7 @@
                             {% endif %}
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="profile-head mb-3">
                                 <h5>
                                     {{independant.nom}} {{independant.prenom}}
@@ -196,17 +203,16 @@
                                 {{ independant.description }}
                             </p>
                         </div>
-                        <div class="col-md-2">
-                            <a href="{{ path('independantModifierInfo', { 'id': app.user.independant.id }) }}"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Votre Profil"/> </a>
-                        </div>
                         {% for message in app.flashes('errorInfo') %}
                         <h5 class="text-danger">{{ message }}</h5>
                         {% endfor %}
-
+                </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="profile-work">
-                                <p>Super Tags</p>
+                                <div class="flex-c-b" style="width: fit-content; align-items: baseline">
+                                <p>Super Tags</p> <a href="{{ path('independantModifierTag', { 'id': app.user.independant.id }) }}"><i class="mdi mdi-grease-pencil" style="margin-left: 5px ; color: #0a58ca"></i> </a>
+                                </div>
                                 {% set displayedTags = [] %}
 
                                 {# Parcours des super tags #}
@@ -230,9 +236,6 @@
                                 {% else %}
                                     Pas de tag
                                 {% endfor %}
-                                <div style="margin-top: 10px">
-                                    <a href="{{ path('independantModifierTag', { 'id': app.user.independant.id }) }}"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Modifier Tag"/> </a>
-                                </div>
                             </div>
 
                         </div>
@@ -240,9 +243,11 @@
                             <div class="card">
                                 <div class="card-body">
                                     {% if carrousel.media != null %}
-                                    <h4 class="card-title">Portfolio</h4>
+                                        <div class="flex-c-b" style="width: fit-content; align-items: baseline">
+                                             <h4 class="card-title">Portfolio</h4><a href="{{ path('independantCréerPortfolio', { 'id': app.user.independant.id }) }}"><i class="mdi mdi-grease-pencil" style="margin-left: 5px "></i> </a>
+                                        </div>
 
-                                    <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
+                                        <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
                                             {% for media in carrousel.media %}
                                             <div class="item">
                                                 <img src="{{ asset('membre/portfolio/' ~ media.lien) }}" alt="" class="imgportfolio">
@@ -250,9 +255,6 @@
                                             {% endfor %}
                                     </div>
                                     {% endif %}
-                                    <div class ="col-md-4 " style="margin-top: 10px">
-                                        <a href="{{ path('independantCréerPortfolio', { 'id': app.user.independant.id }) }}"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Mon Portfolio"/> </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -311,9 +313,9 @@
                             </div>
 
                             {% endif %}
-                            <div class="row">
-                                <div class ="col-md-4 " style="margin-top: 10px">
-                                    <a href="{{ path('independantListerVideo', { 'id': app.user.independant.id }) }}"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Vos videos"/> </a>
+                            <div class="row" style="padding-left: 5%">
+                                <div class="flex-c-b" style="width: fit-content; align-items: baseline ;">
+                                    <h4 class="card-title">Mes vidéos</h4><a href="{{ path('independantListerVideo', { 'id': app.user.independant.id }) }}"><i class="mdi mdi-grease-pencil" style="margin-left: 5px "></i> </a>
                                 </div>
                             </div>
                     </div>
