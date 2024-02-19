@@ -170,8 +170,7 @@
         <div class="card">
             {% for message in app.flashes('success') %}
                 <div class="card-body" style="margin-bottom: 20px">
-                    <blockquote class="blockquote blockquote-primary">
-                        <p class="text-success">SUCCESS :</p>
+                    <blockquote class="">
                         <footer class="blockquote-footer text-success">{{ message }}</footer>
                     </blockquote>
                 </div>
@@ -179,7 +178,7 @@
 
             {% for message in app.flashes('error') %}
                 <div class="card-body" style="margin-bottom: 20px">
-                    <blockquote class="blockquote blockquote-primary">
+                    <blockquote class="">
                         <p class="text-danger">ERREUR :</p>
                         <footer class="blockquote-footer text-danger">{{ message }}</footer>
                     </blockquote>
@@ -189,19 +188,19 @@
                 <div class="table-responsive">
                     <div class="flex-c-b">
                         <div id="calendarIcon" style="cursor: pointer; width: inherit">
-                            <div class="flex-c-c" style="flex-direction: column">
-                                <i class="mdi mdi-calendar setDate">
+                            <div class="flex-c-c" style="flex-direction: row; align-items: end">
+                                <i class="mdi mdi-calendar setDate" style="font-size: 22px">
                                 </i>
-                                <h3>{{ jour }}</h3>
+                                <h4>{{ jour }}</h4>
                             </div>
                         </div>
                         <div class="flex-c-b">
-                        <p style="margin-top: 15px"> Studios </p>
+                        <p style="margin-top: 15px; margin-right: 5px;"> Studios & Espaces</p>
                         <label class="switch flex-c-c col-lg-2">
                             <input type="checkbox" id="cb3-8">
                             <span class="slider"></span>
                         </label>
-                        <p style="margin-top: 15px"> Poste Flex </p>
+                        <p style="margin-top: 15px; margin-left: 5px"> Postes Flex </p>
                         </div>
                     </div>
 
@@ -218,7 +217,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th style="width: 20%;">Espaces</th>
+                            <th style="width: 20%;" id="nameOfTable">Studio & Espaces</th>
                             <th style="width: 10%;">9h-10h</th>
                             <th style="width: 10%;">10h-11h</th>
                             <th style="width: 10%;">11h-12h</th>
@@ -235,12 +234,12 @@
                             <tr class="{% if espace.typeEspace.categorie.id == 4 %}posteFlex{% else %}espace{% endif %}" style="{% if espace.typeEspace.categorie.id == 4 %}display: none;{% else %}display: table-row;{% endif %} height: 60px">
                                 <td style="padding: 0;">
                                     <div style="display: flex; align-items: baseline">
-                                        <h6 class="clickableEsapce leads" style="margin: 3px; padding: 0; cursor: pointer" data-src="{{ path('modalEspace', {'idCarrousel': espace.carrousel.id, 'idEspace': espace.id }) }}"><i class="mdi mdi-eye text-primary"></i></h6>
+                                        <h6 class="clickableEsapce leads" style="margin-right: 8px;margin-left: 4px; padding: 0; cursor: pointer" data-src="{{ path('modalEspace', {'idCarrousel': espace.carrousel.id, 'idEspace': espace.id }) }}"><i class="mdi mdi-eye text-primary"></i></h6>
                                         <h6>{{ espace.libelle }}</h6>
                                     </div>
                                 </td>
                                 {% if espace.tarifEspaceTarifs is empty %}
-                                    <td colspan="9" style="height: 40px;padding: 0;">SUR DEVIS UNIQUEMENT - CONTACTEZ NOUS</td>
+                                    <td colspan="9" style="height: 40px;padding: 0;">Sur devis uniquement: contactez-nous !</td>
                                 {% else %}
                                     {% for heure in 9..18 %}
                                         <td style="height: 40px;padding: 0;">
@@ -274,7 +273,7 @@
     <div class="col-lg-3">
         <div class="card">
             <div class="card-body">
-                <h2>Mes réservations</h2>
+                <h4>Mes réservations</h4>
                 {% for userReservation in userReservations %}
                     {% set duree = userReservation.heureFin|date('H') - userReservation.heureDebut|date('H') %}
                 <div class="row" style="margin-top: 20px;">
@@ -335,6 +334,7 @@
             $('#cb3-8').click(function () {
                 console.log($(this));
                 if ($(this)[0].checked){
+                    $('#nameOfTable')[0].innerText = "Postes Flex";
                     for (let i = 0; i < postFlex.length; i++) {
                         postFlex[i].style.display = 'table-row';
                     }
@@ -348,6 +348,7 @@
                     for (let i = 0; i < espace.length; i++) {
                         espace[i].style.display = 'table-row';
                     }
+                    $('#nameOfTable')[0].innerText = "Studios & Espace";
                 }
             });
 

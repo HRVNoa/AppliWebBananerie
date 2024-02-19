@@ -375,46 +375,40 @@ class AdminController extends AbstractController
                 ->to($reservation->getUser()->getUserIdentifier())
                 ->subject("Nouvelle réservation : ". $reservation->getEspace()->getLibelle() ) // Sujet
                 ->html('
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        margin: 0;
-                        padding: 0;
-                        background-color: #f4f4f4;
-                    }
-                </style>
-                
                 <div style="background-color: #ffffff;
-                        width: 600px;
-                        margin: 0 auto;
-                        padding: 20px;
-                        color: #000;">
+                    width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    color: #000;">
                 <div style="background-color: #FACC5F;
-                            color: #ffffff;
-                            padding: 10px;
-                            text-align: center;">
-                    <h2>Confirmation de votre réservation</h2>
+                    color: #ffffff;
+                    padding: 10px;
+                    text-align: center;">
+                    <h2>ANNULATION DE RÉSERVATION</h2>
                 </div>
                 <div style="padding: 20px;
-                            text-align: left;">
+                    text-align: left;">
                     <p>Bonjour '. $destName .',</p>
-                        <p>Nous avons bien réservé votre réservation. Voici les détails :</p>
-                        <ul>
-                            <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
-                            <li>Heure : '. $reservation->getHeureDebut() .'h à '. $reservation->getHeureFin() .'h</li>
-                            <li>Detail de votre réservation : '.$reservation->getLibelle().'</li>
-                        </ul>
-                        <p>Pour toute modification ou annulation, veuillez nous contacter la bananerie ou via l\'espace membre.</p>
-                        <p>Nous avons hâte de vous accueillir !</p>
-                        <p>Cordialement,</p>
-                        <p>La Bananerie.</p>
+                    <p>L\'administraeur a annulé une réservation.</p>
+                    <p>Détails de réservation:</p>
+                    <ul>
+                        <li>Espace : '. $reservation->getEspace()->getLibelle() .'</li>
+                        <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
+                        <li>Heure : '. $reservation->getHeureDebut() .'h à '. $reservation->getHeureFin() .'h</li>
+                        <li>Detail de votre réservation : '.$reservation->getLibelle().'</li>
+                    </ul>
+                    <p>Un remboursement de X B. COINS sera effectué sur votre compte espace membre. </p>
+                    <p>À très bientôt à La Bananerie ! </p>
                 </div>
-                <div style="background-color: #333333;
-                            color: #ffffff;
-                            padding: 10px;
-                            text-align: center;
-                            font-size: 12px;">
-                    Merci de votre compréhension | <a href="https://google.fr" style="color: #ffffff;">Visitez notre site</a>
+                <div style="
+                    background-color: #333333;
+                    color: #ffffff;
+                    padding: 10px;
+                    text-align: center;
+                    font-size: 12px;">
+                    <p>LA BANANERIE</p>
+                    <p>134 Bd Leroy</p>
+                    <p>14 000 CAEN</p>
                 </div>
             </div>
             ');

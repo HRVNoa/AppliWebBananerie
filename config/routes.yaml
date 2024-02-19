@@ -46,7 +46,7 @@ modalEspace:
     controller : App\Controller\IndexController::modalEspace
 
 annuaireLister:
-    path : /user/annuaire
+    path : /user/annuaire/public
     controller: App\Controller\AnnuaireController::lister
 
 
@@ -56,7 +56,7 @@ independantConsulter:
     controller: App\Controller\IndependantController::consulterIndependant
 
 independantLister:
-    path: /admin/independant/lister
+    path: /admin/independantlister
     controller: App\Controller\IndependantController::listerIndependant
 
 independantAjouter:
@@ -125,7 +125,7 @@ statutConsulter:
     controller: App\Controller\StatutController::consulterStatut
 
 statutLister:
-    path: /admin/statut/lister
+    path: /admin/statutLister
     controller: App\Controller\StatutController::listerStatut
 
 statutAjouter:
@@ -147,7 +147,7 @@ metierConsulter:
     controller: App\Controller\MetierController::consulterMetier
 
 metierLister:
-    path: /admin/metier/lister
+    path: /admin/metierLister
     controller: App\Controller\MetierController::listerMetier
 
 metierAjouter:
@@ -169,7 +169,7 @@ entrepriseConsulter:
     controller: App\Controller\EntrepriseController::consulterEntreprise
 
 entrepriseLister:
-    path: /admin/entreprise/lister
+    path: /admin/entrepriseLister
     controller: App\Controller\EntrepriseController::listerEntreprise
 
 entrepriseAjouter:
@@ -191,7 +191,7 @@ secteuractiviteConsulter:
     controller: App\Controller\SecteurActiviteController::consulterSecteurActivite
 
 secteuractiviteLister:
-    path: /admin/secteuractivite/lister
+    path: /admin/secteuractiviteLister
     controller: App\Controller\SecteurActiviteController::listerSecteurActivite
 
 secteuractiviteAjouter:
@@ -213,7 +213,7 @@ tagConsulter:
     controller: App\Controller\TagController::consulterTag
 
 tagLister:
-    path: /admin/tag/lister
+    path: /admin/tagLister
     controller: App\Controller\TagController::listerTag
 
 tagAjouter:
@@ -235,7 +235,7 @@ contactMousquetaires:
     controller: App\Controller\AdminController::contactMousquetaires
 
 annuaireControl:
-    path: /admin/annuaire
+    path: /admin/annuaireAdmin
     controller: App\Controller\AdminController::annuaireControl
 
 adminAjoutReservation:

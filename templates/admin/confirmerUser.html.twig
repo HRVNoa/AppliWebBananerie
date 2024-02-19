@@ -6,7 +6,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Confirmer nouveau utilisateurs independants</h4>
+                    <h4 class="card-title">Nouveau utilisateurs indépendants</h4>
 
                     {% for message in app.flashes('succesmail') %}
                         <h5 class="text-success">{{ message }}</h5>
@@ -22,9 +22,8 @@
                             <tr>
                                 <th style="text-align: center;">Nom</th>
                                 <th style="text-align: center;">Prenom</th>
-                                <th style="text-align: center;">Metier</th>
+                                <th style="text-align: center;">Email</th>
                                 <th style="text-align: center;">Entreprise</th>
-                                <th style="text-align: center;">Statut</th>
                                 <th style="text-align: center;">Confirmer</th>
                                 <th style="text-align: center;">Refuser</th>
                             </tr>
@@ -35,9 +34,8 @@
                                 <tr>
                                     <td style="text-align: center;" class="text-white">{{ member.independant.nom }}</td>
                                     <td style="text-align: center;" class="text-white">{{ member.independant.prenom }}</td>
-                                    <td style="text-align: center;" class="text-white">{{ member.independant.metier.libelle }}</td>
+                                    <td style="text-align: center;" class="text-white">{{ member.independant.email }}</td>
                                     <td style="text-align: center;" class="text-white">{{ member.independant.entreprise }}</td>
-                                    <td style="text-align: center;" class="text-white">{{ member.independant.statut.libelle }}</td>
                                     <td>
                                         <div class="text-center">
                                             <form action="{{ path('newmemberConfirmed', {'id': member.id}) }}" method="post">
@@ -70,7 +68,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Confirmer nouveau utilisateurs venant d'une entreprise</h4>
+                    <h4 class="card-title">Nouveau utilisateurs entreprises</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -79,7 +77,6 @@
                                 <th style="text-align: center;">Prenom</th>
                                 <th style="text-align: center;">Email</th>
                                 <th style="text-align: center;">Nom Structure</th>
-                                <th style="text-align: center;">Secteur Activite</th>
                                 <th style="text-align: center;">Confirmer</th>
                                 <th style="text-align: center;">Refuser</th>
                             </tr>
@@ -92,7 +89,6 @@
                                     <td style="text-align: center;" class="text-white">{{ member.entreprise.prenom }}</td>
                                     <td style="text-align: center;" class="text-white">{{ member.entreprise.email }}</td>
                                     <td style="text-align: center;" class="text-white">{{ member.entreprise.nomstructure }}</td>
-                                    <td style="text-align: center;" class="text-white">{{ member.entreprise.secteuractivite.libelle }}</td>
                                     <td>
                                         <div class="text-center">
                                             <form action="{{ path('newmemberConfirmed', {'id': member.id}) }}" method="post">
@@ -125,7 +121,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Confirmer nouveau utilisateurs sans affectation</h4>
+                    <h4 class="card-title">Nouveau utilisateurs sans affectation</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
