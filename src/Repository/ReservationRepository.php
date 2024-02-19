@@ -22,19 +22,17 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
-    public function getReservationByEspace($date, $hd, $hf, $espace_id): array
+    public function findExistingReservation($heureDebut, $heureFin, $espace, $date)
     {
-//        $date = explode("/",$date);
-//        $date = $date[2].'/'.$date[1].'/'.$date[0];
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.date = :date and r.heureDebut = :hd and r.heureFin = :hf and r.espace = :espace_id ')
+         $r = $this->createQueryBuilder('r')
+            ->andWhere('r.heureDebut < :heureFin AND r.heureFin > :heureDebut and r.espace = :espace and r.date= :date')
+            ->setParameter('heureFin', $heureFin)
+            ->setParameter('heureDebut', $heureDebut)
+            ->setParameter('espace', $espace)
             ->setParameter('date', $date)
-            ->setParameter('hd', $hd)
-            ->setParameter('hf', $hf)
-            ->setParameter('espace_id', $espace_id)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+        return $r;
     }
 
     public function getReservationFutureByUser($user): array

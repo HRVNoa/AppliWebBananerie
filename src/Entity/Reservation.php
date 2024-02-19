@@ -20,11 +20,11 @@ class Reservation
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $heureDebut = null;
+    #[ORM\Column]
+    private ?int $heureDebut = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $heureFin = null;
+    #[ORM\Column]
+    private ?int $heureFin = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Espace $espace = null;
@@ -61,24 +61,24 @@ class Reservation
         return $this;
     }
 
-    public function getHeureDebut(): ?\DateTimeInterface
+    public function getHeureDebut(): int
     {
         return $this->heureDebut;
     }
 
-    public function setHeureDebut(\DateTimeInterface $heureDebut): static
+    public function setHeureDebut(int $heureDebut): static
     {
         $this->heureDebut = $heureDebut;
 
         return $this;
     }
 
-    public function getHeureFin(): ?\DateTimeInterface
+    public function getHeureFin(): int
     {
         return $this->heureFin;
     }
 
-    public function setHeureFin(\DateTimeInterface $heureFin): static
+    public function setHeureFin(int $heureFin): static
     {
         $this->heureFin = $heureFin;
 

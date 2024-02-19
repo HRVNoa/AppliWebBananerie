@@ -26,6 +26,7 @@ use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
+use function PHPUnit\Framework\isEmpty;
 use function PHPUnit\Framework\returnArgument;
 
 class IndexController extends AbstractController
@@ -68,21 +69,19 @@ class IndexController extends AbstractController
                     'annulable' => false,
                 ]);
             } else {
-                $form = $this->createForm(ReservationType::class, $reservation);
-                $form->handleRequest($request);
                 $now = new DateTime('now');
                 if ($reservation->getDate()->modify("-2 day") < $now){
                     $annulable = false;
                 }else{
                     $annulable = true;
                 }
+                $reservation->getDate()->modify("+2 day");
 
-                if ($form->isSubmitted() && $form->isValid()) {
+                if ($request->query->get('annuler', false)) {
                     try {
                         if ($annulable){
                             //Annulation de la reservation
 
-                            $connectedUser = $security->getUser();
                             if ($reservation->getUser()->getIndependant() != null){
                                 $inde = $doctrine->getRepository(Independant::class)->findOneBy(['user' => $reservation->getUser()]);
                                 $destName = $inde->getNom().' '.$inde->getPrenom();
@@ -133,7 +132,7 @@ class IndexController extends AbstractController
                                         <p>Nous sommes désolés de vous informer que votre réservation a été annulée. Voici les détails de la réservation annulée :</p>
                                         <ul>
                                             <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
-                                            <li>Heure : '. $reservation->getHeureDebut()->format("H") .'h à '. $reservation->getHeureFin()->format("H") .'h</li>
+                                            <li>Heure : '. $reservation->getHeureDebut() .'h à '. $reservation->getHeureFin() .'h</li>
                                             <li>Détail de la réservation : '. $reservation->getLibelle() .'</li>
                                         </ul>
                                         <p>Pour plus d\'informations ou pour toute question, n\'hésitez pas à nous contacter La Bananerie ou via l\'espace membre.</p>
@@ -158,7 +157,6 @@ class IndexController extends AbstractController
                             }
 
                             return $this->render('index/reservation.html.twig', [
-                                'form' => $form,
                                 'reservation' => $reservation,
                                 'succes' => false
                             ]);
@@ -175,7 +173,6 @@ class IndexController extends AbstractController
                     ]);
                 } else {
                     return $this->render('index/modalDetail.html.twig', [
-                        'form' => $form,
                         'reservation' => $reservation,
                         'succes' => true,
                         'annulable' => $annulable,
@@ -204,12 +201,6 @@ class IndexController extends AbstractController
             $this->addFlash('error', 'La date de réservation n\'est pas valide.');
             $succes = false;
         }
-        if ($heures == 'j' or $heures == 'm' or $heures == 'a'){
-            $succes = true;
-        }else{
-            $this->addFlash('error', 'Les horraires de réservation de ne sont pas valide.');
-            $succes = false;
-        }
 
 
         return $this->redirectToRoute('showFormReservation', [
@@ -232,149 +223,119 @@ class IndexController extends AbstractController
         $date = explode("/",$date);
         $date = $date[2].'/'.$date[1].'/'.$date[0];
 
-        $stop = false;
         $espace = $doctrine->getRepository(Espace::class)->find($id);
         $reservation->setEspace($espace);
         $reservation->setDate(new DateTime($date));
         $reservation->setUser($security->getUser());
 
-        $reservationCount = 0;
-        if ($heures === 'm'){
-            $espaceMatin = $doctrine->getRepository(Reservation::class)->getReservationByEspace($date,'09:00:00', '13:00:00',$id);
-            $espaceJournee = $doctrine->getRepository(Reservation::class)->getReservationByEspace($date,'09:00:00', '18:00:00',$id);
-            if ($espaceMatin or $espaceJournee){
-                $reservationCount += 1;
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+
+        $reservation->setEspace($session->get('salleId', $reservation->getEspace()));
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reservationCount = $doctrine->getRepository(Reservation::class)->findExistingReservation($form['heureDebut']->getData(), $form['heureFin']->getData(), $espace, $reservation->getDate());
+
+            // test si il y a déjà une réservation
+            if (count($reservationCount) === 0){
+                $stop = true;
+            }else{
+                $stop = false;
             }
-        }elseif ($heures === 'a'){
-            $espaceApres = $doctrine->getRepository(Reservation::class)->getReservationByEspace($date,'14:00:00', '18:00:00',$id);
-            $espaceJournee = $doctrine->getRepository(Reservation::class)->getReservationByEspace($date,'09:00:00', '18:00:00',$id);
-            if ($espaceApres or $espaceJournee){
-                $reservationCount += 2;
+            if ($stop) {
+            $connectedUser = $security->getUser();
+            if ($reservation->getUser()->getIndependant() != null){
+                $inde = $doctrine->getRepository(Independant::class)->findOneBy(['user' => $reservation->getUser()]);
+                $destName = $inde->getNom().' '.$inde->getPrenom();
+            }else if ($reservation->getUser()->getEntreprise() != null){
+                $entr = $doctrine->getRepository(Entreprise::class)->findOneBy(['user' => $reservation->getUser()]);
+                $destName = $entr->getNom().' '.$entr->getPrenom();
+            }else{
+                $destName = 'Admin';
             }
-        }elseif ($heures === 'j'){
-            $espaceMatin = $doctrine->getRepository(Reservation::class)->getReservationByEspace($date,'09:00:00', '13:00:00',$id);
-            $espaceApres = $doctrine->getRepository(Reservation::class)->getReservationByEspace($date,'14:00:00', '18:00:00',$id);
-            $espaceJournee = $doctrine->getRepository(Reservation::class)->getReservationByEspace($date,'09:00:00', '18:00:00',$id);
-            if ($espaceJournee or $espaceMatin or $espaceApres){
-                $reservationCount += 4;
-            }
-        }
 
-        if ($heures == 'm' and $reservationCount != 1){
-            $reservation->setHeureDebut(new DateTime('09:00:00'));
-            $reservation->setHeureFin(new DateTime('13:00:00'));
-        }elseif ($heures == 'a'and $reservationCount != 2){
-            $reservation->setHeureDebut(new DateTime('14:00:00'));
-            $reservation->setHeureFin(new DateTime('18:00:00'));
-        }elseif ($heures == 'j' and $reservationCount != 4){
-            $reservation->setHeureDebut(new DateTime('09:00:00'));
-            $reservation->setHeureFin(new DateTime('18:00:00'));
-        }else{
-            $stop = true;
-        }
+            $data = $form->getData();
 
-        if (!$stop) {
-            $form = $this->createForm(ReservationType::class, $reservation);
-            $form->handleRequest($request);
-
-            $reservation->setEspace($session->get('salleId', $reservation->getEspace()));
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                $connectedUser = $security->getUser();
-                if ($reservation->getUser()->getIndependant() != null){
-                    $inde = $doctrine->getRepository(Independant::class)->findOneBy(['user' => $reservation->getUser()]);
-                    $destName = $inde->getNom().' '.$inde->getPrenom();
-                }else if ($reservation->getUser()->getEntreprise() != null){
-                    $entr = $doctrine->getRepository(Entreprise::class)->findOneBy(['user' => $reservation->getUser()]);
-                    $destName = $entr->getNom().' '.$entr->getPrenom();
-                }else{
-                    $destName = 'Admin';
-                }
-
-                $data = $form->getData();
-
-                $entityManager = $doctrine->getManager();
-                $entityManager->persist($data);
-                $entityManager->flush();
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($data);
+            $entityManager->flush();
 
 
-                $this->addFlash('success', 'La réservation à bien été pris en compte.');
+            $this->addFlash('success', 'La réservation à bien été pris en compte.');
 
-                // Envoi du mail pour confirmation
-                $transport = Transport::fromDsn('smtp://bananeriebot@gmail.com:ramchihfwonbusnl@smtp.gmail.com:587?encryption=tls&auth_mode=login');
-                $mailer = new Mailer($transport);
-                $email = (new Email())
-                    ->from(new Address('bananeriebot@gmail.com', 'La Bananerie'))
-                    ->to($security->getUser()->getUserIdentifier())
-                    ->subject("Nouvelle réservation : ". $espace->getLibelle() ) // Sujet
-                    ->html('
-                        <style>
-                            body {
-                                font-family: Arial, sans-serif;
-                                margin: 0;
-                                padding: 0;
-                                background-color: #f4f4f4;
-                            }
-                        </style>
-                        
-                        <div style="background-color: #ffffff;
-                                width: 600px;
-                                margin: 0 auto;
-                                padding: 20px;
-                                color: #000;">
-                            <div style="background-color: #FACC5F;
-                                color: #ffffff;
-                                padding: 10px;
-                                text-align: center;">
-                                <h2>Confirmation de votre réservation</h2>
-                            </div>
-                            <div style="padding: 20px;
-                                text-align: left;">
-                                <p>Bonjour '. $destName .',</p>
-                                <p>Nous sommes ravis de confirmer votre réservation. Voici les détails :</p>
-                                <ul>
-                                    <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
-                                    <li>Heure : '. $reservation->getHeureDebut()->format("H") .'h à '. $reservation->getHeureFin()->format("H") .'h</li>
-                                    <li>Detail de votre réservation : '.$reservation->getLibelle().'</li>
-                                </ul>
-                                <p>Pour toute modification ou annulation, veuillez nous contacter la bananerie ou via l\'espace membre.</p>
-                                <p>Nous avons hâte de vous accueillir !</p>
-                                <p>Cordialement,</p>
-                                <p>La Bananerie.</p>
-                            </div>
-                            <div style="background-color: #333333;
-                                color: #ffffff;
-                                padding: 10px;
-                                text-align: center;
-                                font-size: 12px;">
-                                Merci de choisir La Bananerie | <a href="https://google.fr" style="color: #ffffff;">Visitez notre site</a>
-                            </div>
+            // Envoi du mail pour confirmation
+            $transport = Transport::fromDsn('smtp://bananeriebot@gmail.com:ramchihfwonbusnl@smtp.gmail.com:587?encryption=tls&auth_mode=login');
+            $mailer = new Mailer($transport);
+            $email = (new Email())
+                ->from(new Address('bananeriebot@gmail.com', 'La Bananerie'))
+                ->to($security->getUser()->getUserIdentifier())
+                ->subject("Nouvelle réservation : ". $espace->getLibelle() ) // Sujet
+                ->html('
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 0;
+                            padding: 0;
+                            background-color: #f4f4f4;
+                        }
+                    </style>
+                    
+                    <div style="background-color: #ffffff;
+                            width: 600px;
+                            margin: 0 auto;
+                            padding: 20px;
+                            color: #000;">
+                        <div style="background-color: #FACC5F;
+                            color: #ffffff;
+                            padding: 10px;
+                            text-align: center;">
+                            <h2>Confirmation de votre réservation</h2>
                         </div>
-                    ');
-                try {
-                    $mailer->send($email);
-                    $this->addFlash('success', 'Merci! Un accusé vous a été envoyé par mail.');
-                } catch (TransportExceptionInterface $e) {
-                    $this->addFlash('error', "Oops! Quelque chose s'est mal passé et nous n'avons pas pu envoyer un accusé de la réservation par email.");
-                }
+                        <div style="padding: 20px;
+                            text-align: left;">
+                            <p>Bonjour '. $destName .',</p>
+                            <p>Nous sommes ravis de confirmer votre réservation. Voici les détails :</p>
+                            <ul>
+                                <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
+                                <li>Heure : '. $reservation->getHeureDebut() .'h à '. $reservation->getHeureFin() .'h</li>
+                                <li>Detail de votre réservation : '.$reservation->getLibelle().'</li>
+                            </ul>
+                            <p>Pour toute modification ou annulation, veuillez nous contacter la bananerie ou via l\'espace membre.</p>
+                            <p>Nous avons hâte de vous accueillir !</p>
+                            <p>Cordialement,</p>
+                            <p>La Bananerie.</p>
+                        </div>
+                        <div style="background-color: #333333;
+                            color: #ffffff;
+                            padding: 10px;
+                            text-align: center;
+                            font-size: 12px;">
+                            Merci de choisir La Bananerie | <a href="https://google.fr" style="color: #ffffff;">Visitez notre site</a>
+                        </div>
+                    </div>
+                ');
+            try {
+                $mailer->send($email);
+                $this->addFlash('success', 'Merci! Un accusé vous a été envoyé par mail.');
+            } catch (TransportExceptionInterface $e) {
+                $this->addFlash('error', "Oops! Quelque chose s'est mal passé et nous n'avons pas pu envoyer un accusé de la réservation par email.");
+            }
 
+            return $this->render('index/reservation.html.twig', [
+                'form' => $form,
+                'reservation' => $reservation,
+                'succes' => false
+            ]);
+            }else{
+                $this->addFlash('error', 'La réservation ne peut pas être prise. Il y a déjà une réservation sur ce créneau horaire');
                 return $this->render('index/reservation.html.twig', [
-                    'form' => $form,
-                    'reservation' => $reservation,
                     'succes' => false
                 ]);
-
-            }else{
-                return $this->render('index/reservation.html.twig', [
-                    'form' => $form,
-                    'reservation' => $reservation,
-                    'succes' => $succes
-                ]);
             }
         }else{
-            $this->addFlash('error', 'La réservation ne peut pas être prise.');
             return $this->render('index/reservation.html.twig', [
-                'succes' => false
+                'form' => $form,
+                'reservation' => $reservation,
+                'succes' => $succes
             ]);
         }
     }
