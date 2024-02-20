@@ -14,7 +14,6 @@ use App\Entity\User;
 use App\Form\ReservationType;
 use App\Form\TarifEspaceType;
 use DateTime;
-use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -342,7 +341,7 @@ class IndexController extends AbstractController
         ]);
     }
 
-    public function choix(): Response
+    public function choix(ManagerRegistry $doctrine): Response
     {
         return $this->render('index/choix.html.twig', [
             'controller_name' => 'IndexController',
