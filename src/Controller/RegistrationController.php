@@ -57,6 +57,9 @@ class RegistrationController extends AbstractController
                 return $this->redirectToRoute("choixInscription");
 
             }
+            $bourse = new Bourse();
+            $bourse->setQuantite(0);
+            $user->setBourse($bourse);
             $user->setConfirmed(0);
             $entityManager->persist($user);
             $entityManager->flush();
