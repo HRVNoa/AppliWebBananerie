@@ -20,6 +20,7 @@ class TagController extends AbstractController
     {
         return $this->render('tag/index.html.twig', [
             'controller_name' => 'TagController',
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function consulterTag(ManagerRegistry $doctrine, int $id){
@@ -33,7 +34,9 @@ class TagController extends AbstractController
         }
 
         return $this->render('tag/consulter.html.twig', [
-            'tag' => $tag,]);
+            'tag' => $tag,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
     public function listerTag(ManagerRegistry $doctrine)
     {
@@ -42,6 +45,7 @@ class TagController extends AbstractController
 
         return $this->render('tag/lister.html.twig', [
             'tags' => $tags,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function ajouterTag(ManagerRegistry $doctrine,Request $request)
@@ -57,7 +61,10 @@ class TagController extends AbstractController
             $entityManager->persist($tag);
             $entityManager->flush();
 
-            return $this->render('tag/consulter.html.twig', ['tag' => $tag,]);
+            return $this->render('tag/consulter.html.twig', [
+                'tag' => $tag,
+                'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+            ]);
         } else {
             return $this->render('tag/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -80,7 +87,10 @@ class TagController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($tag);
                 $entityManager->flush();
-                return $this->render('tag/consulter.html.twig', ['tag' => $tag,]);
+                return $this->render('tag/consulter.html.twig', [
+                    'tag' => $tag,
+                    'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+                ]);
             }
             else{
                 return $this->render('tag/ajouter.html.twig', array('form' => $form->createView(),));
@@ -97,6 +107,8 @@ class TagController extends AbstractController
         }
         $entityManager->remove($tag);
         $entityManager->flush();
-        return $this->redirectToRoute('tagLister');
+        return $this->redirectToRoute('tagLister', [
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
 }

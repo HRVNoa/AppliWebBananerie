@@ -21,9 +21,13 @@ class Statut
     #[ORM\OneToMany(mappedBy: 'statut', targetEntity: Independant::class)]
     private Collection $independants;
 
+    #[ORM\OneToMany(mappedBy: 'Statut', targetEntity: Paiement::class)]
+    private Collection $paiements;
+
     public function __construct()
     {
         $this->independants = new ArrayCollection();
+        $this->paiements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +71,36 @@ class Statut
             // set the owning side to null (unless already changed)
             if ($independant->getStatut() === $this) {
                 $independant->setStatut(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Paiement>
+     */
+    public function getPaiements(): Collection
+    {
+        return $this->paiements;
+    }
+
+    public function addPaiement(Paiement $paiement): static
+    {
+        if (!$this->paiements->contains($paiement)) {
+            $this->paiements->add($paiement);
+            $paiement->setStatut($this);
+        }
+
+        return $this;
+    }
+
+    public function removePaiement(Paiement $paiement): static
+    {
+        if ($this->paiements->removeElement($paiement)) {
+            // set the owning side to null (unless already changed)
+            if ($paiement->getStatut() === $this) {
+                $paiement->setStatut(null);
             }
         }
 

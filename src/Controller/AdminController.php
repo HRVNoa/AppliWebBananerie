@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Bourse;
 use App\Entity\Entreprise;
 use App\Entity\Independant;
 use App\Entity\IndependantTag;
@@ -19,6 +20,7 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function listerNewMember(ManagerRegistry $doctrine)
@@ -28,10 +30,12 @@ class AdminController extends AbstractController
 
         return $this->render('admin/confirmerUser.html.twig', [
             'newmembers' => $newmembers,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function confirmerNewMember(ManagerRegistry $doctrine, int $id): Response
     {
+        $bourse = new Bourse();
         $entityManager = $doctrine->getManager();
         $newmember = $entityManager->getRepository(User::class)->find($id);
 
@@ -40,10 +44,16 @@ class AdminController extends AbstractController
         }
         $newmember->setConfirmed(true);
 
+        $bourse->setUser($newmember);
+        $bourse->setQuantite(0);
+
+        $entityManager->persist($bourse);
         $entityManager->persist($newmember);
         $entityManager->flush();
 
-        return $this->redirectToRoute('newmemberLister');
+        return $this->redirectToRoute('newmemberLister', [
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
     public function refuserNewMember(ManagerRegistry $doctrine, int $id): Response
     {
@@ -81,7 +91,9 @@ class AdminController extends AbstractController
         }
         $entityManager->remove($newmember);
         $entityManager->flush();
-        return $this->redirectToRoute('newmemberLister');
+        return $this->redirectToRoute('newmemberLister', [
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
 
     public function annuaireControl(ManagerRegistry $doctrine, Request $request)
@@ -94,6 +106,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/annuaire.html.twig', [
             'independants' => $independants,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
 
@@ -116,7 +129,9 @@ class AdminController extends AbstractController
         } catch (\Exception $e){
             $this->addFlash('error', 'L\'independant n\'a pas pu être retirer. Cause : ' . $e);
         }
-        return $this->redirectToRoute('annuaireControl');
+        return $this->redirectToRoute('annuaireControl', [
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
 
 }

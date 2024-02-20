@@ -11968,7 +11968,7 @@ textarea.is-invalid.tt-hint {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  outline: 0; }
+  outline: 0;}
 
 .modal-dialog {
   position: relative;

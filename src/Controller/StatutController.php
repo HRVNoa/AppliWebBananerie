@@ -20,6 +20,7 @@ class StatutController extends AbstractController
     {
         return $this->render('statut/index.html.twig', [
             'controller_name' => 'StatutController',
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function consulterStatut(ManagerRegistry $doctrine, int $id){
@@ -33,7 +34,9 @@ class StatutController extends AbstractController
         }
 
         return $this->render('statut/consulter.html.twig', [
-            'statut' => $statut,]);
+            'statut' => $statut,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
     public function listerStatut(ManagerRegistry $doctrine)
     {
@@ -42,6 +45,7 @@ class StatutController extends AbstractController
 
         return $this->render('statut/lister.html.twig', [
             'status' => $statuts,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function ajouterStatut(ManagerRegistry $doctrine,Request $request)
@@ -57,7 +61,10 @@ class StatutController extends AbstractController
             $entityManager->persist($statut);
             $entityManager->flush();
 
-            return $this->render('statut/consulter.html.twig', ['statut' => $statut,]);
+            return $this->render('statut/consulter.html.twig', [
+                'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+                'statut' => $statut,
+                ]);
         } else {
             return $this->render('statut/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -80,7 +87,10 @@ class StatutController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($statut);
                 $entityManager->flush();
-                return $this->render('statut/consulter.html.twig', ['statut' => $statut,]);
+                return $this->render('statut/consulter.html.twig', [
+                    'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+                    'statut' => $statut,
+                ]);
             }
             else{
                 return $this->render('statut/ajouter.html.twig', array('form' => $form->createView(),));
@@ -97,6 +107,8 @@ class StatutController extends AbstractController
         }
         $entityManager->remove($statut);
         $entityManager->flush();
-        return $this->redirectToRoute('statutLister');
+        return $this->redirectToRoute('statutLister', [
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
 }

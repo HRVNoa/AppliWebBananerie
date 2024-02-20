@@ -24,6 +24,7 @@ class IndependantController extends AbstractController
     {
         return $this->render('independant/index.html.twig', [
             'controller_name' => 'IndependantController',
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function consulterIndependant(ManagerRegistry $doctrine, int $id){
@@ -37,7 +38,9 @@ class IndependantController extends AbstractController
         }
 
         return $this->render('independant/consulter.html.twig', [
-            'independant' => $independant,]);
+            'independant' => $independant,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
     public function listerIndependant(ManagerRegistry $doctrine)
     {
@@ -46,6 +49,7 @@ class IndependantController extends AbstractController
 
         return $this->render('independant/lister.html.twig', [
             'independants' => $independants,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function ajouterIndependant(ManagerRegistry $doctrine,Request $request ,SessionInterface $session)
@@ -65,7 +69,9 @@ class IndependantController extends AbstractController
             $session->set('independant_id', $independant->getId());
 
             // Redirigez vers le formulaire d'inscription de l'utilisateur
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('app_register', [
+                'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+            ]);
         } else {
             return $this->render('independant/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -94,7 +100,10 @@ class IndependantController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($independant);
                 $entityManager->flush();
-                return $this->render('independant/consulter.html.twig', ['independant' => $independant]);
+                return $this->render('independant/consulter.html.twig', [
+                    'independant' => $independant,
+                    'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+                ]);
             } else {
                 return $this->render('independant/ajouter.html.twig', ['form' => $form->createView()]);
             }
@@ -111,7 +120,9 @@ class IndependantController extends AbstractController
         }
         $entityManager->remove($independant);
         $entityManager->flush();
-        return $this->redirectToRoute('independantLister');
+        return $this->redirectToRoute('independantLister', [
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
 
     public function sendmailIndependant(Request $request): Response
@@ -147,6 +158,7 @@ class IndependantController extends AbstractController
         return $this->render('contact/contact.html.twig', [
             'page_name' => 'Contact',
             'form' => $form->createView(),
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
 }

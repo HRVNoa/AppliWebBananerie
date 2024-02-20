@@ -17,6 +17,7 @@ class MetierController extends AbstractController
     {
         return $this->render('metier/index.html.twig', [
             'controller_name' => 'MetierController',
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function consulterMetier(ManagerRegistry $doctrine, int $id){
@@ -30,7 +31,9 @@ class MetierController extends AbstractController
         }
 
         return $this->render('metier/consulter.html.twig', [
-            'metier' => $metier,]);
+            'metier' => $metier,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
     public function listerMetier(ManagerRegistry $doctrine)
     {
@@ -39,6 +42,7 @@ class MetierController extends AbstractController
 
         return $this->render('metier/lister.html.twig', [
             'metiers' => $metiers,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function ajouterMetier(ManagerRegistry $doctrine,Request $request)
@@ -54,7 +58,10 @@ class MetierController extends AbstractController
             $entityManager->persist($metier);
             $entityManager->flush();
 
-            return $this->render('metier/consulter.html.twig', ['metier' => $metier,]);
+            return $this->render('metier/consulter.html.twig', [
+                'metier' => $metier,
+                'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+            ]);
         } else {
             return $this->render('metier/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -77,7 +84,10 @@ class MetierController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($metier);
                 $entityManager->flush();
-                return $this->render('metier/consulter.html.twig', ['metier' => $metier,]);
+                return $this->render('metier/consulter.html.twig', [
+                    'metier' => $metier,
+                    'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+                ]);
             }
             else{
                 return $this->render('metier/ajouter.html.twig', array('form' => $form->createView(),));
@@ -94,6 +104,8 @@ class MetierController extends AbstractController
         }
         $entityManager->remove($metier);
         $entityManager->flush();
-        return $this->redirectToRoute('metierLister');
+        return $this->redirectToRoute('metierLister', [
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
 }
