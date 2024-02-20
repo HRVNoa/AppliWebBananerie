@@ -16,7 +16,8 @@ class UserConfirmedChecker implements UserCheckerInterface
         {
         if (!$user->isConfirmed()) {
         // Lancez une exception si l'utilisateur n'est pas confirmé.
-        throw new CustomUserMessageAccountStatusException('Votre compte n\'est pas encore confirmé.');
+        throw new CustomUserMessageAccountStatusException('Pour garantir une communauté de la meilleure qualité possible, l\'accès à notre application nécessite une validation par un administrateur. Vous recevrez un e-mail lorsque votre compte sera confirmé.
+.');
          }
     }
 }

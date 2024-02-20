@@ -23,6 +23,7 @@ class EntrepriseType extends AbstractType
             ->add('adresseStructure', TextType::class)
             ->add('email', TextType::class)
             ->add('fonctionStructure', TextType::class)
+            ->add('tel' , TextType::class)
             ->add('secteuractivite', EntityType::class,  [
                 'class' => SecteurActivite::class,
                 'choice_label' => function ($secteuractivite) {

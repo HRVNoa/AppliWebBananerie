@@ -244,15 +244,27 @@
                                     {% for heure in 9..18 %}
                                         <td style="height: 40px;padding: 0;">
                                             {% set reservationFound = false %}
+                                            {% set reservant = 'Admin' %}
                                             {% for reservation in espace.getReservations() %}
                                                 {% if reservation.date|date('d/m/Y') == jour %}
                                                     {% if reservation.heureDebut <= heure and reservation.heureFin >= heure+1 %}
                                                         {% set reservationFound = true %}
+                                                        {% if reservation.user.independant %}
+                                                            {% set reservant = reservation.user.independant.nom %}
+                                                        {% elseif reservation.user.entreprise %}
+                                                            {% set reservant = reservation.user.entreprise.nom %}
+                                                        {% else %}
+                                                            {% set reservant = 'La Bananerie' %}
+                                                        {% endif %}
                                                     {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                             {% if reservationFound %}
-                                                Réservé
+                                                <div class="flex-c-c" style="width: 100%; height: 100%">
+                                                    <p>Réservé <br>
+                                                <span style="color: #FACC5F">{{ reservant }}</span>
+                                                    </p>
+                                                </div>
                                             {% else %}
                                                 {% set heureI = heure+1 %}
                                                 <div style="width: 100%; height: 100%;cursor: pointer" class="clickable reservable" data-src="{{ path('formReservation', {'id': espace.id, 'date':jour|format('Y/m/d'), 'heures': heure~'/'~heureI }) }}" ></div>

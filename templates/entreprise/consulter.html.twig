@@ -158,13 +158,18 @@
                            Fonction :  {{ entreprise.fonctionstructure }}
                         </h4>
                         <h4>
+                            Téléphone : {{ entreprise.tel }}
+                        </h4>
+                        <h4>
                            Secteur D'activité : {{ entreprise.secteuractivite.libelle }}
                         </h4>
                     </div>
 
                 </div>
                 <div class="col-md-2">
-                    <a href="{{ path('entrepriseModifier', { 'id': app.user.entreprise.id }) }}"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Votre Profil"/> </a>
+                    <div class="flex-c-b" style="width: fit-content; align-items: baseline ;">
+                    <h4 class="card-title">Mon profil</h4><a href="{{ path('entrepriseModifier', { 'id': app.user.entreprise.id }) }}"><i class="mdi mdi-grease-pencil" style="margin-left: 5px "></i>  </a>
+                    </div>
                 </div>
             </div>
         </div>

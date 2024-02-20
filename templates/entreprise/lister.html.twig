@@ -39,6 +39,8 @@
                                 <th> Fonction exercée </th>
                                 <th> Adresse </th>
                                 <th> Email </th>
+                                <th> Consulter </th>
+                                <th> Supprimer </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,12 +57,6 @@
                                 <td>
                                     <form action="{{ path('entrepriseConsulter', {'id': e.id}) }}" method="get">
                                         <button type="submit" class="btn btn-outline-primary">Consulter</button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="{{ path('entrepriseModifier', {'id': e.id}) }}" method="post">
-                                        <input type="hidden" name="_method" value="UPDATE">
-                                        <button type="submit" class="btn btn-outline-primary">Modifier</button>
                                     </form>
                                 </td>
                                 <td>

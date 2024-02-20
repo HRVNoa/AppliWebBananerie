@@ -49,7 +49,7 @@
                             {% for independant in independants %}
                                 <tr onclick="window.location.href='{{ path('independantConsulter', {"id": independant.id}) }}'" style="cursor: pointer" data-metier-id="{{ independant.metier.id }}">
                                     <td class="py-1">
-                                        <img src="{{ asset('design/assets/images/faces/face15.jpg') }}" alt="image">
+                                        <img src="{{ asset('membre/photodeprofil/') }}{{ independant.photodeprofil }}" alt="image">
                                     </td>
                                     <td>{{ independant.prenom|capitalize }} {{ independant.nom|upper }}</td>
                                     <td>{{ independant.metier.libelle }}</td>
@@ -81,7 +81,7 @@
                                 <div class="row flex-c-b">
                                     <div class="col-lg-2">
                                         <select id="filterMetier" class="form-control" style="color: #6c7293;">
-                                            <option value="">Filtre métiers</option>
+                                            <option value="">Rechercher un métier</option>
                                             {% for metier in metiers %}
                                                 <option value="{{ metier.id }}" style="color: #fff;">{{ metier.libelle }}</option>
                                             {% endfor %}
@@ -106,8 +106,8 @@
                                                 <a href="{{ path('annuaireLister', {'sort': 'desc'}) }}"><i class="mdi mdi-arrow-down-drop-circle-outline"></i></a>
                                             {% endif %}
                                         </th>
-                                        <th>Métier principal</th>
-                                        <th>Métier secondaire</th>
+                                        <th>Métier #1</th>
+                                        <th>Métier #2</th>
                                         <th>Tags</th>
                                         <th style="display: none">TagNormal</th>
                                         <th></th>
@@ -147,7 +147,7 @@
                     {% else %}
                         <h5>Pour avoir accès a l'annuaire merci d'aller sur votre profil et de remplir les informations suivantes : <br><br></h5>
                         <p> Photo de Profil <br><br>
-                            Avoir vos 3 super Tags <br><br>
+                            Avoir 1 à 3 super Tags <br><br>
                             Ensuite remplir le profil <br><br>
                             Pour cela rendez-vous dans la bar a gauche, cliquer sur Mon Compte puis Mon Profil.
                         </p>

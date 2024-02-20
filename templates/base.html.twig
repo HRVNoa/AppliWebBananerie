@@ -22,10 +22,6 @@
             object-fit: cover;
             aspect-ratio: 500/166;
         }
-        .petitaspectlogo{
-            object-fit: cover;
-            aspect-ratio: 75/320;
-        }
 
     </style>
     {% endblock %}
@@ -36,7 +32,7 @@
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
             <a class="sidebar-brand brand-logo" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/admin/logo/BlancSimple.png")}}" alt="logo" class="aspectlogo"/></a>
-            <a class="sidebar-brand brand-logo-mini" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/admin/logo/Blanccourt.png")}}" alt="logo" class="petitaspectlogo"/></a>
+            <a class="sidebar-brand brand-logo-mini" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/admin/logo/BlancSimple.png")}}" alt="logo" /></a>
         </div>
         <ul class="nav">
             <li class="nav-item menu-items">
@@ -132,53 +128,6 @@
                             <img src="{{ asset('img/bCoins.jpg') }}" alt="Coin" style="border-radius: 50%; height: 2rem; width: 2rem; margin-right: 5px">
                             {{ app.user.bourse.quantite }}
                         </a>
-                    </li>
-                    <li class="nav-item dropdown border-left">
-                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-                            <i class="mdi mdi-bell"></i>
-                            <span class="count bg-danger"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                            <h6 class="p-3 mb-0">Notifications</h6>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-calendar text-success"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject mb-1">Event today</p>
-                                    <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-settings text-danger"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject mb-1">Settings</p>
-                                    <p class="text-muted ellipsis mb-0"> Update dashboard </p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-link-variant text-warning"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject mb-1">Launch Admin</p>
-                                    <p class="text-muted ellipsis mb-0"> New admin wow! </p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <p class="p-3 mb-0 text-center">See all notifications</p>
-                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">

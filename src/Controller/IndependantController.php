@@ -137,11 +137,9 @@ class IndependantController extends AbstractController
         $independant = $entityManager->getRepository(Independant::class)->find($id);
         $user = $independant->getUser();
 
-        //$bourse = $user->getBourse();
         if (!$independant) {
             throw $this->createNotFoundException('Aucun independant trouvé avec le numéro '.$id);
         }
-        //$entityManager->remove($bourse);
         $entityManager->remove($user);
         $entityManager->remove($independant);
         $entityManager->flush();
@@ -165,7 +163,7 @@ class IndependantController extends AbstractController
             $email = (new Email())
                 ->from(new Address('bananeriebot@gmail.com', 'Contact La Bananerie'))
                 ->to($independant->getEmail())
-                ->subject("Nouveau message de " . $formData['nom']) // Sujet
+                ->subject("[Contact Espace Membre]" . $formData['nom']) // Sujet
                 ->text(
                     "Nom: " . $formData['nom'] . "\n" .
                     "Email: " . $formData['email'] . "\n" .

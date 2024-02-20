@@ -69,6 +69,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Téléphone</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Secteur d'activité</label>
                             <div class="col-sm-9">
                                 {{ form_widget(form.secteuractivite, {'attr': {'class': 'form-control'}}) }}

@@ -71,8 +71,6 @@ class AdminController extends AbstractController
 
         $bourse->setUser($newmember);
         $bourse->setQuantite(0);
-
-        $entityManager->persist($bourse);
         $entityManager->persist($newmember);
         $entityManager->flush();
         $transport = Transport::fromDsn('smtp://bananeriebot@gmail.com:ramchihfwonbusnl@smtp.gmail.com:587?encryption=tls&auth_mode=login');
@@ -677,8 +675,12 @@ class AdminController extends AbstractController
                 )
             );
 
-            $user->setConfirmed(1);
+
             $user->setRoles(["ROLE_ADMIN"]);
+            $bourse = new Bourse();
+            $bourse->setQuantite(0);
+            $user->setBourse($bourse);
+            $user->setConfirmed(1);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -716,8 +718,9 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('adminSupprimer');
     }
 
-    public function contactMousquetaires(): Response
+    public function contactMousquetaires(ManagerRegistry $doctrine): Response
     {
-        return $this->render('admin/contactMousquetaires.html.twig');
+        return $this->render('admin/contactMousquetaires.html.twig', [ 'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
 }

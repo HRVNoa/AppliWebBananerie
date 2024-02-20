@@ -31,10 +31,7 @@
                 <div class="card-header py-3" style="display: flex; justify-content: space-between; align-items: center">
                     <h6 class="m-0 font-weight-bold text-primary">Toutes vos vidéos</h6>
                     <a href="{{ path ('independantAjouterVideo',  { 'id': app.user.independant.id }) }}" class="btn btn-success">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-check"></i>
-                    <span class="text">Ajouter une vidéo</span>
-                    </span>
+                    <span class="text-white">Ajouter une vidéo</span>
                     </a>
                 </div>
                 <div class="card-body">
@@ -60,7 +57,7 @@
                             {% for video in videos %}
                                 <tr>
                                     {% if video.super == 1 %}
-                                    <td class="font-weight-bold">{{video.lien}}</td>
+                                    <td>{{video.lien}} (vidéo mise en avant)</td>
                                     {% else %}
                                     <td>{{video.lien}}</td>
                                     {% endif %}

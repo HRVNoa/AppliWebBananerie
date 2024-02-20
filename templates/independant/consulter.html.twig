@@ -258,12 +258,16 @@
                             </div>
                         </div>
                     </div>
+                <div class="row" style="padding-left: 5%">
+                    <div class="flex-c-b" style="width: fit-content; align-items: baseline ;">
+                        <h4 class="card-title">Mes vidéos</h4><a href="{{ path('independantListerVideo', { 'id': app.user.independant.id }) }}"><i class="mdi mdi-grease-pencil" style="margin-left: 5px "></i> </a>
+                    </div>
+                </div>
                         {% if independant.videos|length > 0 %}
                             <div class="row align-content-center align-items-center justify-content-center">
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h4 class="card-title">Video :</h4>
                                             {% set displaySuperVideos = false %}
                                             {% for video in independant.videos %}
                                                 {% if video.super == 1 %}
@@ -287,6 +291,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row align-content-center align-items-center justify-content-center">
                                 {% set video_count = independant.videos|filter(video => video.super == 0)|length %}
                                 {% set col_class = 'col-md-2 col-sm-6' %}
@@ -310,13 +315,8 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
-
                             {% endif %}
-                            <div class="row" style="padding-left: 5%">
-                                <div class="flex-c-b" style="width: fit-content; align-items: baseline ;">
-                                    <h4 class="card-title">Mes vidéos</h4><a href="{{ path('independantListerVideo', { 'id': app.user.independant.id }) }}"><i class="mdi mdi-grease-pencil" style="margin-left: 5px "></i> </a>
-                                </div>
-                            </div>
+
                     </div>
             </div>
         </div>

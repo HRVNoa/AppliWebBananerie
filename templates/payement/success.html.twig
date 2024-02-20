@@ -1,8 +1,24 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre commande est un succès!{% endblock %}
+
 {% block body %}
-<section>
-    <p>
-        Merci d'avoir passer commande !
-        <a href="mailto:orders@example.com">orders@example.com</a>.
-    </p>
-</section>
+    <div class="card">
+        <div class ="card-body">
+            {% if app.user.independant %}
+            <H3>
+                Merci votre commande de {{ quantite }} B.Coins est un succès {{ app.user.independant.nom }} {{ app.user.independant.prenom }} !
+            </H3>
+            {% elseif app.user.entreprise %}
+            <H3>
+                Merci votre commande de {{ quantite }} B.Coins est un succès {{ app.user.entreprise.nom }} {{ app.user.entreprise.prenom }} !
+            </H3>
+            {% else %}
+            <H3>
+                Merci votre commande de {{ quantite }} B.Coins est un succès !
+            </H3>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

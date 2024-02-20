@@ -190,12 +190,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group row">
-                        <label class="col-sm-1 col-form-label">Annuaire</label>
-                        {{ form_widget(form.annuaire, {'attr': {'class': 'form-check-input'}}) }}
+                    <h5> En cochant cette case, les utilisateurs de l’espace membres peuvent accéder à mes informations et me contacter directement via un formulaire. Je peux également accéder à l’annuaire et aux profils des autres utilisateurs. </h5>
+                    <div class="form-group row justify-content-center">
+                        <label class="col-sm-1 col-form-label col-md-6">Je souhaite que mon profil apparaisse dans l’annuaire de La Bananerie :</label>
+                        {{ form_widget(form.annuaire, {'attr': {'class': 'form-check-input col-md-6'}}) }}
                     </div>
-                    <p class="card-description"> En cochant l'annuaire vous acceptez d'être visible sur l'application pour être contacté.<br> Acceptez-vous apporte aussi l'accès à l'annuaire pour pouvoir le consulter. </p>
-                </div>
+                    </div>
                 <div class="row flex-c-c">
                     <div class="col-md-2 flex-c-c">
                         <button type="button" class="btn btn-outline-danger btn-icon-text" onclick="window.location.href='{{ path('independantConsulter', {'id': independant.id}) }}'">Annuler</button>

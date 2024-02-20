@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EntrepriseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EntrepriseRepository::class)]
 class Entreprise
@@ -37,6 +38,11 @@ class Entreprise
 
     #[ORM\OneToOne(inversedBy: 'entreprise', cascade: ['persist', 'remove'])]
     private ?User $user = null;
+
+    #[ORM\Column(length: 13)]
+    #[Assert\Regex(pattern : "/^\d+$/", message:"Veuillez saisir uniquement des chiffres.")]
+    #[Assert\Length( max: 13, maxMessage:"La telephone ne peut pas dépasser 13 chiffres.")]
+    private ?string $tel = null;
 
     public function getId(): ?int
     {
@@ -135,6 +141,18 @@ class Entreprise
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(string $tel): static
+    {
+        $this->tel = $tel;
 
         return $this;
     }
