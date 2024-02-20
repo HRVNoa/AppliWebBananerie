@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Entreprise;
 use App\Entity\Espace;
 use App\Entity\Independant;
@@ -46,15 +47,18 @@ class IndexController extends AbstractController
             $reservations = $doctrine->getRepository(Reservation::class)->findBy(['date' => $jour]);
 
             return $this->render('index/index.html.twig', [
+                'controller_name' => 'IndexController',
+                'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
                 'espaces' => $espaces,
                 'reservations' => $reservations,
                 'userReservations' => $userReservations,
                 'jour' => $jour->format('d/m/Y'),
             ]);
         }
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('app_login', [
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
-
     public function modalDetail(Request $request, ManagerRegistry $doctrine, Security $security)
     {
         if ($request->query->get('id', null) != null){
@@ -342,6 +346,7 @@ class IndexController extends AbstractController
     {
         return $this->render('index/choix.html.twig', [
             'controller_name' => 'IndexController',
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function mentionlegale(): Response

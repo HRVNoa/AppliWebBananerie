@@ -21,6 +21,16 @@ class BourseRepository extends ServiceEntityRepository
         parent::__construct($registry, Bourse::class);
     }
 
+    public function findByUserId($userId)
+    {
+        return $this->createQueryBuilder('b')
+            ->join('b.user', 'u')
+            ->where('u.id = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Bourse[] Returns an array of Bourse objects
 //     */

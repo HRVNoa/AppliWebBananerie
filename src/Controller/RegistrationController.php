@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Bourse;
 use App\Entity\Entreprise;
 use App\Entity\Independant;
 use App\Entity\User;
@@ -57,7 +58,6 @@ class RegistrationController extends AbstractController
 
             }
             $user->setConfirmed(0);
-
             $entityManager->persist($user);
             $entityManager->flush();
 

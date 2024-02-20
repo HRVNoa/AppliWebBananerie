@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consulter une bourse{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h3 class="card-title fw-semibold mb-4">Fiche de la bourse de : {{ bourse.user.email }}</h3>
+                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="mb-3 mb-sm-0">
+                        <a href="{{ path('bourseModifier', {'id': bourse.id}) }}"><button type="button" class="btn btn-primary m-1">Modifier</button></a>
+                    </div>
+                {% endif %}
+            </div>
+            <table class="table table-bordered" id="dataTable">
+                <thead>
+                    <tr>
+                        <td style="text-align: center">User : </td>
+                        <td style="text-align: center">Quantiter : </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center">{{ bourse.user.email }}</td>
+                        <td style="text-align: center">{{ bourse.quantite }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <a href="{{ path('bourseLister') }}"><button type="button" class="btn btn-primary m-1">Retour</button></a>
+    <br>
+    <br>
+    <br>
+
+{% endblock %}

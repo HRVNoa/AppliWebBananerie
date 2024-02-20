@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% block style %}
+
+<style>
+    .credit-card-form {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    }
+
+    .input-group input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    flex: 1; /* Cette propriété permet à l'input de prendre toute la largeur disponible */
+    }
+
+    .card-type img {
+    height: 24px;
+    }
+
+    .card-number-container input[type="text"].card-number {
+    flex-grow: 1; /* Permet au champ de saisie de numéro de carte de se développer autant que possible */
+    }
+
+    .expiry-cvc {
+    display: flex;
+    width: 100%; /* Assurez-vous que le conteneur prenne toute la largeur disponible */
+    }
+
+    .expiry-cvc input {
+    flex: 1; /* Permet aux champs de se développer et de prendre la même largeur */
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="credit-card-form" style="align-items: center; display: flex; justify-content: space-between; flex-direction: column;">
+    <div style="text-align: center">
+        <h2>Acheter des B.Coins</h2>
+    </div>
+    <div>
+        <p>Votre solde actuelle : {{ bourse.quantite }}</p>
+    </div>
+    <form id="payment-form" class="forms-sample" method="POST" action="{{ path('creditAcheter', {'id': app.user.id}) }}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-direction: column; height: 100%;">
+        <div id="payment-element">
+            <!--Stripe.js injects the Payment Element-->
+            <div class="form-group">
+
+                <label for="monSelect">Nombre de B.Coins souhaiter</label>
+                <select id="monSelect" class="form-control" name="tarifSelect" style="color: white; width: 100%">
+                    {% for tarif in tarifs %}
+                        <option value="{{ tarif.quantite }}">{{ tarif.quantite }}</option>
+                    {% endfor %}
+                </select>
+                <p>Montant en € : <span id="montant"></span></p>
+
+            </div>
+        </div>
+        <button id="submit" class="btn btn-primary me-2 boutonValiderAchat">
+            <div class="spinner hidden" id="spinner"></div>
+            <span id="button-text">Valider le payement</span>
+        </button>
+        <div id="payment-message" class="hidden"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var valeurSelect = document.getElementById('monSelect')
+
+                var quantite = valeurSelect.value;
+                document.getElementById('montant').textContent = quantite * 5;
+            })
+            document.getElementById('monSelect').addEventListener('change', function() {
+                var quantite = this.value;
+                document.getElementById('montant').textContent = quantite * 5;
+            });
+        </script>
+    </form>
+</div>
+{% endblock %}

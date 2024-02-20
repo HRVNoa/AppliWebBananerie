@@ -14,11 +14,8 @@
     <link rel="stylesheet" href="{{ asset("design/assets/vendors/flag-icon-css/css/flag-icon.min.css")}}">
     <link rel="stylesheet" href="{{ asset("design/assets/vendors/owl-carousel-2/owl.carousel.min.css")}}">
     <link rel="stylesheet" href="{{ asset("design/assets/vendors/owl-carousel-2/owl.theme.default.min.css")}}">
-
     <link rel="stylesheet" href="{{ asset("design/assets/css/style.css")}}" >
-
     <link rel="shortcut icon" href="{{ asset("design/assets/images/favicon.png")}}" />
-
     {% block stylesheets %}
     <style>
         .aspectlogo{
@@ -108,6 +105,7 @@
                         <li class="nav-item"> <a class="nav-link" href="{{ path('tagLister') }}"> Tags </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('newmemberLister') }}"> Utilisateurs </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('adminLister') }}"> Admin </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('bourseLister') }}"> Bourse </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('contactMousquetaires') }}"> Mousseketères </a></li>
 
                     </ul>
@@ -128,6 +126,60 @@
                     <span class="mdi mdi-menu"></span>
                 </button>
                 <ul class="navbar-nav navbar-nav-right">
+
+                    <li class="nav-item dropdown border-left">
+                        <a href="{{ path('creditAcheter', {'id': app.user.id}) }}" id="openModalAchatCoins" type="button" class="btn btn-outline-warning btn-icon-text">
+                            <img src="{{ asset('img/bCoins.jpg') }}" alt="Coin" style="border-radius: 50%; height: 2rem; width: 2rem; margin-right: 5px">
+                            {{ app.user.bourse.quantite }}
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown border-left">
+                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                            <i class="mdi mdi-bell"></i>
+                            <span class="count bg-danger"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                            <h6 class="p-3 mb-0">Notifications</h6>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-calendar text-success"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject mb-1">Event today</p>
+                                    <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-settings text-danger"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject mb-1">Settings</p>
+                                    <p class="text-muted ellipsis mb-0"> Update dashboard </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-link-variant text-warning"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject mb-1">Launch Admin</p>
+                                    <p class="text-muted ellipsis mb-0"> New admin wow! </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <p class="p-3 mb-0 text-center">See all notifications</p>
+                        </div>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                             <div class="navbar-profile">
@@ -173,6 +225,14 @@
         </nav>
         <div class="main-panel">
             <div class="content-wrapper">
+                <!-- Modal réservation -->
+                <div class="modal modalclose fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <iframe id="modalReservation" src="{{ path('creditAcheter', {'id': app.user.id}) }}" style="width: inherit" height="800" width="180" title="Reservation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+                        </div>
+                    </div>
+                </div>
                 {% block body %}{% endblock %}
             </div>
         <footer class="footer">
@@ -209,6 +269,7 @@
 <!-- Custom js for this page -->
 <script src="{{ asset("design/assets/js/dashboard.js")}}"></script>
 <!-- End custom js for this page -->
-
+<!-- Stripe Script -->
+<script src="https://js.stripe.com/v3/"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@ class MembreController extends AbstractController
     {
         return $this->render('membre/index.html.twig', [
             'controller_name' => 'MembreController',
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
 }

@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AnnuaireController extends AbstractController
 {
-//    #[Route('/annuaire', name: 'app_annuaire')]
     public function lister(ManagerRegistry $doctrine, Request $request): Response
     {
         $sort = $request->query->get('sort', 'rdm');
@@ -32,6 +31,7 @@ class AnnuaireController extends AbstractController
         return $this->render('annuaire/lister.html.twig', [
             'independants' => $independants,
             'metiers' => $metiers,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
 }

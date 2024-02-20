@@ -24,6 +24,7 @@ class EntrepriseController extends AbstractController
     {
         return $this->render('entreprise/index.html.twig', [
             'controller_name' => 'EntrepriseController',
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function consulterEntreprise(ManagerRegistry $doctrine, int $id){
@@ -37,7 +38,9 @@ class EntrepriseController extends AbstractController
         }
 
         return $this->render('entreprise/consulter.html.twig', [
-            'entreprise' => $entreprise,]);
+            'entreprise' => $entreprise,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
     public function listerEntreprise(ManagerRegistry $doctrine)
     {
@@ -46,6 +49,7 @@ class EntrepriseController extends AbstractController
 
         return $this->render('/entreprise/lister.html.twig', [
             'entreprises' => $entreprises,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function ajouterEntreprise(ManagerRegistry $doctrine,Request $request ,SessionInterface $session)
@@ -69,7 +73,9 @@ class EntrepriseController extends AbstractController
             $session->set('entreprise_id', $entreprise->getId());
 
             // Redirigez vers le formulaire d'inscription de l'utilisateur
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('app_register', [
+                'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+            ]);
         } else {
             return $this->render('entreprise/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -99,7 +105,10 @@ class EntrepriseController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($entreprise);
                 $entityManager->flush();
-                return $this->render('entreprise/consulter.html.twig', ['entreprise' => $entreprise,]);
+                return $this->render('entreprise/consulter.html.twig', [
+                    'entreprise' => $entreprise,
+                    'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+                ]);
             }
             else{
                 return $this->render('entreprise/formModif.html.twig',['entreprise' => $entreprise, 'form' => $form->createView()]);
@@ -119,6 +128,8 @@ class EntrepriseController extends AbstractController
         $entityManager->remove($user);
         $entityManager->remove($entreprise);
         $entityManager->flush();
-        return $this->redirectToRoute('entrepriseLister');
+        return $this->redirectToRoute('entrepriseLister', [
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
 }

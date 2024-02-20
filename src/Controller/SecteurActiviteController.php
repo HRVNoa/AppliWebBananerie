@@ -18,6 +18,7 @@ class SecteurActiviteController extends AbstractController
     {
         return $this->render('secteur/index.html.twig', [
             'controller_name' => 'SecteurActiviteController',
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function consulterSecteurActivite(ManagerRegistry $doctrine, int $id){
@@ -31,7 +32,9 @@ class SecteurActiviteController extends AbstractController
         }
 
         return $this->render('secteur/consulter.html.twig', [
-            'secteur' => $secteurActivite,]);
+            'secteur' => $secteurActivite,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
     public function listerSecteurActivite(ManagerRegistry $doctrine)
     {
@@ -40,6 +43,7 @@ class SecteurActiviteController extends AbstractController
 
         return $this->render('secteur/lister.html.twig', [
             'secteurs' => $secteurActivites,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function ajouterSecteurActivite(ManagerRegistry $doctrine,Request $request)
@@ -55,7 +59,10 @@ class SecteurActiviteController extends AbstractController
             $entityManager->persist($secteurActivite);
             $entityManager->flush();
 
-            return $this->redirectToRoute('secteuractiviteLister');
+            return $this->redirectToRoute('secteuractiviteLister', [
+                'secteur' => $secteurActivite,
+                'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+            ]);
         } else {
             return $this->render('secteur/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -78,7 +85,11 @@ class SecteurActiviteController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($secteurActivite);
                 $entityManager->flush();
-                return $this->redirectToRoute('secteuractiviteLister');
+
+                return $this->redirectToRoute('secteuractiviteLister', [
+                    'secteur' => $secteurActivite,
+                    'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+                ]);
             }
             else{
                 return $this->render('secteur/ajouter.html.twig', array('form' => $form->createView(),));
@@ -95,6 +106,8 @@ class SecteurActiviteController extends AbstractController
         }
         $entityManager->remove($secteurActivite);
         $entityManager->flush();
-        return $this->redirectToRoute('secteuractiviteLister');
+        return $this->redirectToRoute('secteuractiviteLister', [
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
     }
 }

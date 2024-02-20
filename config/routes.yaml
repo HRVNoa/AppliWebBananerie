@@ -302,3 +302,28 @@ newmemberRefuser:
     path: /admin/supprimer/{id}
     controller: App\Controller\AdminController::refuserNewMember
 
+
+
+bourseConsulter:
+    path: /admin/bourse/consulter/{id}
+    controller: App\Controller\BourseController::consulterBourse
+
+bourseLister:
+    path: /admin/bourse
+    controller: App\Controller\BourseController::listerBourse
+
+bourseAjouter:
+    path: /admin/bourse/ajouter
+    controller: App\Controller\BourseController::ajouterBourse
+
+bourseModifier:
+    path: /admin/bourse/modifier/{id}
+    controller: App\Controller\BourseController::ModifierBourse
+
+bourseSupprimer:
+    path: /admin/bourse/supprimer/{id}
+    controller: App\Controller\BourseController::supprimerBourse
+
+creditAcheter:
+    path: /bourse/acheter/{id}
+    controller: App\Controller\PayementController::startPayement
