@@ -98,7 +98,7 @@ class Independant
     #[ORM\OneToOne(inversedBy: 'independant', cascade: ['persist', 'remove'])]
     private ?Carrousel $portfolio = null;
 
-    #[ORM\OneToMany(mappedBy: 'independant', targetEntity: Video::class)]
+    #[ORM\OneToMany(mappedBy: 'independant', targetEntity: Video::class, cascade: ['persist', 'remove'])]
     private Collection $videos;
 
 
