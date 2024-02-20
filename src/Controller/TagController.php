@@ -61,7 +61,7 @@ class TagController extends AbstractController
             $entityManager->persist($tag);
             $entityManager->flush();
 
-            return $this->render('tag/consulter.html.twig', [
+            return $this->redirectToRoute('tagLister', [
                 'tag' => $tag,
                 'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
             ]);
@@ -87,10 +87,12 @@ class TagController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($tag);
                 $entityManager->flush();
-                return $this->render('tag/consulter.html.twig', [
+
+                return $this->redirectToRoute('tagLister', [
                     'tag' => $tag,
                     'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
                 ]);
+
             }
             else{
                 return $this->render('tag/ajouter.html.twig', array('form' => $form->createView(),));

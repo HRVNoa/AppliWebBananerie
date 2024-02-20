@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="card bg-success text-white shadow" style="margin-bottom: 20px">
+            <div class="card-body">
+                Success
+                <div class="text-white">{{ message }}</div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="card bg-danger text-white shadow" style="margin-bottom: 20px">
+            <div class="card-body">
+                Erreur
+                <div class="text-white">{{ message }}</div>
+            </div>
+        </div>
+    {% endfor %}
+    <a type="button" class="btn btn-outline-primary" href="{{ path("adminEspaceAjouter") }}">Ajouter</a>
+    {% set espaceCount = 0 %}
+    {% for espace in espaces %}
+
+
+        {% if espaceCount == 0 %}
+            <div class="row" style="padding-top: 5px; padding-bottom: 5px">
+
+        {% endif %}
+        <div class="col-lg-4" style="height: inherit; padding-bottom: 5px; padding-top: 5px;">
+            <div class="card" style="height: 100%;">
+                <div class="card-body flex-c-b" style="flex-direction: column">
+                    <h4 class="card-title">{{ espace.libelle }}</h4>
+                    <a type="button" class="btn btn-outline-success btn-fw" href="{{ path("adminEspaceCarrousel", {'id':espace.id}) }}" style="margin-top: 10px">Carrousel</a>
+                    {% if espace.carrousel == null %}
+                        <img src="{{ asset('media/espace/rien.jpg') }}" class="d-block w-100" alt="Pas d'image" style="object-fit: cover; aspect-ratio: 16/9; margin-top: 10px">
+                    {% else %}
+                        {% set noMedia = true %}
+                        {% for media in espace.carrousel.media %}
+                            {% if loop.first %}
+                                {% set noMedia = false %}
+                                <img src="{{ asset('media/espace/') }}{{ espace.carrousel.id }}/{{ media.lien }}" style="object-fit: cover; aspect-ratio: 16/9; margin-top: 10px" class="d-block w-100" alt="Pas d'image">
+                            {% endif %}
+                        {% endfor %}
+                        {% if noMedia %}
+                            <img src="{{ asset('media/espace/rien.jpg') }}" class="d-block w-100" alt="Pas d'image" style="object-fit: cover; aspect-ratio: 16/9; margin-top: 10px">
+                        {% endif %}
+                        {% endif %}
+                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row rounded mt-3">
+                        <div class="text-md-left text-xl-left">
+                            <h6 class="mb-1">Description</h6>
+                            <p class="text-muted mb-0">{{ espace.description }}</p>
+                        </div>
+                    </div>
+
+                    <a type="button" class="btn btn-outline-success btn-fw" href="{{ path("adminEspaceModif", {'id': espace.id}) }}" style="margin-top: 10px">Modifier</a>
+                    <div class="row flex-c-c" style="width: 100%; padding-top: 10px;padding-bottom: 10px; border-top: 1px solid #2c2e33 !important; margin-top: 10px;">
+                        <div class="col-lg-12">
+                            <h6 class="mb-1">Prix:</h6>
+                        </div>
+                    </div>
+                    <div class="row flex-c-c" style="width: 100%; padding-top: 10px;padding-bottom: 10px;">
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-md-center">
+                                    {% set un = false %}
+                                    {% for coin in espace.tarifEspaceTarifs %}
+                                        {% if coin.heure == 1 %}
+                                            {% set un = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                        <thead>
+                                            <tr>
+                                                {% if un %}
+                                                    <th> 1 heure </th>
+                                                {% endif %}
+                                                <th> 4 heures </th>
+                                                <th> 9 heures </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                {% set havePrix = false %}
+                                                {% for coin in espace.tarifEspaceTarifs %}
+                                                    {% if coin.heure == 1 %}
+                                                        {% set havePrix = true %}
+                                                        <th>
+                                                            <h6>{{ coin.prix }} B.Coins</h6>
+                                                            <a type="button" class="btn btn-outline-success" href="{{ path("adminEspacePrix", {'id':coin.id}) }}">Ajuster</a>
+                                                        </th>
+                                                    {% endif %}
+
+                                                {% endfor %}
+                                                {% for coin in espace.tarifEspaceTarifs %}
+                                                    {% if coin.heure == 4 %}
+                                                        {% set havePrix = true %}
+                                                        <th>
+                                                            <h6>{{ coin.prix }} B.Coins</h6>
+                                                            <a type="button" class="btn btn-outline-success" href="{{ path("adminEspacePrix", {'id':coin.id}) }}">Ajuster</a>
+                                                        </th>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% for coin in espace.tarifEspaceTarifs %}
+                                                    {% if coin.heure == 9 %}
+                                                        {% set havePrix = true %}
+                                                        <th>
+                                                            <h6>{{ coin.prix }} B.Coins</h6>
+                                                            <a type="button" class="btn btn-outline-success" href="{{ path("adminEspacePrix", {'id':coin.id}) }}">Ajuster</a>
+                                                        </th>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if havePrix == false %}
+                                                    <th colspan="2"><label> Sur devis </label></th>
+                                                {% endif %}
+                                            </tr>
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row flex-c-c" style="width: 100%; padding-top: 10px;padding-bottom: 10px;">
+                        <a type="button" class="btn btn-outline-danger" href="{{ path("adminEspaceSupprimer", {'id':espace.id}) }}">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if espaceCount == 2 %}
+            </div>
+            {% set espaceCount = 0 %}
+        {% else %}
+            {% set espaceCount = espaceCount + 1 %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}

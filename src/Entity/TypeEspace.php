@@ -21,6 +21,9 @@ class TypeEspace
     #[ORM\OneToMany(mappedBy: 'typeEspace', targetEntity: Espace::class)]
     private Collection $espaces;
 
+    #[ORM\ManyToOne(inversedBy: 'typeEspaces')]
+    private ?CategorieEspace $categorie = null;
+
     public function __construct()
     {
         $this->espaces = new ArrayCollection();
@@ -69,6 +72,18 @@ class TypeEspace
                 $espace->setTypeEspace(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategorie(): ?CategorieEspace
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?CategorieEspace $categorie): static
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

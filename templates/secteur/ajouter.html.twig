@@ -3,8 +3,19 @@
 
 {% block body %}
 
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Modifier secteur d'activité</h4>
+            {{ form_start(form) }}
+            <div class="form-group row">
+                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nom du secteur d'activité</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.libelle) }}
+                </div>
+            </div>
+            {{ form_widget(form.enregistrer) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 
 {% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+{% block title %}Lister Videos{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+
+
+    <div class="card">
+    <div class="card-body">
+
+    <h1>Lister Video</h1>
+        {% for message in app.flashes('success') %}
+            <div class="card bg-success text-white shadow" style="margin-bottom: 20px">
+                <div class="card-body">
+                    Success
+                    <div class="text-white">{{ message }}</div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="card bg-danger text-white shadow" style="margin-bottom: 20px">
+                <div class="card-body">
+                    Erreur
+                    <div class="text-white">{{ message }}</div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3" style="display: flex; justify-content: space-between; align-items: center">
+                    <h6 class="m-0 font-weight-bold text-primary">Toutes vos vidéos</h6>
+                    <a href="{{ path ('independantAjouterVideo',  { 'id': app.user.independant.id }) }}" class="btn btn-success">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    <span class="text">Ajouter une vidéo</span>
+                    </span>
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% for message in app.flashes('errorlien') %}
+                        {% set errorlien = true %}
+                        <h5 class="text-danger">{{ message }}</h5>
+                    {% endfor %}
+                    {% for message in app.flashes('errorsuper') %}
+                        {% set errorsuper = true %}
+                        <h5 class="text-danger">{{ message }}</h5>
+                    {% endfor %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Lien</th>
+                                <th>Modifier</th>
+                                <th>Supprimer</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for video in videos %}
+                                <tr>
+                                    {% if video.super == 1 %}
+                                    <td class="font-weight-bold">{{video.lien}}</td>
+                                    {% else %}
+                                    <td>{{video.lien}}</td>
+                                    {% endif %}
+                                    <td>
+                                        <a href="{{ path('independantModifierVideo', {'id': video.id}) }}" class="btn btn-warning btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                            <span class="text">Modifier</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('independantSupprimerVideo' , {'id': video.id}) }}" class="btn btn-danger btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Supprimer</span>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+{% endblock %}

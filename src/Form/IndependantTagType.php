@@ -20,11 +20,6 @@ class IndependantTagType extends AbstractType
                 'label'    => 'Super',
                 'required' => false,
             ])
-            /*
-            ->add('independant', EntityType::class, [
-                'class' => Independant::class,
-'choice_label' => 'id',
-            ])*/
             ->add('tag', EntityType::class, [
                 'class' => Tag::class,
                 'choice_label' => 'libelle',

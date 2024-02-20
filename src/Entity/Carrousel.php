@@ -15,14 +15,18 @@ class Carrousel
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable:true)]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'carrousel', targetEntity: Media::class)]
+    #[ORM\OneToMany(mappedBy: 'carrousel', targetEntity: Media::class , cascade: ['persist', 'remove'] )]
     private Collection $media;
 
-    #[ORM\OneToOne(mappedBy: 'carrousel', cascade: ['persist', 'remove'])]
-    private ?Espace $espace = null;
+    #[ORM\OneToMany(mappedBy: 'carrousel', targetEntity: Espace::class, cascade:  ['persist', 'remove'])]
+    private Collection $espaces;
+
+    #[ORM\OneToOne(mappedBy: 'portfolio', cascade: ['persist', 'remove'])]
+    private ?Independant $independant = null;
+
 
     public function __construct()
     {
@@ -54,47 +58,75 @@ class Carrousel
         return $this->media;
     }
 
-    public function addMedium(Media $medium): static
+    public function addMedia(Media $media): static
     {
-        if (!$this->media->contains($medium)) {
-            $this->media->add($medium);
-            $medium->setCarrousel($this);
+        if (!$this->media->contains($media)) {
+            $this->media->add($media);
+            $media->setCarrousel($this);
         }
 
         return $this;
     }
 
-    public function removeMedium(Media $medium): static
+    public function removeMedia(Media $media): static
     {
-        if ($this->media->removeElement($medium)) {
+        if ($this->media->removeElement($media)) {
             // set the owning side to null (unless already changed)
-            if ($medium->getCarrousel() === $this) {
-                $medium->setCarrousel(null);
+            if ($media->getCarrousel() === $this) {
+                $media->setCarrousel(null);
             }
         }
 
         return $this;
     }
 
-    public function getEspace(): ?Espace
+    public function getEspaces(): Collection
     {
-        return $this->espace;
+        return $this->espaces;
     }
 
-    public function setEspace(?Espace $espace): static
+    public function addEspace(Espace $espace): self
     {
-        // unset the owning side of the relation if necessary
-        if ($espace === null && $this->espace !== null) {
-            $this->espace->setCarrousel(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($espace !== null && $espace->getCarrousel() !== $this) {
+        if (!$this->espaces->contains($espace)) {
+            $this->espaces[] = $espace;
             $espace->setCarrousel($this);
         }
 
-        $this->espace = $espace;
+        return $this;
+    }
+
+    public function removeEspace(Espace $espace): self
+    {
+        if ($this->espaces->removeElement($espace)) {
+            // set the owning side to null (unless already changed)
+            if ($espace->getCarrousel() === $this) {
+                $espace->setCarrousel(null);
+            }
+        }
 
         return $this;
     }
+
+    public function getIndependant(): ?Independant
+    {
+        return $this->independant;
+    }
+
+    public function setIndependant(?Independant $independant): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($independant === null && $this->independant !== null) {
+            $this->independant->setPortfolio(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($independant !== null && $independant->getPortfolio() !== $this) {
+            $independant->setPortfolio($this);
+        }
+
+        $this->independant = $independant;
+
+        return $this;
+    }
+
 }

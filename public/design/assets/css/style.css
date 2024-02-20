@@ -7901,8 +7901,6 @@ progress {
   margin-bottom: 1rem;
   font-size: 0.875em;
   color: #6c757d; }
-  .blockquote-footer::before {
-    content: "\2014\00A0"; }
 
 .img-fluid {
   max-width: 100%;
@@ -8994,8 +8992,8 @@ progress {
   .jsgrid .jsgrid-table .jsgrid-filter-row select:focus, .jsgrid .jsgrid-table .jsgrid-filter-row input:focus[type=number], .select2-container--default .select2-selection--single:focus, .select2-container--default .select2-selection--single .select2-search__field:focus, .typeahead:focus,
   .tt-query:focus,
   .tt-hint:focus {
-    color: #212529;
-    background-color: #fff;
+    color: #fff;
+    background-color: #212529;
     border-color: #86b7fe;
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
@@ -16786,7 +16784,7 @@ code {
   .btn-inverse-secondary:not(.btn-inverse-light) {
     color: #e4eaec; }
   .btn-inverse-secondary:hover {
-    color: #ffffff;
+    color: #000;
     background-color: #e4eaec;
     border-color: #e4eaec; }
   .btn-inverse-secondary.focus, .btn-inverse-secondary:focus {
@@ -17398,7 +17396,9 @@ select.tt-query,
 select.tt-hint {
   padding: .4375rem .75rem;
   border: 0;
-  color: #4b5564; }
+  color: #fff;
+  background-color: #212529;
+}
   select.form-control:focus, select.asColorPicker-input:focus, .dataTables_wrapper select:focus,
   .jsgrid .jsgrid-table .jsgrid-filter-row select:focus, .select2-container--default select.select2-selection--single:focus, .select2-container--default .select2-selection--single select.select2-search__field:focus, select.typeahead:focus,
   select.tt-query:focus,
@@ -20397,17 +20397,13 @@ div.tagsinput {
       .sidebar .sidebar-brand-wrapper .sidebar-brand:active, .sidebar .sidebar-brand-wrapper .sidebar-brand:focus, .sidebar .sidebar-brand-wrapper .sidebar-brand:hover {
         color: #252b3e; }
       .sidebar .sidebar-brand-wrapper .sidebar-brand img {
-        width: calc(244px - 120px);
         max-width: 100%;
-        height: 28px;
         margin: auto;
         vertical-align: middle; }
       .sidebar .sidebar-brand-wrapper .sidebar-brand.brand-logo-mini {
         display: none; }
         .sidebar .sidebar-brand-wrapper .sidebar-brand.brand-logo-mini img {
-          width: calc(70px - 50px);
           max-width: 100%;
-          height: 28px;
           margin: auto; }
   .sidebar .nav {
     overflow: hidden;

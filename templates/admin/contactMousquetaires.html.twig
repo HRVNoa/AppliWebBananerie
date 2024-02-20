@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block title %}Contact Mousquetaires{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% block body %}
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Tableau des Mousseketères</h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th> Photo </th>
+                        <th> Mousseketères </th>
+                        <th> Numéro </th>
+                        <th> Email </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="py-1">
+                            <img src="{{ asset("design/admin/imgcreator/jules.jpg")}}" alt="image" />
+                        </td>
+                        <td> Jules Turpin </td>
+                        <td> 01 01 01 01 01 </td>
+                        <td> julesturpin@gmail.com </td>
+
+                    </tr>
+                    <tr>
+                        <td class="py-1">
+                            <img src="{{ asset("design/admin/imgcreator/noa.jpeg")}}" alt="image" />
+                        </td>
+                        <td> Noä Hervieu</td>
+                        <td> 06 03 12 87 77 </td>
+                        <td> hervieu.noa@gmail.com </td>
+                    </tr>
+                    <tr>
+                        <td class="py-1">
+                            <img src="{{ asset("design/admin/imgcreator/paul.jpg")}}" alt="image" />
+                        </td>
+                        <td> Paul Cuquemelle </td>
+                        <td> 07 89 79 79 62 </td>
+                        <td> paulcuquemelle@orange.fr </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

@@ -9,12 +9,44 @@ choixInscription:
     controller : App\Controller\IndexController::choix
 
 
+adminAjouter:
+    path : /admin/Register
+    controller: App\Controller\AdminController::ajouterAdmin
+
+adminLister:
+    path : /admin/listerAdmin
+    controller: App\Controller\AdminController::listerAdmin
+
+adminSupprimer:
+    path : /admin/supprimer/{id}
+    controller: App\Controller\AdminController::supprimerAdmin
+
 accueilIndex:
     path : /
     controller: App\Controller\IndexController::index
 
+mentionlegale:
+    path : /mentionlegale
+    controller: App\Controller\IndexController::mentionlegale
+
+formReservation:
+    path : /reservation
+    controller : App\Controller\IndexController::formReservation
+
+showFormReservation:
+    path : /reservationShow
+    controller : App\Controller\IndexController::showFormReservation
+
+detailReservation:
+    path : /reservationDetail
+    controller : App\Controller\IndexController::modalDetail
+
+modalEspace:
+    path : /modalEspace/{idCarrousel}/{idEspace}
+    controller : App\Controller\IndexController::modalEspace
+
 annuaireLister:
-    path : /user/annuaire
+    path : /user/annuaire/public
     controller: App\Controller\AnnuaireController::lister
 
 
@@ -24,11 +56,11 @@ independantConsulter:
     controller: App\Controller\IndependantController::consulterIndependant
 
 independantLister:
-    path: /independant/lister
+    path: /admin/independantlister
     controller: App\Controller\IndependantController::listerIndependant
 
 independantAjouter:
-    path: /public/ajouter
+    path: /public/ajouterinde
     controller: App\Controller\IndependantController::ajouterIndependant
 
 independantModifier:
@@ -36,54 +68,98 @@ independantModifier:
     controller: App\Controller\IndependantController::modifierIndependant
 
 independantSupprimer:
-    path: /independant/supprimer/{id}
+    path: /admin/independant/supprimer/{id}
     controller: App\Controller\IndependantController::supprimerIndependant
 
 independant_sendmail:
-    path: /independant/consulter/{id}/send
+    path: /independant/consultersend/{id}
     controller: App\Controller\IndependantController::sendmailIndependant
 
 
+
+independantModifierInfo:
+    path: /independant/modifierinfo/{id}
+    controller: App\Controller\IndependantController::ModifInfoIndependant
+
+independantModifierPhotoDeProfil:
+    path: /independant/modifierPdp/{id}
+    controller: App\Controller\IndependantController::ModifPhotoDeProfilIndependant
+
+independantModifierTag:
+    path: /independant/modifierTag/{id}
+    controller: App\Controller\IndependantController::ModifTagIndependant
+
+independantCréerPortfolio:
+    path: /independant/ajouterPortfolio/{id}
+    controller: App\Controller\IndependantController::AddPortfolioIndependant
+
+independantModifierPortfolio:
+    path: /independant/modifierPortfolio/{id}
+    controller: App\Controller\IndependantController::ModifPortfolioIndependant
+
+independantSupprimerPortfolio:
+    path: /independant/supprimerPortfolio/{id}
+    controller: App\Controller\IndependantController::SupprimerPortfolioIndependant
+
+
+
+independantAjouterVideo:
+    path: /independant/ajouterVideo/{id}
+    controller: App\Controller\IndependantController::AjouterVideoIndependant
+
+independantSupprimerVideo:
+    path: /independant/supprimerVideo/{id}
+    controller: App\Controller\IndependantController::SupprimerVideoIndependant
+
+independantModifierVideo:
+    path: /independant/modifierVideo/{id}
+    controller: App\Controller\IndependantController::modifierVideoIndependant
+
+independantListerVideo:
+    path: /independant/listerVideo/{id}
+    controller: App\Controller\IndependantController::listerVideoIndependant
+
+
 statutConsulter:
-    path: /statut/consulter/{id}
+    path: /admin/statut/consulter/{id}
     controller: App\Controller\StatutController::consulterStatut
 
 statutLister:
-    path: /statut/lister
+    path: /admin/statutLister
     controller: App\Controller\StatutController::listerStatut
 
 statutAjouter:
-    path: /statut/ajouter
+    path: /admin/statut/ajouter
     controller: App\Controller\StatutController::ajouterStatut
 
 statutModifier:
-    path: /statut/modifier/{id}
+    path: /admin/statut/modifier/{id}
     controller: App\Controller\StatutController::modifierStatut
 
 statutSupprimer:
-    path: /statut/supprimer/{id}
+    path: /admin/statut/supprimer/{id}
     controller: App\Controller\StatutController::supprimerStatut
 
 
 
 metierConsulter:
-    path: /metier/consulter/{id}
+    path: /admin/metier/consulter/{id}
     controller: App\Controller\MetierController::consulterMetier
 
 metierLister:
-    path: /metier/lister
+    path: /admin/metierLister
     controller: App\Controller\MetierController::listerMetier
 
 metierAjouter:
-    path: /metier/ajouter
+    path: /admin/metier/ajouter
     controller: App\Controller\MetierController::ajouterMetier
 
 metierModifier:
-    path: /metier/modifier/{id}
+    path: /admin/metier/modifier/{id}
     controller: App\Controller\MetierController::modifierMetier
 
 metierSupprimer:
-    path: /metier/supprimer/{id}
+    path: /admin/metier/supprimer/{id}
     controller: App\Controller\MetierController::supprimerMetier
 
 
@@ -93,11 +169,11 @@ entrepriseConsulter:
     controller: App\Controller\EntrepriseController::consulterEntreprise
 
 entrepriseLister:
-    path: /entreprise/lister
+    path: /admin/entrepriseLister
     controller: App\Controller\EntrepriseController::listerEntreprise
 
 entrepriseAjouter:
-    path: /public/ajouter
+    path: /public/ajouterentreprise
     controller: App\Controller\EntrepriseController::ajouterEntreprise
 
 entrepriseModifier:
@@ -105,58 +181,110 @@ entrepriseModifier:
     controller: App\Controller\EntrepriseController::modifierEntreprise
 
 entrepriseSupprimer:
-    path: /entreprise/supprimer/{id}
+    path: /admin/entreprise/supprimer/{id}
     controller: App\Controller\EntrepriseController::supprimerEntreprise
 
 
 
 secteuractiviteConsulter:
-    path: /secteuractivite/consulter/{id}
+    path: /admin/secteuractivite/consulter/{id}
     controller: App\Controller\SecteurActiviteController::consulterSecteurActivite
 
 secteuractiviteLister:
-    path: /secteuractivite/lister
+    path: /admin/secteuractiviteLister
     controller: App\Controller\SecteurActiviteController::listerSecteurActivite
 
 secteuractiviteAjouter:
-    path: /secteuractivite/ajouter
+    path: /admin/secteuractivite/ajouter
     controller: App\Controller\SecteurActiviteController::ajouterSecteurActivite
 
 secteuractiviteModifier:
-    path: /secteuractivite/modifier/{id}
+    path: /admin/secteuractivite/modifier/{id}
     controller: App\Controller\SecteurActiviteController::modifierSecteurActivite
 
 secteuractiviteSupprimer:
-    path: /secteuractivite/supprimer/{id}
+    path: /admin/secteuractivite/supprimer/{id}
     controller: App\Controller\SecteurActiviteController::supprimerSecteurActivite
 
 
 
 tagConsulter:
-    path: /tag/consulter/{id}
+    path: /admin/tag/consulter/{id}
     controller: App\Controller\TagController::consulterTag
 
 tagLister:
-    path: /tag/lister
+    path: /admin/tagLister
     controller: App\Controller\TagController::listerTag
 
 tagAjouter:
-    path: /tag/ajouter
+    path: /admin/tag/ajouter
     controller: App\Controller\TagController::ajouterTag
 
 tagModifier:
-    path: /tag/modifier/{id}
+    path: /admin/tag/modifier/{id}
     controller: App\Controller\TagController::modifierTag
 
 tagSupprimer:
-    path: /tag/supprimer/{id}
+    path: /admin/tag/supprimer/{id}
     controller: App\Controller\TagController::supprimerTag
     
-    
+
+
+contactMousquetaires:
+    path: /admin/mousquetaires
+    controller: App\Controller\AdminController::contactMousquetaires
 
 annuaireControl:
-    path: /admin/annuaire
+    path: /admin/annuaireAdmin
     controller: App\Controller\AdminController::annuaireControl
+
+adminAjoutReservation:
+    path: /admin/reservationAjout
+    controller: App\Controller\AdminController::adminAjoutReservation
+
+adminReservation:
+    path: /admin/reservation
+    controller: App\Controller\AdminController::adminReservation
+
+adminAnnuleReservation:
+    path: /admin/reservation/cancel
+    controller: App\Controller\AdminController::adminAnnuleReservation
+
+adminEspace:
+    path: /admin/espace
+    controller: App\Controller\AdminController::adminEspace
+
+adminEspacePrix:
+    path: /admin/espacePrix/{id}
+    controller: App\Controller\AdminController::adminEspacePrix
+
+adminEspacePrixAjouter:
+    path: /admin/espacePrixAjouter/{id}
+    controller: App\Controller\AdminController::adminEspacePrixAdd
+
+adminEspaceModif:
+    path: /admin/espace/{id}
+    controller: App\Controller\AdminController::adminEspaceModif
+
+adminEspaceCarrousel:
+    path: /admin/espaceCarrousel/liste/{id}
+    controller: App\Controller\AdminController::adminEspaceCarrousel
+
+adminEspaceCarrouselDel:
+    path: /admin/espaceCarrousel/del/{id}
+    controller: App\Controller\AdminController::adminEspaceCarrouselDel
+
+adminEspaceCarrouselAdd:
+    path: /admin/espaceCarrousel/add/{id}
+    controller: App\Controller\AdminController::adminEspaceCarrouselAdd
+
+adminEspaceSupprimer:
+    path : /admin/espace/supprimer/{id}
+    controller: App\Controller\AdminController::adminEspaceSupprimer
+
+adminEspaceAjouter:
+    path : /admin/espaceajouter
+    controller: App\Controller\AdminController::adminEspaceAjouter
 
 delIndependantAnnuaire:
     path: /admin/annuaire/{id}

@@ -58,7 +58,8 @@ class MetierController extends AbstractController
             $entityManager->persist($metier);
             $entityManager->flush();
 
-            return $this->render('metier/consulter.html.twig', [
+
+            return $this->redirectToRoute('metierLister', [
                 'metier' => $metier,
                 'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
             ]);
@@ -84,7 +85,8 @@ class MetierController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($metier);
                 $entityManager->flush();
-                return $this->render('metier/consulter.html.twig', [
+
+                return $this->redirectToRoute('metierLister', [
                     'metier' => $metier,
                     'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
                 ]);

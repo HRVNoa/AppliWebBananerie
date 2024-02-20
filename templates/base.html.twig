@@ -14,35 +14,42 @@
     <link rel="stylesheet" href="{{ asset("design/assets/vendors/flag-icon-css/css/flag-icon.min.css")}}">
     <link rel="stylesheet" href="{{ asset("design/assets/vendors/owl-carousel-2/owl.carousel.min.css")}}">
     <link rel="stylesheet" href="{{ asset("design/assets/vendors/owl-carousel-2/owl.theme.default.min.css")}}">
-
     <link rel="stylesheet" href="{{ asset("design/assets/css/style.css")}}" >
-
     <link rel="shortcut icon" href="{{ asset("design/assets/images/favicon.png")}}" />
-    <script>
-        {% block script %}{% endblock %}
-    </script>
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+    <style>
+        .aspectlogo{
+            object-fit: cover;
+            aspect-ratio: 500/166;
+        }
+        .petitaspectlogo{
+            object-fit: cover;
+            aspect-ratio: 75/320;
+        }
+
+    </style>
+    {% endblock %}
 </head>
 <body>
 <div class="container-scroller">
     <!-- partial:partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <a class="sidebar-brand brand-logo" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/assets/images/logo.svg")}}" alt="logo" /></a>
-            <a class="sidebar-brand brand-logo-mini" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/assets/images/logo-mini.svg")}}" alt="logo" /></a>
+            <a class="sidebar-brand brand-logo" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/admin/logo/BlancSimple.png")}}" alt="logo" class="aspectlogo"/></a>
+            <a class="sidebar-brand brand-logo-mini" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/admin/logo/Blanccourt.png")}}" alt="logo" class="petitaspectlogo"/></a>
         </div>
         <ul class="nav">
-            <li class="nav-item nav-category">
-                <span class="nav-link">Navigation</span>
-            </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" href="/">
               <span class="menu-icon">
                 <i class="mdi mdi-table" style="font-size: 20px"></i>
               </span>
-                    <span class="menu-title">Tableau de bord</span>
+                    <span class="menu-title">Réservations</span>
                 </a>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
+
+            {% else %}
             <li class="nav-item menu-items">
                 <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
@@ -62,27 +69,17 @@
                                 <a class="nav-link" href="/">Mon Profil</a>
                             {% endif %}
                         </li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ asset("design/pages/ui-features/buttons.html")}}">Mes événements</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ asset("design/pages/ui-features/dropdowns.html")}}">Mes réservations</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ asset("design/pages/ui-features/typography.html")}}">Relevé de compte</a></li>
                     </ul>
                 </div>
             </li>
+            {% endif %}
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ path('annuaireLister') }}">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large" style="font-size: 20px"></i>
               </span>
                     <span class="menu-title">Annuaire</span>
-                </a>
-            </li>
-
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ path('accueilIndex') }}">
-              <span class="menu-icon">
-                <i class="mdi mdi-calendar-clock" style="font-size: 20px"></i>
-              </span>
-                    <span class="menu-title">Événements</span>
                 </a>
             </li>
             {% if is_granted('ROLE_ADMIN') %}
@@ -97,15 +94,20 @@
                 </a>
                 <div class="collapse" id="auth">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ path('independantLister') }}"> Independant </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ path('entrepriseLister') }}"> Entreprise </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('independantLister') }}"> Indépendants </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('entrepriseLister') }}"> Entreprises </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('annuaireControl') }}"> Annuaire </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('adminReservation') }}"> Réservations </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('adminEspace') }}"> Espaces </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('statutLister') }}"> Statut </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ path('metierLister') }}"> Metier </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ path('secteuractiviteLister') }}"> Secteur </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ path('tagLister') }}"> Tag </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ path('newmemberLister') }}"> NewMember </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('metierLister') }}"> Métiers </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('secteuractiviteLister') }}"> Secteurs </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('tagLister') }}"> Tags </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('newmemberLister') }}"> Utilisateurs </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('adminLister') }}"> Admin </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('bourseLister') }}"> Bourse </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('contactMousquetaires') }}"> Mousseketères </a></li>
+
                     </ul>
                 </div>
             </li>
@@ -124,6 +126,7 @@
                     <span class="mdi mdi-menu"></span>
                 </button>
                 <ul class="navbar-nav navbar-nav-right">
+
                     <li class="nav-item dropdown border-left">
                         <a href="{{ path('creditAcheter', {'id': app.user.id}) }}" id="openModalAchatCoins" type="button" class="btn btn-outline-warning btn-icon-text">
                             <img src="{{ asset('img/bCoins.jpg') }}" alt="Coin" style="border-radius: 50%; height: 2rem; width: 2rem; margin-right: 5px">
@@ -180,41 +183,26 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                             <div class="navbar-profile">
-                                <img class="img-xs rounded-circle" src="{{ asset("design/assets/images/faces/face15.jpg")}}" alt="">
+                                {% if app.user.entreprise %}
+                                        <img class="img-xs rounded-circle" src="{{ asset("design/pdp.png")}}" alt="">
+                                {% elseif app.user.independant %}
+                                    {% if app.user.independant.photodeprofil != null %}
+                                    <img class="img-xs rounded-circle" src="{{ asset('membre/photodeprofil/') }}{{ app.user.independant.photodeprofil }}" alt="">
+                                    {% else %}
+                                    <img class="img-xs rounded-circle" src="{{ asset("design/pdp.png")}}" alt="">
+                                    {% endif %}
+                                {% endif %}
                                 {% if app.user.entreprise %}
                                     <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ app.user.entreprise.prenom }} {{ app.user.entreprise.nom }}</p>
                                 {% elseif app.user.independant %}
                                     <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ app.user.independant.prenom }} {{ app.user.independant.nom }}</p>
                                 {% else %}
-                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Nom d'utilisateur non disponible</p>
+                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ app.user.email }}</p>
                                 {% endif %}
                                 <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-                            <h6 class="p-3 mb-0">Profil</h6>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-settings text-success"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject mb-1">Paramètres</p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-calendar-today text-success"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject mb-1">Mes Réservations</p>
-                                </div>
-                            </a>
                             <div class="dropdown-divider"></div>
                             <a href="/logout" class="dropdown-item preview-item" >
                                 <div class="preview-thumbnail">
@@ -250,7 +238,7 @@
         <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
                 <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> <a href="/mentionlegale" target="_blank">Mention légale</a> </span>
             </div>
         </footer>
         <!-- partial -->

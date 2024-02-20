@@ -4,36 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="FIn de branche (modif sur le consulter indep)">
-      <change afterPath="$PROJECT_DIR$/src/Entity/Bourse.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Carrousel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Equipement.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/EquipementEspace.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Espace.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Evenement.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Inscription.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Media.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Paiement.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Reservation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Tarif.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/TypeEspace.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/TypeEvenement.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/BourseRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/CarrouselRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/EquipementEspaceRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/EquipementRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/EspaceRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/EvenementRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/InscriptionRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/MediaRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/PaiementRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/ReservationRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/TarifRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/TypeEspaceRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/TypeEvenementRepository.php" afterDir="false" />
+    <list default="true" id="dc6f3553-7d09-4c43-a323-a5d66218c95d" name="Changes" comment="fix bug">
+      <change afterPath="$PROJECT_DIR$/templates/admin/lister.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/register.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Independant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Independant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Carrousel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Carrousel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/EspaceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/EspaceType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/espace.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/espace.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/formEspace.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/formEspace.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,23 +210,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "PHPUnit.Main.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "création-modf-entité-mcd",
-    "last_opened_file_path": "/Applications/MAMP/htdocs/AppliWebBananerie/templates/tag",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;PHPUnit.Main.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;System-admin-et-ajout-espace&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Applications/MAMP/htdocs/AppliWebBananerie&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates/tag" />
@@ -253,6 +234,10 @@
       <recent name="$PROJECT_DIR$/templates/entreprise" />
       <recent name="$PROJECT_DIR$/templates/independant" />
       <recent name="$PROJECT_DIR$/templates/metier" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Validator/Constraints" />
+      <recent name="$PROJECT_DIR$/public/design" />
     </key>
   </component>
   <component name="RunManager">
@@ -284,94 +269,19 @@
       <workItem from="1706515825276" duration="4777000" />
       <workItem from="1706602071760" duration="7210000" />
       <workItem from="1706688126800" duration="3958000" />
-    </task>
-    <task id="LOCAL-00029" summary="Correction bug dans l'ajout">
-      <option name="closed" value="true" />
-      <created>1706015741541</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015741541</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Correction bug dans l'ajout">
-      <option name="closed" value="true" />
-      <created>1706015743722</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015743722</updated>
-    </task>
-    <task id="LOCAL-00031" summary="Correction bug pour les routes de statut">
-      <option name="closed" value="true" />
-      <created>1706015753441</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015753441</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Création vu pour lister">
-      <option name="closed" value="true" />
-      <created>1706015761832</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015761832</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Création vu pour lister">
-      <option name="closed" value="true" />
-      <created>1706015763803</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015763803</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Création vu pour lister">
-      <option name="closed" value="true" />
-      <created>1706015767103</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1706015767103</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Création de la vue lister">
-      <option name="closed" value="true" />
-      <created>1706018526629</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1706018526629</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Création de la vue ajouter">
-      <option name="closed" value="true" />
-      <created>1706018531804</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1706018531804</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Modification sidebar">
-      <option name="closed" value="true" />
-      <created>1706018538094</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1706018538094</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Création consulter">
-      <option name="closed" value="true" />
-      <created>1706018554017</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1706018554017</updated>
-    </task>
-    <task id="LOCAL-00039" summary="Création consulter">
-      <option name="closed" value="true" />
-      <created>1706018555938</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1706018555938</updated>
+      <workItem from="1706774653379" duration="24834000" />
+      <workItem from="1706804502688" duration="3000" />
+      <workItem from="1706861192734" duration="8685000" />
+      <workItem from="1707120137764" duration="15679000" />
+      <workItem from="1707138639776" duration="27936000" />
+      <workItem from="1707230005812" duration="60000" />
+      <workItem from="1707230073487" duration="5922000" />
+      <workItem from="1707293058923" duration="20800000" />
+      <workItem from="1707379447838" duration="44131000" />
+      <workItem from="1707813548029" duration="2658000" />
+      <workItem from="1707818399327" duration="17000" />
+      <workItem from="1707898855816" duration="2763000" />
+      <workItem from="1707984063906" duration="305000" />
     </task>
     <task id="LOCAL-00040" summary="Création entite">
       <option name="closed" value="true" />
@@ -677,7 +587,95 @@
       <option name="project" value="LOCAL" />
       <updated>1706197164679</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="Ajout metier secondaire dans independant">
+      <option name="closed" value="true" />
+      <created>1706696196449</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1706696196449</updated>
+    </task>
+    <task id="LOCAL-00079" summary="adaptation code avec path">
+      <option name="closed" value="true" />
+      <created>1706698321821</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1706698321821</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Correction Bug route">
+      <option name="closed" value="true" />
+      <created>1706698777279</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1706698777279</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Ajout systeme lors de la connexion qui verifie si l'utilisateur est confirmed ou non">
+      <option name="closed" value="true" />
+      <created>1706775276744</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1706775276744</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Ajout de champs">
+      <option name="closed" value="true" />
+      <created>1706775288106</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1706775288106</updated>
+    </task>
+    <task id="LOCAL-00083" summary="Ajout de route pour admin">
+      <option name="closed" value="true" />
+      <created>1706775296429</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1706775296429</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Ajout nouvelle methode pour gerer les users">
+      <option name="closed" value="true" />
+      <created>1706775308168</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1706775308168</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Ajout d'un bouton dans la sidebar">
+      <option name="closed" value="true" />
+      <created>1706775317365</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1706775317365</updated>
+    </task>
+    <task id="LOCAL-00086" summary="Modification">
+      <option name="closed" value="true" />
+      <created>1706775326160</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1706775326160</updated>
+    </task>
+    <task id="LOCAL-00087" summary="visuel pour confirmer">
+      <option name="closed" value="true" />
+      <created>1706775354686</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1706775354686</updated>
+    </task>
+    <task id="LOCAL-00088" summary="Correction bug inscription + easter egg">
+      <option name="closed" value="true" />
+      <created>1706777821992</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1706777821992</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -696,18 +694,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Ajout choix inscription" />
-    <MESSAGE value="Ajout one to one" />
-    <MESSAGE value="Ajout systeme pour lier le formulaire 1 avec le form 2" />
-    <MESSAGE value="Modif visuel" />
-    <MESSAGE value="Ajotu controller choix inscription" />
-    <MESSAGE value="Suppresion choix de tag" />
-    <MESSAGE value="Ajout nouveau systeme pour passer la variable en session" />
-    <MESSAGE value="Modification dans l'entite pour le one to one" />
-    <MESSAGE value="Ajout vue pour choix inscription" />
-    <MESSAGE value="Modification aspect" />
-    <MESSAGE value="Changement nom botuon" />
-    <MESSAGE value="Ajout systeme pour passer la variable dans la session" />
     <MESSAGE value="Ajout et suppresion d'une relation pour independantTag" />
     <MESSAGE value="Ajout systeme de selection" />
     <MESSAGE value="Ajout et suppresion relation avec independanttag" />
@@ -721,6 +707,18 @@
     <MESSAGE value="Création ContactType" />
     <MESSAGE value="IndependantController ajout send mail" />
     <MESSAGE value="Ajout route sendmail" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout route sendmail" />
+    <MESSAGE value="Ajout metier secondaire dans independant" />
+    <MESSAGE value="adaptation code avec path" />
+    <MESSAGE value="Correction Bug route" />
+    <MESSAGE value="Ajout systeme lors de la connexion qui verifie si l'utilisateur est confirmed ou non" />
+    <MESSAGE value="Ajout de champs" />
+    <MESSAGE value="Ajout de route pour admin" />
+    <MESSAGE value="Ajout nouvelle methode pour gerer les users" />
+    <MESSAGE value="Ajout d'un bouton dans la sidebar" />
+    <MESSAGE value="Modification" />
+    <MESSAGE value="visuel pour confirmer" />
+    <MESSAGE value="Correction bug inscription + easter egg" />
+    <MESSAGE value="fix bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
   </component>
 </project>

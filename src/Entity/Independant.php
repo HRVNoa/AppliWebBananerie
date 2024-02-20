@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraints as AcmeAssert;
 
 #[ORM\Entity(repositoryClass: IndependantRepository::class)]
 class Independant
@@ -26,12 +28,22 @@ class Independant
     private ?string $entreprise = null;
 
     #[ORM\Column(length: 13)]
+    #[Assert\Regex(pattern : "/^\d+$/", message:"Veuillez saisir uniquement des chiffres.")]
+
+    #[Assert\Length( max: 13, maxMessage:"La telephone ne peut pas dépasser 13 chiffres.")]
     private ?string $tel = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[AcmeAssert\IsOldEnough]
+    #[AcmeAssert\IsAgeNotTooHigh]
     private ?\DateTimeInterface $dateNaiss = null;
 
     #[ORM\Column(length: 5)]
+    #[Assert\Range(
+        notInRangeMessage: "le code postal doit être entre 10000 et 99999",
+        min : 10000,
+        max : 99999
+    )]
     private ?string $copos = null;
 
     #[ORM\ManyToOne(inversedBy: 'independants')]
@@ -53,11 +65,11 @@ class Independant
     #[ORM\OneToOne(inversedBy: 'independant', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'independant', targetEntity: IndependantTag::class, cascade: ['persist'])]
+    #[ORM\OneToMany(mappedBy: 'independant', targetEntity: IndependantTag::class, cascade: ['persist', 'remove'])]
     private Collection $independantTags;
 
     #[ORM\Column]
-    private ?bool $annuaire = null;
+    private ?bool $annuaire = false;
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $photodeprofil = null;
@@ -74,18 +86,26 @@ class Independant
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $youtube = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Carrousel $carrousel = null;
 
     #[ORM\ManyToOne(inversedBy: 'independants2nd')]
     private ?Metier $metierSecondaire = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $video = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Length( max: 500, maxMessage:"La description ne peut pas dépasser 500 caractères.")]
+    private ?string $description = null;
+
+    #[ORM\OneToOne(inversedBy: 'independant', cascade: ['persist', 'remove'])]
+    private ?Carrousel $portfolio = null;
+
+    #[ORM\OneToMany(mappedBy: 'independant', targetEntity: Video::class)]
+    private Collection $videos;
+
 
     public function __construct()
     {
         $this->independantTags = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -339,17 +359,6 @@ class Independant
         return $this;
     }
 
-    public function getCarrousel(): ?Carrousel
-    {
-        return $this->carrousel;
-    }
-
-    public function setCarrousel(?Carrousel $carrousel): static
-    {
-        $this->carrousel = $carrousel;
-
-        return $this;
-    }
 
     public function getMetierSecondaire(): ?Metier
     {
@@ -363,15 +372,59 @@ class Independant
         return $this;
     }
 
-    public function getVideo(): ?string
+
+    public function getDescription(): ?string
     {
-        return $this->video;
+        return $this->description;
     }
 
-    public function setVideo(?string $video): static
+    public function setDescription(?string $description): static
     {
-        $this->video = $video;
+        $this->description = $description;
 
         return $this;
     }
+
+    public function getPortfolio(): ?Carrousel
+    {
+        return $this->portfolio;
+    }
+
+    public function setPortfolio(?Carrousel $portfolio): static
+    {
+        $this->portfolio = $portfolio;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Video>
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): static
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos->add($video);
+            $video->setIndependant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): static
+    {
+        if ($this->videos->removeElement($video)) {
+            // set the owning side to null (unless already changed)
+            if ($video->getIndependant() === $this) {
+                $video->setIndependant(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

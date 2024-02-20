@@ -1,0 +1,85 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}Tableau de bord{% endblock %}#}
+<link rel="stylesheet" href="{{ asset("design/assets/css/style.css")}}" >
+<link rel="stylesheet" href="{{ asset("/design/assets/vendors/mdi/css/materialdesignicons.min.css")}}">
+<link rel="stylesheet" href="{{ asset("design/assets/vendors/css/vendor.bundle.base.css")}}">
+
+<link rel="stylesheet" href="{{ asset("design/assets/vendors/jvectormap/jquery-jvectormap.css")}}">
+<link rel="stylesheet" href="{{ asset("design/assets/vendors/flag-icon-css/css/flag-icon.min.css")}}">
+<link rel="stylesheet" href="{{ asset("design/assets/vendors/owl-carousel-2/owl.carousel.min.css")}}">
+<link rel="stylesheet" href="{{ asset("design/assets/vendors/owl-carousel-2/owl.theme.default.min.css")}}">
+
+{% for message in app.flashes('success') %}
+    <div class="card-body" style="margin-bottom: 20px">
+        <blockquote class="blockquote blockquote-primary">
+            <h6 class="text-success">{{ message }}</h6>
+        </blockquote>
+    </div>
+{% endfor %}
+{% for message in app.flashes('error') %}
+    <div class="card-body" style="margin-bottom: 20px">
+        <blockquote class="blockquote blockquote-primary">
+            <p class="text-danger">ERREUR :</p>
+            <footer class="text-danger">{{ message }}</footer>
+        </blockquote>
+    </div>
+{% endfor %}
+
+
+
+{% if succes %}
+    <div class="container">
+        <div class="row" style="padding-top: 20px">
+            <div class="col-cm-12">
+                <h2>MA RÉSERVATION:</h2>
+                <h3 class="text-secondary"> Espace : {{ reservation.espace.libelle }}</h3>
+
+                <div class="row" style="padding-top: 20px">
+                    <div class="col-md-12">
+                        <label class="text-secondary">JOUR :</label>
+                        {{ reservation.date|date('d/m/Y') }}
+                    </div>
+                </div>
+
+                <div class="row" style="padding-top: 20px">
+                    <div style="width: 50%;">
+                        <label class="text-secondary">HEURE DE DÉBUT :</label>
+                        {{ reservation.heureDebut }}h
+                    </div>
+
+                    <div style="width: 50%;">
+                        <label class="text-secondary">HEURE DE FIN :</label>
+                        {{ reservation.heureFin }}h
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 20px">
+                    <div class="col-md-12">
+                        <label class="text-secondary">DÉTAILS DE RÉSERVATION :</label>
+                        {{ reservation.libelle }}
+                    </div>
+                </div>
+                <div style="padding-top: 20px" id="btnform">
+                    {% if annulable %}
+                        <a href="{{ path('detailReservation', {'id': reservation.id,'annuler': true}) }}" id="btnConfirm" type="submit" class="btn btn-danger btn-fw">ANNULER MA RÉSERVATION</a>
+                        <h4 id="temoins" style="display: none" class="">Annulation en cours...</h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("reservation_libelle").disabled = 'true';
+        document.getElementById("reservation_heureDebut").disabled = 'true';
+        document.getElementById("reservation_heureFin").disabled = 'true';
+        document.getElementById("reservation_date").disabled = 'true';
+        document.getElementById("btnConfirm").addEventListener("click", function () {
+            document.getElementById("btnConfirm").style.display = "none";
+            document.getElementById("temoins").style.display = "block";
+        })
+    });
+
+</script>

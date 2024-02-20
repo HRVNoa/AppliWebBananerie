@@ -2,43 +2,60 @@
 {% block title %}Liste des metiers{% endblock %}
 {% block stylesheets %}{% endblock %}
 {% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="card bg-success text-white shadow" style="margin-bottom: 20px">
+            <div class="card-body">
+                Success
+                <div class="text-white">{{ message }}</div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="card bg-danger text-white shadow" style="margin-bottom: 20px">
+            <div class="card-body">
+                Erreur
+                <div class="text-white">{{ message }}</div>
+            </div>
+        </div>
+    {% endfor %}
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Liste Metiers</h4>
                     <form action="{{ path('metierAjouter') }}" method="get">
-                        <button type="submit" class="btn btn-primary">Ajouter un nouveau metier</button>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
                     </form>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th style="text-align: center;"> ID </th>
-                                <th style="text-align: center;"> Libelle </th>
+                                <th style="text-align: left;"> Libellé </th>
+{#                                <th style="text-align: center;"> Consulter </th>#}
+                                <th style="text-align: center;"> Modifier </th>
+                                <th style="text-align: center;"> Supprimer </th>
 
                             </tr>
                             </thead>
                             <tbody>
                             {% for m in metiers %}
                                 <tr>
-                                    <td style="text-align: center;"  class="text-white">{{ m.id }}</td>
-                                    <td style="text-align: center;" class="text-white">{{ m.libelle }}</td>
+                                    <td style="text-align: left;" class="text-white">{{ m.libelle }}</td>
 
 
+{#                                    <td>#}
+{#                                        <form action="{{ path('metierConsulter', {'id': m.id}) }}" method="get" class="flex-c-c">#}
+{#                                            <button type="submit" class="btn btn-outline-primary">Consulter</button>#}
+{#                                        </form>#}
+{#                                    </td>#}
                                     <td>
-                                        <form action="{{ path('metierConsulter', {'id': m.id}) }}" method="get">
-                                            <button type="submit" class="btn btn-outline-primary">Consulter</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="{{ path('metierModifier', {'id': m.id}) }}" method="post">
+                                        <form action="{{ path('metierModifier', {'id': m.id}) }}" method="post" class="flex-c-c">
                                             <input type="hidden" name="_method" value="UPDATE">
                                             <button type="submit" class="btn btn-outline-primary">Modifier</button>
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="{{ path('metierSupprimer', {'id': m.id}) }}" method="post">
+                                        <form action="{{ path('metierSupprimer', {'id': m.id}) }}" method="post" class="flex-c-c">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="submit" class="btn btn-outline-primary">Supprimer</button>
                                         </form>

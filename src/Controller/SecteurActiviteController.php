@@ -59,7 +59,7 @@ class SecteurActiviteController extends AbstractController
             $entityManager->persist($secteurActivite);
             $entityManager->flush();
 
-            return $this->render('secteur/consulter.html.twig', [
+            return $this->redirectToRoute('secteuractiviteLister', [
                 'secteur' => $secteurActivite,
                 'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
             ]);
@@ -85,7 +85,8 @@ class SecteurActiviteController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($secteurActivite);
                 $entityManager->flush();
-                return $this->render('secteur/consulter.html.twig', [
+
+                return $this->redirectToRoute('secteuractiviteLister', [
                     'secteur' => $secteurActivite,
                     'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
                 ]);

@@ -4,142 +4,486 @@
 
 
 {% block stylesheets %}
+
     <style>
-        #schedule-container {
-            overflow-x: auto;
-            white-space: nowrap;
+
+        #calendar {
+            font-family: Arial, sans-serif;
+            width: 90%;
+            max-width: 600px;
         }
-        #schedule {
+
+        #calendar table {
             width: 100%;
             border-collapse: collapse;
         }
-        #schedule th,
-        #schedule td {
-            border: 1px solid #ddd;
-            padding: 10px;
+
+        #calendar caption {
             text-align: center;
-            min-width: 60px;
+            font-size: 24px;
+            font-weight: bold;
         }
-        .time-slot:hover {
-            background-color: #e3e3e3;
+
+        #calendar th {
+            background-color: #191c24;
+            color: white;
+            padding: 10px;
+        }
+
+        #calendar td {
+            text-align: center;
+            padding: 8px;
+            border: 1px solid #191c24;
+        }
+
+        #calendar td a {
+            display: block;
+            text-decoration: none;
+            color: #666;
+            padding: 5px;
+        }
+
+        #calendar td a:hover {
+            background-color: #36373A;
+        }
+
+        button {
             cursor: pointer;
+            padding: 10px 20px;
+            background-color: unset;
+            color: #191c24;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
         }
-        #date-selector {
-            margin-bottom: 20px;
+
+        button:focus {
+            outline: none;
         }
+
+        /* Aligner les boutons de navigation */
+        button#prevMonth, button#nextMonth {
+            float: left;
+            clear: both;
+            color: #fff;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        /* Effacer les flottants */
+        #calendar:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        #calendarContainer {
+            background-color: #191c24;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .mdi-calendar {
+            font-size: 26px;
+        }
+
+    /*    Bouton switch PS C'est PAS MOI QUI LA FAIT*/
+        .switch {
+            --secondary-container: #3a4b39;
+            --primary: #84da89;
+            font-size: 17px;
+            position: relative;
+            display: inline-block;
+            width: 3.7em;
+            height: 1.8em;
+        }
+
+        .switch input {
+            display: none;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #313033;
+            transition: .2s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 1.4em;
+            width: 1.4em;
+            border-radius: 20px;
+            left: 0.2em;
+            bottom: 0.2em;
+            background-color: #aeaaae;
+            transition: .4s;
+        }
+
+        input:checked + .slider::before {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider {
+            background-color: var(--secondary-container);
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--secondary-container);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(1.9em);
+        }
+
+        .reservable:hover {
+            color: #facc5f;
+            background-color: #36373A;
+        }
+
+        .reservable:hover::after {
+            content: "+";
+            font-size: 55px;
+        }
+
     </style>
+
 {% endblock %}
 
-
-{% block javascripts %}
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const selectedDateInput = document.getElementById('selected-date');
-            const scheduleContainer = document.getElementById('schedule-container');
-            const today = new Date().toISOString().split('T')[0];
-            selectedDateInput.value = today; // Définir la date d'aujourd'hui comme valeur par défaut
-
-            // Fonction pour charger le planning pour une date donnée
-            function loadScheduleForDate(date) {
-                // Ici, ajoutez votre logique pour charger les données de planning pour la date sélectionnée
-                console.log(`Chargement du planning pour la date : ${date}`);
-                // Par exemple, vous pourriez envoyer une requête AJAX à votre serveur pour obtenir les données de planning
-            }
-
-            // Chargez le planning pour la date d'aujourd'hui au démarrage
-            loadScheduleForDate(today);
-
-            // Écouteur d'événements pour détecter un changement de date
-            selectedDateInput.addEventListener('change', function(event) {
-                const selectedDate = event.target.value;
-                loadScheduleForDate(selectedDate);
-            });
-
-            // Gestionnaires d'événements pour les boutons de changement de tableau
-            var btnStudio = document.getElementById("btn-studio");
-            var btnFlex = document.getElementById("btn-flex");
-            var scheduleContainerStudio = document.getElementById("schedule-container-studio");
-            var scheduleContainerFlex = document.getElementById("schedule-container-flex");
-
-            btnStudio.addEventListener('click', function() {
-                scheduleContainerStudio.style.display = 'block';
-                scheduleContainerFlex.style.display = 'none';
-            });
-
-            btnFlex.addEventListener('click', function() {
-                scheduleContainerStudio.style.display = 'none';
-                scheduleContainerFlex.style.display = 'block';
-            });
-        });
-
-
-    </script>
-{% endblock %}
 
 {% block body %}
+<div class="row">
 
-    <div class="card">
-        <div class="card-body">
-            <!-- Choix du jour sur le planning -->
-            <div id="date-selector">
-                <i class="mdi mdi-calendar-clock" style="font-size: 25px; vertical-align: middle;"></i>
-                <label for="selected-date" style="margin-left: 5px; vertical-align: middle;"></label>
-                <input type="date" id="selected-date" name="selected-date" style="vertical-align: middle;">
-            </div>
-            <!-- Bouton changement de planning -->
-            <div id="selector-container">
-                <button type="submit" id="btn-studio" class="btn btn-secondary btn-rounded btn-fw">Studios</button>
-                <button type="submit" id="btn-flex" class="btn btn-secondary btn-rounded btn-fw">Postes Flex</button>
-            </div>
-            <!-- Block Espace -->
-            <div id="schedule-container-studio" class="schedule-container">
-                 <table id="schedule">
-                    <thead>
-                    <tr>
-                        <th>Heure/Salle</th>
-                        {% for heure in 8..19 %}
-                            <th>{{ heure }}h</th>
-                        {% endfor %}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% set espaces = ['Studio 60m2', 'Studio 15m2', 'Studio Son', 'Studio Montage', 'Accueil client 4p', 'Salle réunion 10p', 'Bureau privé 2p'] %}
-                    {% for espace in espaces %}
+    <div class="col-lg-9">
+        <div class="card">
+            {% for message in app.flashes('success') %}
+                <div class="card-body" style="margin-bottom: 20px">
+                    <blockquote class="">
+                        <footer class="blockquote-footer text-success">{{ message }}</footer>
+                    </blockquote>
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('error') %}
+                <div class="card-body" style="margin-bottom: 20px">
+                    <blockquote class="">
+                        <p class="text-danger">ERREUR :</p>
+                        <footer class="blockquote-footer text-danger">{{ message }}</footer>
+                    </blockquote>
+                </div>
+            {% endfor %}
+            <div class="card-body" style="padding: 1rem 1rem">
+                <div class="table-responsive">
+                    <div class="flex-c-b">
+                        <div id="calendarIcon" style="cursor: pointer; width: inherit">
+                            <div class="flex-c-c" style="flex-direction: row; align-items: end">
+                                <i class="mdi mdi-calendar setDate" style="font-size: 22px">
+                                </i>
+                                <h4>{{ jour }}</h4>
+                            </div>
+                        </div>
+                        <div class="flex-c-b">
+                        <p style="margin-top: 15px; margin-right: 5px;"> Studios & Espaces</p>
+                        <label class="switch flex-c-c col-lg-2">
+                            <input type="checkbox" id="cb3-8">
+                            <span class="slider"></span>
+                        </label>
+                        <p style="margin-top: 15px; margin-left: 5px"> Postes Flex </p>
+                        </div>
+                    </div>
+
+                    <div id="calendarContainer" style="display: none; position: absolute; z-index: 1000;">
+
+                        <div class="row">
+                            <button id="prevMonth" class="col-lg-4"><i class="mdi mdi-chevron-left"></i></button>
+                            <h4 class="col-lg-4 setDate"></h4>
+                            <button id="nextMonth" class="col-lg-4"><i class="mdi mdi-chevron-right"></i></button>
+                        </div>
+                        <div id="calendar"></div>
+                    </div>
+
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <td class="room-name">{{ espace }}</td>
-                            {% for heure in 8..19 %}
-                                <td class="time-slot" data-hour="{{ heure }}" data-room="{{ espace }}"></td>
-                            {% endfor %}
+                            <th style="width: 20%;" id="nameOfTable">Studio & Espaces</th>
+                            <th style="width: 10%;">9h-10h</th>
+                            <th style="width: 10%;">10h-11h</th>
+                            <th style="width: 10%;">11h-12h</th>
+                            <th style="width: 10%;">12h-13h</th>
+                            <th style="width: 10%;">13h-14h</th>
+                            <th style="width: 10%;">14h-15h</th>
+                            <th style="width: 10%;">15h-16h</th>
+                            <th style="width: 10%;">16h-17h</th>
+                            <th style="width: 10%;">17h-18h</th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <!-- Block postes flex -->
-            <div id="schedule-container-flex" class="schedule-container" style="display: none;">
-                <table id="schedule-flex">
-                    <thead>
-                    <tr>
-                        <th>Heure/Poste Flex</th>
-                        {% for heure in 8..19 %}
-                            <th>{{ heure }}h</th>
+                        </thead>
+                        <tbody style="color: #fff;">
+                        {% for espace in espaces %}
+                            <tr class="{% if espace.typeEspace.categorie.id == 4 %}posteFlex{% else %}espace{% endif %}" style="{% if espace.typeEspace.categorie.id == 4 %}display: none;{% else %}display: table-row;{% endif %} height: 60px">
+                                <td style="padding: 0;">
+                                    <div style="display: flex; align-items: baseline">
+                                        <h6 class="clickableEsapce leads" style="margin-right: 8px;margin-left: 4px; padding: 0; cursor: pointer" data-src="{{ path('modalEspace', {'idCarrousel': espace.carrousel.id, 'idEspace': espace.id }) }}"><i class="mdi mdi-eye text-primary"></i></h6>
+                                        <h6>{{ espace.libelle }}</h6>
+                                    </div>
+                                </td>
+                                {% if espace.tarifEspaceTarifs is empty %}
+                                    <td colspan="9" style="height: 40px;padding: 0;">Sur devis uniquement: contactez-nous !</td>
+                                {% else %}
+                                    {% for heure in 9..18 %}
+                                        <td style="height: 40px;padding: 0;">
+                                            {% set reservationFound = false %}
+                                            {% for reservation in espace.getReservations() %}
+                                                {% if reservation.date|date('d/m/Y') == jour %}
+                                                    {% if reservation.heureDebut <= heure and reservation.heureFin >= heure+1 %}
+                                                        {% set reservationFound = true %}
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if reservationFound %}
+                                                Réservé
+                                            {% else %}
+                                                {% set heureI = heure+1 %}
+                                                <div style="width: 100%; height: 100%;cursor: pointer" class="clickable reservable" data-src="{{ path('formReservation', {'id': espace.id, 'date':jour|format('Y/m/d'), 'heures': heure~'/'~heureI }) }}" ></div>
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                {% endif %}
+                            </tr>
                         {% endfor %}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% set flex_postes = ['Poste 1', 'Poste 2', 'Poste 3', 'Poste 4', 'Poste 5', 'Poste 6', 'Poste 7', 'Poste 8'] %}
-                    {% for poste in flex_postes %}
-                        <tr>
-                            <td class="room-name">{{ poste }}</td>
-                            {% for heure in 8..19 %}
-                                <td class="time-slot" data-hour="{{ heure }}" data-post="{{ poste }}"></td>
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+
+
+                </div>
             </div>
         </div>
     </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <h4>Mes réservations</h4>
+                {% for userReservation in userReservations %}
+                    {% set duree = userReservation.heureFin|date('H') - userReservation.heureDebut|date('H') %}
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-12 my-auto flex-c-c" style="flex-direction: column">
+                        <div class="flex-c-c">
+                            <h5 class="mb-0">{{ userReservation.espace.libelle }}</h5>
+                            <p class="text-warning ms-2 mb-0 font-weight-medium">{% for i in userReservation.espace.tarifEspaceTarifs %}{% if i.heure == duree %}{{ i.prix }}{% endif %}{% endfor%} BananaCoins</p>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Le {{ userReservation.date|date('d/m/Y') }} de {{ userReservation.heureDebut }}h à {{ userReservation.heureFin }}h </h6>
+                        <h6 class="text-info font-weight-normal clickableDetail" style="cursor: pointer" data-src="{{ path('detailReservation', {'id': userReservation.id}) }}">Plus de détails</h6>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal réservation -->
+    <div class="modal modalclose fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h2 id="timeReservation">Chargement en cours...</h2>
+                <iframe id="modalReservation" style="width: inherit" height="600" title="Reservation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal detail -->
+    <div class="modal modalclose fade" id="detailModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h2 id="timeDetail">Chargement en cours...</h2>
+                <iframe id="modalDetail" style="width: inherit" height="500" title="Detail" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal espace -->
+    <div class="modal fade" id="espaceModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 750px;">
+            <div class="modal-content" style="padding: 20px; background-color: #191c24">
+                <h2 id="timeEspace">Chargement en cours...</h2>
+                <iframe id="modalEspace" style="width: inherit" height="500" title="Detail" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+            </div>
+        </div>
+    </div>
+
+
+
+    {#  JavaScript  #}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            var postFlex = $('.posteFlex');
+            var espace = $('.espace');
+
+            $('#cb3-8').click(function () {
+                console.log($(this));
+                if ($(this)[0].checked){
+                    $('#nameOfTable')[0].innerText = "Postes Flex";
+                    for (let i = 0; i < postFlex.length; i++) {
+                        postFlex[i].style.display = 'table-row';
+                    }
+                    for (let i = 0; i < espace.length; i++) {
+                        espace[i].style.display = 'none';
+                    }
+                }else{
+                    for (let i = 0; i < postFlex.length; i++) {
+                        postFlex[i].style.display = 'none';
+                    }
+                    for (let i = 0; i < espace.length; i++) {
+                        espace[i].style.display = 'table-row';
+                    }
+                    $('#nameOfTable')[0].innerText = "Studios & Espace";
+                }
+            });
+
+            $('.modalclose').click(function() {
+                location.reload();
+            });
+
+            $('.clickableEsapce').click(function() {
+                // Ouvrir la modal ici
+                $('#espaceModal').modal('show');
+
+                document.getElementById('modalEspace').style.display = 'none';
+                document.getElementById('timeEspace').style.display = 'block';
+
+                var iframe = document.querySelector('#modalEspace');
+                iframe.src = $(this).data('src');
+                setTimeout(() => {
+                    document.getElementById('modalEspace').style.display = 'block';
+                    document.getElementById('timeEspace').style.display = 'none';
+                },'2500');
+            });
+
+            $('.clickableDetail').click(function() {
+                // Ouvrir la modal ici
+                $('#detailModal').modal('show');
+
+                document.getElementById('modalDetail').style.display = 'none';
+                document.getElementById('timeDetail').style.display = 'block';
+
+                var iframe = document.querySelector('#detailModal iframe');
+                iframe.src = $(this).data('src');
+                setTimeout(() => {
+                    document.getElementById('modalDetail').style.display = 'block';
+                    document.getElementById('timeDetail').style.display = 'none';
+                },'2500');
+
+            });
+
+            $('.clickable').click(function() {
+                // Ouvrir la modal ici
+                $('#reservationModal').modal('show');
+
+                document.getElementById('modalReservation').style.display = 'none';
+                document.getElementById('timeReservation').style.display = 'block';
+
+                // Remplir les informations de la modal (salle et horaire sélectionnés)
+
+                var iframe = document.querySelector('#reservationModal iframe');
+                iframe.src = $(this).data('src');
+                setTimeout(() => {
+                    document.getElementById('modalReservation').style.display = 'block';
+                    document.getElementById('timeReservation').style.display = 'none';
+                },'2500');
+
+            });
+
+            let currentMonth = new Date().getMonth() + 1; // JavaScript compte les mois de 0 à 11
+            let currentYear = new Date().getFullYear();
+
+            function generateCalendar(month, year) {
+                const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+                    "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+                const daysInMonth = new Date(year, month, 0).getDate();
+                $('.setDate')[1].innerHTML = monthNames[month - 1] + "<br>" + year;
+
+                let calendarHtml = `<table><tr><th>Dim</th><th>Lun</th><th>Mar</th><th>Mer</th><th>Jeu</th><th>Ven</th><th>Sam</th></tr><tr>`;
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const date = new Date(year, month - 1, day);
+                    const dayOfWeek = date.getDay(); // 0 (Dimanche) à 6 (Samedi)
+
+                    if (day == 1) {
+                        // Ajouter des cellules vides si le 1er jour du mois n'est pas un Dimanche
+                        calendarHtml += "<td>".repeat(dayOfWeek) + `<td><a href="#" data-date="${formatDate(date)}">${day}</a></td>`;
+                    } else {
+                        if (dayOfWeek == 0) calendarHtml += "</tr><tr>"; // Nouvelle ligne si Dimanche
+                        calendarHtml += `<td><a href="#" data-date="${formatDate(date)}">${day}</a></td>`;
+                    }
+                }
+
+                calendarHtml += "</tr></table>";
+                document.getElementById('calendar').innerHTML = calendarHtml;
+
+                // Ajout de l'écouteur d'événements pour les clics sur les jours
+                document.querySelectorAll('#calendar a').forEach(a => {
+                    a.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        const date = this.getAttribute('data-date');
+                        window.location.href = `/?jour=${date}`;
+                        // Ou utiliser la fonction path de Symfony si disponible
+                    });
+                });
+            }
+            function updateCalendar(month, year) {
+                generateCalendar(month, year);
+            }
+
+            function formatDate(date) {
+                return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+            }
+
+            document.getElementById('calendarIcon').addEventListener('click', function() {
+                const calendarContainer = document.getElementById('calendarContainer');
+                if (calendarContainer.style.display === "none") {
+                    calendarContainer.style.display = "block";
+                } else {
+                    calendarContainer.style.display = "none";
+                }
+
+
+                document.getElementById('prevMonth').addEventListener('click', function() {
+                    currentMonth--;
+                    if (currentMonth < 1) {
+                        currentMonth = 12;
+                        currentYear--;
+                    }
+                    updateCalendar(currentMonth, currentYear);
+                });
+
+                document.getElementById('nextMonth').addEventListener('click', function() {
+                    currentMonth++;
+                    if (currentMonth > 12) {
+                        currentMonth = 1;
+                        currentYear++;
+                    }
+                    updateCalendar(currentMonth, currentYear);
+                });
+
+            });
+
+            updateCalendar(currentMonth, currentYear);
+
+        });
+    </script>
+
+
+
 {% endblock %}

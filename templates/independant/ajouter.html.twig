@@ -18,25 +18,129 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{asset("/design/assets/images/favicon.png")}}" />
 </head>
+
 <body>
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="row w-100 m-0">
             <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
-                <div class="card col-lg-4 mx-auto">
-                    <div class="card-body px-5 py-5">
-                        <h3 class="card-title text-left mb-3">Inscription</h3>
-                            {{ form_start(form) }}
-                            {{ form_widget(form) }}
-                            {{ form_end(form) }}
-                        <p class="terms">By creating an account you are accepting our<a href="#"> Terms & Conditions</a></p>
+                <div class=" mx-auto">
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title text-left mb-3">Inscription Independant</h3>
+                                    {{ form_start(form, {'attr': {'class': 'form-sample'}}) }}
+                                    {{ form_widget(form._token) }}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label class=" col-form-label">Nom :</label>
+                                                {{ form_errors(form.nom) }}
+                                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label class=" col-form-label">Prénom :</label>
+                                                {{ form_errors(form.prenom) }}
+                                                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label class=" col-form-label">Entreprise :</label>
+                                                {{ form_errors(form.entreprise) }}
+                                                    {{ form_widget(form.entreprise, {'attr': {'class': 'form-control'}}) }}
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label class=" col-form-label">Telephone :</label>
+                                                {{ form_errors(form.tel) }}
+                                                    {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label class=" col-form-label">Email :</label>
+                                                {{ form_errors(form.email) }}
+                                                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label class=" col-form-label">Date de Naissance :</label>
+                                                {{ form_errors(form.dateNaiss) }}
+                                                    {{ form_widget(form.dateNaiss, {'attr': {'class': 'form-control'}}) }}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label class=" col-form-label">Adresse :</label>
+                                                {{ form_errors(form.adresse) }}
+                                                    {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label class=" col-form-label">Code Postal :</label>
+                                                    {{ form_errors(form.copos) }}
+                                                    {{ form_widget(form.copos, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group  ">
+                                                <label class=" col-form-label">Statut :</label>
+
+                                                    {{ form_widget(form.statut, {'attr': {'class': 'form-control'}}) }}
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label class=" col-form-label">Ville :</label>
+                                                {{ form_errors(form.ville) }}
+                                                    {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class=" col-form-label">Metier Principal :</label>
+
+                                                    {{ form_widget(form.metier, {'attr': {'class': 'form-control'}}) }}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-primary btn-icon-text text-center'}}) }}
+
+                                    {{ form_end(form, {'render_rest': false}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <p class="terms">Par créer un compte vous avez accepté nos<a href="#"> Termes & Conditions</a></p>
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 <script src="{{asset("/design/assets/vendors/js/vendor.bundle.base.js")}}"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->

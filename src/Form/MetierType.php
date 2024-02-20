@@ -14,9 +14,11 @@ class MetierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('libelle',TextType::class)
+            ->add('libelle',TextType::class,[
+                'attr' => ['class' => 'form-control  text-light']
+            ])
         ;
-        $builder->add('enregistrer',SubmitType::class, array('label' => 'Nouveau Metier', "attr" => ["class" => "btn btn-primary"]));
+        $builder->add('enregistrer',SubmitType::class, array('label' => 'Ajouter', "attr" => ["class" => "btn btn-primary"]));
 
     }
 

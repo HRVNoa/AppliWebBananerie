@@ -41,6 +41,7 @@ class RegistrationController extends AbstractController
                 if ($entreprise) {
                     $user->setEntreprise($entreprise);
                     $entreprise->setUser($user);
+                    $user->setRoles(["ROLE_ENTREPRISE"]);
                 }
                 $session->remove('entreprise_id');
             } elseif ($independantId) {
@@ -48,6 +49,7 @@ class RegistrationController extends AbstractController
                 if ($independant) {
                     $user->setIndependant($independant);
                     $independant->setUser($user);
+                    $user->setRoles(["ROLE_INDEPENDANT"]);
                 }
                 $session->remove('independant_id');
             } else {

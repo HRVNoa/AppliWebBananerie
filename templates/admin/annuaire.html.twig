@@ -47,8 +47,8 @@
                                         <a href="{{ path('annuaireLister', {'sort': 'desc'}) }}"><i class="mdi mdi-arrow-down-drop-circle-outline"></i></a>
                                     {% endif %}
                                 </th>
-                                <th>Métier principal</th>
-                                <th>Métier secondaire</th>
+                                <th>Métier #1</th>
+                                <th>Métier #2</th>
                                 <th>Tags</th>
                                 <th style="display: none">TagNormal</th>
                                 <th></th>
@@ -58,7 +58,7 @@
                             {% for independant in independants %}
                                 <tr onclick="window.location.href='{{ path('independantConsulter', {"id": independant.id}) }}'" style="cursor: pointer" data-metier-id="{{ independant.metier.id }}">
                                     <td class="py-1">
-                                        <img src="{{ asset('design/assets/images/faces/face15.jpg') }}" alt="image">
+                                        <img src="{{ asset('membre/photodeprofil/') }}{{ independant.photodeprofil }}" alt="">
                                     </td>
                                     <td>{{ independant.prenom|capitalize }} {{ independant.nom|upper }}</td>
                                     <td>{{ independant.metier.libelle }}</td>
