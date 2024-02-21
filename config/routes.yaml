@@ -327,3 +327,28 @@ bourseSupprimer:
 creditAcheter:
     path: /bourse/acheter/{id}
     controller: App\Controller\PayementController::startPayement
+
+
+payementConsulter:
+    path: /admin/payement/consulter/{id}
+    controller: App\Controller\PayementController::consulterPayement
+
+payementLister:
+    path: /admin/payement/
+    controller: App\Controller\PayementController::listerPayement
+
+payementAjouter:
+    path: /admin/payement/ajouter
+    controller : App\Controller\PayementController::ajouterPayement
+
+payementModifier:
+    path: /admin/payement/modifier/{id}
+    controller: App\Controller\PayementController::modifierPayement
+
+releverCompte:
+    path: /releverCompte/{id}
+    controller: App\Controller\PayementController::listerComptePayement
+
+releverCompteConsulter:
+    path: /releverCompte/consulter/{id}
+    controller: App\Controller\PayementController::consulterPayement
