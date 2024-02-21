@@ -5,13 +5,12 @@ namespace App\Form;
 use App\Entity\Espace;
 use App\Entity\Reservation;
 use App\Entity\User;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Callback;
@@ -49,7 +48,11 @@ class ReservationType extends AbstractType
                 'disabled' => true,
                 'attr'=>['style'=>'display:none;'],
             ])
+            ->add('matin', SubmitType::class, ['attr' => ['class' => 'btn-sm btn-success btn-fw btnConfirm'],'label' => 'Matin'])
+            ->add('apresmidi', SubmitType::class, ['attr' => ['class' => 'btn-sm btn-success btn-fw btnConfirm'],'label' => 'ApresMidi'])
+            ->add('journee', SubmitType::class, ['attr' => ['class' => 'btn-sm btn-success btn-fw btnConfirm'],'label' => 'Journée'])
         ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

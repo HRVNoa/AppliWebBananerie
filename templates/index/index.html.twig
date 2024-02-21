@@ -408,10 +408,10 @@
 
                 var iframe = document.querySelector('#reservationModal iframe');
                 iframe.src = $(this).data('src');
-                // setTimeout(() => {
-                //     document.getElementById('modalReservation').style.display = 'block';
-                //     document.getElementById('timeReservation').style.display = 'none';
-                // },'2500');
+                setTimeout(() => {
+                    document.getElementById('modalReservation').style.display = 'block';
+                    document.getElementById('timeReservation').style.display = 'none';
+                },'2500');
 
             });
 
