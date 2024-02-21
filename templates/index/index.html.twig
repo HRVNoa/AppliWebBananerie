@@ -276,8 +276,6 @@
                         {% endfor %}
                         </tbody>
                     </table>
-
-
                 </div>
             </div>
         </div>
@@ -405,15 +403,15 @@
 
                 document.getElementById('modalReservation').style.display = 'none';
                 document.getElementById('timeReservation').style.display = 'block';
-
+                console.log(document.getElementById('timeReservation'));
                 // Remplir les informations de la modal (salle et horaire sélectionnés)
 
                 var iframe = document.querySelector('#reservationModal iframe');
                 iframe.src = $(this).data('src');
-                setTimeout(() => {
-                    document.getElementById('modalReservation').style.display = 'block';
-                    document.getElementById('timeReservation').style.display = 'none';
-                },'2500');
+                // setTimeout(() => {
+                //     document.getElementById('modalReservation').style.display = 'block';
+                //     document.getElementById('timeReservation').style.display = 'none';
+                // },'2500');
 
             });
 

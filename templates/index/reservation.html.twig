@@ -43,32 +43,12 @@
                     </div>
                 </div>
 
-                {% if reservation.espace.typeEspace.categorie.id != 3 %}
-                    <div class="row" style="padding-top: 20px;">
-                        <div class="col-md-12">
-                            <label class="text-secondary">ACTION OBLIGATOIRE :</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div  style="width: 30%;">
-                            <a class="btn btn-success" style="width: 100%;" onclick="matin()">Heure matin</a>
-                        </div>
-                        <div style="width: 40%;">
-                            <a class="btn btn-success" style="width: 100%;" onclick="apresMidi()">Heure après-midi</a>
-                        </div>
-                        <div style="width: 30%;">
-                            <a class="btn btn-success" style="width: 100%;" onclick="journee()">Heure journée</a>
-                        </div>
-                    </div>
-                {% endif %}
                 <div class="row" style="padding-top: 20px">
                     <div style="width: 50%;">
-                        <label class="text-secondary">HEURE DE DÉBUT :</label>
                         {{ form_widget(form.heureDebut) }}
                     </div>
 
                     <div style="width: 50%;">
-                        <label class="text-secondary">HEURE DE FIN :</label>
                         {{ form_widget(form.heureFin) }}
                     </div>
                 </div>
@@ -86,7 +66,11 @@
                 </div>
                 {{ form_widget(form.espace) }}
                 {{ form_widget(form.user) }}
-
+                <div class="row" style="padding-top: 20px">
+                    <div class="col-md-12">
+                        <label class="text-secondary">MODALITÉS DE RÉSERVATION :</label>
+                    </div>
+                </div>
                 <div class="row flex-c-c" style="padding-top: 10px;">
                     <div class="col-lg-12">
                         <div class="table-responsive">
@@ -99,18 +83,18 @@
                                 {% endfor %}
                                 <thead>
                                 <tr>
-                                    {% if un %}
-                                        <th>Par heure</th>
-                                    {% endif %}
-                                    <th>9h-13h / 14h-18h</th>
-                                    <th>9h 18h</th>
+                                    <th>Heures</th>
+                                    <th>Tarif B.Coins</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+
                                 <tr>
+                                    <th>9h-13h</th>
                                     {% set havePrix = false %}
                                     {% for coin in reservation.espace.tarifEspaceTarifs %}
-                                        {% if coin.heure == 1 %}
+                                        {% if coin.heure == 4 %}
                                             {% set havePrix = true %}
                                             <th>
                                                 <h6>{{ coin.prix }} B.Coins</h6>
@@ -120,6 +104,14 @@
                                         {% endif %}
 
                                     {% endfor %}
+                                    {% if havePrix == false %}
+                                        <th colspan="2"><label> Sur devis </label></th>
+                                    {% else %}
+                                        <th><a href="#">Choisir</a></th>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <th>14h-18h</th>
                                     {% for coin in reservation.espace.tarifEspaceTarifs %}
                                         {% if coin.heure == 4 %}
                                             {% set havePrix = true %}
@@ -128,6 +120,13 @@
                                             </th>
                                         {% endif %}
                                     {% endfor %}
+                                    {% if havePrix == true %}
+                                        <th><a href="#">Choisir</a></th>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <th>9h-18h</th>
+                                    {% set havePrix = false %}
                                     {% for coin in reservation.espace.tarifEspaceTarifs %}
                                         {% if coin.heure == 9 %}
                                             {% set havePrix = true %}
@@ -138,17 +137,14 @@
                                     {% endfor %}
                                     {% if havePrix == false %}
                                         <th colspan="2"><label> Sur devis </label></th>
+                                    {% else %}
+                                        <th><a href="#">Choisir</a></th>
                                     {% endif %}
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
-
-                <div style="padding-top: 15px" id="btnform">
-                    <button id="btnConfirm" type="submit" class="btn btn-success btn-fw">CONFIRMER</button>
-                    <h4 id="temoins" style="display: none" class="">Réservation en cours...</h4>
                 </div>
             </div>
         </div>
@@ -175,13 +171,6 @@
 
 
     document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("btnConfirm").addEventListener("click", function () {
-            if (document.getElementById("reservation_libelle").value !== '') {
-                document.getElementById("btnConfirm").style.display = "none";
-                document.getElementById("temoins").style.display = "block";
-            }
-        });
-
         // défini l'heure suivant le clic de l'utilisateur
         var heure = location.search.split('=')[2].split('&')[0].split('/');
         document.getElementById('reservation_heureDebut').value = heure[0];

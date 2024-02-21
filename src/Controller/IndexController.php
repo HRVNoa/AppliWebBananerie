@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Bourse;
 use App\Entity\User;
+use App\Form\ReservationHeureType;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Entreprise;
 use App\Entity\Espace;
@@ -267,7 +268,11 @@ class IndexController extends AbstractController
         $reservation->setDate(new DateTime($date));
         $reservation->setUser($security->getUser());
 
-        $form = $this->createForm(ReservationType::class, $reservation);
+        if ($reservation->getEspace()->getTypeEspace()->getCategorie()->getId() != 3){
+            $form = $this->createForm(ReservationType::class, $reservation);
+        }else{
+            $form = $this->createForm(ReservationHeureType::class, $reservation);
+        }
         $form->handleRequest($request);
 
         $reservation->setEspace($session->get('salleId', $reservation->getEspace()));
@@ -281,134 +286,134 @@ class IndexController extends AbstractController
                 $stop = false;
             }
             if ($stop) {
-            $connectedUser = $security->getUser();
-            if ($reservation->getUser()->getIndependant() != null){
-                $inde = $doctrine->getRepository(Independant::class)->findOneBy(['user' => $reservation->getUser()]);
-                $destName = $inde->getNom().' '.$inde->getPrenom();
-                $user = $inde;
-            }else if ($reservation->getUser()->getEntreprise() != null){
-                $entr = $doctrine->getRepository(Entreprise::class)->findOneBy(['user' => $reservation->getUser()]);
-                $destName = $entr->getNom().' '.$entr->getPrenom();
-                $user = $entr;
-            }else{
-                $destName = 'Admin';
-                $user = 'Admin';
-            }
-
-            $data = $form->getData();
-
-            //Débit B.Coins
-            try {
-
-                if ($user != 'Admin'){
-                    $nbHeure = $reservation->getHeureFin() - $reservation->getHeureDebut();
-
-                    if ($nbHeure < 4){
-                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
-                            if ($tarifs->getHeure() == 1){
-                                $prix = $tarifs->getPrix() * $nbHeure;
-                            }
-                        }
-                    }elseif ($nbHeure < 9){
-                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
-                            if ($tarifs->getHeure() == 4){
-                                $prix = $tarifs->getPrix();
-                            }
-                        }
-                        $nbHeure = $nbHeure - 4;
-                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
-                            if ($tarifs->getHeure() == 1){
-                                $prix = $tarifs->getPrix() * $nbHeure + $prix;
-                            }
-                        }
-                    }elseif ($nbHeure = 9){
-                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
-                            if ($tarifs->getHeure() == 9){
-                                $prix = $tarifs->getPrix();
-                            }
-                        }
-                    }
-                    $APayer = $reservation->getUser()->getBourse()->getQuantite()-$prix;
-
-                    if ($APayer < 0){
-                        $this->addFlash('error', 'Vous n\'avez pas un solde suffisant pour cet espace');
-                        return $this->render('index/reservation.html.twig', [
-                            'succes' => false
-                        ]);
-                    }else{
-                        $reservation->getUser()->getBourse()->setQuantite($APayer);
-                    }
-
+                $connectedUser = $security->getUser();
+                if ($reservation->getUser()->getIndependant() != null){
+                    $inde = $doctrine->getRepository(Independant::class)->findOneBy(['user' => $reservation->getUser()]);
+                    $destName = $inde->getNom().' '.$inde->getPrenom();
+                    $user = $inde;
+                }else if ($reservation->getUser()->getEntreprise() != null){
+                    $entr = $doctrine->getRepository(Entreprise::class)->findOneBy(['user' => $reservation->getUser()]);
+                    $destName = $entr->getNom().' '.$entr->getPrenom();
+                    $user = $entr;
+                }else{
+                    $destName = 'Admin';
+                    $user = 'Admin';
                 }
 
-            }catch (Exception $e){
-                $this->addFlash('error', 'Oops! Quelque chose s\'est mal passé et nous avons pas pu vous débiter.');
-                $this->addFlash('error', 'La Bananerie a été notifié de cette erreur.');
-            }
+                $data = $form->getData();
 
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($data);
-            $entityManager->flush();
+                //Débit B.Coins
+                try {
 
-            $this->addFlash('success', 'Merci ! La réservation a bien été pris en compte.');
+                    if ($user != 'Admin'){
+                        $nbHeure = $reservation->getHeureFin() - $reservation->getHeureDebut();
 
-            // Envoi du mail pour confirmation
-            $transport = Transport::fromDsn('smtp://bananeriebot@gmail.com:ramchihfwonbusnl@smtp.gmail.com:587?encryption=tls&auth_mode=login');
-            $mailer = new Mailer($transport);
-            $email = (new Email())
-                ->from(new Address('bananeriebot@gmail.com', 'La Bananerie'))
-                ->to($security->getUser()->getUserIdentifier())
-                ->subject("Nouvelle réservation : ". $espace->getLibelle() ) // Sujet
-                ->html('
-                    <div style="background-color: #ffffff;
-                            width: 600px;
-                            margin: 0 auto;
-                            padding: 20px;
-                            color: #000;">
-                        <div style="background-color: #FACC5F;
-                            color: #ffffff;
-                            padding: 10px;
-                            text-align: center;">
-                            <h2>CONFIRMATION DE RÉSERVATION</h2>
+                        if ($nbHeure < 4){
+                            foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                if ($tarifs->getHeure() == 1){
+                                    $prix = $tarifs->getPrix() * $nbHeure;
+                                }
+                            }
+                        }elseif ($nbHeure < 9){
+                            foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                if ($tarifs->getHeure() == 4){
+                                    $prix = $tarifs->getPrix();
+                                }
+                            }
+                            $nbHeure = $nbHeure - 4;
+                            foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                if ($tarifs->getHeure() == 1){
+                                    $prix = $tarifs->getPrix() * $nbHeure + $prix;
+                                }
+                            }
+                        }elseif ($nbHeure = 9){
+                            foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                if ($tarifs->getHeure() == 9){
+                                    $prix = $tarifs->getPrix();
+                                }
+                            }
+                        }
+                        $APayer = $reservation->getUser()->getBourse()->getQuantite()-$prix;
+
+                        if ($APayer < 0){
+                            $this->addFlash('error', 'Vous n\'avez pas un solde suffisant pour cet espace');
+                            return $this->render('index/reservation.html.twig', [
+                                'succes' => false
+                            ]);
+                        }else{
+                            $reservation->getUser()->getBourse()->setQuantite($APayer);
+                        }
+
+                    }
+
+                }catch (Exception $e){
+                    $this->addFlash('error', 'Oops! Quelque chose s\'est mal passé et nous avons pas pu vous débiter.');
+                    $this->addFlash('error', 'La Bananerie a été notifié de cette erreur.');
+                }
+
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($data);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Merci ! La réservation a bien été pris en compte.');
+
+                // Envoi du mail pour confirmation
+                $transport = Transport::fromDsn('smtp://bananeriebot@gmail.com:ramchihfwonbusnl@smtp.gmail.com:587?encryption=tls&auth_mode=login');
+                $mailer = new Mailer($transport);
+                $email = (new Email())
+                    ->from(new Address('bananeriebot@gmail.com', 'La Bananerie'))
+                    ->to($security->getUser()->getUserIdentifier())
+                    ->subject("Nouvelle réservation : ". $espace->getLibelle() ) // Sujet
+                    ->html('
+                        <div style="background-color: #ffffff;
+                                width: 600px;
+                                margin: 0 auto;
+                                padding: 20px;
+                                color: #000;">
+                            <div style="background-color: #FACC5F;
+                                color: #ffffff;
+                                padding: 10px;
+                                text-align: center;">
+                                <h2>CONFIRMATION DE RÉSERVATION</h2>
+                            </div>
+                            <div style="padding: 20px;
+                                text-align: left;">
+                                <p>Bonjour '. $destName .',</p>
+                                <p>Votre réservation à La Bananerie a bien été prise en compte.</p>
+                                <p>Détails de réservation:</p>
+                                <ul>
+                                    <li>Espace : '. $reservation->getEspace()->getLibelle() .'</li>
+                                    <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
+                                    <li>Heure : '. $reservation->getHeureDebut() .'h à '. $reservation->getHeureFin() .'h</li>
+                                    <li>Detail de votre réservation : '.$reservation->getLibelle().'</li>
+                                </ul>
+                                <p>Toute annulation reste possible jusqu’à 48h avant la date effective de réservation.</p>
+                                <p>À très bientôt à La Bananerie ! </p>
+                            </div>
+                            <div style="
+                                background-color: #333333;
+                                color: #ffffff;
+                                padding: 10px;
+                                text-align: center;
+                                font-size: 12px;">
+                                <p>LA BANANERIE</p>
+                                <p>134 Bd Leroy</p>
+                                <p>14 000 CAEN</p>
+                            </div>
                         </div>
-                        <div style="padding: 20px;
-                            text-align: left;">
-                            <p>Bonjour '. $destName .',</p>
-                            <p>Votre réservation à La Bananerie a bien été prise en compte.</p>
-                            <p>Détails de réservation:</p>
-                            <ul>
-                                <li>Espace : '. $reservation->getEspace()->getLibelle() .'</li>
-                                <li>Date : '. $reservation->getDate()->format("d/m/Y") .'</li>
-                                <li>Heure : '. $reservation->getHeureDebut() .'h à '. $reservation->getHeureFin() .'h</li>
-                                <li>Detail de votre réservation : '.$reservation->getLibelle().'</li>
-                            </ul>
-                            <p>Toute annulation reste possible jusqu’à 48h avant la date effective de réservation.</p>
-                            <p>À très bientôt à La Bananerie ! </p>
-                        </div>
-                        <div style="
-                            background-color: #333333;
-                            color: #ffffff;
-                            padding: 10px;
-                            text-align: center;
-                            font-size: 12px;">
-                            <p>LA BANANERIE</p>
-                            <p>134 Bd Leroy</p>
-                            <p>14 000 CAEN</p>
-                        </div>
-                    </div>
-                ');
-            try {
-                $mailer->send($email);
-                $this->addFlash('success', 'Merci ! Une confirmation vous a été envoyé par mail.');
-            } catch (TransportExceptionInterface $e) {
-                $this->addFlash('error', "Oops! Quelque chose s'est mal passé, nous n'avons pas pu envoyer la confirmation de réservation par mail.");
-            }
+                    ');
+                try {
+                    $mailer->send($email);
+                    $this->addFlash('success', 'Merci ! Une confirmation vous a été envoyé par mail.');
+                } catch (TransportExceptionInterface $e) {
+                    $this->addFlash('error', "Oops! Quelque chose s'est mal passé, nous n'avons pas pu envoyer la confirmation de réservation par mail.");
+                }
 
-            return $this->render('index/reservation.html.twig', [
-                'form' => $form,
-                'reservation' => $reservation,
-                'succes' => false
-            ]);
+                return $this->render('index/reservation.html.twig', [
+                    'form' => $form,
+                    'reservation' => $reservation,
+                    'succes' => false
+                ]);
             }else{
                 $this->addFlash('error', 'La réservation ne peut pas être prise en compte. Il y a déjà une réservation sur ce créneau horaire.');
                 return $this->render('index/reservation.html.twig', [
@@ -416,26 +421,19 @@ class IndexController extends AbstractController
                 ]);
             }
         }else{
-            foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarif){
-                if ($tarif->getHeure() == 1){
-                    $unite = $tarif->getPrix();
-                }elseif ($tarif->getHeure() == 4){
-                    $demi = $tarif->getPrix();
-                }elseif ($tarif->getHeure() == 9){
-                    $journee = $tarif->getPrix();
-                }
+            if ($reservation->getEspace()->getTypeEspace()->getCategorie()->getId() != 3){
+                return $this->render('index/reservation.html.twig', [
+                    'form' => $form,
+                    'reservation' => $reservation,
+                    'succes' => $succes,
+                ]);
+            }else{
+                return $this->render('index/reservationHeure.html.twig', [
+                    'form' => $form,
+                    'reservation' => $reservation,
+                    'succes' => $succes,
+                ]);
             }
-            if (!isset($unite)){
-                $unite = false;
-            }
-            return $this->render('index/reservation.html.twig', [
-                'form' => $form,
-                'reservation' => $reservation,
-                'succes' => $succes,
-                'unite' => $unite,
-                'demi' => $demi,
-                'journee' => $journee,
-            ]);
         }
     }
 

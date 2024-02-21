@@ -1,0 +1,117 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}Tableau de bord{% endblock %}#}
+<link rel="stylesheet" href="{{ asset("design/assets/css/style.css")}}" >
+<link rel="stylesheet" href="{{ asset("/design/assets/vendors/mdi/css/materialdesignicons.min.css")}}">
+<link rel="stylesheet" href="{{ asset("design/assets/vendors/css/vendor.bundle.base.css")}}">
+
+<link rel="stylesheet" href="{{ asset("design/assets/vendors/jvectormap/jquery-jvectormap.css")}}">
+<link rel="stylesheet" href="{{ asset("design/assets/vendors/flag-icon-css/css/flag-icon.min.css")}}">
+<link rel="stylesheet" href="{{ asset("design/assets/vendors/owl-carousel-2/owl.carousel.min.css")}}">
+<link rel="stylesheet" href="{{ asset("design/assets/vendors/owl-carousel-2/owl.theme.default.min.css")}}">
+
+{#{% block body %}#}
+{% for message in app.flashes('success') %}
+    <div class="card-body" style="margin-bottom: 20px">
+        <blockquote class="blockquote blockquote-primary">
+            <footer class="blockquote-footer text-success">{{ message }}</footer>
+        </blockquote>
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="card-body" style="margin-bottom: 20px">
+        <blockquote class="blockquote blockquote-primary">
+            <p class="text-danger">ERREUR :</p>
+            <footer class="blockquote-footer text-danger">{{ message }}</footer>
+        </blockquote>
+    </div>
+{% endfor %}
+{% if succes %}
+    {{ form_start(form) }}
+    {{ form_widget(form._token) }}
+    <div class="container">
+        <div class="row" style="padding-top: 20px">
+            <div class="col-cm-12">
+                <h2>Détails de la réservation:</h2>
+                <h3 class="text-secondary"> Espace : {{ reservation.espace.libelle }}</h3>
+
+                <div class="row" style="padding-top: 20px">
+                    <div class="col-md-12">
+                        <label class="text-secondary">JOUR :</label>
+                        {{ form_widget(form.date) }}
+                    </div>
+                </div>
+                
+                <div class="row" style="padding-top: 20px">
+                    <div style="width: 50%;">
+                        <label class="text-secondary">HEURE DE DÉBUT :</label>
+                        {{ form_widget(form.heureDebut) }}
+                    </div>
+
+                    <div style="width: 50%;">
+                        <label class="text-secondary">HEURE DE FIN :</label>
+                        {{ form_widget(form.heureFin) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form_errors(form.heureFin) }}
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 20px">
+                    <div class="col-md-12">
+                        <label class="text-secondary">DÉTAILS DE LA RÉSERVATION :</label>
+                        {{ form_widget(form.libelle) }}
+                    </div>
+                </div>
+                {{ form_widget(form.espace) }}
+                {{ form_widget(form.user) }}
+
+                <div style="padding-top: 15px" id="btnform">
+                    <button id="btnConfirm" type="submit" class="btn btn-success btn-fw">CONFIRMER</button>
+                    <h4 id="temoins" style="display: none" class="">Réservation en cours...</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form,{"render_rest": false}) }}
+{% endif %}
+
+<script>
+
+    function matin() {
+        document.getElementById('reservation_heureDebut').value = 9;
+        document.getElementById('reservation_heureFin').value = 13;
+    }
+
+    function apresMidi() {
+        document.getElementById('reservation_heureDebut').value = 14;
+        document.getElementById('reservation_heureFin').value = 18;
+    }
+
+    function journee() {
+        document.getElementById('reservation_heureDebut').value = 9;
+        document.getElementById('reservation_heureFin').value = 18;
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("btnConfirm").addEventListener("click", function () {
+            if (document.getElementById("reservation_libelle").value !== '') {
+                document.getElementById("btnConfirm").style.display = "none";
+                document.getElementById("temoins").style.display = "block";
+            }
+        });
+
+        // défini l'heure suivant le clic de l'utilisateur
+        var heure = location.search.split('=')[2].split('&')[0].split('/');
+        document.getElementById('reservation_heure_heureDebut').value = heure[0];
+        document.getElementById('reservation_heure_heureFin').value = heure[1];
+
+    });
+
+</script>
+
+{#{% endblock %}#}
