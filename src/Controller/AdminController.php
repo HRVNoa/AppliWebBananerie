@@ -71,8 +71,6 @@ class AdminController extends AbstractController
 
         $bourse->setUser($newmember);
         $bourse->setQuantite(0);
-
-        $entityManager->persist($bourse);
         $entityManager->persist($newmember);
         $entityManager->flush();
         $transport = Transport::fromDsn('smtp://bananeriebot@gmail.com:ramchihfwonbusnl@smtp.gmail.com:587?encryption=tls&auth_mode=login');

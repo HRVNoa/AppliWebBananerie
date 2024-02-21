@@ -46,7 +46,6 @@
                                 <th> Tags </th>
                                 <th> Super Tags </th>
                                 <th> Consulter </th>
-                                <th> Modifier </th>
                                 <th> Supprimer </th>
                             </tr>
                             </thead>
@@ -85,12 +84,6 @@
                                 <td>
                                     <form action="{{ path('independantConsulter', {'id': i.id}) }}" method="get">
                                         <button type="submit" class="btn btn-outline-primary">Consulter</button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="{{ path('independantModifierInfo', {'id': i.id}) }}" method="post">
-                                        <input type="hidden" name="_method" value="UPDATE">
-                                        <button type="submit" class="btn btn-outline-primary">Modifier</button>
                                     </form>
                                 </td>
                                 <td>

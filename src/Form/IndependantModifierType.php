@@ -66,7 +66,8 @@ class IndependantModifierType extends AbstractType
                 'required' => true ,
             ])
             ->add('annuaire', CheckboxType::class,[
-                'required' => false
+                'label' => 'Je souhaite que mon profil apparaisse dans l’annuaire de La Bananerie',
+                'required' => false,
             ]);
         $builder->add('enregistrer', SubmitType::class, ['label' => 'Modifier', 'attr' => ['class' => 'btn btn-primary']]);
     }

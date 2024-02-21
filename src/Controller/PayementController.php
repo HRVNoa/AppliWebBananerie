@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Stripe\Stripe;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -248,21 +249,22 @@ class PayementController extends AbstractController
             $paiement->setDateAchat($date);
         }
         $bourse->setQuantite($bourse->getQuantite() + $quantite);
-
-        $entityManager = $doctrine->getManager();
-        $entityManager->persist($paiement);
-        $entityManager->flush();
-
-        return $this->render('payement/success.html.twig', [
-            'user' => $id,
-        ]);
+        try {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($paiement);
+            $entityManager->flush();
+            $this->addFlash('success', 'Merci ! Votre commande a bien été crediter sur votre compte.');
+        } catch (TransportExceptionInterface $e) {
+            $this->addFlash('error', "Oops! Quelque chose s'est mal passé.");
+        }
+        return $this->redirectToRoute('accueilIndex' , ['user' => $user]);
     }
 
     #[Route('/bourse/acheter/fail/{id}/{quantite}', name: 'payment_fail')]
-    public function achatFail($id): Response{
-        return $this->render('payement/fail.html.twig', [
-            'user' => $id,
-        ]);
+    public function achatFail($id, ManagerRegistry $doctrine): Response{
+        $user = $doctrine->getRepository(User::class)->find($id);
+        $this->addFlash('error', "Oops! Quelque chose s'est mal passé.");
+        return $this->redirectToRoute('accueilIndex' , ['user' => $user]);
     }
 
 
