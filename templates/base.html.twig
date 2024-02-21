@@ -175,14 +175,6 @@
         </nav>
         <div class="main-panel">
             <div class="content-wrapper">
-                <!-- Modal réservation -->
-                <div class="modal modalclose fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <iframe id="modalReservation" src="{{ path('creditAcheter', {'id': app.user.id}) }}" style="width: inherit" height="800" width="180" title="Reservation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
-                        </div>
-                    </div>
-                </div>
                 {% block body %}{% endblock %}
             </div>
         <footer class="footer">

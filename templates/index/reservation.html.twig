@@ -43,32 +43,12 @@
                     </div>
                 </div>
 
-                {% if reservation.espace.typeEspace.categorie.id != 3 %}
-                    <div class="row" style="padding-top: 20px;">
-                        <div class="col-md-12">
-                            <label class="text-secondary">ACTION OBLIGATOIRE :</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div  style="width: 30%;">
-                            <a class="btn btn-success" style="width: 100%;" onclick="matin()">Heure matin</a>
-                        </div>
-                        <div style="width: 40%;">
-                            <a class="btn btn-success" style="width: 100%;" onclick="apresMidi()">Heure après-midi</a>
-                        </div>
-                        <div style="width: 30%;">
-                            <a class="btn btn-success" style="width: 100%;" onclick="journee()">Heure journée</a>
-                        </div>
-                    </div>
-                {% endif %}
                 <div class="row" style="padding-top: 20px">
                     <div style="width: 50%;">
-                        <label class="text-secondary">HEURE DE DÉBUT :</label>
                         {{ form_widget(form.heureDebut) }}
                     </div>
 
                     <div style="width: 50%;">
-                        <label class="text-secondary">HEURE DE FIN :</label>
                         {{ form_widget(form.heureFin) }}
                     </div>
                 </div>
@@ -86,7 +66,11 @@
                 </div>
                 {{ form_widget(form.espace) }}
                 {{ form_widget(form.user) }}
-
+                <div class="row" style="padding-top: 20px">
+                    <div class="col-md-12">
+                        <label class="text-secondary">MODALITÉS DE RÉSERVATION :</label>
+                    </div>
+                </div>
                 <div class="row flex-c-c" style="padding-top: 10px;">
                     <div class="col-lg-12">
                         <div class="table-responsive">
@@ -99,27 +83,34 @@
                                 {% endfor %}
                                 <thead>
                                 <tr>
-                                    {% if un %}
-                                        <th>Par heure</th>
-                                    {% endif %}
-                                    <th>9h-13h / 14h-18h</th>
-                                    <th>9h 18h</th>
+                                    <th>Heures</th>
+                                    <th>Tarif B.Coins</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+
                                 <tr>
+                                    <th>9h-13h</th>
                                     {% set havePrix = false %}
                                     {% for coin in reservation.espace.tarifEspaceTarifs %}
-                                        {% if coin.heure == 1 %}
+                                        {% if coin.heure == 4 %}
                                             {% set havePrix = true %}
                                             <th>
                                                 <h6>{{ coin.prix }} B.Coins</h6>
-{#                                                {% set peu = app.user.bourse.quantite - coin.prix %}#}
-{#                                                <h6 style="color: #f63333;">{% if peu < 0 %}Insuffisant{% endif %}</h6>#}
                                             </th>
                                         {% endif %}
 
                                     {% endfor %}
+                                    {% if havePrix == false %}
+                                        <th colspan="2"><label> Sur devis </label></th>
+                                    {% else %}
+                                        <th>{{ form_widget(form.matin,{'attr': {'onClick': 'matin()'}}) }}</th>
+
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <th>14h-18h</th>
                                     {% for coin in reservation.espace.tarifEspaceTarifs %}
                                         {% if coin.heure == 4 %}
                                             {% set havePrix = true %}
@@ -128,6 +119,13 @@
                                             </th>
                                         {% endif %}
                                     {% endfor %}
+                                    {% if havePrix == true %}
+                                        <th>{{ form_widget(form.apresmidi,{'attr': {'onClick': 'apresMidi()'}}) }}</th>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <th>9h-18h</th>
+                                    {% set havePrix = false %}
                                     {% for coin in reservation.espace.tarifEspaceTarifs %}
                                         {% if coin.heure == 9 %}
                                             {% set havePrix = true %}
@@ -138,6 +136,8 @@
                                     {% endfor %}
                                     {% if havePrix == false %}
                                         <th colspan="2"><label> Sur devis </label></th>
+                                    {% else %}
+                                        <th>{{ form_widget(form.journee,{'attr': {'onClick': 'journee()'}}) }}</th>
                                     {% endif %}
                                 </tr>
                                 </tbody>
@@ -145,9 +145,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div style="padding-top: 15px" id="btnform">
-                    <button id="btnConfirm" type="submit" class="btn btn-success btn-fw">CONFIRMER</button>
+                <div class="row" style="padding-top: 20px">
                     <h4 id="temoins" style="display: none" class="">Réservation en cours...</h4>
                 </div>
             </div>
@@ -175,15 +173,19 @@
 
 
     document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("btnConfirm").addEventListener("click", function () {
-            if (document.getElementById("reservation_libelle").value !== '') {
-                document.getElementById("btnConfirm").style.display = "none";
-                document.getElementById("temoins").style.display = "block";
-            }
-        });
+        for (let i = 0; i < document.getElementsByClassName("btnConfirm").length; i++) {
+            document.getElementsByClassName("btnConfirm")[i].addEventListener("click", function () {
+                if (document.getElementById("reservation_libelle").value !== '') {
+                    for (let j = 0; j < document.getElementsByClassName("btnConfirm").length; j++) {
+                        document.getElementsByClassName("btnConfirm")[j].style.display = "none";
+                    }
+                    document.getElementById("temoins").style.display = "block";
+                }
+            });
+        }
 
         // défini l'heure suivant le clic de l'utilisateur
-        var heure = location.search.split('=')[2].split('&')[0].split('/');
+        var heure = location.search.split('=')[3].split('/');
         document.getElementById('reservation_heureDebut').value = heure[0];
         document.getElementById('reservation_heureFin').value = heure[1];
 

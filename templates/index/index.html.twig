@@ -276,8 +276,6 @@
                         {% endfor %}
                         </tbody>
                     </table>
-
-
                 </div>
             </div>
         </div>
@@ -405,7 +403,7 @@
 
                 document.getElementById('modalReservation').style.display = 'none';
                 document.getElementById('timeReservation').style.display = 'block';
-
+                console.log(document.getElementById('timeReservation'));
                 // Remplir les informations de la modal (salle et horaire sélectionnés)
 
                 var iframe = document.querySelector('#reservationModal iframe');
