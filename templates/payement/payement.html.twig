@@ -41,14 +41,14 @@
         <h2>Acheter des B.Coins</h2>
     </div>
     <div>
-        <p>Votre solde actuelle : {{ bourse.quantite }}</p>
+        <p>Votre solde actuel : {{ bourse.quantite }}</p>
     </div>
     <form id="payment-form" class="forms-sample" method="POST" action="{{ path('creditAcheter', {'id': app.user.id}) }}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-direction: column; height: 100%;">
         <div id="payment-element">
             <!--Stripe.js injects the Payment Element-->
             <div class="form-group">
 
-                <label for="monSelect">Nombre de B.Coins souhaiter</label>
+                <label for="monSelect">Nombre de B.Coins souhaité</label>
                 <select id="monSelect" class="form-control" name="tarifSelect" style="color: white; width: 100%">
                     {% for tarif in tarifs %}
                         <option value="{{ tarif.quantite }}">{{ tarif.quantite }}</option>
@@ -60,7 +60,7 @@
         </div>
         <button id="submit" class="btn btn-primary me-2 boutonValiderAchat">
             <div class="spinner hidden" id="spinner"></div>
-            <span id="button-text">Valider le payement</span>
+            <span id="button-text">Valider le paiement</span>
         </button>
         <div id="payment-message" class="hidden"></div>
         <script>

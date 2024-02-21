@@ -65,7 +65,7 @@
                                 <a class="nav-link" href="/">Mon Profil</a>
                             {% endif %}
                         </li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ asset("design/pages/ui-features/typography.html")}}">Relevé de compte</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('releverCompte', {'id': app.user.id})}}">Relevé de compte</a></li>
                     </ul>
                 </div>
             </li>
@@ -102,6 +102,7 @@
                         <li class="nav-item"> <a class="nav-link" href="{{ path('newmemberLister') }}"> Utilisateurs </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('adminLister') }}"> Admin </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('bourseLister') }}"> Bourse </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ path('payementLister') }}"> Paiement </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ path('contactMousquetaires') }}"> Mousseketères </a></li>
 
                     </ul>

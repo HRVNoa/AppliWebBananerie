@@ -14,7 +14,6 @@
 {% for message in app.flashes('success') %}
     <div class="card-body" style="margin-bottom: 20px">
         <blockquote class="blockquote blockquote-primary">
-            <p class="text-success">SUCCESS :</p>
             <footer class="blockquote-footer text-success">{{ message }}</footer>
         </blockquote>
     </div>
@@ -88,9 +87,64 @@
                 {{ form_widget(form.espace) }}
                 {{ form_widget(form.user) }}
 
-                <h6 style="padding-top: 10px;">Coût : 1 B.Coins</h6>
-                <h6 style="padding-top: 2px;">Votre solde : 25 B.Coins</h6>
-                <h6 style="padding-top: 2px;">Nouveau solde après achat : 6 B.Coins</h6>
+                <div class="row flex-c-c" style="padding-top: 10px;">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered text-md-center" style="table-layout: fixed;">
+                                {% set un = false %}
+                                {% for coin in reservation.espace.tarifEspaceTarifs %}
+                                    {% if coin.heure == 1 %}
+                                        {% set un = true %}
+                                    {% endif %}
+                                {% endfor %}
+                                <thead>
+                                <tr>
+                                    {% if un %}
+                                        <th>Par heure</th>
+                                    {% endif %}
+                                    <th>9h-13h / 14h-18h</th>
+                                    <th>9h 18h</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    {% set havePrix = false %}
+                                    {% for coin in reservation.espace.tarifEspaceTarifs %}
+                                        {% if coin.heure == 1 %}
+                                            {% set havePrix = true %}
+                                            <th>
+                                                <h6>{{ coin.prix }} B.Coins</h6>
+{#                                                {% set peu = app.user.bourse.quantite - coin.prix %}#}
+{#                                                <h6 style="color: #f63333;">{% if peu < 0 %}Insuffisant{% endif %}</h6>#}
+                                            </th>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                    {% for coin in reservation.espace.tarifEspaceTarifs %}
+                                        {% if coin.heure == 4 %}
+                                            {% set havePrix = true %}
+                                            <th>
+                                                <h6>{{ coin.prix }} B.Coins</h6>
+                                            </th>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% for coin in reservation.espace.tarifEspaceTarifs %}
+                                        {% if coin.heure == 9 %}
+                                            {% set havePrix = true %}
+                                            <th>
+                                                <h6>{{ coin.prix }} B.Coins</h6>
+                                            </th>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if havePrix == false %}
+                                        <th colspan="2"><label> Sur devis </label></th>
+                                    {% endif %}
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
                 <div style="padding-top: 15px" id="btnform">
                     <button id="btnConfirm" type="submit" class="btn btn-success btn-fw">CONFIRMER</button>
@@ -132,6 +186,7 @@
         var heure = location.search.split('=')[2].split('&')[0].split('/');
         document.getElementById('reservation_heureDebut').value = heure[0];
         document.getElementById('reservation_heureFin').value = heure[1];
+
     });
 
 </script>

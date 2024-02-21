@@ -32,6 +32,9 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?User $user = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $quantite = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Reservation
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): static
+    {
+        $this->quantite = $quantite;
 
         return $this;
     }

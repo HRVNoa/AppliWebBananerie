@@ -6,14 +6,18 @@ use App\Entity\Bourse;
 use App\Entity\Entreprise;
 use App\Entity\Independant;
 use App\Entity\Paiement;
+use App\Entity\Reservation;
 use App\Entity\Tarif;
 use App\Entity\User;
+use App\Form\PaiementAjouterType;
+use App\Form\PaiementModifierType;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Stripe\Stripe;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +31,115 @@ class PayementController extends AbstractController
     public function __construct(UrlGeneratorInterface $generator){
         $this->generator = $generator;
     }
+
+    public function consulterPayement(ManagerRegistry $doctrine, $id){
+        $paiement = $doctrine->getRepository(Paiement::class)->find($id);
+
+        if(!$paiement){
+            throw $this->createNotFoundException('Aucun paiement as été trouver avec le numéro' . $id);
+        }
+
+        return $this->render('payement/consulter.html.twig', [
+            'paiement' => $paiement,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
+    }
+
+    public function consulterComptePayement(ManagerRegistry $doctrine, $id){
+
+    }
+
+    public function listerPayement(ManagerRegistry $doctrine){
+        $paiements = $doctrine->getRepository(Paiement::class)->findBy([], ['dateAchat' => 'DESC']);
+
+        return $this->render('payement/lister.html.twig', [
+            'paiements' => $paiements,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
+    }
+
+    public function listerComptePayement(ManagerRegistry $doctrine, Security $security, $id){
+        //$remboursements = $doctrine->getRepository(Remboursement::class)->findBy(['user' => $id], ['dateRemboursement' => 'DESC']);
+        $reservations = $doctrine->getRepository(Reservation::class) ->findBy(['user' => $id], ['date' => 'DESC']);
+        $paiements = $doctrine->getRepository(Paiement::class)->findBy(['user' => $id], ['dateAchat' => 'DESC']);
+        $user = $doctrine->getRepository(User::class)->find($id);
+        $currentUser = $security->getUser();
+
+        if ($currentUser !== $user) {
+            // Si les ID ne correspondent pas, redirigez l'utilisateur vers sa propre page
+            $this->addFlash('error', 'Vous n\'êtes pas autorisé à voir le relevé de compte d\'un autre utilisateur.');
+            return $this->redirectToRoute('accueilIndex');
+        }
+
+        foreach($paiements as $paiement){
+            $paiement->type = 'paiement';
+        }
+        foreach($reservations as $reservation){
+            $reservation->type = 'reservation';
+        }
+        /*
+        foreach($remboursements as $remboursement){
+            $remboursement->type = 'remboursement';
+        }
+        */
+        $quantite = $reservation->getQuantite();
+        $items = array_merge($paiements, $reservations, /*$remboursements*/);
+
+
+        return $this->render('payement/releverCompteLister.html.twig', [
+            'items' => $items,
+            'quantite' => $quantite,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
+    }
+
+    public function ajouterPayement(ManagerRegistry $doctrine, Request $request){
+        $paiement = new Paiement();
+
+        $form = $this->createForm(PaiementAjouterType::class, $paiement);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $paiement = $form->getData();
+
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($paiement);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('payementLister', [
+                'paiement' => $paiement,
+                'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true)
+            ]);
+        } else {
+            return $this->render('payement/ajouter.html.twig', array('form' => $form->createView()));
+        }
+    }
+
+    public function modifierPayement(ManagerRegistry $doctrine, Request $request, $id){
+        $paiement = $doctrine->getRepository(Paiement::class)->find($id);
+
+        if(!$paiement){
+            throw $this->createNotFoundException('Aucun paiement trouvé avec le numéro ' . $id);
+        } else {
+            $form = $this->createForm(PaiementModifierType::class, $paiement);
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()){
+                $paiement = $form->getData();
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($paiement);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('payementLister', [
+                    'paiement' => $paiement,
+                    'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true)
+                ]);
+            } else{
+                return $this->render('payement/modifier.html.twig', array('form' => $form->createView()));
+            }
+        }
+    }
+
     public function startPayement(ManagerRegistry $doctrine, Request $request, $id): Response
     {
         $tarifs = $doctrine->getRepository(Tarif::class)->findAll();
@@ -116,7 +229,7 @@ class PayementController extends AbstractController
             $paiement->setMetier($independant->getMetier());
             $paiement->setNom($independant->getNom());
             $paiement->setPrenom($independant->getPrenom());
-            $paiement->setEntreprise(null);
+            $paiement->setEntreprise($independant->getEntreprise());
             $paiement->setEmail($independant->getEmail());
             $paiement->setTel($independant->getTel());
             $paiement->setAdresse($independant->getAdresse());
