@@ -2,22 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Bourse;
+use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Entreprise;
 use App\Entity\Espace;
 use App\Entity\Independant;
 use App\Entity\Media;
 use App\Entity\Reservation;
-use App\Entity\TarifEspaceTarif;
-use App\Entity\TypeEspace;
-use App\Entity\User;
 use App\Form\ReservationType;
-use App\Form\TarifEspaceType;
 use DateTime;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -26,8 +23,6 @@ use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
-use function PHPUnit\Framework\isEmpty;
-use function PHPUnit\Framework\returnArgument;
 
 class IndexController extends AbstractController
 {
@@ -87,11 +82,14 @@ class IndexController extends AbstractController
                             if ($reservation->getUser()->getIndependant() != null){
                                 $inde = $doctrine->getRepository(Independant::class)->findOneBy(['user' => $reservation->getUser()]);
                                 $destName = $inde->getNom().' '.$inde->getPrenom();
+                                $user = $inde;
                             }else if ($reservation->getUser()->getEntreprise() != null){
                                 $entr = $doctrine->getRepository(Entreprise::class)->findOneBy(['user' => $reservation->getUser()]);
                                 $destName = $entr->getNom().' '.$entr->getPrenom();
+                                $user = $entr;
                             }else{
                                 $destName = 'Admin';
+                                $user = 'Admin';
                             }
 
                             $entityManager = $doctrine->getManager();
@@ -99,6 +97,50 @@ class IndexController extends AbstractController
                             $entityManager->flush();
 
                             $this->addFlash('success', 'Merci ! La réservation a bien été annulée');
+
+                            //Rembourssement de B.coins
+
+                            try {
+                                if ($user != 'Admin'){
+                                    $nbHeure = $reservation->getHeureFin() - $reservation->getHeureDebut();
+                                    if ($nbHeure < 4){
+                                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                            if ($tarifs->getHeure() == 1){
+                                                $prix = $tarifs->getPrix() * $nbHeure;
+                                            }
+                                        }
+                                    }elseif ($nbHeure < 9){
+                                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                            if ($tarifs->getHeure() == 4){
+                                                $prix = $tarifs->getPrix();
+                                            }
+                                        }
+                                        $nbHeure = $nbHeure - 4;
+                                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                            if ($tarifs->getHeure() == 1){
+                                                $prix = $tarifs->getPrix() * $nbHeure + $prix;
+                                            }
+                                        }
+                                    }elseif ($nbHeure = 9){
+                                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                            if ($tarifs->getHeure() == 9){
+                                                $prix = $tarifs->getPrix();
+                                            }
+                                        }
+                                    }
+                                    $bourse = $doctrine->getRepository(Bourse::class)->find($reservation->getUser()->getBourse());
+                                    $solde = $reservation->getUser()->getBourse()->getQuantite();
+                                    $reservation->getUser()->getBourse()->setQuantite($solde+$prix);
+
+                                    $entityManager->persist($bourse);
+                                    $entityManager->flush();
+                                }
+
+                                $this->addFlash('success', 'Vous avez bien été rembourser');
+                            }catch (Exception $e){
+                                $this->addFlash('error', 'Oops! Quelque chose s\'est mal passé et nous avons pas pu vous rembourser.');
+                                $this->addFlash('error', 'La Bananerie a été notifié de cette erreur. Contactez La Bananerie pour confirmer votre non remboursement');
+                            }
 
                             // Envoi du mail pour confirmation
                             $transport = Transport::fromDsn('smtp://bananeriebot@gmail.com:ramchihfwonbusnl@smtp.gmail.com:587?encryption=tls&auth_mode=login');
@@ -130,7 +172,7 @@ class IndexController extends AbstractController
                                             <li>Heure : '. $reservation->getHeureDebut() .'h à '. $reservation->getHeureFin() .'h</li>
                                             <li>Detail de votre réservation : '.$reservation->getLibelle().'</li>
                                         </ul>
-                                        <p>Un remboursement de X B. COINS sera effectué sur votre compte espace membre. </p>
+                                        <p>Un remboursement de '. $prix .' B. COINS sera effectué sur votre compte espace membre. </p>
                                         <p>À très bientôt à La Bananerie ! </p>
                                     </div>
                                     <div style="
@@ -210,6 +252,7 @@ class IndexController extends AbstractController
     public function showFormReservation(SessionInterface $session, Request $request, ManagerRegistry $doctrine,Security $security)
     {
         $succes = $request->query->get('succes');
+        $user = $doctrine->getRepository(User::class)->find($security->getUser());
 
         $reservation = new Reservation();
         $id = $request->query->get('id', null);
@@ -242,19 +285,70 @@ class IndexController extends AbstractController
             if ($reservation->getUser()->getIndependant() != null){
                 $inde = $doctrine->getRepository(Independant::class)->findOneBy(['user' => $reservation->getUser()]);
                 $destName = $inde->getNom().' '.$inde->getPrenom();
+                $user = $inde;
             }else if ($reservation->getUser()->getEntreprise() != null){
                 $entr = $doctrine->getRepository(Entreprise::class)->findOneBy(['user' => $reservation->getUser()]);
                 $destName = $entr->getNom().' '.$entr->getPrenom();
+                $user = $entr;
             }else{
                 $destName = 'Admin';
+                $user = 'Admin';
             }
 
             $data = $form->getData();
 
+            //Débit B.Coins
+            try {
+
+                if ($user != 'Admin'){
+                    $nbHeure = $reservation->getHeureFin() - $reservation->getHeureDebut();
+
+                    if ($nbHeure < 4){
+                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                            if ($tarifs->getHeure() == 1){
+                                $prix = $tarifs->getPrix() * $nbHeure;
+                            }
+                        }
+                    }elseif ($nbHeure < 9){
+                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                            if ($tarifs->getHeure() == 4){
+                                $prix = $tarifs->getPrix();
+                            }
+                        }
+                        $nbHeure = $nbHeure - 4;
+                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                            if ($tarifs->getHeure() == 1){
+                                $prix = $tarifs->getPrix() * $nbHeure + $prix;
+                            }
+                        }
+                    }elseif ($nbHeure = 9){
+                        foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                            if ($tarifs->getHeure() == 9){
+                                $prix = $tarifs->getPrix();
+                            }
+                        }
+                    }
+                    $APayer = $reservation->getUser()->getBourse()->getQuantite()-$prix;
+
+                    if ($APayer < 0){
+                        $this->addFlash('error', 'Vous n\'avez pas un solde suffisant pour cet espace');
+                        return $this->render('index/reservation.html.twig', [
+                            'succes' => false
+                        ]);
+                    }else{
+                        $reservation->getUser()->getBourse()->setQuantite($APayer);
+                    }
+
+                }
+
+            }catch (Exception $e){
+                $this->addFlash('error', 'Oops! Quelque chose s\'est mal passé et nous avons pas pu vous débiter.');
+                $this->addFlash('error', 'La Bananerie a été notifié de cette erreur.');
+            }
+
             $entityManager = $doctrine->getManager();
             $entityManager->persist($data);
             $entityManager->flush();
-
 
             $this->addFlash('success', 'Merci ! La réservation a bien été pris en compte.');
 
@@ -322,10 +416,25 @@ class IndexController extends AbstractController
                 ]);
             }
         }else{
+            foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarif){
+                if ($tarif->getHeure() == 1){
+                    $unite = $tarif->getPrix();
+                }elseif ($tarif->getHeure() == 4){
+                    $demi = $tarif->getPrix();
+                }elseif ($tarif->getHeure() == 9){
+                    $journee = $tarif->getPrix();
+                }
+            }
+            if (!isset($unite)){
+                $unite = false;
+            }
             return $this->render('index/reservation.html.twig', [
                 'form' => $form,
                 'reservation' => $reservation,
-                'succes' => $succes
+                'succes' => $succes,
+                'unite' => $unite,
+                'demi' => $demi,
+                'journee' => $journee,
             ]);
         }
     }
