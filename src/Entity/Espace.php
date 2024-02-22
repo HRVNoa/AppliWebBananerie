@@ -40,12 +40,16 @@ class Espace
     #[ORM\OneToMany(mappedBy: 'espace', targetEntity: Remboursement::class)]
     private Collection $remboursements;
 
+    #[ORM\OneToMany(mappedBy: 'espace', targetEntity: ReservationLog::class)]
+    private Collection $reservationLogs;
+
     public function __construct()
     {
         $this->equipementEspaces = new ArrayCollection();
         $this->reservations = new ArrayCollection();
         $this->tarifEspaceTarifs = new ArrayCollection();
         $this->remboursements = new ArrayCollection();
+        $this->reservationLogs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -215,6 +219,36 @@ class Espace
             // set the owning side to null (unless already changed)
             if ($remboursement->getEspace() === $this) {
                 $remboursement->setEspace(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReservationLog>
+     */
+    public function getReservationLogs(): Collection
+    {
+        return $this->reservationLogs;
+    }
+
+    public function addReservationLog(ReservationLog $reservationLog): static
+    {
+        if (!$this->reservationLogs->contains($reservationLog)) {
+            $this->reservationLogs->add($reservationLog);
+            $reservationLog->setEspace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservationLog(ReservationLog $reservationLog): static
+    {
+        if ($this->reservationLogs->removeElement($reservationLog)) {
+            // set the owning side to null (unless already changed)
+            if ($reservationLog->getEspace() === $this) {
+                $reservationLog->setEspace(null);
             }
         }
 
