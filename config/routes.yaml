@@ -8,6 +8,9 @@ choixInscription:
     path : /choixinscription
     controller : App\Controller\IndexController::choix
 
+terme&condition,:
+    path : /terme&condition
+    controller : App\Controller\IndexController::pagetermecondition
 
 adminAjouter:
     path : /admin/Register

@@ -58,7 +58,7 @@ class IndependantContactType extends AbstractType
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Message',
-                'attr' => ['placeholder' => 'Ecrire votre message'],
+                'attr' => ['placeholder' => 'Votre message'],
                 'constraints' => [
                     new Length([
                         'min' => 10,
