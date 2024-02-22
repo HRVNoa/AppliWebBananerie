@@ -9,6 +9,9 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
@@ -21,6 +24,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email',TextType::class ,[
                 'attr'=>['class'=>"form-control p_input text-white"],
+                'data' => $options['email'],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                                 'mapped' => false,
@@ -55,13 +59,18 @@ class RegistrationFormType extends AbstractType
                             'attr' => ['class'=>"form-control p_input text-white"],
                         ],
                         'invalid_message' => 'Les mots de passe doivent être les mêmes.',
-                    ]);
+
+
+                ]);
+
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'email' => '',
         ]);
     }
 }

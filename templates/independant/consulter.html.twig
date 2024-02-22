@@ -83,8 +83,7 @@
     margin-top: -15%;
     }
         .metiersecondaire{
-            padding: 14%;
-            margin-top: -5%;
+
         }
         .metiersecondaire h6{
             color: #818182;
@@ -171,13 +170,6 @@
                                     Changer de photo
                                 </a>
                             </div>
-                            {% if independant.metiersecondaire != null %}
-                            <div class="metiersecondaire">
-                                <h6>
-                            {{ independant.metiersecondaire.libelle}}
-                                </h6>
-                            </div>
-                            {% endif %}
                         </div>
 
                         <div class="col-md-8">
@@ -191,7 +183,13 @@
                                 <h6>
                                     {{ independant.metier.libelle }}
                                 </h6>
-
+                                {% if independant.metiersecondaire != null %}
+                                    <div class="metiersecondaire">
+                                        <h6>
+                                            {{ independant.metiersecondaire.libelle}}
+                                        </h6>
+                                    </div>
+                                {% endif %}
                                 <button type="button" class="btn btn-social-icon btn-facebook" onclick='window.location.href="{{ independant.facebook }}"'><i style="font-size: 25px" class="mdi mdi-facebook"></i></button>
                                 <button type="button" class="btn btn-social-icon btn-youtube" onclick='window.location.href="{{ independant.youtube }}"'><i style="font-size: 25px" class="mdi mdi-youtube"></i></button>
                                 <button type="button" class="btn btn-social-icon btn-insta" onclick='window.location.href="{{ independant.instagram }}"'><i style="font-size: 25px" class="mdi mdi-instagram"></i></button>
@@ -330,13 +328,6 @@
                             <img src="{{ asset('membre/photodeprofil/') }}{{ independant.photodeprofil }}" alt="" class="pdp"/>
                         </div>
                         {% endif %}
-                        {% if independant.metiersecondaire != null %}
-                        <div class="metiersecondaire">
-                            <h6>
-                                 {{ independant.metiersecondaire.libelle}}
-                            </h6>
-                        </div>
-                        {% endif %}
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head mb-3">
@@ -349,6 +340,13 @@
                             <h6>
                                 {{ independant.metier.libelle }}
                             </h6>
+                            {% if independant.metiersecondaire != null %}
+                                <div class="metiersecondaire">
+                                    <h6>
+                                        {{ independant.metiersecondaire.libelle}}
+                                    </h6>
+                                </div>
+                            {% endif %}
                             {% if independant.facebook|length > 0 %}
                                 <button type="button" class="btn btn-social-icon btn-facebook" onclick='window.location.href="{{ independant.facebook }}"'><i style="font-size: 25px" class="mdi mdi-facebook"></i></button>
                             {% endif %}

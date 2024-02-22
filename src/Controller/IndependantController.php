@@ -88,7 +88,7 @@ class IndependantController extends AbstractController
 
             // Stockez l'ID de l'independant dans la session
             $session->set('independant_id', $independant->getId());
-
+            $session->set('user_email', $independant->getEmail());
             // Redirigez vers le formulaire d'inscription de l'utilisateur
             return $this->redirectToRoute('app_register', [
                 'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
@@ -135,12 +135,11 @@ class IndependantController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $independant = $entityManager->getRepository(Independant::class)->find($id);
-        $user = $independant->getUser();
-
+        $independant->setUser(null);
         if (!$independant) {
             throw $this->createNotFoundException('Aucun independant trouvé avec le numéro '.$id);
         }
-        $entityManager->remove($user);
+
         $entityManager->remove($independant);
         $entityManager->flush();
         return $this->redirectToRoute('independantLister', [
