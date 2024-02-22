@@ -37,11 +37,15 @@ class Espace
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\OneToMany(mappedBy: 'espace', targetEntity: Remboursement::class)]
+    private Collection $remboursements;
+
     public function __construct()
     {
         $this->equipementEspaces = new ArrayCollection();
         $this->reservations = new ArrayCollection();
         $this->tarifEspaceTarifs = new ArrayCollection();
+        $this->remboursements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,6 +187,36 @@ class Espace
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Remboursement>
+     */
+    public function getRemboursements(): Collection
+    {
+        return $this->remboursements;
+    }
+
+    public function addRemboursement(Remboursement $remboursement): static
+    {
+        if (!$this->remboursements->contains($remboursement)) {
+            $this->remboursements->add($remboursement);
+            $remboursement->setEspace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRemboursement(Remboursement $remboursement): static
+    {
+        if ($this->remboursements->removeElement($remboursement)) {
+            // set the owning side to null (unless already changed)
+            if ($remboursement->getEspace() === $this) {
+                $remboursement->setEspace(null);
+            }
+        }
 
         return $this;
     }
