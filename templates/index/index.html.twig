@@ -285,12 +285,11 @@
             <div class="card-body">
                 <h4>Mes réservations</h4>
                 {% for userReservation in userReservations %}
-                    {% set duree = userReservation.heureFin|date('H') - userReservation.heureDebut|date('H') %}
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-lg-12 my-auto flex-c-c" style="flex-direction: column">
                         <div class="flex-c-c">
                             <h5 class="mb-0">{{ userReservation.espace.libelle }}</h5>
-                            <p class="text-warning ms-2 mb-0 font-weight-medium">{% for i in userReservation.espace.tarifEspaceTarifs %}{% if i.heure == duree %}{{ i.prix }}{% endif %}{% endfor%} BananaCoins</p>
+                            <p class="text-warning ms-2 mb-0 font-weight-medium">{{ userReservation.quantite }} BananaCoins</p>
                         </div>
                         <h6 class="text-muted font-weight-normal">Le {{ userReservation.date|date('d/m/Y') }} de {{ userReservation.heureDebut }}h à {{ userReservation.heureFin }}h </h6>
                         <h6 class="text-info font-weight-normal clickableDetail" style="cursor: pointer" data-src="{{ path('detailReservation', {'id': userReservation.id}) }}">Plus de détails</h6>

@@ -48,9 +48,9 @@ class ReservationType extends AbstractType
                 'disabled' => true,
                 'attr'=>['style'=>'display:none;'],
             ])
-            ->add('matin', SubmitType::class, ['attr' => ['class' => 'btn-sm btn-success btn-fw btnConfirm'],'label' => 'Matin'])
-            ->add('apresmidi', SubmitType::class, ['attr' => ['class' => 'btn-sm btn-success btn-fw btnConfirm'],'label' => 'ApresMidi'])
-            ->add('journee', SubmitType::class, ['attr' => ['class' => 'btn-sm btn-success btn-fw btnConfirm'],'label' => 'Journée'])
+            ->add('matin', SubmitType::class, ['attr' => ['class' => 'btn-sm btn-success btn-fw btnConfirm'],'label' => 'Choisir'])
+            ->add('apresmidi', SubmitType::class, ['attr' => ['class' => 'btn-sm btn-success btn-fw btnConfirm'],'label' => 'Choisir'])
+            ->add('journee', SubmitType::class, ['attr' => ['class' => 'btn-sm btn-success btn-fw btnConfirm'],'label' => 'Choisir'])
         ;
 
     }

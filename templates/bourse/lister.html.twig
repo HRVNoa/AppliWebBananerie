@@ -33,12 +33,6 @@
                                 <td>{{ bourse.user.email }}</td>
                                 <td>{{ bourse.quantite }}</td>
                                 <td>
-                                    <a href="{{ path('bourseConsulter', {'id': bourse.id}) }}" class="btn btn-primary btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                        </span>
-                                        <span class="text">Consulter</span>
-                                    </a>
                                     <a href="{{ path('bourseModifier', {'id': bourse.id}) }}" class="btn btn-warning btn-icon-split btn-sm">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-exclamation-triangle"></i>
