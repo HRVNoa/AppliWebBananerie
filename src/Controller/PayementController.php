@@ -7,12 +7,11 @@ use App\Entity\Entreprise;
 use App\Entity\Independant;
 use App\Entity\Paiement;
 use App\Entity\Remboursement;
-use App\Entity\Reservation;
+use App\Entity\ReservationLog;
 use App\Entity\Tarif;
 use App\Entity\User;
 use App\Form\PaiementAjouterType;
 use App\Form\PaiementModifierType;
-use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -57,7 +56,7 @@ class PayementController extends AbstractController
 
     public function listerComptePayement(ManagerRegistry $doctrine, Security $security, $id){
         $remboursements = $doctrine->getRepository(Remboursement::class)->findBy(['user' => $id], ['date' => 'DESC']);
-        $reservations = $doctrine->getRepository(Reservation::class) ->findBy(['user' => $id], ['date' => 'DESC']);
+        $reservations = $doctrine->getRepository(ReservationLog::class) ->findBy(['user' => $id], ['date' => 'DESC']);
         $paiements = $doctrine->getRepository(Paiement::class)->findBy(['user' => $id], ['dateAchat' => 'DESC']);
         $user = $doctrine->getRepository(User::class)->find($id);
         $currentUser = $security->getUser();

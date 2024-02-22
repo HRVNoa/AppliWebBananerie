@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Bourse;
 use App\Entity\Remboursement;
+use App\Entity\ReservationLog;
 use App\Entity\User;
 use App\Form\ReservationHeureType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -255,6 +256,7 @@ class IndexController extends AbstractController
 
         //récupe / création des objets en base
         $reservation = new Reservation();
+        $reservationLog = new ReservationLog();
         $user = $doctrine->getRepository(User::class)->find($security->getUser());
         $espace = $doctrine->getRepository(Espace::class)->find($id);
 
@@ -282,6 +284,10 @@ class IndexController extends AbstractController
         $reservation->setDate(new DateTime($date));
         $reservation->setUser($user);
 
+        $reservationLog->setEspace($espace);
+        $reservationLog->setDate(new DateTime($date));
+        $reservationLog->setUser($user);
+
         if ($reservation->getEspace()->getTypeEspace()->getCategorie()->getId() != 3){
             // Réservation demi journée ou journée
             $form = $this->createForm(ReservationType::class, $reservation);
@@ -296,6 +302,8 @@ class IndexController extends AbstractController
                     if (count($reservationCount) === 0){
                         $reservation->setHeureDebut(9);
                         $reservation->setHeureFin(13);
+                        $reservationLog->setHeureDebut(9);
+                        $reservationLog->setHeureFin(13);
                         foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
                             if ($tarifs->getHeure() == 4){
                                 $prix = $tarifs->getPrix();
@@ -317,6 +325,8 @@ class IndexController extends AbstractController
                     if (count($reservationCount) === 0){
                         $reservation->setHeureDebut(14);
                         $reservation->setHeureFin(18);
+                        $reservationLog->setHeureDebut(14);
+                        $reservationLog->setHeureFin(18);
                         foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
                             if ($tarifs->getHeure() == 4){
                                 $prix = $tarifs->getPrix();
@@ -338,6 +348,8 @@ class IndexController extends AbstractController
                     if (count($reservationCount) === 0){
                         $reservation->setHeureDebut(9);
                         $reservation->setHeureFin(18);
+                        $reservationLog->setHeureDebut(9);
+                        $reservationLog->setHeureFin(18);
                         foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
                             if ($tarifs->getHeure() == 9){
                                 $prix = $tarifs->getPrix();
@@ -373,6 +385,7 @@ class IndexController extends AbstractController
                 }
                 try{
                     $reservation->setQuantite($prix);
+                    $reservationLog->setQuantite($prix);
                     $bourseApres = $reservation->getUser()->getBourse()->getQuantite()-$prix;
 
                     if ($user != 'Admin'){
@@ -394,8 +407,12 @@ class IndexController extends AbstractController
                 }
 
                 if ($stop){
+
+                    $reservationLog->setLibelle($reservation->getLibelle());
+
                     $entityManager = $doctrine->getManager();
                     $entityManager->persist($reservation);
+                    $entityManager->persist($reservationLog);
                     $entityManager->flush();
 
                     $this->addFlash('success', 'Merci ! La réservation a bien été pris en compte.');
@@ -546,8 +563,12 @@ class IndexController extends AbstractController
                     }
 
                     if ($stop){
+
+                        $reservationLog->setLibelle($reservation->getLibelle());
+                        
                         $entityManager = $doctrine->getManager();
                         $entityManager->persist($reservation);
+                        $entityManager->persist($reservationLog);
                         $entityManager->flush();
 
                         $this->addFlash('success', 'Merci ! La réservation a bien été pris en compte.');

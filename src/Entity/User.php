@@ -55,12 +55,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Remboursement::class)]
     private Collection $remboursements;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ReservationLog::class)]
+    private Collection $reservationLogs;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
         $this->paiements = new ArrayCollection();
         $this->inscriptions = new ArrayCollection();
         $this->remboursements = new ArrayCollection();
+        $this->reservationLogs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -325,6 +329,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($remboursement->getUser() === $this) {
                 $remboursement->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReservationLog>
+     */
+    public function getReservationLogs(): Collection
+    {
+        return $this->reservationLogs;
+    }
+
+    public function addReservationLog(ReservationLog $reservationLog): static
+    {
+        if (!$this->reservationLogs->contains($reservationLog)) {
+            $this->reservationLogs->add($reservationLog);
+            $reservationLog->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservationLog(ReservationLog $reservationLog): static
+    {
+        if ($this->reservationLogs->removeElement($reservationLog)) {
+            // set the owning side to null (unless already changed)
+            if ($reservationLog->getUser() === $this) {
+                $reservationLog->setUser(null);
             }
         }
 
