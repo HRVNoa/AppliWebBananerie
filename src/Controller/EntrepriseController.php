@@ -71,6 +71,7 @@ class EntrepriseController extends AbstractController
 
             // Stockez l'ID de l'entreprise dans la session
             $session->set('entreprise_id', $entreprise->getId());
+            $session->set('user_email', $entreprise->getEmail());
 
             // Redirigez vers le formulaire d'inscription de l'utilisateur
             return $this->redirectToRoute('app_register', [
@@ -119,13 +120,11 @@ class EntrepriseController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $entreprise = $entityManager->getRepository(Entreprise::class)->find($id);
-        $user = $entreprise->getUser();
-        //$bourse = $user->getBourse();
+        $entreprise->setUser(null);
         if (!$entreprise) {
             throw $this->createNotFoundException('Aucun entreprise trouvé avec le numéro '.$id);
         }
         //$entityManager->remove($bourse);
-        $entityManager->remove($user);
         $entityManager->remove($entreprise);
         $entityManager->flush();
         return $this->redirectToRoute('entrepriseLister', [

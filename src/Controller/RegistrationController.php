@@ -27,7 +27,8 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ManagerRegistry $doctrine ,SessionInterface $session): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $email = $session->get('user_email');
+        $form = $this->createForm(RegistrationFormType::class, $user, ['email'=> $email]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -102,6 +103,7 @@ class RegistrationController extends AbstractController
             text-align: center;">
             <h1>Bonjour !</h1>
             <p>Votre demande d’inscription à l’espace membre de La Bananerie a bien été prise en compte. </p>
+            <p>L’administrateur s’occupe de confirmer votre accès à la plateforme dans les plus brefs délais.</p>
             <p>Pour toute réservation ou demande urgente, n’hésitez pas à contacter l’équipe par mail à icilabananerie@gmail.com ou par téléphone au 06 80 81 74 79.</p>
             <p>A très bientôt à La Bananerie !</p>
             <p>
