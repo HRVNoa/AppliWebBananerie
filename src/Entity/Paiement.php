@@ -21,9 +21,6 @@ class Paiement
     private ?Tarif $tarif = null;
 
     #[ORM\ManyToOne(inversedBy: 'paiements')]
-    private ?Bourse $bourse = null;
-
-    #[ORM\ManyToOne(inversedBy: 'paiements')]
     private ?User $user = null;
 
     #[ORM\Column(length: 70)]
@@ -77,18 +74,6 @@ class Paiement
     public function setTarif(?Tarif $tarif): static
     {
         $this->tarif = $tarif;
-
-        return $this;
-    }
-
-    public function getBourse(): ?Bourse
-    {
-        return $this->bourse;
-    }
-
-    public function setBourse(?Bourse $bourse): static
-    {
-        $this->bourse = $bourse;
 
         return $this;
     }

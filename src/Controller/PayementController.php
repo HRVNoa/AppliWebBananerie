@@ -45,10 +45,6 @@ class PayementController extends AbstractController
         ]);
     }
 
-    public function consulterComptePayement(ManagerRegistry $doctrine, $id){
-
-    }
-
     public function listerPayement(ManagerRegistry $doctrine){
         $paiements = $doctrine->getRepository(Paiement::class)->findBy([], ['dateAchat' => 'DESC']);
 
@@ -223,7 +219,6 @@ class PayementController extends AbstractController
         $tarif = $doctrine->getRepository(Tarif::class)->findOneBy(['quantite' => $quantite]);
         if($user == $independant->getUser()){
             $paiement->setTarif($tarif);
-            $paiement->setBourse($bourse);
             $paiement->setUser($user);
             $paiement->setStatut($independant->getStatut());
             $paiement->setMetier($independant->getMetier());
@@ -236,7 +231,6 @@ class PayementController extends AbstractController
             $paiement->setDateAchat($date);
         } elseif($user == $entreprise->getUser()){
             $paiement->setTarif($tarif);
-            $paiement->setBourse($bourse);
             $paiement->setUser($user);
             $paiement->setStatut($entreprise->getStatut());
             $paiement->setMetier($entreprise->getMetier());
@@ -266,6 +260,4 @@ class PayementController extends AbstractController
         $this->addFlash('error', "Oops! Quelque chose s'est mal passé.");
         return $this->redirectToRoute('accueilIndex' , ['user' => $user]);
     }
-
-
 }
