@@ -21,6 +21,7 @@
         .aspectlogo{
             object-fit: cover;
             aspect-ratio: 500/166;
+            height: 100%;
         }
 
     </style>
@@ -31,14 +32,14 @@
     <!-- partial:partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <a class="sidebar-brand brand-logo" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/admin/logo/BlancSimple.png")}}" alt="logo" class="aspectlogo"/></a>
-            <a class="sidebar-brand brand-logo-mini" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/admin/logo/BlancSimple.png")}}" alt="logo" /></a>
+            <a class="sidebar-brand brand-logo" href="{{ path('accueilIndex') }}" style="height: 100%"><img src="{{ asset("design/admin/logo/BlancSimple.png")}}" alt="logo" style="aspect-ratio: 500/166; object-fit: cover; height: 100%"/></a>
+            <a class="sidebar-brand brand-logo-mini" href="{{ path('accueilIndex') }}" style="height: 100%"><img src="{{ asset("design/admin/logo/BlancCourt.png")}}" alt="logo" style="aspect-ratio: 500/166; -ms-transform: scale(5);-webkit-transform: scale(5); transform: scale(5); object-fit: cover;"/></a>
         </div>
         <ul class="nav">
             <li class="nav-item menu-items">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="{{ path('accueilIndex') }}">
               <span class="menu-icon">
-                <i class="mdi mdi-table" style="font-size: 20px"></i>
+                <i class="mdi mdi-table-large" style="font-size: 20px"></i>
               </span>
                     <span class="menu-title">Réservations</span>
                 </a>
@@ -116,7 +117,7 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo-mini" href="{{ path('accueilIndex') }}"><img src="{{ asset("design/assets/images/logo-mini.svg")}}" alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" href="{{ path('accueilIndex') }}" style="height: 100%"><img src="{{ asset("design/admin/logo/BlancCourt.png")}}" alt="logo" style="aspect-ratio: 500/166; -ms-transform: scale(5);-webkit-transform: scale(5); transform: scale(5); object-fit: cover;"/></a>
             </div>
             <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">

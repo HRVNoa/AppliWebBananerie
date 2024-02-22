@@ -79,8 +79,6 @@ class PayementController extends AbstractController
             $remboursement->type = 'remboursement';
         }
 
-        $quantite = $reservation->getQuantite();
-        $quantite2 = $remboursement->getQuantite();
         $items = array_merge($paiements, $reservations, $remboursements);
 
 
