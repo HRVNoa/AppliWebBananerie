@@ -27,12 +27,8 @@ class Bourse
     #[ORM\OneToOne(inversedBy: 'bourse', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'bourse', targetEntity: Paiement::class)]
-    private Collection $paiements;
 
-    public function __construct()
-    {
-        $this->paiements = new ArrayCollection();
+    public function __construct(){
     }
 
     public function getId(): ?int
@@ -60,36 +56,6 @@ class Bourse
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Paiement>
-     */
-    public function getPaiements(): Collection
-    {
-        return $this->paiements;
-    }
-
-    public function addPaiement(Paiement $paiement): static
-    {
-        if (!$this->paiements->contains($paiement)) {
-            $this->paiements->add($paiement);
-            $paiement->setBourse($this);
-        }
-
-        return $this;
-    }
-
-    public function removePaiement(Paiement $paiement): static
-    {
-        if ($this->paiements->removeElement($paiement)) {
-            // set the owning side to null (unless already changed)
-            if ($paiement->getBourse() === $this) {
-                $paiement->setBourse(null);
-            }
-        }
 
         return $this;
     }

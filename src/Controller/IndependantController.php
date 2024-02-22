@@ -34,7 +34,6 @@ class IndependantController extends AbstractController
     {
         return $this->render('independant/index.html.twig', [
             'controller_name' => 'IndependantController',
-            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
     public function consulterIndependant(ManagerRegistry $doctrine, $id){
