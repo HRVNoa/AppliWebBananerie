@@ -136,20 +136,9 @@ class IndexController extends AbstractController
                                     $solde = $reservation->getUser()->getBourse()->getQuantite();
                                     $reservation->getUser()->getBourse()->setQuantite($solde+$prix);
 
-                                    //Ajoute en base dans la table remboursement
-                                    $remboursement = new Remboursement();
-                                    $remboursement->setQuantite($reservation->getQuantite());
-                                    $remboursement->setUser($reservation->getUser());
-                                    $remboursement->setLibelle($reservation->getLibelle());
-                                    $remboursement->setEspace($reservation->getEspace());
-                                    $remboursement->setHeureDebut($reservation->getHeureDebut());
-                                    $remboursement->setHeureFin($reservation->getHeureFin());
-
                                     $entityManager->persist($bourse);
                                     $entityManager->flush();
 
-                                    $entityManager->persist($remboursement);
-                                    $entityManager->flush();
                                 }
 
                                 $this->addFlash('success', 'Vous avez bien été rembourser');
@@ -157,6 +146,20 @@ class IndexController extends AbstractController
                                 $this->addFlash('error', 'Oops! Quelque chose s\'est mal passé et nous avons pas pu vous rembourser.');
                                 $this->addFlash('error', 'La Bananerie a été notifié de cette erreur. Contactez La Bananerie pour confirmer votre non remboursement');
                             }
+
+
+                            //Ajoute en base dans la table remboursement
+                            $remboursement = new Remboursement();
+                            $remboursement->setQuantite($reservation->getQuantite());
+                            $remboursement->setUser($reservation->getUser());
+                            $remboursement->setLibelle($reservation->getLibelle());
+                            $remboursement->setEspace($reservation->getEspace());
+                            $remboursement->setHeureDebut($reservation->getHeureDebut());
+                            $remboursement->setHeureFin($reservation->getHeureFin());
+                            $remboursement->setDate($reservation->getDate());
+
+                            $entityManager->persist($remboursement);
+                            $entityManager->flush();
 
                             // Envoi du mail pour confirmation
                             $transport = Transport::fromDsn('smtp://bananeriebot@gmail.com:ramchihfwonbusnl@smtp.gmail.com:587?encryption=tls&auth_mode=login');
