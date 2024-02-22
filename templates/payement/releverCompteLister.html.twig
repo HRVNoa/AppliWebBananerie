@@ -60,6 +60,15 @@
                                         <td>-{{ item.quantite }}</td>
                                         <td> Réservation d'espaces  </td>
                                     {% endif %}
+                                    {% if item.type == 'remboursement' %}
+                                        <td>{{ item.date|date("d/m/Y") }}</td>
+                                        <td>{{ item.user.email }}</td>
+                                        <td>{{ item.user.entreprise.prenom }} {{ item.user.entreprise.nom }}</td>
+                                        <td>{{ item.user.entreprise.entreprise }}</td>
+                                        <td>{{ item.user.entreprise.tel }}</td>
+                                        <td>+{{ item.quantite }}</td>
+                                        <td> Remboursement de B.Coins </td>
+                                    {% endif %}
                                 {% endif %}
                                 {% if app.user.independant %}
                                     {% if item.type == 'paiement' %}
@@ -79,6 +88,15 @@
                                         <td>{{ item.user.independant.tel }}</td>
                                         <td>-{{ item.quantite }}</td>
                                         <td> Réservation d'un espaces </td>
+                                    {% endif %}
+                                    {% if item.type == 'remboursement' %}
+                                        <td>{{ item.date|date("d/m/Y") }}</td>
+                                        <td>{{ item.user.email }}</td>
+                                        <td>{{ item.user.independant.prenom }} {{ item.user.independant.nom }}</td>
+                                        <td>{{ item.user.independant.entreprise }}</td>
+                                        <td>{{ item.user.independant.tel }}</td>
+                                        <td>+{{ item.quantite }}</td>
+                                        <td> Remboursement de B.Coins </td>
                                     {% endif %}
                                 {% endif %}
                             </tr>

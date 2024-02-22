@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Bourse;
+use App\Entity\Remboursement;
 use App\Entity\User;
 use App\Form\ReservationHeureType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -135,7 +136,19 @@ class IndexController extends AbstractController
                                     $solde = $reservation->getUser()->getBourse()->getQuantite();
                                     $reservation->getUser()->getBourse()->setQuantite($solde+$prix);
 
+                                    //Ajoute en base dans la table remboursement
+                                    $remboursement = new Remboursement();
+                                    $remboursement->setQuantite($reservation->getQuantite());
+                                    $remboursement->setUser($reservation->getUser());
+                                    $remboursement->setLibelle($reservation->getLibelle());
+                                    $remboursement->setEspace($reservation->getEspace());
+                                    $remboursement->setHeureDebut($reservation->getHeureDebut());
+                                    $remboursement->setHeureFin($reservation->getHeureFin());
+
                                     $entityManager->persist($bourse);
+                                    $entityManager->flush();
+
+                                    $entityManager->persist($remboursement);
                                     $entityManager->flush();
                                 }
 

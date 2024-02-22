@@ -52,11 +52,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $confirmed = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Remboursement::class)]
+    private Collection $remboursements;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
         $this->paiements = new ArrayCollection();
         $this->inscriptions = new ArrayCollection();
+        $this->remboursements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -293,6 +297,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setConfirmed(bool $confirmed): static
     {
         $this->confirmed = $confirmed;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Remboursement>
+     */
+    public function getRemboursements(): Collection
+    {
+        return $this->remboursements;
+    }
+
+    public function addRemboursement(Remboursement $remboursement): static
+    {
+        if (!$this->remboursements->contains($remboursement)) {
+            $this->remboursements->add($remboursement);
+            $remboursement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRemboursement(Remboursement $remboursement): static
+    {
+        if ($this->remboursements->removeElement($remboursement)) {
+            // set the owning side to null (unless already changed)
+            if ($remboursement->getUser() === $this) {
+                $remboursement->setUser(null);
+            }
+        }
 
         return $this;
     }

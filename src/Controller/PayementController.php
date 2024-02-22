@@ -6,6 +6,7 @@ use App\Entity\Bourse;
 use App\Entity\Entreprise;
 use App\Entity\Independant;
 use App\Entity\Paiement;
+use App\Entity\Remboursement;
 use App\Entity\Reservation;
 use App\Entity\Tarif;
 use App\Entity\User;
@@ -55,7 +56,7 @@ class PayementController extends AbstractController
     }
 
     public function listerComptePayement(ManagerRegistry $doctrine, Security $security, $id){
-        //$remboursements = $doctrine->getRepository(Remboursement::class)->findBy(['user' => $id], ['dateRemboursement' => 'DESC']);
+        $remboursements = $doctrine->getRepository(Remboursement::class)->findBy(['user' => $id], ['date' => 'DESC']);
         $reservations = $doctrine->getRepository(Reservation::class) ->findBy(['user' => $id], ['date' => 'DESC']);
         $paiements = $doctrine->getRepository(Paiement::class)->findBy(['user' => $id], ['dateAchat' => 'DESC']);
         $user = $doctrine->getRepository(User::class)->find($id);
@@ -73,18 +74,18 @@ class PayementController extends AbstractController
         foreach($reservations as $reservation){
             $reservation->type = 'reservation';
         }
-        /*
+
         foreach($remboursements as $remboursement){
             $remboursement->type = 'remboursement';
         }
-        */
+
         $quantite = $reservation->getQuantite();
-        $items = array_merge($paiements, $reservations, /*$remboursements*/);
+        $quantite2 = $remboursement->getQuantite();
+        $items = array_merge($paiements, $reservations, $remboursements);
 
 
         return $this->render('payement/releverCompteLister.html.twig', [
             'items' => $items,
-            'quantite' => $quantite,
             'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
     }
