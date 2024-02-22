@@ -55,6 +55,12 @@
                     </div>
                 </div>
 
+                <div class="row" style="padding-top: 20px">
+                    <div class="col-md-12">
+                        <h4>Réserver pour <span id="priceBuy"></span> B.Coins</h4>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         {{ form_errors(form.heureFin) }}
@@ -66,6 +72,9 @@
                         {{ form_widget(form.libelle) }}
                     </div>
                 </div>
+                <div id="unite" style="display: none;">{{ unite }}</div>
+                <div id="demi" style="display: none;">{{ demi }}</div>
+                <div id="journee" style="display: none;">{{ journee }}</div>
                 {{ form_widget(form.espace) }}
                 {{ form_widget(form.user) }}
 
@@ -80,6 +89,27 @@
 {% endif %}
 
 <script>
+
+    function showPrice() {
+        let hunite = parseInt(document.getElementById('unite').innerText);
+        let hdemi = parseInt(document.getElementById('demi').innerText);
+        let hjournee = parseInt(document.getElementById('journee').innerText);
+
+        let hdebut = parseInt(document.getElementById('reservation_heure_heureDebut').value);
+        let hfin = parseInt(document.getElementById('reservation_heure_heureFin').value);
+        let time = hfin-hdebut;
+
+        console.log(hunite, hdemi, hjournee, hdebut, hfin, time);
+
+        if (time < 4){
+            document.getElementById('priceBuy').innerText = hunite*time;
+        }else if (time < 9){
+            time = time-4;
+            document.getElementById('priceBuy').innerText = hdemi+hunite*time;
+        }else if (time === 9){
+            document.getElementById('priceBuy').innerText = hjournee;
+        }
+    }
 
     function matin() {
         document.getElementById('reservation_heureDebut').value = 9;
@@ -105,10 +135,40 @@
             }
         });
 
+        document.getElementById('reservation_heure_heureDebut').addEventListener('change', function() {
+            ajusterHeureFin();
+            showPrice();
+        });
+
+        document.getElementById('reservation_heure_heureFin').addEventListener('change', function() {
+            ajusterHeureDebut();
+            showPrice();
+        });
+
+        // Control si heure fin et plus grand que heure début
+
+        function ajusterHeureFin() {
+            var heureDebut = document.getElementById('reservation_heure_heureDebut');
+            var heureFin = document.getElementById('reservation_heure_heureFin');
+            if (parseInt(heureFin.value) <= parseInt(heureDebut.value)) {
+                heureFin.value = parseInt(heureDebut.value) + 1;
+            }
+        }
+
+        function ajusterHeureDebut() {
+            var heureDebut = document.getElementById('reservation_heure_heureDebut');
+            var heureFin = document.getElementById('reservation_heure_heureFin');
+            if (parseInt(heureDebut.value) >= parseInt(heureFin.value)) {
+                heureDebut.value = parseInt(heureFin.value) - 1;
+            }
+        }
+
         // défini l'heure suivant le clic de l'utilisateur
         var heure = location.search.split('=')[3].split('/');
         document.getElementById('reservation_heure_heureDebut').value = heure[0];
         document.getElementById('reservation_heure_heureFin').value = heure[1];
+
+        showPrice();
 
     });
 
