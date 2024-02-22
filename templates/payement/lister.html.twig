@@ -43,7 +43,7 @@
                             {% for paiement in paiements %}
                                 <tr>
                                     <td>{{ paiement.dateAchat|date("d/m/Y") }}</td>
-                                    <td>{{ app.user.email }}</td>
+                                    <td>{{ paiement.email }}</td>
                                     <td>{{ paiement.prenom }} {{ paiement.nom }}</td>
                                     <td>{{ paiement.entreprise }}</td>
                                     <td>{{ paiement.tel }}</td>

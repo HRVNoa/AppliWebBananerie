@@ -330,19 +330,19 @@ creditAcheter:
 
 
 payementConsulter:
-    path: /admin/payement/consulter/{id}
+    path: /admin/paiement/consulter/{id}
     controller: App\Controller\PayementController::consulterPayement
 
 payementLister:
-    path: /admin/payement/
+    path: /admin/paiement/
     controller: App\Controller\PayementController::listerPayement
 
 payementAjouter:
-    path: /admin/payement/ajouter
+    path: /admin/paiement/ajouter
     controller : App\Controller\PayementController::ajouterPayement
 
 payementModifier:
-    path: /admin/payement/modifier/{id}
+    path: /admin/paiement/modifier/{id}
     controller: App\Controller\PayementController::modifierPayement
 
 releverCompte:
