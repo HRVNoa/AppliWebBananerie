@@ -141,9 +141,9 @@ class IndexController extends AbstractController
 
                                 }
 
-                                $this->addFlash('success', 'Vous avez bien été rembourser');
+                                $this->addFlash('success', 'Vous avez bien été remboursé.');
                             }catch (Exception $e){
-                                $this->addFlash('error', 'Oops! Quelque chose s\'est mal passé et nous avons pas pu vous rembourser.');
+                                $this->addFlash('error', 'Oops! Quelque chose s\'est mal passé et nous avons pas pu vous remboursé.');
                                 $this->addFlash('error', 'La Bananerie a été notifié de cette erreur. Contactez La Bananerie pour confirmer votre non remboursement');
                             }
 
@@ -666,5 +666,9 @@ class IndexController extends AbstractController
     public function mentionlegale(): Response
     {
         return $this->render('index/mentionlegale.html.twig');
+    }
+    public function pagetermecondition(): Response
+    {
+        return $this->render('index/termecondition.html.twig');
     }
 }

@@ -29,7 +29,7 @@
 
                     {{ form_start(form, {'attr': {'class': 'form-sample'}}) }}
                      {{ form_widget(form._token) }}
-                    <p class="card-description"> Information Personnel </p>
+                    <p class="card-description"> Informations Personnelles </p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
@@ -56,7 +56,7 @@
                                     {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
-                            <p class="card-description"> Changer d'email ici ne fait pas changer votre email de connexion. </p>
+                            <p class="card-description"> Changer d'email ici ne modifie votre email de connexion. </p>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
@@ -70,7 +70,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Metier Principal</label>
+                                <label class="col-sm-3 col-form-label">Metier #1</label>
                                 <div class="col-sm-9">
                                     {{ form_widget(form.metier, {'attr': {'class': 'form-control'}}) }}
                                 </div>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Metier Secondaire</label>
+                                <label class="col-sm-3 col-form-label">Metier #2</label>
                                 <div class="col-sm-9">
                                     {{ form_widget(form.metierSecondaire, {'attr': {'class': 'form-control'}}) }}
                                 </div>
@@ -125,7 +125,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Description</label>
+                                <label class="col-sm-2 col-form-label">Description Profil</label>
                                 <div class="col-sm-9">
                                     {{ form_errors(form.description) }}
                                     {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
@@ -169,7 +169,7 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="card-description"> Pour les réseaux sociaux merci de renseigné le lien direct vers la page. Exemple : https://youtube.com/laBananerie </p>
+                        <p class="card-description"> Pour les réseaux sociaux merci de renseigner le lien direct vers la page. Exemple : https://youtube.com/laBananerie </p>
                     </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -182,7 +182,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Telephone</label>
+                            <label class="col-sm-3 col-form-label">Téléphone</label>
                             <div class="col-sm-9">
                                 {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
                             </div>
@@ -191,9 +191,9 @@
                 </div>
                 <div class="row">
                     <h5> En cochant cette case, les utilisateurs de l’espace membres peuvent accéder à mes informations et me contacter directement via un formulaire. Je peux également accéder à l’annuaire et aux profils des autres utilisateurs. </h5>
-                    <div class="form-group row justify-content-center">
-                        <label class="col-sm-1 col-form-label col-md-6">Je souhaite que mon profil apparaisse dans l’annuaire de La Bananerie :</label>
+                    <div class="form-group row">
                         {{ form_widget(form.annuaire, {'attr': {'class': 'form-check-input col-md-6'}}) }}
+                        <label class="col-sm-1 col-form-label col-md-6">Je souhaite que mon profil apparaisse dans l’annuaire de La Bananerie </label>
                     </div>
                     </div>
                 <div class="row flex-c-c">

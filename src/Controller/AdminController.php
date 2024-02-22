@@ -131,7 +131,7 @@ class AdminController extends AbstractController
     ');
         try {
             $mailer->send($email);
-            $this->addFlash('succesmail', 'Votre confirmation a été envoyé.');
+            $this->addFlash('succesmail', 'La confirmation a été envoyé.');
         } catch (TransportExceptionInterface $e) {
             $this->addFlash('errormail', "Oops! Quelque chose s'est mal passé et nous n'avons pas pu envoyer votre message.");
         }
