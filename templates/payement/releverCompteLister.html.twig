@@ -24,6 +24,9 @@
             <div class="card-body">
                 <div class="" style="display: flex; justify-content: space-between">
                     <h4 class="card-title">Liste de vos transactions effectués</h4>
+                    <div class="col-lg-4">
+                        <input type="text" id="searchField" class="form-control" placeholder="Rechercher par la date" style="color: #6c7293;">
+                    </div>
                     </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -43,7 +46,7 @@
                             <tr>
                                 {% if app.user.entreprise %}
                                     {% if item.type == 'paiement' %}
-                                        <td>{{ item.dateAchat|date("d/m/Y") }}</td>
+                                        <td>{{ item.date|date("d/m/Y") }}</td>
                                         <td>{{ item.email }}</td>
                                         <td>{{ item.prenom }} {{ item.nom }}</td>
                                         <td>{{ item.entreprise }}</td>
@@ -72,7 +75,7 @@
                                 {% endif %}
                                 {% if app.user.independant %}
                                     {% if item.type == 'paiement' %}
-                                        <td>{{ item.dateAchat|date("d/m/Y") }}</td>
+                                        <td>{{ item.date|date("d/m/Y") }}</td>
                                         <td>{{ item.email }}</td>
                                         <td>{{ item.prenom }} {{ item.nom }}</td>
                                         <td>{{ item.entreprise }}</td>
@@ -107,4 +110,24 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchField = document.getElementById("searchField");
+            const rows = document.querySelectorAll("tbody tr");
+
+            searchField.addEventListener("input", function () {
+                const searchValue = searchField.value.toLowerCase();
+
+                rows.forEach(function (row) {
+                    const date = row.cells[0].textContent.toLowerCase();
+
+                    if (date.includes(searchValue)) {
+                        row.style.display = "table-row";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

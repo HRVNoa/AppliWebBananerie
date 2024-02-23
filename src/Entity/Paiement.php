@@ -54,12 +54,12 @@ class Paiement
         return $this->id;
     }
 
-    public function getDateAchat(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
         return $this->dateAchat;
     }
 
-    public function setDateAchat(\DateTimeInterface $dateAchat): static
+    public function setDate(\DateTimeInterface $dateAchat): static
     {
         $this->dateAchat = $dateAchat;
 

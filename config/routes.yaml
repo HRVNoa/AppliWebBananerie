@@ -336,10 +336,6 @@ payementConsulter:
     path: /admin/paiement/consulter/{id}
     controller: App\Controller\PayementController::consulterPayement
 
-payementLister:
-    path: /admin/paiement/
-    controller: App\Controller\PayementController::listerPayement
-
 payementAjouter:
     path: /admin/paiement/ajouter
     controller : App\Controller\PayementController::ajouterPayement
@@ -355,3 +351,7 @@ releverCompte:
 releverCompteConsulter:
     path: /releverCompte/consulter/{id}
     controller: App\Controller\PayementController::consulterPayement
+
+releverCompteAdmin:
+    path: /admin/releverCompte/lister
+    controller: App\Controller\PayementController::listerComptePayementAdmin
