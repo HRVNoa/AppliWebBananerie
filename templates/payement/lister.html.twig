@@ -23,43 +23,113 @@
         <div class="card">
             <div class="card-body">
                 <div class="" style="display: flex; justify-content: space-between">
-                    <h4 class="card-title">Liste des achats</h4>
-                    <a href="{{ path('payementAjouter') }}" class="btn btn-primary btn-fw m-1">Ajouter un paiement</a>
+                    <h4 class="card-title">Liste des transactions</h4>
+                    <div class="col-lg-4">
+                        <input type="text" id="searchField" class="form-control" placeholder="Rechercher par nom, prénom, date..." style="color: #6c7293;">
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th> User </th>
-                                <th> Nom </th>
-                                <th> Entreprise </th>
-                                <th> Tel </th>
-                                <th> B.Coins acheté </th>
-                                <th> Actions </th>
-                            </tr>
+                        <tr>
+                            <th> Date </th>
+                            <th> User </th>
+                            <th> Nom </th>
+                            <th> Entreprise </th>
+                            <th> Tel </th>
+                            <th> B.Coins </th>
+                            <th> Type </th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {% for paiement in paiements %}
-                                <tr>
-                                    <td>{{ paiement.dateAchat|date("d/m/Y") }}</td>
-                                    <td>{{ paiement.email }}</td>
-                                    <td>{{ paiement.prenom }} {{ paiement.nom }}</td>
-                                    <td>{{ paiement.entreprise }}</td>
-                                    <td>{{ paiement.tel }}</td>
-                                    <td>{{ paiement.tarif.quantite }}</td>
-                                    <td>
-                                        <form action="{{ path('payementModifier', {'id': paiement.id}) }}" method="post" class="flex-c-c">
-                                            <input type="hidden" name="_method" value="UPDATE">
-                                            <button type="submit" class="btn btn-outline-primary">Modifier</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                        {% for item in items %}
+                            <tr>
+                                {% if app.user.entreprise %}
+                                    {% if item.type == 'paiement' %}
+                                        <td>{{ item.date|date("d/m/Y") }}</td>
+                                        <td>{{ item.email }}</td>
+                                        <td>{{ item.prenom }} {{ item.nom }}</td>
+                                        <td>{{ item.entreprise }}</td>
+                                        <td>{{ item.tel }}</td>
+                                        <td>+{{ item.tarif.quantite }}</td>
+                                        <td> Achat B.Coins </td>
+                                    {% endif %}
+                                    {% if item.type == 'reservation' %}
+                                        <td>{{ item.date|date("d/m/Y") }}</td>
+                                        <td>{{ item.user.entreprise.email }}</td>
+                                        <td>{{ item.user.entreprise.prenom }} {{ item.user.entreprise.nom }}</td>
+                                        <td>{{ item.user.entreprise.entreprise }}</td>
+                                        <td>{{ item.user.entreprise.tel }}</td>
+                                        <td>-{{ item.quantite }}</td>
+                                        <td> Réservation d'espaces  </td>
+                                    {% endif %}
+                                    {% if item.type == 'remboursement' %}
+                                        <td>{{ item.date|date("d/m/Y") }}</td>
+                                        <td>{{ item.user.email }}</td>
+                                        <td>{{ item.user.entreprise.prenom }} {{ item.user.entreprise.nom }}</td>
+                                        <td>{{ item.user.entreprise.entreprise }}</td>
+                                        <td>{{ item.user.entreprise.tel }}</td>
+                                        <td>+{{ item.quantite }}</td>
+                                        <td> Remboursement de B.Coins </td>
+                                    {% endif %}
+                                {% endif %}
+                                {% if app.user.independant %}
+                                    {% if item.type == 'paiement' %}
+                                        <td>{{ item.date|date("d/m/Y") }}</td>
+                                        <td>{{ item.email }}</td>
+                                        <td>{{ item.prenom }} {{ item.nom }}</td>
+                                        <td>{{ item.entreprise }}</td>
+                                        <td>{{ item.tel }}</td>
+                                        <td>+{{ item.tarif.quantite }}</td>
+                                        <td> Achat B.Coins </td>
+                                    {% endif %}
+                                    {% if item.type == 'reservation' %}
+                                        <td>{{ item.date|date("d/m/Y") }}</td>
+                                        <td>{{ item.user.independant.email }}</td>
+                                        <td>{{ item.user.independant.prenom }} {{ item.user.independant.nom }}</td>
+                                        <td>{{ item.user.independant.entreprise }}</td>
+                                        <td>{{ item.user.independant.tel }}</td>
+                                        <td>-{{ item.quantite }}</td>
+                                        <td> Réservation d'un espaces </td>
+                                    {% endif %}
+                                    {% if item.type == 'remboursement' %}
+                                        <td>{{ item.date|date("d/m/Y") }}</td>
+                                        <td>{{ item.user.email }}</td>
+                                        <td>{{ item.user.independant.prenom }} {{ item.user.independant.nom }}</td>
+                                        <td>{{ item.user.independant.entreprise }}</td>
+                                        <td>{{ item.user.independant.tel }}</td>
+                                        <td>+{{ item.quantite }}</td>
+                                        <td> Remboursement de B.Coins </td>
+                                    {% endif %}
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchField = document.getElementById("searchField");
+            const rows = document.querySelectorAll("tbody tr");
+
+            searchField.addEventListener("input", function () {
+                const searchValue = searchField.value.toLowerCase();
+
+                rows.forEach(function (row) {
+                    const date = row.cells[0].textContent.toLowerCase();
+                    const nomPrenom = row.cells[2].textContent.toLowerCase();
+
+                    if (date.includes(searchValue) || nomPrenom.includes(searchValue)) {
+                        row.style.display = "table-row";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

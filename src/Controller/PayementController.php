@@ -45,15 +45,6 @@ class PayementController extends AbstractController
         ]);
     }
 
-    public function listerPayement(ManagerRegistry $doctrine){
-        $paiements = $doctrine->getRepository(Paiement::class)->findBy([], ['dateAchat' => 'DESC']);
-
-        return $this->render('payement/lister.html.twig', [
-            'paiements' => $paiements,
-            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
-        ]);
-    }
-
     public function listerComptePayement(ManagerRegistry $doctrine, Security $security, $id){
         $remboursements = $doctrine->getRepository(Remboursement::class)->findBy(['user' => $id], ['date' => 'DESC']);
         $reservations = $doctrine->getRepository(ReservationLog::class) ->findBy(['user' => $id], ['date' => 'DESC']);
@@ -80,8 +71,41 @@ class PayementController extends AbstractController
 
         $items = array_merge($paiements, $reservations, $remboursements);
 
+        usort($items, function($a, $b) {
+            return $b->getDate() <=> $a->getDate();
+        });
 
         return $this->render('payement/releverCompteLister.html.twig', [
+            'items' => $items,
+            'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
+        ]);
+    }
+
+    public function listerComptePayementAdmin(ManagerRegistry $doctrine, Security $security){
+        $remboursements = $doctrine->getRepository(Remboursement::class)->findAll();
+        $reservations = $doctrine->getRepository(ReservationLog::class)->findAll();
+        $paiements = $doctrine->getRepository(Paiement::class)->findAll();
+        $user = $doctrine->getRepository(User::class)->findAll();
+        $currentUser = $security->getUser();
+
+        foreach($paiements as $paiement){
+            $paiement->type = 'paiement';
+        }
+        foreach($reservations as $reservation){
+            $reservation->type = 'reservation';
+        }
+
+        foreach($remboursements as $remboursement){
+            $remboursement->type = 'remboursement';
+        }
+
+        $items = array_merge($paiements, $reservations, $remboursements);
+
+        usort($items, function($a, $b) {
+            return $b->getDate() <=> $a->getDate();
+        });
+
+        return $this->render('payement/lister.html.twig', [
             'items' => $items,
             'quantiteBourse' => json_decode($this->forward('App\Controller\BourseController::getBourse', [$doctrine])->getContent(),true),
         ]);
