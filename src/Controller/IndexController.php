@@ -250,8 +250,8 @@ class IndexController extends AbstractController
         // Récupération des variables dans l'url
         $id = $request->query->get('id', null);
         $heures = $request->query->get('heures', null);
-        $date = $request->query->get('date', null);
-
+        $date = $request->query->get('date', date("Y/m/d"));
+        $pDate = $date;
 
         //récupe / création des objets en base
         $reservation = new Reservation();
@@ -267,12 +267,11 @@ class IndexController extends AbstractController
             $this->addFlash('error', 'L\'horaire n\'est pas valide.');
             $succes = false;
         }
-        if ($date == null or $date < Date('d/m/Y')){
+        $dateObjet = DateTime::createFromFormat('d/m/Y', $date);
+        if ($date == null or $dateObjet < DateTime::createFromFormat('d/m/Y', $date)){
             $this->addFlash('error', 'La date de réservation n\'est pas valide.');
             $succes = false;
         }
-
-
 
         $date = explode("/",$date);
         $date = $date[2].'/'.$date[1].'/'.$date[0];
@@ -393,6 +392,12 @@ class IndexController extends AbstractController
                     $this->addFlash('error', 'La Bananerie a été notifié de cette erreur.');
                 }
 
+                $dateDuJour = new DateTime();
+                if ($reservation->getDate()->format('Y/m/d') < $dateDuJour->format('Y/m/d')){
+                    $this->addFlash('error', 'La date de réservation est invalide.');
+                    $stop = false;
+                }
+
                 if ($stop){
                     $entityManager = $doctrine->getManager();
                     $entityManager->persist($reservation);
@@ -498,36 +503,38 @@ class IndexController extends AbstractController
 
                     // Débit de B.Coins
                     try {
-                        if ($user != 'Admin'){
-                            $nbHeure = $reservation->getHeureFin() - $reservation->getHeureDebut();
+                        $nbHeure = $reservation->getHeureFin() - $reservation->getHeureDebut();
 
-                            if ($nbHeure < 4){
-                                foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
-                                    if ($tarifs->getHeure() == 1){
-                                        $prix = $tarifs->getPrix() * $nbHeure;
-                                    }
-                                }
-                            }elseif ($nbHeure < 9){
-                                foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
-                                    if ($tarifs->getHeure() == 4){
-                                        $prix = $tarifs->getPrix();
-                                    }
-                                }
-                                $nbHeure = $nbHeure - 4;
-                                foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
-                                    if ($tarifs->getHeure() == 1){
-                                        $prix = $tarifs->getPrix() * $nbHeure + $prix;
-                                    }
-                                }
-                            }elseif ($nbHeure == 9){
-                                foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
-                                    if ($tarifs->getHeure() == 9){
-                                        $prix = $tarifs->getPrix();
-                                    }
+                        if ($nbHeure < 4){
+                            foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                if ($tarifs->getHeure() == 1){
+                                    $prix = $tarifs->getPrix() * $nbHeure;
                                 }
                             }
-                            $bourseApres = $reservation->getUser()->getBourse()->getQuantite()-$prix;
+                        }elseif ($nbHeure < 9){
+                            foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                if ($tarifs->getHeure() == 4){
+                                    $prix = $tarifs->getPrix();
+                                }
+                            }
+                            $nbHeure = $nbHeure - 4;
+                            foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                if ($tarifs->getHeure() == 1){
+                                    $prix = $tarifs->getPrix() * $nbHeure + $prix;
+                                }
+                            }
+                        }elseif ($nbHeure == 9){
+                            foreach ($reservation->getEspace()->getTarifEspaceTarifs() as $tarifs){
+                                if ($tarifs->getHeure() == 9){
+                                    $prix = $tarifs->getPrix();
+                                }
+                            }
+                        }
 
+                        $reservation->setQuantite($prix);
+
+                        if ($user != 'Admin'){
+                            $bourseApres = $reservation->getUser()->getBourse()->getQuantite()-$prix;
                             if ($bourseApres < 0){
                                 $this->addFlash('error', 'Vous n\'avez pas un solde suffisant pour cet espace');
                                 return $this->render('index/reservation.html.twig', [
