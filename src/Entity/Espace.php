@@ -19,7 +19,7 @@ class Espace
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $libelle = null;
 
-    #[ORM\ManyToOne(inversedBy: 'espaces')]
+    #[ORM\ManyToOne(cascade: ['persist', 'remove'], inversedBy: 'espaces')]
     private ?Carrousel $carrousel = null;
 
     #[ORM\ManyToOne(inversedBy: 'espaces')]
@@ -28,7 +28,7 @@ class Espace
     #[ORM\OneToMany(mappedBy: 'espace', targetEntity: EquipementEspace::class)]
     private Collection $equipementEspaces;
 
-    #[ORM\OneToMany(mappedBy: 'espace', targetEntity: Reservation::class)]
+    #[ORM\OneToMany(mappedBy: 'espace', targetEntity: Reservation::class, cascade: ['persist', 'remove'])]
     private Collection $reservations;
 
     #[ORM\OneToMany(mappedBy: 'espace', targetEntity: TarifEspaceTarif::class , cascade: ['persist', 'remove'] )]
