@@ -536,7 +536,7 @@ class AdminController extends AbstractController
     {
         $espace = $doctrine->getRepository(Espace::class)->find($id);
         $medias = $espace->getCarrousel()->getMedia();
-        return $this->render('admin/mediaEspace.html.twig', ['medias' => $medias,'espace' => $espace->getLibelle(), 'carrousel' => $espace->getCarrousel()]);
+        return $this->render('admin/mediaEspace.html.twig', ['medias' => $medias,'espace' => $espace->getLibelle(),'espaceId' => $espace->getId(), 'carrousel' => $espace->getCarrousel()]);
     }
 
     public function adminEspaceCarrouselAdd(ManagerRegistry $doctrine, Request $request, $id)
@@ -575,11 +575,11 @@ class AdminController extends AbstractController
                 $entityManager->flush();
                 $this->addFlash('success', 'La photo a été ajoutée avec succès.');
 
-                return $this->redirectToRoute('adminEspaceCarrousel',['id' => $espace->getCarrousel()->getId()]);
+                return $this->redirectToRoute('adminEspaceCarrousel',['id' => $espace->getId()]);
 
             } catch (\Exception $e){
                 $this->addFlash('error', 'La photo n\'a pas pu être ajoutée. Cause : ' . $e);
-                return $this->redirectToRoute('adminEspaceCarrousel',['id' => $espace->getCarrousel()->getId()]);
+                return $this->redirectToRoute('adminEspaceCarrousel',['id' => $espace->getId()]);
             }
         }else{
             return $this->render('admin/formMediaEspace.html.twig', ['form' => $form, 'carrousel' => $espace->getCarrousel(), 'id' => $id]);
@@ -605,7 +605,7 @@ class AdminController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('success', 'Média a bien été supprimé.');
-        return $this->redirectToRoute('adminEspaceCarrousel',['id' => $media->getCarrousel()->getEspace()->getId()]);
+        return $this->redirectToRoute('adminEspaceCarrousel',['id' => $media->getCarrousel()->getEspaces()->first()->getId()]);
 
     }
 
